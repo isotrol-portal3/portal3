@@ -39,7 +39,7 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
-		<finalName>${artifactId}</finalName>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 		<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -81,7 +81,7 @@
 							<directory>${basedir}/src/main/resources</directory>
 						</resource>
 					</webResources>
-					<warSourceExcludes>${project.build.directory}/${artifactId}/.gwt-tmp/**</warSourceExcludes>
+					<warSourceExcludes>${project.build.directory}/${project.artifactId}/.gwt-tmp/**</warSourceExcludes>
 				</configuration>
 			</plugin>
 			<!--  configure the GWT-Maven plugin -->

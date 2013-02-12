@@ -18,7 +18,7 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
-		<finalName>${artifactId}</finalName>
+		<finalName>${project.artifactId}</finalName>
 
 		<plugins>
 			<plugin>
@@ -57,7 +57,7 @@
 							<resources>
 								<resource>
 									<directory>
-										${project.build.directory}/${artifactId}/${gwtModuleName}/
+										${project.build.directory}/${project.artifactId}/${gwtModuleName}/
 									</directory>
 									<filtering>false</filtering>
 									<includes>
@@ -89,7 +89,7 @@
 						</resource>
 					</webResources>
 					<warSourceExcludes>
-						${project.build.directory}/${artifactId}/.gwt-tmp/**
+						${project.build.directory}/${project.artifactId}/.gwt-tmp/**
 					</warSourceExcludes>
 				</configuration>
 			</plugin>

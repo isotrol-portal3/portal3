@@ -1,1 +1,2 @@
-# Use wars profile to build.
+Built with maven
+

@@ -166,6 +166,8 @@
 		<module>impe3-content-client</module>
 		<module>impe3-online-webapp-deps</module>
 		<module>impe3-pms-webapp-deps</module>
+		<module>impe3-pms-webapp</module>
+		<module>impe3-online-webapp</module>
 	</modules>
 
 	<dependencies>
@@ -189,18 +191,4 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 	</dependencies>
-
-	<profiles>
-		<profile>
-			<id>wars</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<modules>
-				<module>impe3-pms-webapp</module>
-				<module>impe3-online-webapp</module>
-			</modules>
-		</profile>
-	</profiles>
-
 </project>
