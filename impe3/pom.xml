@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>impe3-maven</artifactId>
 		<groupId>com.isotrol.impe3.maven</groupId>
@@ -9,25 +10,17 @@
 	<groupId>com.isotrol.impe3</groupId>
 	<artifactId>impe3</artifactId>
 	<packaging>pom</packaging>
-	<name>IMP3225600 - Impe3</name>
+	<name>Port@l 3.0 :: Main project</name>
+	<description>Isotrol Port@l 3.0 Portal Management Platform</description>
 	<version>2.9.190-SNAPSHOT</version>
 
-	<issueManagement>
-		<system>REDMINE</system>
-		<url>http://redmine/projects/impe203700/issues</url>
-	</issueManagement>
-	<ciManagement>
-		<system>HUDSON</system>
-		<url>http://sprintegracion:8080/hudson/view/Impe3/</url>
-	</ciManagement>
 	<scm>
-		<connection>scm:svn:https://svn.isotrol.com/ETC_ISTL_IMP3225600/trunk/source/impe3
-		</connection>
-		<developerConnection>scm:svn:https://svn.isotrol.com/ETC_ISTL_IMP3225600/trunk/source/impe3
-		</developerConnection>
-		<url>https://svn.isotrol.com/ETC_ISTL_IMP3225600/trunk/source/impe3
-		</url>
+		<connection>scm:git:https://code.google.com/p/isotrol-portal.p3/</connection>
+		<developerConnection>scm:git:https://code.google.com/p/isotrol-portal.p3/</developerConnection>
+		<url>http://code.google.com/p/isotrol-portal/source/browse/?repo=p3</url>
+		<tag>HEAD</tag>
 	</scm>
+
 	<properties>
 		<externalApiVersion>2.9.190</externalApiVersion>
 	</properties>
@@ -38,8 +31,7 @@
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
 				<configuration>
-					<header>http://isotrol-portal.googlecode.com/svn/trunk/license-header.txt
-					</header>
+					<header>http://training.isotrol-portal.googlecode.com/git/license-header.txt</header>
 					<quiet>false</quiet>
 					<failIfMissing>true</failIfMissing>
 					<aggregate>true</aggregate>
@@ -80,7 +72,7 @@
 					<links>
 						<link>http://jsr311.java.net/nonav/releases/1.1</link>
 						<link>http://jersey.java.net/nonav/apidocs/1.2/jersey</link>
-						<link>http://docs.guava-libraries.googlecode.com/git-history/release09/javadoc</link>
+						<link>http://docs.guava-libraries.googlecode.com/git-history/v13.0/javadoc/</link>
 					</links>
 					<version>false</version>
 					<doctitle>Port@l API (version ${project.version})</doctitle>
@@ -145,13 +137,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<repositories>
-		<repository>
-			<id>impe</id>
-			<name>Isotrol impe3 repository</name>
-			<url>http://srvmaven/maven2/impe-releases</url>
-		</repository>
-	</repositories>
 	<modules>
 		<module>impe3-lucene</module>
 		<module>impe3-hib</module>
