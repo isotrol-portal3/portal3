@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>impe3-maven</artifactId>
 		<groupId>com.isotrol.impe3.maven</groupId>
@@ -12,13 +11,13 @@
 	<packaging>pom</packaging>
 	<name>Port@l 3.0 :: Main project</name>
 	<description>Isotrol Port@l 3.0 Portal Management Platform</description>
-	<version>2.9.190-SNAPSHOT</version>
+	<version>2.9.190</version>
 
 	<scm>
 		<connection>scm:git:https://code.google.com/p/isotrol-portal.p3/</connection>
 		<developerConnection>scm:git:https://code.google.com/p/isotrol-portal.p3/</developerConnection>
 		<url>http://code.google.com/p/isotrol-portal/source/browse/?repo=p3</url>
-		<tag>HEAD</tag>
+		<tag>impe3-2.9.190</tag>
 	</scm>
 
 	<properties>
