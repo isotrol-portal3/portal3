@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>impe3-maven</artifactId>
 		<groupId>com.isotrol.impe3.maven</groupId>
@@ -61,23 +62,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<minmemory>256m</minmemory>
-					<maxmemory>512m</maxmemory>
-					<author>false</author>
-					<excludePackageNames>com.isotrol.impe3.content:com.isotrol.impe3.core:com.isotrol.impe3.support:com.isotrol.impe3.es:com.isotrol.impe3.hib:com.isotrol.impe3.idx:com.isotrol.impe3.lucene:com.isotrol.impe3.mappings.jdbc:com.isotrol.impe3.nr.core:com.isotrol.impe3.connectors:com.isotrol.impe3.freemarker:com.isotrol.impe3.palette:com.isotrol.impe3.pms:com.isotrol.impe3.samples:com.isotrol.impe3.web.pms:com.isotrol.impe3.web:com.isotrol.impe3.gui:com.isotrol.impe3.users</excludePackageNames>
-					<links>
-						<link>http://jsr311.java.net/nonav/releases/1.1</link>
-						<link>http://jersey.java.net/nonav/apidocs/1.2/jersey</link>
-						<link>http://docs.guava-libraries.googlecode.com/git-history/v13.0/javadoc/</link>
-					</links>
-					<version>false</version>
-					<doctitle>Port@l API (version ${project.version})</doctitle>
-					<windowtitle>Port@l API</windowtitle>
-				</configuration>
-			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -136,6 +120,29 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+	</dependencies>
+
 	<modules>
 		<module>impe3-lucene</module>
 		<module>impe3-hib</module>
@@ -170,25 +177,34 @@
 		<module>impe3-online-webapp</module>
 	</modules>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-	</dependencies>
+	<profiles>
+		<profile>
+			<id>portal3-api</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<configuration>
+							<minmemory>256m</minmemory>
+							<maxmemory>512m</maxmemory>
+							<author>false</author>
+							<excludePackageNames>com.isotrol.impe3.content:com.isotrol.impe3.core:com.isotrol.impe3.support:com.isotrol.impe3.es:com.isotrol.impe3.hib:com.isotrol.impe3.idx:com.isotrol.impe3.lucene:com.isotrol.impe3.mappings.jdbc:com.isotrol.impe3.nr.core:com.isotrol.impe3.connectors:com.isotrol.impe3.freemarker:com.isotrol.impe3.palette:com.isotrol.impe3.pms:com.isotrol.impe3.samples:com.isotrol.impe3.web.pms:com.isotrol.impe3.web:com.isotrol.impe3.gui:com.isotrol.impe3.users</excludePackageNames>
+							<links>
+								<link>http://jsr311.java.net/nonav/releases/1.1</link>
+								<link>http://jersey.java.net/nonav/apidocs/1.2/jersey</link>
+								<link>http://docs.guava-libraries.googlecode.com/git-history/v13.0/javadoc/</link>
+							</links>
+							<version>false</version>
+							<doctitle>Port@l API (version ${project.version})</doctitle>
+							<windowtitle>Port@l API</windowtitle>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>
