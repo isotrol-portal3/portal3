@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<import resource="classpath:/com/isotrol/impe3/freemarker/with-freemarker.xml" />
+
+	<bean id="manual"
+		class="com.isotrol.impe3.palette.breadcrumb.ManualBreadcrumbComponent"
+		scope="prototype">
+		<property name="fileLoader" ref="fileLoader" />
+		<property name="config" ref="config" />
+		<property name="categories" ref="categories" />
+		<property name="uriGenerator" ref="uriGenerator" />
+		<property name="freeMarkerService" ref="freeMarkerService" />
+	</bean>
+
+	<bean id="navigation"
+		class="com.isotrol.impe3.palette.breadcrumb.NavigationBreadcrumbComponent"
+		scope="prototype">
+		<property name="fileLoader" ref="fileLoader" />
+		<property name="config" ref="config" />
+		<property name="categories" ref="categories" />
+		<property name="uriGenerator" ref="uriGenerator" />
+		<property name="freeMarkerService" ref="freeMarkerService" />
+	</bean>
+
+	<bean id="content"
+		class="com.isotrol.impe3.palette.breadcrumb.ContentBreadcrumbComponent"
+		scope="prototype">
+		<property name="fileLoader" ref="fileLoader" />
+		<property name="config" ref="config" />
+		<property name="categories" ref="categories" />
+		<property name="uriGenerator" ref="uriGenerator" />
+		<property name="freeMarkerService" ref="freeMarkerService" />
+	</bean>
+
+</beans>

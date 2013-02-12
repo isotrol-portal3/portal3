@@ -1,0 +1,43 @@
+<module>
+
+	<source path="users/gui" />
+
+	<public path="public/Users" />
+
+	<inherits name='com.google.gwt.user.User' />
+	
+	<!-- import GIN module which provides Dependency Injection for GWT: -->
+	<inherits name="com.google.gwt.inject.Inject"/>
+	
+	<!-- Commons PMS module: -->
+	<inherits name='com.isotrol.impe3.GuiCommon' />
+
+	<!-- Inherit the default GWT style sheet.  You can change       -->
+	<!-- the theme of your GWT application by uncommenting          -->
+	<!-- any one of the following lines.                            -->
+	<inherits name='com.google.gwt.user.theme.standard.Standard' />
+	<!-- Other module inherits                                      -->
+	<inherits name='com.extjs.gxt.ui.GXT' />
+	<inherits name='com.isotrol.impe3.UsersApi' />
+
+	<!-- Locale -->
+	<inherits name="com.google.gwt.i18n.I18N"/>
+	<extend-property name="locale" values="es" />
+	
+<!--	<set-property name="user.agent" value="gecko1_8" />-->
+	
+	<!-- Avoid warnings such as 
+	[WARN] Field 'private final com.google.gwt.i18n.client.impl.ConstantMap.OrderedConstantSet<java.lang.String> keys' 
+			will not be serialized because it is final -->
+	<set-property name="gwt.suppressNonStaticFinalFieldWarnings" value="true" />  -->
+	
+	<entry-point class='com.isotrol.impe3.users.gui.Users' />
+
+	<!-- 
+		Specify the application specific style sheet.
+	-->
+	<stylesheet src='css/ext-all.css' />
+	<!-- Main stylesheet for this app. -->
+	<stylesheet src='Users.css' />
+
+</module>

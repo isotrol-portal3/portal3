@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="service"
+		class="com.isotrol.impe3.connectors.localechain.ChainOfLocaleResolver">
+		<property name="firstStep"  ref="firstStep"/>
+		<property name="secondStep" ref="secondStep"/>
+		<property name="thirdStep"  ref="thirdStep"/>
+		<property name="fourthStep" ref="fourthStep"/>
+		<property name="fifthStep"  ref="fifthStep"/>
+	</bean>
+
+	<bean id="thirdStep"
+		class="com.isotrol.impe3.connectors.localechain.NullLocaleResolver" />
+	<bean id="fourthStep"
+		class="com.isotrol.impe3.connectors.localechain.NullLocaleResolver" />
+	<bean id="fifthStep"
+		class="com.isotrol.impe3.connectors.localechain.NullLocaleResolver" />
+
+</beans>

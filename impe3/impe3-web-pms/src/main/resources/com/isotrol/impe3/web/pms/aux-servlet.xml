@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="10000000" />
+	</bean>
+
+	<bean name="mappingsServiceExporter"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="mappingsService" />
+		<property name="serviceInterface" value="com.isotrol.impe3.mappings.MappingsService" />
+	</bean>
+
+	<bean name="uploadController" class="com.isotrol.impe3.web.pms.upload.UploadController">
+		<constructor-arg ref="fileManager" />
+	</bean>
+
+	<!--
+		no 'id' required, HandlerMapping beans are automatically detected by
+		the DispatcherServlet
+	-->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<value>
+				/MappingsService=mappingsServiceExporter
+				/uploadFile=uploadController
+            </value>
+		</property>
+	</bean>
+
+</beans>

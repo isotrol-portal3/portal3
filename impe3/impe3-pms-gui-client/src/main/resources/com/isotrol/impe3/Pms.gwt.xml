@@ -1,0 +1,65 @@
+<module rename-to="pms">
+
+	<source path="pms/gui/client" />
+	<source path="pms/gui/common" />
+	
+	<public path="public/Pms" />
+	<public path="public/GuiCommon" />
+
+	<inherits name='com.google.gwt.user.User' />
+
+	<!-- import GIN module which provides Dependency Injection for GWT: -->
+	<inherits name="com.google.gwt.inject.Inject"/>
+
+	<!-- Inherit the default GWT style sheet.  You can change       -->
+	<!-- the theme of your GWT application by uncommenting          -->
+	<!-- any one of the following lines.                            -->
+	<inherits name='com.google.gwt.user.theme.standard.Standard' />
+	
+	<!-- Used to request jsoj files -->
+	<inherits name='com.google.gwt.jsonp.Jsonp'/> 
+
+	<!-- Other module inherits                                      -->
+	<inherits name='com.extjs.gxt.ui.GXT' />
+
+	<!-- Inherit gwt-dnd support             						-->
+	<inherits name='com.allen_sauer.gwt.dnd.gwt-dnd' />
+
+	<!-- Inherit Isotrol our GWT common items -->
+	<inherits name='com.isotrol.impe3.PmsGuiApi' />
+	<inherits name='com.isotrol.impe3.Impe3GuiCommon' />
+
+	<!-- Browser compatibility: comment to compile for all browsers
+		In order to compile for only one version, choose (GXT 1.2): 
+		ie6,ie8,gecko,gecko1_8,safari,opera 
+	-->
+	<!--<set-property name="user.agent" value="gecko1_8" />-->
+<!--	<set-property name="user.agent" value="ie6" />-->
+
+	<!-- Locale -->
+	<inherits name="com.google.gwt.i18n.I18N" />
+	<extend-property name="locale" values="es" />
+	<set-property name="locale" value="es" />
+
+	<!--
+		Avoid warnings such as [WARN] Field 'private final
+		com.google.gwt.i18n.client.impl.ConstantMap.OrderedConstantSet<java.lang.String>
+		keys' will not be serialized because it is final
+	-->
+	<set-property name="gwt.suppressNonStaticFinalFieldWarnings" value="true" />
+
+	<entry-point class='com.isotrol.impe3.pms.gui.client.Pms' />
+
+	<!-- 
+		Specify the application specific style sheets.
+	-->
+	<!-- PMS main stylesheet. -->
+	<stylesheet src='Pms.css' />
+	<!-- Node Repositories panel stylesheet -->
+	<stylesheet src='Nr.css' />
+	<!-- Comments panel stylesheet -->
+	<stylesheet src='Comments.css' />
+	<!-- Design specific stylesheet. -->
+	<stylesheet src='Design.css' />
+
+</module>

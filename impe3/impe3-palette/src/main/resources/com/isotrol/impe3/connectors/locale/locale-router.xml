@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="service" class="com.isotrol.impe3.connectors.locale.LocaleRouterImpl">
+		<property name="resolver" ref="localeResolver" />
+		<property name="generator" ref="localeURIGenerator" />
+	</bean>
+
+
+	<bean id="localeURIGenerator" class="com.isotrol.impe3.api.support.DefaultLocaleURIGenerator"
+		factory-method="get" />
+
+</beans>

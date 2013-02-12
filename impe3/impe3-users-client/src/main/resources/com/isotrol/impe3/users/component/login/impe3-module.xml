@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="login" class="com.isotrol.impe3.users.component.login.LoginAction"
+		scope="prototype">
+		<property name="service" ref="portalUsersService" />
+		<property name="uriGenerator" ref="uriGenerator" />
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="logout" class="com.isotrol.impe3.users.component.login.LogoutAction"
+		scope="prototype">
+		<property name="uriGenerator" ref="uriGenerator" />
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="component" class="com.isotrol.impe3.users.component.login.LoginComponent"
+		scope="prototype">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="logged" class="com.isotrol.impe3.users.component.login.IsLoggedComponent"
+		scope="prototype">
+	</bean>
+</beans>

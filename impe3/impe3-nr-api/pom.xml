@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>impe3</artifactId>
+		<groupId>com.isotrol.impe3</groupId>
+		<version>2.9.185-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>impe3-nr-api</artifactId>
+	<name>IMPE3 :: Node Repository :: API</name>
+	<dependencies>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-api-base</artifactId>
+			<version>2.9.185-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.lucis</groupId>
+			<artifactId>lucis-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<!-- nos se corresponde con la version comun -->
+			<!-- <version>2.6.2</version> -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.derquinsej</groupId>
+			<artifactId>derquinsej-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.derquinsej</groupId>
+			<artifactId>derquinsej-test-support</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

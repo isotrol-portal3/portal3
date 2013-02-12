@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="freeMarkerService" class="com.isotrol.impe3.freemarker.DefaultFreeMarkerService">
+		<constructor-arg index="0" ref="fileLoader" />
+		<constructor-arg index="1" ref="externalTemplateLoader" />
+		<constructor-arg index="2" ref="engineMode" />
+		<constructor-arg index="3" ref="config" />
+		<property name="imgUri" ref="imgUri" />
+	</bean>
+
+	<bean id="externalTemplateLoader" class="com.isotrol.impe3.freemarker.EmptyTemplateLoader">
+	</bean>
+
+	<bean id="imgUri" class="com.isotrol.impe3.connectors.uri.EmptyURIBuilderImpl">
+	</bean>
+
+</beans>

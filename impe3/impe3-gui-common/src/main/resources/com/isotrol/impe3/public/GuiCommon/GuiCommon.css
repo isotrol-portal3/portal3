@@ -1,0 +1,433 @@
+/**
+ * This file is part of Port@l
+ * Port@l 3.0 - Portal Engine and Management System
+ * Copyright (C) 2010  Isotrol, SA.  http://www.isotrol.com
+ *
+ * Port@l is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Port@l is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Port@l.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#debug-panel {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	z-index: 50;
+	border: 1px #8DB2E3 solid;
+	background-color: white;
+}
+
+.debug-border {
+	border: 1px solid green;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	font-family: sans-serif;
+	font-size: 11px;
+	/*text-align: center;*/
+}
+
+.loading-icon {
+	background: transparent url('img/loading.gif') no-repeat scroll left !important;
+	width: 16px;
+	height: 16px;
+}
+
+.invalid-widget {
+	border: 1px solid red !important;
+}
+
+.main-panel,.north-panel {
+	border: 1px solid #BBBBBB;
+}
+
+.north-panel {
+	padding: 5px;
+}
+
+.enlinea {
+	display: inline;
+}
+
+.bloque {
+	display: block;
+}
+
+.oculto {
+	display: none;
+}
+
+.colorfondo {
+	background-color: #dfe8f6;
+}
+
+.fondoBlanco {
+	background-color: white !important;
+}
+
+.red-message {
+	color: red !important;
+} 
+
+/** la sobreescribimos, cambia el fondo de los objetos Window */
+.x-window-mc {
+	background-color: white !important;
+}
+
+.gwt-SuggestBoxPopup {
+	z-index: 1500;	
+}
+
+/***** MENU ITEMS AND OTHER LIST VIEWS. *****/
+.menu-item {
+	width: 100%;
+	height: auto;
+	padding-left: 5px;
+}
+
+.menu-item-icon {
+	float: left;
+	height: 16px;
+	width: 16px;
+}
+
+.menu-item-text {
+	margin-left: 5px;
+}
+/**** BUTTON ICONS */
+.new {
+	background: url('img/button-icons/add.gif') no-repeat;
+}
+
+.accept {
+	background: url('img/button-icons/ok.gif') no-repeat;
+}
+
+.delete {
+	background: url('img/button-icons/delete.gif') no-repeat;
+}
+
+.reject {
+	background: url(img/button-icons/cross.png);
+}
+
+.edit {
+	background: url('img/button-icons/edit.gif');
+}
+
+.download {
+	background: url('img/button-icons/download.png');
+}
+
+.save {
+	background: url('img/button-icons/save.gif');
+}
+
+.save-quit {
+	background: url('img/button-icons/save_close.gif');
+}
+
+.search {
+	background: url('img/button-icons/search.png');
+}
+
+.trash {
+	background: url('img/button-icons/trash.gif');
+}
+
+.calendar {
+	background: url(img/button-icons/calendar.gif);
+}
+
+.moderate {
+	background: url(img/button-icons/moderate.gif) no-repeat;
+}
+
+.user {
+	background: url('img/user.gif') no-repeat;
+}
+
+.add-user {
+	background: transparent url('img/button-icons/add-user.gif') no-repeat;
+}
+
+.delete-user {
+	background: transparent url('img/button-icons/delete-user.gif') no-repeat;
+}
+
+.change-pwd {
+	background: transparent url('img/button-icons/change-pwd.gif') no-repeat;
+}
+
+.tool-preview-icon {
+	background: url('img/button-icons/preview.gif');
+}
+
+.select {
+	background: url('img/button-icons/select.png');
+}
+
+.add-continue {
+	background: url('img/button-icons/addContinue.gif') no-repeat;
+}
+
+/*.generic-button-16:nth-of-type(1) img {
+	left: 0px !important;
+	top: 0px !important;
+}*/
+
+.generic-button-16 img {
+	left: -19px !important;
+	top: -2px !important;
+}
+
+/**** END BUTTON ICONS */
+
+.username-field,.info-message-label {
+	font-family: tahoma, arial, verdana, sans-serif;
+	font-size: 11px;
+	font-size-adjust: none;
+	font-style: normal;
+	font-variant: normal;
+	color: #15428B;
+	font-weight: bold !important;
+}
+
+.readonly-field {
+	background: #EEEEEE !important;
+	color: gray;
+	opacity: 0.6;
+}
+
+.x-panel-header-text {
+	font-weight: bold;
+	color: #15428B;
+}
+
+.x-form-label-11px .x-form-item-label,	/* Form fields with 12 px labels*/
+.font-size-12px	 /* 12px font */ {
+	font-size: 12px;
+}
+
+.form-layout-window-body {
+	padding: 10px;
+	background-color: white;
+}
+
+.logout-button {
+	background: url("img/logout-small.gif");
+	width: 16px;
+	height: 16px;
+	margin: 0;
+}
+
+.colorfondo {
+	background-color: #DFE8F6;
+}
+/**** MENU CONFIGURATION *****/
+.menu-logo-title {
+	font-weight: bold;
+	line-height: 32px;
+	font-size: 16px;
+	font-family: Tahoma, Verdana, Arial, Sans-serif;
+	color: #15428B;
+	text-align: center;
+}
+/**** END MENU CONFIGURATION *****/
+
+/******* LIST VIEW STYLES ********/
+.list-view-item {
+	padding-left: 5px;
+	width: 100%;
+	height: auto;
+	cursor: pointer;
+}
+
+.list-view-item-icon {
+	float: left;
+	width: 16px;
+	height: 16px;
+}
+/***** END LIST VIEW STYLES *****/
+
+/******** FORMS *********/
+.generic-label {
+	-x-system-font:none;
+	font-family:tahoma,arial,helvetica,sans-serif;
+	font-size:12px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:normal;
+	clear:left;
+	display:block;
+	float:left;
+	padding:3px 0;
+	z-index:2;	
+}
+
+/* tree-item-nocheckable
+ * Should be assigned to tree nodes with no visible check box,
+ * in checkable trees.
+ */
+div.tree-item-nocheckable img.x-tree3-node-check {
+	display: none !important;
+}
+div.tree-item-nocheckable img.x-tree3-node-icon {
+	margin-left: 18px;
+}
+
+.checkbox-align-left {
+	left: 0 !important;
+}
+
+/********** TAB PANELS **********/
+.tab-panel-no-header-borders .x-tab-panel-header {
+	border-left: none;
+	border-top: none;
+	border-right: none;	
+}
+
+
+/********** GENERICS ************/
+
+.height-100pc {
+	height: 100%;
+}
+
+.width-100pc {
+	width: 100% !important;
+}
+
+.piebloq {
+	clear: both;
+	font-size: 1px;
+}
+
+.no-lr-borders {	/* no left nor right borders */
+	border-left: 0px none !important;
+	border-right: 0px none !important;
+}
+
+.no-top-borders {
+	border-top: 0px none !important;
+}
+
+.no-bottom-borders {
+	border-bottom: 0px none !important;
+}
+
+.padding-0px {
+	padding: 0px;	
+}
+
+.padding-5px {
+	padding: 5px;	
+}
+
+.padding-10px {
+	padding: 10px;	
+}
+
+.padding-right-10px {
+	padding-right: 5px;
+}
+
+.padding-left-4px {
+	padding-left: 4px;
+}
+
+.padding-left-5px {
+	padding-left: 5px;
+}
+
+.padding-left-10px {
+	padding-left: 10px;
+}
+
+.padding-right-5px {
+	padding-left: 5px;
+}
+
+.margin-left-4px {
+	margin-left: 4px;
+}
+
+.margin-left-5px {
+	margin-left: 5px;
+}
+
+.margin-left-10px {
+	margin-left: 10px;
+}
+
+.margin-left-17px {
+	margin-left: 17px;
+}
+
+.margin-right-4px {
+	margin-right: 4px;
+}
+
+.margin-right-5px {
+	margin-right: 5px;
+}
+
+.margin-right-10pc {
+	margin-left: 10% !important;
+}
+
+.margin-10px {
+	margin: 10px;
+}
+
+.margin-top-10px {
+	margin-top: 10px;
+}
+
+.margin-bottom-5px {
+	margin-bottom: 5px;
+}
+
+.margin-bottom-10px {
+	margin-bottom: 10px;	
+}
+
+.margin-bottom-20px {
+	margin-bottom: 20px;
+}
+
+.cursor-pointer {
+	cursor: pointer;	
+}
+
+/********* END GENERICS *********/
+
+/**** MENU STYLES ****/
+.level1-left-panel {
+	border-left: 0;
+	border-right: 0;
+}
+
+/* mask styles */
+.mask-waiting div {
+	background: #FFFFFF url('img/loading_blue.gif') no-repeat 98%;
+	padding-right: 25px;
+}
+/******** END MENU ************/

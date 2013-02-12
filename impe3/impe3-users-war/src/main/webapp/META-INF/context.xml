@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context privileged="true">
+
+    <ResourceLink global="jdbc/impe3users"   name="jdbc/impe3users"   type="javax.sql.DataSource"/>
+
+
+<!-- EJEMPLO  
+
+<Resource
+      name="jdbc/impe3users"
+      type="javax.sql.DataSource"
+      password="CCUL_USU_WEB"
+      driverClassName="oracle.jdbc.driver.OracleDriver"
+      maxIdle="2"
+      maxWait="5000"
+      username="CCUL_USU_WEB"
+      url="jdbc:oracle:thin:@titan:1521:oratitan"
+      maxActive="4"/>
+
+PARA EL SERVER.XML
+
+<Server>
+  <GlobalNamingResources>
+    <Resource
+      name="jdbc/impe3users"
+      type="javax.sql.DataSource"
+      password="CCUL_USU_WEB"
+      driverClassName="oracle.jdbc.driver.OracleDriver"
+      maxIdle="2"
+      maxWait="5000"
+      username="CCUL_USU_WEB"
+      url="jdbc:oracle:thin:@titan:1521:oratitan"
+      maxActive="4"/>
+  </GlobalNamingResources>
+
+
+-->
+
+
+</Context>

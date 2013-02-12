@@ -1,0 +1,10 @@
+com.isotrol.impe3.samples.calculator.CalculatorConnectorModule
+com.isotrol.impe3.samples.calculator.CalculatorComponentModule
+com.isotrol.impe3.samples.dummy.DummyConnectorModule
+com.isotrol.impe3.samples.dummy.DummyComponentModule
+com.isotrol.impe3.samples.component.SimpleComponentModule
+com.isotrol.impe3.samples.component.NodeComponentModule
+com.isotrol.impe3.samples.message.MessageModule
+com.isotrol.impe3.samples.message.EchoModule
+com.isotrol.impe3.samples.message.OptionalEchoModule
+com.isotrol.impe3.samples.randomnr.RandomModule

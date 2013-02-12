@@ -1,0 +1,12 @@
+<module>
+
+	<source path='pms/gui/api' />
+	
+	<public path='public/PmsGuiApi' />
+
+	<inherits name='com.google.gwt.user.User' />
+
+	<inherits name='com.isotrol.impe3.PmsApi' />
+	<inherits name='com.isotrol.impe3.UsersApi' />
+
+</module>

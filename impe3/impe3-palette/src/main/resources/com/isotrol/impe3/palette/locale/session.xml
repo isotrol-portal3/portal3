@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="localeSetter"
+		class="com.isotrol.impe3.palette.locale.SessionLocaleAction" scope="prototype">
+		<property name="config" ref="config" />
+		<property name="uriGenerator" ref="uriGenerator" />
+	</bean>
+
+	<bean id="actionExporter" class="com.isotrol.impe3.api.support.ActionExporterComponent" scope="prototype">
+		<property name="config" ref="config" />
+		<property name="actionName" value="localeSetter" />
+	</bean>
+
+</beans>

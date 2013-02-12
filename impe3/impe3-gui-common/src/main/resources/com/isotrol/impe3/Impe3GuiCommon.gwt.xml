@@ -1,0 +1,47 @@
+<!-- Common classes for Isotrol GWT webapps -->
+<module>
+
+<!--	source path is "com/isotrol/gwt/"-->
+	<source path="gui/common" />
+	<public path="public/GuiCommon" />
+
+<!--	INHERITS-->
+	
+	<!-- GWT common user libs -->
+	<inherits name='com.google.gwt.user.User' />
+	
+	<!-- import GIN module which provides Dependency Injection for GWT: -->
+	<inherits name="com.google.gwt.inject.Inject"/>
+	
+	<!-- GXT libs -->
+	<inherits name='com.extjs.gxt.ui.GXT' />
+
+	<!-- Inherit the default GWT style sheet.  You can change       -->
+	<!-- the theme of your GWT application by uncommenting          -->
+	<!-- any one of the following lines.                            -->
+	<inherits name='com.google.gwt.user.theme.standard.Standard' />
+	
+<!--	END INHERITS-->
+
+	<!-- Set locale:-->
+	<extend-property name="locale" values="es" />
+	<set-property name="locale" value="es" />
+
+	<!-- Browser compatibility: comment to compile for all browsers
+		In order to compile for only one version, choose (GXT 1.2): 
+		ie6,ie8,gecko,gecko1_8,safari,opera 
+		Comment next line for all browsers compatibility -->
+<!--	<set-property name="user.agent" value="ie6" />-->
+<!--	<set-property name="user.agent" value="gecko1_8" />-->
+
+	<!--
+		Avoid warnings such as [WARN] Field 'private final
+		com.google.gwt.i18n.client.impl.ConstantMap.OrderedConstantSet<java.lang.String>
+		keys' will not be serialized because it is final
+	-->
+	<set-property name="gwt.suppressNonStaticFinalFieldWarnings" value="true" />
+
+	<!-- CSS styles shared with others apps -->
+	<stylesheet src='gxt/css/gxt-all.css' />
+	<stylesheet src='GuiCommon.css' />
+</module>

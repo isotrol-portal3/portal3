@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>impe3</artifactId>
+    <groupId>com.isotrol.impe3</groupId>
+    <version>2.9.28-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>impe3-users-gui</artifactId>
+  <name>IMPE3 :: Users :: GUI</name>
+  
+	<dependencies>
+		<dependency>
+			<groupId>com.extjs</groupId>
+			<artifactId>gxt</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwtVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-users-api</artifactId>
+			<version>2.9.28-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-pms-gui-client</artifactId>
+			<version>2.9.28-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwtVersion}</version>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!--
+				configure the GWT-Maven plugin for generating i18n and async service
+				interfaces
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<configuration>
+					<extraJvmArgs>-Xmx512m -Xss4096k</extraJvmArgs>
+					<gwtVersion>${gwtVersion}</gwtVersion>
+					<!--		        generate settings file-->
+					<i18nConstantsWithLookupBundles>
+						<value>com.isotrol.impe3.users.gui.util.UsersSettings</value>
+						<value>com.isotrol.impe3.users.gui.util.UsersStyles</value>
+					</i18nConstantsWithLookupBundles>
+					<!--	     		generate messages file-->
+					<i18nMessagesBundles>
+						<value>com.isotrol.impe3.users.gui.util.UsersMessages</value>
+					</i18nMessagesBundles>
+					<generateDirectory>src/main/java</generateDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<!-- <goal>i18n</goal> -->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		
+		<resources>
+			<!-- All GWT modules must include sources in packaging 
+				 so the projects that use it can compile to JavaScript -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
+	
+  <reporting>
+		<plugins>
+			<plugin>
+				<groupId>net.sf</groupId>
+				<artifactId>stat-scm</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>

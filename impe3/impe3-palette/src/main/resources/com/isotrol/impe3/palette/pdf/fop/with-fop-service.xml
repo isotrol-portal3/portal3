@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="fopService" class="com.isotrol.impe3.palette.pdf.fop.DefaultFopService">
+		<constructor-arg index="0" ref="config" />
+		<constructor-arg index="1" ref="fopServiceFopFactory" />
+		<constructor-arg index="2" ref="fopServiceTransformerFactory" />
+		<constructor-arg index="3" ref="fileLoader" />
+	</bean>
+
+	<bean id="fopServiceFopFactory" class="org.apache.fop.apps.FopFactory" factory-method="newInstance" />
+	<bean id="fopServiceTransformerFactory" class="org.apache.xalan.xsltc.trax.SmartTransformerFactoryImpl" />
+
+</beans>

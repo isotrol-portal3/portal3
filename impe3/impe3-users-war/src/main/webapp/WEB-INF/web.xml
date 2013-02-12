@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<display-name>impe3-users-war</display-name>
+
+	<description>IMPE3 :: Users :: WebApp</description>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>WEB-INF/users-db.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>com.isotrol.impe3.users.web.Impe3UsersContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>hessian</servlet-name>
+		<servlet-class>com.isotrol.impe3.users.web.Impe3UsersHessianServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>rpc</servlet-name>
+		<servlet-class>com.isotrol.impe3.users.web.Impe3UsersRPCServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>hessian</servlet-name>
+		<url-pattern>/hessian/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>rpc</servlet-name>
+		<url-pattern>/rpc/*</url-pattern>
+	</servlet-mapping>
+
+</web-app>

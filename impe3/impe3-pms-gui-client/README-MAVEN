@@ -1,0 +1,34 @@
+DEBUG AND PRODUCTION ENVIRONMENTS
+
+2 profiles are defined, according to user needs:
+
+-profile 'debug' displays the GWT Debug Panel to the top-right corner, and a log panel in the menu.
+To activate 'debug' profile, run the Maven build with option '-P debug', for example:
+	mvn clean install -P debug 
+
+-profile 'production' displays the app with no debug tweaks.
+This profile is active by default, so there's no need to specify it.
+
+
+
+CONSTANTS AND i18n INTERFACES GENERATION
+
+The GWT constants and i18n interfaces are generated automatically. To build the project and create 
+those interfaces:
+
+	mvn clean generate-resources gwt:i18n package install
+
+or whatever is needed after 'package', instead of 'install'
+
+
+Otherwise, if there is no need to create the interfaces, this should suffice:
+	mvn clean package install
+
+
+All that jazz is necessary because gwt-maven-plugin bounds the goal i18n to 'package' phase, and we don't need 
+auto generation of code in some environments, like Continuous Integration; so that binding is commented out,
+and an explicit 'gwt:i18n' must be specified before 'package'.
+
+On the other way, 'Settings.properties' is special: it must be filtered prior to firing 'gwt:i18n', so an
+execution of 'resources:copy-resources' was bound to 'generate-resources' phase. That's why it must be invoked 
+before 'gwt:i18n'.

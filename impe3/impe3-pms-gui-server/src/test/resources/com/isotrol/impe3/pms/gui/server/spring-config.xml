@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="categorySelConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.category.CategorySelConverter" >
+		<property name="stateConverter" ref="stateConverter" />
+	</bean>
+		
+	<bean id="categoryTreeConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.category.CategoryTreeConverter">
+		<property name="categorySelConverter" ref="categorySelConverter" />
+	</bean>
+	
+	<bean id="categoryConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.category.CategoryConverter">
+		<property name="nameConverter" ref="nameConverter" />
+		<property name="stateConverter" ref="stateConverter" />
+	</bean>
+
+	<bean id="sourceMappingSelConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.mapping.SourceMappingSelConverter">
+	</bean>
+
+	<bean id="moduleDependencyConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.modulerelation.ModuleDependencyConverter">
+	</bean>
+
+	<bean id="providedConnectorConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.modulerelation.ProvidedConnectorConverter">
+	</bean>
+
+	<bean id="invalidModuleConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.module.InvalidModuleConverter">
+	</bean>
+
+	<bean id="componentModuleConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.module.ComponentModuleConverter">
+		<property name="moduleDependencyConverter" ref="moduleDependencyConverter" />
+	</bean>
+
+	<bean id="connectorModuleConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.module.ConnectorModuleConverter">
+		<property name="moduleDependencyConverter" ref="moduleDependencyConverter" />
+		<property name="providedConnectorConverter" ref="providedConnectorConverter" />
+	</bean>
+	
+	<bean id="stateConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.StateConverter" />
+	
+	<bean id="nameConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.NameConverter" />
+	
+	<bean id="contentTypeConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.contenttype.ContentTypeConverter">
+		<property name="stateConverter" ref="stateConverter" />
+		<property name="nameConverter" ref="nameConverter" />
+	</bean>
+	
+	<bean id="contentTypeSelConverter"
+		class="com.isotrol.impe3.pms.gui.server.converter.impl.contenttype.ContentTypeSelConverter" >
+		<property name="stateConverter" ref="stateConverter" />
+	</bean>
+	
+</beans>
+           

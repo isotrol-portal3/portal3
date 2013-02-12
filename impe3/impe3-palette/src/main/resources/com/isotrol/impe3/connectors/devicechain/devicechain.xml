@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="service"
+		class="com.isotrol.impe3.connectors.devicechain.ChainOfDeviceResolver">
+		<property name="firstStep" ref="firstStep" />
+		<property name="secondStep" ref="secondStep" />
+		<property name="thirdStep" ref="nullResolver" />
+		<property name="fourthStep" ref="nullResolver" />
+		<property name="fifthStep" ref="nullResolver" />
+	</bean>
+
+	<bean id="nullResolver" class="com.isotrol.impe3.api.support.NullDeviceResolver"
+		factory-method="get" />
+
+</beans>

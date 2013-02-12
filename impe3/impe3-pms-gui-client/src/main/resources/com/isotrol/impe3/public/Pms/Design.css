@@ -1,0 +1,341 @@
+/**
+ * This file is part of Port@l
+ * Port@l 3.0 - Portal Engine and Management System
+ * Copyright (C) 2010  Isotrol, SA.  http://www.isotrol.com
+ *
+ * Port@l is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Port@l is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Port@l.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+table td, select {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+.body-window-design {
+	overflow: hidden;
+	text-align: left;
+}
+
+/************* ESTRUCTURA GENERAL **************/
+.design-main-panel {
+	width: 100%;
+	margin: auto;
+}
+
+.design-main-panel table {
+	/*width: 100%;*/
+}
+
+.design-main-panel .my-root-item table {
+	width: auto;	
+}
+
+.panel {
+	padding: 20px 0;
+	border: 1px solid;
+	width: 100%;
+}
+
+.cabecera {
+	padding: 0.1em;
+	margin: 0.1em;
+	background-color: #87B3FF;
+	border: 1px solid blue;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-none {
+	float: none;
+}
+
+/********** NORTH PANEL ************/
+.design-main-panel .design-north-panel {
+	margin-bottom: 15px;
+	height: auto !important;
+}
+
+.design-main-panel .design-north-panel-body {
+	border-bottom: none;
+	height: auto !important;
+}
+
+.palette-button-icon {
+	background: url('img/PaletteIcon.gif') no-repeat 0 50% !important;
+	padding-left: 25px !important;
+}
+
+.templates-button-icon {
+	background: url('img/templates-icon.gif') no-repeat 0 50% !important;
+	padding-left: 25px !important;
+}
+
+.save-button-icon {
+	background: url('img/Save_Icon.gif') no-repeat 0 50% !important;
+	padding-left: 25px !important;
+}
+
+.clean-button-icon {
+	background: url('img/button-icons/trash.gif') no-repeat 0 50% !important;
+	padding-left: 25px !important;
+}
+
+.restore-button-icon {
+	background: url('img/page_refresh.gif') no-repeat 0 50% !important;
+	padding-left: 25px !important;
+}
+
+.preview-button-icon {
+	background: url('img/preview-icon.gif') no-repeat 0 50% !important;
+	padding-left: 25px !important;
+}
+
+.save-close-button-icon {
+	background: url('img/save_close.gif') no-repeat 0 50% !important;
+	padding-left: 25px !important;
+}
+
+/**************** DESIGN ZONE ****************/
+.design-zone-panel { /*height: 100% !important;
+	overflow: auto;*/
+	/*height: 88% !important;*/
+	/*top: 50px !important;*/
+}
+
+.design-zone-panel table {
+	width: 100%;	
+}
+
+.selector-column-button {
+	width: auto;
+	padding: 2px;
+	height: 20px;
+	font-size: 9pt;
+	position: absolute;
+	top: -20px;
+	left: 0;
+}
+
+/**** COLUMNS ********/
+.column, .inherited-column {
+	width: auto;
+	background-color: white;
+	margin: auto;
+}
+
+.column {
+	border: 1px solid #DF9999;	
+}
+
+.maincolumn {
+	position: relative;
+	border: none;
+}
+
+.column table.column-panel {
+	width: 100%;
+	height: 40px;
+}
+
+.column table.fill-frame {
+	background-color: #DFDFDF;
+	height: 120px;
+}
+
+.column table.fill-hover {
+	background-color: #BCDEFF;
+}
+
+.column-IndexedPanel-spacer {
+	height: 10px;
+}
+
+/************** COLUMNS PALETTE ****************/
+
+.columns-palette {
+	margin: 15px 0 0 2%;	
+}
+
+.templates-palette .dialogContent {
+	height: 500px;
+	overflow: auto;
+}
+
+.gwt-DialogBox-cursor-move .Caption {
+	cursor: move;
+	color: #15428B;
+	font-weight: bold;
+}
+
+#columnSelector-form-id {
+	position: relative;
+}
+
+#columnSelector-form-id label {
+	width: auto !important;
+}
+
+#numCols-id input {
+	width: 30px !important;
+	margin: 0 3px;
+}
+
+#columnSelector-form-id .nextButton {
+	background-image: url("img/adelante.gif");
+	width: 18px;
+	height: 18px;
+}
+
+.colSelector-button {
+	margin-bottom: 10px;
+}
+
+.selector-width-column {
+	width: auto !important;
+}
+
+.selector-width-column input {
+	width: 50px !important;
+}
+
+/************** BUTTONS **************/
+.design-button {
+	
+}
+
+.close-button {
+	background: url(img/icon_close.png) no-repeat left center !important;
+	width: 19px;
+	height: 19px;
+	position: absolute;
+	top: 5px;
+	right: 7px;
+}
+
+/************* FRAME *****************/
+.box {
+	margin-bottom: 10px;
+	position: relative;
+	width: 100%;
+}
+
+.box-ondrop {
+	margin-bottom: 0;
+}
+
+.box table {
+	width: 100%;
+}
+
+.box-close-button {
+	padding: 0;
+	border: none;
+}
+
+/*********** DRAG & DROP **************/
+.dragdrop-movable-panel {
+	width: 30px !important;
+	height: 20px !important;
+	z-index: 3000;
+}
+
+.draggable-column, .draggable-component {
+	height: 10px;
+	background-color: #A8BBCF;
+	font-size: 5pt;
+	color: transparent;	
+}
+
+.draggable-column {
+	background-color: #DF9999;
+}
+
+/************ COMPONENTS ***************/
+.componentsPanel {
+	border: 1px solid red;
+}
+
+.componentsPanel table {
+	width: 100%;
+}
+
+.estiloWidget {
+	border: 1px solid #A8BBCF;
+	background-color: #FFFFFF;
+}
+
+.empty-component {
+	background: url(img/background_hueco.png);
+	position: relative !important;
+	z-index: 20000 !important;
+}
+
+.fill-in-layout {
+	height: 150px;
+	background: url(img/background_hueco.png);
+	text-align: center;
+	font-size: 30px;
+	line-height: 150px;
+}
+
+.componentTab-panel {
+	margin-left: 2%;
+}
+
+#componentTabId .x-tab-panel-body {
+	padding-top: 10px;
+}
+
+.estiloBloqueo {
+	background-color: #68676B;
+	left: 0;
+	top: 0;
+	position: absolute;
+	width: 100%;   
+	height: 100%;
+	z-index: 1000;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+}
+
+.box-empty-component {
+	position: relative !important;
+	z-index: 2000;
+}
+
+/********** COMPONENTS PALETTE ***********/
+
+.components-palette-toolbar {
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+.components-palette-toolbar table {
+	width: auto;
+	margin: auto;
+}
+
+.popup-component-html {
+	position: relative;
+}
+
+.popup-component-html .gwt-HTML {
+	overflow: auto;
+}

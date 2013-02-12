@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="editionsServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="editionsService" />
+	</bean>
+	
+	<bean id="usersServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="usersService" />
+	</bean>
+	
+	<bean id="routingDomainsServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="routingDomainsService" />
+	</bean>
+
+	<bean id="componentsServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="componentsService" />
+	</bean>
+
+	<bean id="portalsServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="portalsService" />
+	</bean>
+
+	<bean id="contentTypesServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="contentTypesService" />
+	</bean>
+	
+	<bean id="moduleRegistryServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="moduleRegistryService" />
+	</bean>
+	
+	<bean id="sourceMappingsServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="sourceMappingsService" />
+	</bean>
+	
+	<bean id="categoriesServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="categoriesService" />
+	</bean>
+	
+	<bean id="connectorsServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="connectorsService" />
+	</bean>
+	
+	<bean id="pagesServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="pagesService" />
+	</bean>
+	
+	<bean id="externalServicesServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="externalServicesService" />
+	</bean>
+	
+	<bean id="sessionsServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="sessionsService" />
+	</bean>
+	
+	<bean id="portalUsersExternalServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="portalUsersExternalService" />
+	</bean>
+	
+	<bean id="nodeRepositoryExternalServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="nodeRepositoryExternalService" />
+	</bean>
+	
+	<bean id="devicesServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="devicesService" />
+	</bean>
+	
+	<bean id="commentsExternalServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="commentsExternalService" />
+	</bean>
+
+	<!--+
+		| Spring URL mapper
+		+-->
+	<bean id="urlMapper"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<map>
+				<entry key="/pmsrpc/EditionsService" value-ref="editionsServiceExporter" />
+				<entry key="/pmsrpc/UsersService" value-ref="usersServiceExporter" />
+				<entry key="/pmsrpc/PortalsService" value-ref="portalsServiceExporter" />
+				<entry key="/pmsrpc/ContentTypesService" value-ref="contentTypesServiceExporter" />
+				<entry key="/pmsrpc/ModulesRegistryService" value-ref="moduleRegistryServiceExporter" />
+				<entry key="/pmsrpc/CategoriesService" value-ref="categoriesServiceExporter" />
+				<entry key="/pmsrpc/SourceMappingsService" value-ref="sourceMappingsServiceExporter" />
+				<entry key="/pmsrpc/ConnectorsService" value-ref="connectorsServiceExporter" />
+				<entry key="/pmsrpc/ComponentsService" value-ref="componentsServiceExporter" />
+				<entry key="/pmsrpc/RoutingDomainsService" value-ref="routingDomainsServiceExporter" />
+				<entry key="/pmsrpc/PagesService" value-ref="pagesServiceExporter" />
+				<entry key="/pmsrpc/SessionsService" value-ref="sessionsServiceExporter" />
+				<entry key="/pmsrpc/ExternalServicesService" value-ref="externalServicesServiceExporter" />
+				<entry key="/pmsrpc/PortalUsersExternalService" value-ref="portalUsersExternalServiceExporter" />
+				<entry key="/pmsrpc/NodeRepositoryExternalService" value-ref="nodeRepositoryExternalServiceExporter" />
+				<entry key="/pmsrpc/DevicesService" value-ref="devicesServiceExporter" />
+				<entry key="/pmsrpc/CommentsExternalService" value-ref="commentsExternalServiceExporter" />
+			</map>
+		</property>
+		<property name="alwaysUseFullPath">
+			<value>true</value>
+		</property>
+	</bean>
+	
+</beans>

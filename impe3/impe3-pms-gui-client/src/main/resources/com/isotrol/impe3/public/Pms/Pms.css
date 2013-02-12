@@ -1,0 +1,582 @@
+/**
+ * This file is part of Port@l
+ * Port@l 3.0 - Portal Engine and Management System
+ * Copyright (C) 2010  Isotrol, SA.  http://www.isotrol.com
+ *
+ * Port@l is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Port@l is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Port@l.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+/***** LEFT MENU *****/
+
+.info-user-panel {
+	padding: 5px;
+	border-bottom: 1px solid #99BBE8;	
+}
+
+.info-user {
+	font-family: tahoma, arial, verdana, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	background: url('img/user.gif') left no-repeat;
+	padding: 3px 0 3px 18px;
+}
+
+.info-user:hover {
+	cursor: pointer;
+	color: #15428B;
+}
+
+.logo-portal-blue, .logo-portal-white {
+	border-bottom: 1px solid #99BBE8;
+	height: 50px;
+} 
+
+.logo-portal-white {
+	background: white url(img/recorte_portal_blanco.jpg) no-repeat 5px center;
+}
+
+.logo-portal-blue {
+	background: #DFE8F6 url(img/recorte_portal.jpg) no-repeat center center;
+}
+
+.menu-icon-sys {
+	background-image: url('img/menu-icons/sys.gif');
+}
+
+.menu-icon-portal {
+	background-image: url('img/menu-icons/portal.gif');
+}
+
+.menu-icon-editions {
+	background-image: url('img/menu-icons/edit.gif');
+}
+
+.menu-icon-routing-domains {
+	background: url('img/menu-icons/rd.gif') no-repeat;
+}
+
+.menu-icon-modules-registry {
+	background-image: url('img/menu-icons/mreg.gif');
+}
+
+.menu-icon-source-mappings {
+	background-image: url('img/menu-icons/smap.gif');
+}
+
+.menu-icon-connectors {
+	background-image: url('img/menu-icons/connector.gif');
+}
+
+.menu-icon-nr {
+	background: url('img/menu-icons/nr.gif') no-repeat;
+}
+
+.menu-icon-comments {
+	background: url('img/menu-icons/comment.gif') no-repeat;
+}
+
+.menu-icon-categories {
+	background: transparent url('img/menu-icons/category.gif') left no-repeat
+		!important;
+}
+
+.menu-icon-content-types {
+	background-image: url('img/menu-icons/type.gif');
+}
+
+.menu-icon-devices {
+	background-image: url('img/menu-icons/dev.gif');
+}
+
+.menu-icon-services {
+	background-image: url('img/menu-icons/esvc.gif');
+}
+
+.menu-icon-cache {
+	background-image: url('img/menu-icons/drive.png');
+}
+
+.icono-maquetacion {
+	background: transparent url('img/edit.gif') left no-repeat
+		!important;
+}
+
+.menu-icon-ia {
+	background-image: url('img/info.gif');
+}
+
+.menu-icon-help {
+	background-image: url('img/menu-icons/icon_info.gif');
+}
+
+.icon-gestion-portales {
+	background: url('img/www.gif') no-repeat;
+}
+
+.components-package-icon {
+	background-image: url('img/brick.png');
+}
+
+.alert-icon {
+	background-image: url('img/icon_alert.gif');
+}
+
+.icon-bases {
+	background: transparent url('img/var-icons/bases.gif') no-repeat 0 50% !important;
+}
+
+.icon-properties {
+	background: transparent url('img/var-icons/properties.png') no-repeat 0 50% !important;
+}
+
+.page-generic-icon {
+	background: url('img/page_next.gif');
+}
+
+.package-generic-icon {
+	background: url('img/page_package.gif');
+}
+
+.menu-icon-parent-portal {
+	background-image: url('img/menu-icons/copy_d.gif');
+}
+
+.menu-icon-collections {
+	background-image: url('img/menu-icons/list_components.gif');
+}
+
+.portalToolBar {
+	background: #EFF6FF;
+	border: none !important;
+}
+
+.admin-icon {
+	background: transparent url('img/components-tree-icons/component.gif') no-repeat;	
+}
+
+/**** USERS *****/
+.user-icon, .menu-icon-user {
+	background: url('img/user.gif') no-repeat;
+}
+
+.add-user-icon {
+	background: transparent url('img/add-user.gif') no-repeat 0 50% !important;
+}
+
+.delete-user-icon {
+	background: transparent url('img/delete-user.gif') no-repeat 0 50% !important;
+}
+
+.icon-change-pwd {
+	background: transparent url('img/change-pwd.gif') no-repeat 0 50% !important;
+}
+
+.icon-effective-authorities {
+	background: transparent url('img/user-icons/effective-rights.gif') no-repeat 0 50% !important;
+}
+
+.icon-role {
+	background: transparent url('img/user-icons/role.gif') no-repeat 0 50% !important;
+}
+
+.icon-authority-granted {
+	background: transparent url('img/user-icons/authority-granted.gif') no-repeat 0 50% !important;
+}
+
+.icon-authority-implied {
+	background: transparent url('img/user-icons/authority-implied.gif') no-repeat 0 50% !important;
+}
+
+.icon-portal-authorities {
+	background: transparent url('img/user-icons/portal-authorities.gif') no-repeat 0 50% !important;
+}
+
+#buscadorUsuarios .x-panel-body,#buscadorUsuarios .x-panel-footer {
+	float: left;
+	display: inline;
+	width: 45%;
+}
+
+#buscadorUsuarios .x-panel-footer {
+	padding-top: 8px;
+}
+
+#buscadorUsuarios td.inner-cell {
+	text-align: left;
+}
+
+table.x-btn {
+	width: auto !important;
+}
+
+.icon-manage-portal-users {
+	background: transparent url('img/account_settings.gif') no-repeat scroll left !important;
+}
+
+.icon-manage-nodes-repository {
+	background: transparent url('img/manage-nr.gif') no-repeat scroll left !important;
+	width: 30px !important;
+}
+
+.service-manage-icon img {
+	width: 20px !important;
+	/*left: -22px !important;*/
+}
+
+.service-manage-icon button {
+	/*padding-left: 20px !important;*/
+}
+
+/**** OTHER BUTTONS ****/
+.export-icon {
+	background: url('img/application_put.png') no-repeat;
+}
+
+.import-icon {
+	background: url('img/application_get.png') no-repeat;
+}
+
+.back-icon {
+	background: url('img/page_left.gif') no-repeat;
+}
+
+.publish-icon {
+	background: url('img/state-icons/state-published.png') no-repeat;
+}
+
+/**** MAQUETACION ****/
+.icon-design-column-close {
+	background: transparent url('img/close_button_red.gif');
+	width: 10px;
+	height: 10px;
+}
+
+.icon-design-column-css, .icon-css-selector-red, .icon-css-selector-green {
+	background: transparent url('img/css-icon.gif');
+	width: 20px;
+	height:10px;
+}
+
+.icon-css-selector-red {
+	background: transparent url('img/css-icon-red.gif');
+}	
+
+.icon-css-selector-green {
+	background: transparent url('img/css-icon-green.gif');
+}
+
+.filter-style {
+	margin-top: 10px;
+	margin-left: 5px;
+}
+
+.page-icon {
+	background: url('img/document.gif');
+}
+
+/**** ARBOL DE PORTALES ****/
+.menu-context-icon {
+	background: url('img/list.gif');
+}
+
+.offline-view {
+	background: transparent url('img/search-blue.gif') no-repeat scroll left
+		!important;
+}
+
+.online-view {
+	background: transparent url('img/search-red.gif') no-repeat scroll left
+		!important;
+}
+
+/* FORMULARIO EDICION DE CATEGORIAS 
+	paneles de detalles en general (items a la derecha de algo, en las pestañas)
+*/
+.detail-panel {
+	margin-left: 10px !important;
+}
+
+#categoryName .x-form-label-left { /*background-color: #DFE8F6;*/
+	
+}
+
+#categoryName .x-form-element {
+	padding-left: 0px !important;
+	padding-top: 1px;
+}
+
+.inputCategoryForm {
+	width: 100% !important;
+}
+
+#categoryButtonBar {
+	width: 100% !important;
+}
+
+label[for $="asociationRadio"] {
+	display: none !important;
+}
+
+label[for $="previousPageButtonBar"] {
+	display: none !important;
+}
+
+/***** LISTA DE TIPOS DE CONTENIDO *****/
+#contentSearcher .x-panel-body,#buscadorUsuarios .x-panel-footer {
+	float: left;
+	display: inline;
+	width: 60%;
+}
+
+#contentSearcher .x-panel-footer {
+	padding-top: 8px;
+}
+
+#contentSearcher td.inner-cell {
+	text-align: left;
+}
+
+.cpOwnContentStyle {
+	float: right;
+}
+
+.inheritContentList {
+	margin: 10px !important;
+}
+
+.contenttype-selection { /* antes:
+	margin: 50px 0 0 10px;
+	*/
+}
+
+.icon-locales {
+	background: transparent url(img/flag_white.gif) no-repeat;
+}
+
+/***** PÁGINAS DE UN PORTAL ******/
+	/***** PANEL CON MENU DE PORTAL ******/
+#idportalmenu { /*background-color: #DFE8F6;*/
+	
+}
+
+#idportalmenu .thumb-wrap {
+	float: left;
+	margin: 4px 20px 4px 4px;
+	padding: 5px 4px;;
+	width: 135px;
+	text-align: center;
+}
+
+#idportalmenu .thumb { /*border: 3px solid #1860A8;*/
+	text-align: center;
+}
+
+#idportalmenu .thumb-over {
+	background: #DDDDDD;
+	color: #1860A8;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#idportalmenu .thumb-wrap span {
+	display: block;
+	overflow: hidden;
+	text-align: center;
+}
+
+#idportalmenu .x-view-item-sel {
+	border: none !important;
+}
+
+/**** PORTAL EDITION *******/ /***** TIPOS DE CONTENIDO*****/
+.connectors-combo-box {
+	width: 50px;
+}
+
+.portal-property-label {
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.portal-property-separator {
+	margin-right: 15px;
+}
+
+/********* BASES ************/
+.cpOwnStyle {
+	margin-left: 30px !important;
+}
+
+.inherited-base-row {
+	background-color: #eae8e3;
+}
+
+.own-base-row {
+	background-color: #ffffff;
+}
+
+/********* PAGES **********/
+.pages-right-container {
+	margin-left: 30px !important;
+}
+
+/* not used anymore
+.components-tree-panel {
+	margin-bottom: 10px;
+}
+*/
+
+.components-tree-panel-body {
+	height: 175px;
+}
+
+.components-in-page-panel {
+	margin: 0 0 0 20px;
+	display: inline;
+}
+
+.item-disabled, .item-disabled>.my-treeitem-wrap *, .grid-cell-disabled {
+	color: gray !important;
+}
+
+.inherited-page {
+	color: #4F9FFF;
+}
+
+.x-tree3-el img.icon-tree-right {
+    vertical-align: middle;
+    margin-left: 3px;
+}
+
+.categoryWithPageFolder {
+	background: url("img/folder_page.gif");
+}
+
+/******* MAPPING PANEL ***********/
+.mapping-grid,.one-row-grid,.upper-panel,.margin-bottom-20px {
+	margin-bottom: 20px;
+}
+
+.mapping-detail-description {
+	padding: 10px;
+	font-weight: bold;
+}
+
+/*TODO quitar*/
+.catMap-panel-layout {
+	padding-left: 10px;
+}
+
+/************* CONNECTORS ************/
+.required-icon-style {
+	margin: 5px 0 0 40px;
+}
+
+/*
+.connector-save-button {
+	margin: 0 0 10px 10px;
+}
+*/ /*
+.connector-name-input {
+	width: 100% !important;
+}
+*/
+.label-select-dependencies {
+	width: 150px;
+	font-family: tahoma, arial, helvetica, sans-serif;
+	font-size: 12px;
+	margin-top: 2px;
+}
+
+/*********** MODULES ************/
+li.list-elem-dependencies * {
+	vertical-align: middle;
+}
+
+/******* CONFIGURATION FIELDSET ********/
+.configuration-panel-item {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.config-form form {
+	padding: 0 !important;	
+}
+
+/* Component in Page tree */
+.icon-component-tree-node {
+	background: transparent url(img/components-tree-icons/component.gif) no-repeat scroll -1px -1px;
+}
+.icon-wrong-component-tree-node {
+	background: transparent url(img/components-tree-icons/component-error.gif) no-repeat scroll -1px -1px;
+}
+
+.icon-download-file {
+	background: transparent url(img/icon_package_get.gif) no-repeat;
+}
+
+/******* NAVIGATION ********/
+.separatorNavigationItem {
+	margin: 0 5px;	
+}
+
+/**************************/
+/* tree nodes don't have cursor pointer in GXT 2.1.1 */
+.x-tree3-el * {
+	cursor: pointer;	
+}
+
+/***** LOGIN *******/
+.login-panel {
+	background: transparent url(img/imgPortal300.jpg) no-repeat top center;
+	padding-top: 130px;
+	margin: 10px;
+}
+
+.x-btn input {
+	background:transparent none repeat scroll 0 0;
+	border:medium none;
+	color:#333333;
+	font-family:arial,tahoma,verdana,helvetica;
+	font-size:11px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:normal;
+}
+
+/***** ABOUT PANEL *****/
+.about-panel {
+	background: transparent url(img/logo_portal_semi-200.png) no-repeat 130% -10%;
+	padding: 10px 10px 0;
+	height: auto !important;
+}
+
+.impe-build-info {
+	margin: 5px 0 30px 5px;
+	font-size: 10px;
+	color: Grey;
+}
+
+.copyright-text {
+	text-align: right;
+	color: White;
+}

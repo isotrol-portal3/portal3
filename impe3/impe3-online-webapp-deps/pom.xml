@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>impe3</artifactId>
+		<groupId>com.isotrol.impe3</groupId>
+		<version>2.9.185-SNAPSHOT</version>
+	</parent>
+	<artifactId>impe3-online-webapp-deps</artifactId>
+	<packaging>pom</packaging>
+	<name>IMPE3 :: ONLINE :: Webapp Dependencies</name>
+	<dependencies>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId> 
+			<artifactId>impe3-web-online</artifactId>
+			<version>2.9.185-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-palette</artifactId>
+			<version>2.9.185-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>

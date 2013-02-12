@@ -1,0 +1,20 @@
+<module>
+
+	<source path='pms/api' />
+	<source path='api'>
+		<!-- <include name="DeviceType.java" />
+		<include name="ETagMode.java" />
+		<include name="DeviceNameUse.java" />-->
+		<include name="*.java" />
+	</source>
+	<source path='nr/api'>
+		<include name="FilterType.java" />
+	</source>
+	
+	<public path="public/PmsApi" />
+	
+	<inherits name="com.isotrol.impe3.UsersApi" />
+	<inherits name="com.isotrol.impe3.Web20Api" />
+	<inherits name="com.isotrol.impe3.pms.ExtApi" />
+
+</module>

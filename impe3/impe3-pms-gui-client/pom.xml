@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>impe3</artifactId>
+		<groupId>com.isotrol.impe3</groupId>
+		<version>2.9.185-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>impe3-pms-gui-client</artifactId>
+	<name>IMPE3 :: PMS GUI :: Client</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-gui-common</artifactId>
+			<version>2.9.185-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gwt-dnd</groupId>
+			<artifactId>gwt-dnd</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-pms-gui-api</artifactId>
+			<version>2.9.185-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<!--
+				configure the GWT-Maven plugin for generating i18n and async service
+				interfaces
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<configuration>
+					<extraJvmArgs>-Xmx512m -Xss4096k</extraJvmArgs>
+					<gwtVersion>${gwtVersion}</gwtVersion>
+					<modules>
+						<module>com.isotrol.impe3.Gui-common</module>
+						<module>com.isotrol.impe3.Pms</module>
+					</modules>
+					<!--		        generate Settings constants file-->
+					<i18nConstantsWithLookupBundles>
+						<!-- PMS entry point: -->
+						<value>com.isotrol.impe3.pms.gui.client.i18n.PmsSettings</value>
+						<value>com.isotrol.impe3.pms.gui.client.i18n.PmsStyles</value>
+						<!-- GuiCommon entry point: -->
+						<value>com.isotrol.impe3.pms.gui.common.util.Settings</value>
+						<!-- PortalUsers entry point: -->
+						<value>com.isotrol.impe3.pms.gui.client.i18n.UsersSettings</value>
+						<!--
+							<value>com.isotrol.impe3.pms.gui.portalusers.util.UsersStyles</value>
+						-->
+						<!-- NodesRepository entry point: -->
+						<value>com.isotrol.impe3.pms.gui.client.i18n.NrSettings</value>
+						<value>com.isotrol.impe3.pms.gui.client.i18n.NrStyles</value>
+						<!-- Comments external service: -->
+						<value>com.isotrol.impe3.pms.gui.client.i18n.CommentsSettings</value>
+						<value>com.isotrol.impe3.pms.gui.client.i18n.CommentsStyles</value>
+					</i18nConstantsWithLookupBundles>
+					<!--	     		generate PMS messages file-->
+					<i18nMessagesBundles>
+						<!-- PMS entry point: -->
+						<value>com.isotrol.impe3.pms.gui.client.i18n.PmsMessages</value>
+						<!-- PortalUsers entry point: -->
+						<value>com.isotrol.impe3.pms.gui.client.i18n.UsersMessages</value>
+						<!-- NodesRepository entry point: -->
+						<value>com.isotrol.impe3.pms.gui.client.i18n.NrMessages</value>
+						<!-- Comments external service: -->
+						<value>com.isotrol.impe3.pms.gui.client.i18n.CommentsMessages</value>
+					</i18nMessagesBundles>
+					<generateDirectory>src/main/auto</generateDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>i18n</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<!-- All GWT modules must include sources in packaging -->
+			<!-- so the projects that use it can compile to JavaScript -->
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/auto</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/PmsSettings.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/PmsSettings.properties</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+	</build>
+
+</project>
