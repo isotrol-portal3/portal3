@@ -10,7 +10,7 @@
 	<artifactId>impe3</artifactId>
 	<packaging>pom</packaging>
 	<name>IMP3225600 - Impe3</name>
-	<version>2.9.185-SNAPSHOT</version>
+	<version>2.9.190-SNAPSHOT</version>
 
 	<issueManagement>
 		<system>REDMINE</system>
