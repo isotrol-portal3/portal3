@@ -1,2 +1,2 @@
-Built with maven
+Built with Maven
 
