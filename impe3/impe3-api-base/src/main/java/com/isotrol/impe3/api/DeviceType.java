@@ -24,9 +24,9 @@ package com.isotrol.impe3.api;
  * Enumeration of supported device types.
  * @author Andres Rodriguez
  * @author Emilio Escobar Reyero
- */
+ */ 
 public enum DeviceType {
-	HTML(980), XHTML(980), ATOM(null), SITEMAP(null), XLS(null), XLSX(null), PDF(null);
+	HTML(980), XHTML(980), ATOM(null), SITEMAP(null), XLS(null), XLSX(null), PDF(null),XML(null);
 
 	/** Default width. */
 	private final Integer width;
