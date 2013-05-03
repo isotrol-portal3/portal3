@@ -107,7 +107,7 @@
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 				<includes>
-					<include>**/PmsSettings.properties</include>
+					<include>**/PmsMessages.properties</include>
 				</includes>
 			</resource>
 			<resource>
