@@ -17,37 +17,18 @@
  * along with Port@l.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.isotrol.impe3.api;
+package com.isotrol.impe3.api.component.icms;
+
+
+import com.isotrol.impe3.api.component.ComponentRenderer;
+import com.isotrol.impe3.api.component.html.HTMLFragment;
 
 
 /**
- * Enumeration of supported device types.
- * @author Andres Rodriguez
- * @author Emilio Escobar Reyero
- */ 
-public enum DeviceType {
-	HTML(980), XHTML(980), ATOM(null), SITEMAP(null), XLS(null), XLSX(null), PDF(null),ICMS(null);
-
-	/** Default width. */
-	private final Integer width;
-
-	DeviceType(final Integer width) {
-		this.width = width;
-	}
-
-	/**
-	 * Returns whether the type supports layout.
-	 * @return True if the type supports layout.
-	 */
-	public boolean isLayout() {
-		return width != null;
-	}
-
-	/**
-	 * Returns the default width.
-	 * @return The default width.
-	 */
-	public Integer getWidth() {
-		return width;
-	}
+ * Interface defining an XML renderer.
+ * 
+ */
+public interface ICMSRenderer extends ComponentRenderer {
+	
+	HTMLFragment getBody();
 }

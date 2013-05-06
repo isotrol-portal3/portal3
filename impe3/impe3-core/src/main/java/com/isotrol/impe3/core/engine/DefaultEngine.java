@@ -109,6 +109,7 @@ public abstract class DefaultEngine implements Engine {
 		RENDERING_ENGINES.put(DeviceType.XLS, BinaryRenderingEngine.EXCEL_SUPPLIER);
 		RENDERING_ENGINES.put(DeviceType.XLSX, BinaryRenderingEngine.EXCEL_SUPPLIER);
 		RENDERING_ENGINES.put(DeviceType.PDF, BinaryRenderingEngine.PDF_SUPPLIER);
+		RENDERING_ENGINES.put(DeviceType.ICMS, ICMSFragmentRenderingEngine.SUPPLIER);
 	}
 
 	private final EngineModel model;

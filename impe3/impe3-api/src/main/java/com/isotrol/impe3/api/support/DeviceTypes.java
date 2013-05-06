@@ -30,6 +30,7 @@ import com.isotrol.impe3.api.component.ComponentRenderer;
 import com.isotrol.impe3.api.component.atom.ATOMRenderer;
 import com.isotrol.impe3.api.component.excel.ExcelRenderer;
 import com.isotrol.impe3.api.component.html.HTMLRenderer;
+import com.isotrol.impe3.api.component.icms.ICMSRenderer;
 import com.isotrol.impe3.api.component.pdf.PDFRenderer;
 import com.isotrol.impe3.api.component.sitemap.SitemapRenderer;
 
@@ -55,6 +56,7 @@ public final class DeviceTypes {
 		MAP.put(DeviceType.XLS, ExcelRenderer.class);
 		MAP.put(DeviceType.XLSX, ExcelRenderer.class);
 		MAP.put(DeviceType.PDF, PDFRenderer.class);
+		MAP.put(DeviceType.ICMS, ICMSRenderer.class);
 	}
 
 	public static Class<? extends ComponentRenderer> getRendererType(DeviceType type) {
