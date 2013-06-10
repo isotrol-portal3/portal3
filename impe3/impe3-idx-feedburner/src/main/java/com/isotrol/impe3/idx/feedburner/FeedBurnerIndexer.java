@@ -62,7 +62,7 @@ import com.sun.syndication.io.XmlReader;
  * FeedBurner Rss timestamp based indexer.
  * @author Emilio Escobar Reyero
  */
-public class FeedBurnerIndexer implements Indexer<Long> {
+public class FeedBurnerIndexer implements Indexer<Long,Object> {
 
 	final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -139,7 +139,7 @@ public class FeedBurnerIndexer implements Indexer<Long> {
 					builder.setBytes(sb.toString().getBytes(), true);
 				}
 
-				return builder.get();
+				return builder.get().getDocument();
 			}
 
 			private Set<String> splitChannels(List<SyndCategoryImpl> categories) {
@@ -225,12 +225,12 @@ public class FeedBurnerIndexer implements Indexer<Long> {
 	 * Just call generateBatch method.
 	 * @see net.sf.lucis.core.Indexer#index(java.lang.Object)
 	 */
-	public Batch<Long> index(Long checkpoint) throws InterruptedException {
+	public Batch<Long,Object> index(Long checkpoint) throws InterruptedException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("[" + url + "] Beggining index checkpoint: {}", checkpoint);
 		}
 
-		final Batch<Long> batch = generateBatch(checkpoint == null ? 0L : checkpoint);
+		final Batch<Long,Object> batch = generateBatch(checkpoint == null ? 0L : checkpoint);
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("[" + url + "] New index checkpoint at {}", batch.getCheckpoint());
@@ -239,7 +239,7 @@ public class FeedBurnerIndexer implements Indexer<Long> {
 		return batch;
 	}
 
-	private Batch<Long> generateBatch(long startPoint) throws InterruptedException {
+	private Batch<Long,Object> generateBatch(long startPoint) throws InterruptedException {
 		if (logger.isTraceEnabled()) {
 			logger.trace("[" + url + "] Batch starting at {} position.", startPoint);
 		}
@@ -345,4 +345,9 @@ public class FeedBurnerIndexer implements Indexer<Long> {
 			return name.replaceAll(" ", "_");
 		}
 	};
+
+	public void afterCommit(Object payload) {
+		// TODO Auto-generated method stub
+		
+	}
 }

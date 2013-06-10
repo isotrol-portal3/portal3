@@ -39,11 +39,11 @@ public final class IndexServiceFactoryBean extends AbstractIndexServiceFactoryBe
 	/** Store. */
 	private final Store<?> store;
 	/** Delays. */
-	private final Indexer<?> indexer;
+	private final Indexer<?,?> indexer;
 	/** Service. */
-	private volatile DefaultIndexerService<?> service = null;
+	private volatile DefaultIndexerService<?,?> service = null;
 
-	IndexServiceFactoryBean(Analyzer analyzer, Store<?> store, Indexer<?> indexer) {
+	IndexServiceFactoryBean(Analyzer analyzer, Store<?> store, Indexer<?,?> indexer) {
 		super(analyzer);
 		this.store = checkNotNull(store, "The store must be provided");
 		this.indexer = checkNotNull(indexer, "The indexer must be provided");
@@ -55,7 +55,7 @@ public final class IndexServiceFactoryBean extends AbstractIndexServiceFactoryBe
 			writer.setName(getWriterName());
 			// We know what we are doing.
 			@SuppressWarnings({"unchecked", "rawtypes"})
-			DefaultIndexerService<?> s = new DefaultIndexerService(store, writer, indexer, null, isPasive());
+			DefaultIndexerService<?,?> s = new DefaultIndexerService(store, writer, indexer, null, isPasive());
 			s.setName(getName());
 			Delays d = getDelays();
 			if (d != null) {

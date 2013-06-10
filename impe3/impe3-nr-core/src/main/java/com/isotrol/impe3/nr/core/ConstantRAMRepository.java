@@ -61,7 +61,7 @@ public final class ConstantRAMRepository {
 	 * @throws InterruptedException
 	 */
 	private ConstantRAMRepository(Builder b) throws InterruptedException {
-		final Batch<Long> batch = b.batchBuilder.build(1L);
+		final Batch<Long,Object> batch = b.batchBuilder.build(1L);
 		final Writer writer = new DefaultWriter();
 		this.store = new RAMStore<Long>();
 		writer.write(store, batch);
@@ -116,7 +116,7 @@ public final class ConstantRAMRepository {
 		 * @throws InterruptedException
 		 */
 		public Builder add(DocumentBuilder builder, Analyzer analyzer) throws InterruptedException {
-			final Document d = builder.get();
+			final Document d = builder.get().getDocument();
 			if (analyzer != null) {
 				batchBuilder.add(d, analyzer);
 			} else {

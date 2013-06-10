@@ -133,10 +133,10 @@ public class HighlighterTest {
 			document.setBytes(str.getBytes(), true);
 			document.setNodeKey(NodeKey.of(texto.getId(), generator.get().toString()));
 
-			batchBuilder.add(document.get());
+			batchBuilder.add(document.get().getDocument());
 		}
 
-		final Batch<Long> batch = batchBuilder.build(1L);
+		final Batch<Long,Object> batch = batchBuilder.build(1L);
 		final Store<Long> store = new RAMStore<Long>();
 		final Writer writer = new DefaultWriter();
 		writer.write(store, batch);

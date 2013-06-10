@@ -75,6 +75,19 @@
 
 	<dependencyManagement>
 		<dependencies>
+		
+		<!-- Lucis -->
+			<dependency>
+				<groupId>net.sf.lucis</groupId>
+				<artifactId>lucis-api</artifactId>
+				<version>3.6.4</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.lucis</groupId>
+				<artifactId>lucis-core</artifactId>
+				<version>3.6.4</version>
+			</dependency>
+		
 			<!-- Isotrol Impe3 External APIs -->
 			<dependency>
 				<groupId>com.isotrol.impe3</groupId>
@@ -150,6 +163,7 @@
 		<module>impe3-core</module>
 		<module>impe3-pms-api</module>
 		<module>impe3-pms-core</module>
+		<module>impe3-nr-audit</module>
 		<module>impe3-nr-api</module>
 		<module>impe3-nr-core</module>
 		<module>impe3-test</module>

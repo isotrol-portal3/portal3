@@ -43,6 +43,9 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
+import com.google.common.hash.HashCode;
+import com.google.common.hash.Hasher;
+import com.google.common.hash.Hashing;
 import com.isotrol.impe3.nr.api.NodeKey;
 import com.isotrol.impe3.nr.api.Schema;
 
@@ -52,7 +55,7 @@ import com.isotrol.impe3.nr.api.Schema;
  * @author Emilio Escobar Reyero
  * @author Andres Rodriguez
  */
-public final class DocumentBuilder implements Supplier<Document> {
+public final class DocumentBuilder implements Supplier<Portal3Document> {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	private Document document = new Document();
 	private boolean releaseSet = false;
@@ -68,11 +71,15 @@ public final class DocumentBuilder implements Supplier<Document> {
 	private Set<String> otherLocales = newHashSet();
 	private boolean defaultLocale = true;
 	private static final String O = "0";
-
+	private Hasher hasher =Hashing.sha256().newHasher();
+	private Long virtualTime=null;
+	
 	/**
 	 * Default constructor.
 	 */
 	public DocumentBuilder() {
+		
+		
 	}
 
 	/**
@@ -81,6 +88,8 @@ public final class DocumentBuilder implements Supplier<Document> {
 	 * @param text value to add
 	 */
 	private void siu(String field, String text) {
+		hasher.putString(field);
+		hasher.putString(text);
 		document.add(new Field(field, text, Field.Store.YES, Field.Index.NOT_ANALYZED));
 	}
 
@@ -90,6 +99,8 @@ public final class DocumentBuilder implements Supplier<Document> {
 	 * @param text value to add
 	 */
 	private void sia(String field, String text) {
+		hasher.putString(field);
+		hasher.putString(text);
 		document.add(new Field(field, text, Field.Store.YES, Field.Index.ANALYZED));
 	}
 
@@ -99,6 +110,8 @@ public final class DocumentBuilder implements Supplier<Document> {
 	 * @param text value to add
 	 */
 	private void nsia(String field, String text) {
+		hasher.putString(field);
+		hasher.putString(text);
 		document.add(new Field(field, text, Field.Store.NO, Field.Index.ANALYZED));
 	}
 
@@ -108,6 +121,8 @@ public final class DocumentBuilder implements Supplier<Document> {
 	 * @param text value to add
 	 */
 	private void nsiu(String field, String text) {
+		hasher.putString(field);
+		hasher.putString(text);
 		document.add(new Field(field, text, Field.Store.NO, Field.Index.NOT_ANALYZED));
 	}
 
@@ -298,6 +313,7 @@ public final class DocumentBuilder implements Supplier<Document> {
 	 * @return fluid builder
 	 */
 	public DocumentBuilder setBytes(byte[] bytes, boolean compressed) {
+		hasher.putBytes(bytes);
 		document.add(new Field(Schema.CONTENT_STORE, compressed ? compress(bytes) : bytes));
 		siu(Schema.COMPRESSED, compressed ? Schema.COMPRESSED_VALUE : O);
 		return this;
@@ -401,7 +417,8 @@ public final class DocumentBuilder implements Supplier<Document> {
 
 		Store s = store ? Field.Store.YES : Field.Store.NO;
 		Index i = analyze ? Field.Index.ANALYZED : Field.Index.NOT_ANALYZED;
-
+		hasher.putString(name);
+		hasher.putString(value);
 		document.add(new Field(name, value, s, i));
 
 		return this;
@@ -417,6 +434,8 @@ public final class DocumentBuilder implements Supplier<Document> {
 		checkNotNull(name);
 		checkNotNull(value);
 		checkArgument(name.startsWith(Schema.BLOB_PREFIX) && name.length() > Schema.BLOB_PREFIX.length());
+		hasher.putString(name);
+		hasher.putBytes(value);
 		document.add(new Field(name, value));
 		return this;
 	}
@@ -485,14 +504,30 @@ public final class DocumentBuilder implements Supplier<Document> {
 	}
 
 	/**
+	 * Sets the document virtual time
+	 * @param virtualTime
+	 */
+	public void setVirtualTime(Long virtualTime) {
+		this.virtualTime = virtualTime;
+	}
+
+	/**
 	 * Create a new document
 	 * @return the document
 	 */
-	public Document get() {
+	public Portal3Document get() {
 		requiredFields();
+		Portal3Document salida;
 		final Document d = document;
+		final HashCode h = hasher.hash();
 		document = new Document();
-		return d;
+		hasher =Hashing.sha256().newHasher();
+		if (virtualTime!=null){
+			salida = Portal3Document.withHashAndVirtualTime(d, h, virtualTime);
+		} else {
+			salida = Portal3Document.withHash(d,h);
+		}
+		return salida;
 	}
 
 	private void requiredFields() {

@@ -54,7 +54,7 @@ public class NodeMapperTest {
 		builder.setNodeKey(nodeKey).setTitle(title).setDescription(description).addLocale(lang).setDate(date)
 			.addCategory(categoryKey);
 
-		return builder.get();
+		return builder.get().getDocument();
 	}
 
 	@Test
