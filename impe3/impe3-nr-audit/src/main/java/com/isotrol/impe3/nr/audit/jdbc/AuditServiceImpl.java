@@ -58,6 +58,7 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 	private static final String CATEGORYID = "categoryid";
 	private static final String HASH = "hash";
 	private static final String VIRTUALTIME = "virtualtime";
+	private static final String CONTENTTIME = "contenttime";
 	private static final String OPERATION = "operation";
 	private static final String TIME = "time";
 	private static final String LOCALE = "locale";
@@ -65,23 +66,23 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 	private static final String SEQNAME = "audit";
 	
 	private static final String sqlSelectContents = "SELECT A.CONTENT_ID, A.CONTENT_TYPE_ID, A.LOCALE, A.INDEX_ID, A.HASH, A.VIRTUAL_TIME, A.CONTENT_DATE "
-		+ "FROM CONTENT_AUDIT A WHERE A.INDEX_ID = :"+INDEXID+" AND A.VALID_OPERATION_ID=A.ID AND A.OPERATION<>'"+AuditOperations.DELETE.toString()+"'";
+		+ "FROM CONTENT_AUDIT A WHERE A.INDEX_ID = :"+INDEXID+" AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.OPERATION<>'"+AuditOperations.DELETE.toString()+"'";
 	
-	private static final String sqlInsert = "INSERT INTO CONTENT_AUDIT (ID, CONTENT_ID, CONTENT_TYPE_ID, LOCALE, INDEX_ID, HASH, VIRTUAL_TIME, OPERATION, TIME, VALID_OPERATION_ID) "
-		+ " VALUES (:"+ID+", :"+CONTENTID+", :"+CONTENTTYPEID+", :"+LOCALE+", :"+INDEXID+", :"+HASH+", :"+VIRTUALTIME+", :"+OPERATION+", :"+TIME+", :"+ID+")";
+	private static final String sqlInsert = "INSERT INTO CONTENT_AUDIT (CONTENT_AUDIT_ID, CONTENT_ID, CONTENT_TYPE_ID, LOCALE, INDEX_ID, HASH, VIRTUAL_TIME, CONTENT_DATE, OPERATION, TIME, VALID_OPERATION_ID) "
+		+ " VALUES (:"+ID+", :"+CONTENTID+", :"+CONTENTTYPEID+", :"+LOCALE+", :"+INDEXID+", :"+HASH+", :"+VIRTUALTIME+", :"+CONTENTTIME+", :"+OPERATION+", :"+TIME+", :"+ID+")";
 	
 //TODO get Category
 	private static final String sqlgetLang = "SELECT  A.LOCALE FROM " +
-			" CONTENT_AUDIT A WHERE A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID+" AND A.VALID_OPERATION_ID=A.ID ";
+			" CONTENT_AUDIT A WHERE A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID+" AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID ";
 	
 	private static final String sqlUpdateValid = "UPDATE  CONTENT_AUDIT A SET A.VALID_OPERATION_ID = :"+ID
 		+ "  WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID+" AND  A.LOCALE=:"+LOCALE;
 	
-	private static final String sqlGetSequence = "SELECT ID FROM SEQUENCE_T WHERE SEQ_NAME='"+SEQNAME+"' FOR UPDATE ";
+	private static final String sqlGetSequence = "SELECT SEQ_VALUE FROM SEQUENCE_T WHERE SEQ_NAME='"+SEQNAME+"' FOR UPDATE ";
 	  
-	private static final String sqlupdateSequence = "UPDATE SEQUENCE_T SET ID = ID + 1 WHERE SEQ_NAME='"+SEQNAME+"'";
+	private static final String sqlupdateSequence = "UPDATE SEQUENCE_T SET SEQ_VALUE = SEQ_VALUE + 1 WHERE SEQ_NAME='"+SEQNAME+"'";
 	
-	private static final String sqlInsertCats = "INSERT INTO  CONTENT_AUDIT_CATEGORIES (ID,CATEGORY_ID)  VALUES ( :"+ID+", :"+CATEGORYID+")";
+	private static final String sqlInsertCats = "INSERT INTO  CONTENT_AUDIT_CATEGORIES (CONTENT_AUDIT_ID,CATEGORY_ID)  VALUES ( :"+ID+", :"+CATEGORYID+")";
 	
 	/*
 	private static final String sqlSelectCats = "SELECT cat.ID, cat.CATEGORY_ID FROM CONTENT_AUDIT_CATEGORIES cat " +
@@ -90,17 +91,17 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 	*/
 	private static final String sqlExistFromHash = "SELECT COUNT(A.CONTENT_ID)"
 			+ " FROM CONTENT_AUDIT A WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID
-			+ " AND A.VALID_OPERATION_ID=A.ID AND A.LOCALE=:"+LOCALE+" AND A.HASH=:"+HASH;
+			+ " AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.HASH=:"+HASH;
 	private static final String sqlExistFromVirtualTime = "SELECT COUNT(A.CONTENT_ID)"
 			+ " FROM CONTENT_AUDIT A WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID
-			+ " AND A.VALID_OPERATION_ID=A.ID AND A.LOCALE=:"+LOCALE+" AND A.VIRTUAL_TIME>=:"+VIRTUALTIME;
+			+ " AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.VIRTUAL_TIME>=:"+VIRTUALTIME;
 	private static final String sqlExistFromVirtualTimeAndHash = "SELECT COUNT(A.CONTENT_ID)"
 			+ " FROM CONTENT_AUDIT A WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID
-			+ " AND A.VALID_OPERATION_ID=A.ID AND A.LOCALE=:"+LOCALE+" AND A.VIRTUAL_TIME>=:"+VIRTUALTIME+" AND A.HASH=:"+HASH;
+			+ " AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.VIRTUAL_TIME>=:"+VIRTUALTIME+" AND A.HASH=:"+HASH;
 	
 	private static final String sqlExistDeleted = "SELECT COUNT(A.CONTENT_ID)"
 			+ " FROM CONTENT_AUDIT A WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID
-			+ " AND A.VALID_OPERATION_ID=A.ID AND A.LOCALE=:"+LOCALE+" AND A.OPERATION = '"+AuditOperations.DELETE.toString()+"'";
+			+ " AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.OPERATION = '"+AuditOperations.DELETE.toString()+"'";
 	
 	
 	//TODO seleccionar idiomas del contenido
@@ -187,6 +188,7 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 				parameterMap.put(OPERATION, operationCode);
 				parameterMap.put(HASH, content.getHash());
 				parameterMap.put(VIRTUALTIME,  content.getVirtualTime());
+				parameterMap.put(CONTENTTIME,content.getContentTime());
 				parameterMap.put(TIME, timestamp);
 				if (content.getLocale()!=null){
 					parameterMap.put(LOCALE, content.getLocale());
