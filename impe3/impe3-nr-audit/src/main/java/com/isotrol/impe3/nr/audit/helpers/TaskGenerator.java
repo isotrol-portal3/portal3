@@ -26,6 +26,7 @@ import java.util.UUID;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.isotrol.impe3.nr.api.Schema;
+import com.isotrol.impe3.nr.audit.api.AuditEngineMode;
 import com.isotrol.impe3.nr.audit.api.AuditOperations;
 import com.isotrol.impe3.nr.audit.api.AuditService;
 import com.isotrol.impe3.nr.audit.api.AuditTask;
@@ -36,17 +37,17 @@ import com.isotrol.impe3.nr.core.Portal3Document;
 public class TaskGenerator {
 
 	
-	public static final List<AuditTask> generateTask(AuditService auditService, String indexId,  List<Portal3Document> documents){
+	public static final List<AuditTask> generateTask(AuditService auditService, String indexId,  List<Portal3Document> documents,AuditEngineMode engineMode){
 		
 		
 		final List<AuditTask> contenidos= Lists.newLinkedList();
 		
-		if (auditService!=null && indexId!=null){
+		if (auditService!=null && indexId!=null && engineMode!=null){
 			final Collection<AuditedContent> valoresAnteriores;
 			final Collection<AuditedContent> valoresIndexados= Lists.newLinkedList();
 			valoresAnteriores= auditService.getContents(indexId);
 			for (AuditedContent auditedContent : valoresAnteriores) {
-				valoresIndexados.add(AuditedContent.simple(auditedContent.getContentId(), auditedContent.getContentTypeId(),ImmutableList.<String>of(), auditedContent.getLocale(), auditedContent.getIndexId(),auditedContent.getContentTime()));
+				valoresIndexados.add(AuditedContent.simple(auditedContent.getContentId(), auditedContent.getContentTypeId(),ImmutableList.<String>of(), auditedContent.getLocale(), auditedContent.getIndexId(), engineMode, auditedContent.getContentTime()));
 			}
 			
 			for (Portal3Document document : documents) {
@@ -60,8 +61,8 @@ public class TaskGenerator {
 					contentTime = null;
 				}
 				
-				AuditedContent content = AuditedContent.withHash(document.getDocument().get(Schema.ID), UUID.fromString(document.getDocument().get(Schema.TYPE)),Lists.newArrayList(cats), document.getDocument().get(Schema.LOCALE), indexId, document.getHash().toString(),contentTime);
-				AuditedContent simpleContent = AuditedContent.simple(document.getDocument().get(Schema.ID), UUID.fromString(document.getDocument().get(Schema.TYPE)),ImmutableList.<String>of(), document.getDocument().get(Schema.LOCALE), indexId,contentTime);
+				AuditedContent content = AuditedContent.withHash(document.getDocument().get(Schema.ID), UUID.fromString(document.getDocument().get(Schema.TYPE)),Lists.newArrayList(cats), document.getDocument().get(Schema.LOCALE), indexId, engineMode, document.getHash().toString(),contentTime);
+				AuditedContent simpleContent = AuditedContent.simple(document.getDocument().get(Schema.ID), UUID.fromString(document.getDocument().get(Schema.TYPE)),ImmutableList.<String>of(), document.getDocument().get(Schema.LOCALE), indexId, engineMode, contentTime);
 				if (valoresIndexados.remove(simpleContent)){
 					if (!valoresAnteriores.remove(content)){
 						contenidos.add(new AuditTask(content, AuditOperations.MODIFY,AuditValidationMode.HASH));

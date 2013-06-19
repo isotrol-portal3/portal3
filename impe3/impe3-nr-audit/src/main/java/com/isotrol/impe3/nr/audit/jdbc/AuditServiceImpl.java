@@ -36,6 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.isotrol.impe3.nr.audit.api.AuditEngineMode;
 import com.isotrol.impe3.nr.audit.api.AuditOperations;
 import com.isotrol.impe3.nr.audit.api.AuditService;
 import com.isotrol.impe3.nr.audit.api.AuditTask;
@@ -62,21 +63,22 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 	private static final String OPERATION = "operation";
 	private static final String TIME = "time";
 	private static final String LOCALE = "locale";
+	private static final String ENGINEMODE = "enginemode";
 	
 	private static final String SEQNAME = "audit";
 	
-	private static final String sqlSelectContents = "SELECT A.CONTENT_ID, A.CONTENT_TYPE_ID, A.LOCALE, A.INDEX_ID, A.HASH, A.VIRTUAL_TIME, A.CONTENT_DATE "
+	private static final String sqlSelectContents = "SELECT A.CONTENT_ID, A.CONTENT_TYPE_ID, A.LOCALE, A.INDEX_ID, A.ENGINE_MODE, A.HASH, A.VIRTUAL_TIME, A.CONTENT_DATE "
 		+ "FROM CONTENT_AUDIT A WHERE A.INDEX_ID = :"+INDEXID+" AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.OPERATION<>'"+AuditOperations.DELETE.toString()+"'";
 	
-	private static final String sqlInsert = "INSERT INTO CONTENT_AUDIT (CONTENT_AUDIT_ID, CONTENT_ID, CONTENT_TYPE_ID, LOCALE, INDEX_ID, HASH, VIRTUAL_TIME, CONTENT_DATE, OPERATION, TIME, VALID_OPERATION_ID) "
-		+ " VALUES (:"+ID+", :"+CONTENTID+", :"+CONTENTTYPEID+", :"+LOCALE+", :"+INDEXID+", :"+HASH+", :"+VIRTUALTIME+", :"+CONTENTTIME+", :"+OPERATION+", :"+TIME+", :"+ID+")";
+	private static final String sqlInsert = "INSERT INTO CONTENT_AUDIT (CONTENT_AUDIT_ID, CONTENT_ID, CONTENT_TYPE_ID, LOCALE, INDEX_ID, ENGINE_MODE, HASH, VIRTUAL_TIME, CONTENT_DATE, OPERATION, TIME, VALID_OPERATION_ID) "
+		+ " VALUES (:"+ID+", :"+CONTENTID+", :"+CONTENTTYPEID+", :"+LOCALE+", :"+INDEXID+", :"+ENGINEMODE+", :"+HASH+", :"+VIRTUALTIME+", :"+CONTENTTIME+", :"+OPERATION+", :"+TIME+", :"+ID+")";
 	
 //TODO get Category
 	private static final String sqlgetLang = "SELECT  A.LOCALE FROM " +
-			" CONTENT_AUDIT A WHERE A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID+" AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID ";
+			" CONTENT_AUDIT A WHERE A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID+" AND A.ENGINE_MODE=:"+ENGINEMODE+" AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID ";
 	
 	private static final String sqlUpdateValid = "UPDATE  CONTENT_AUDIT A SET A.VALID_OPERATION_ID = :"+ID
-		+ "  WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID+" AND  A.LOCALE=:"+LOCALE;
+		+ "  WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID+" AND A.ENGINE_MODE=:"+ENGINEMODE+" AND  A.LOCALE=:"+LOCALE;
 	
 	private static final String sqlGetSequence = "SELECT SEQ_VALUE FROM SEQUENCE_T WHERE SEQ_NAME='"+SEQNAME+"' FOR UPDATE ";
 	  
@@ -91,17 +93,17 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 	*/
 	private static final String sqlExistFromHash = "SELECT COUNT(A.CONTENT_ID)"
 			+ " FROM CONTENT_AUDIT A WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID
-			+ " AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.HASH=:"+HASH;
+			+ " AND A.ENGINE_MODE=:"+ENGINEMODE+" AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.HASH=:"+HASH;
 	private static final String sqlExistFromVirtualTime = "SELECT COUNT(A.CONTENT_ID)"
 			+ " FROM CONTENT_AUDIT A WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID
-			+ " AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.VIRTUAL_TIME>=:"+VIRTUALTIME;
+			+ " AND A.ENGINE_MODE=:"+ENGINEMODE+" AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.VIRTUAL_TIME>=:"+VIRTUALTIME;
 	private static final String sqlExistFromVirtualTimeAndHash = "SELECT COUNT(A.CONTENT_ID)"
 			+ " FROM CONTENT_AUDIT A WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID
-			+ " AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.VIRTUAL_TIME>=:"+VIRTUALTIME+" AND A.HASH=:"+HASH;
+			+ " AND A.ENGINE_MODE=:"+ENGINEMODE+" AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.VIRTUAL_TIME>=:"+VIRTUALTIME+" AND A.HASH=:"+HASH;
 	
 	private static final String sqlExistDeleted = "SELECT COUNT(A.CONTENT_ID)"
 			+ " FROM CONTENT_AUDIT A WHERE  A.CONTENT_ID=:"+CONTENTID+" AND A.CONTENT_TYPE_ID=:"+CONTENTTYPEID+" AND A.INDEX_ID=:"+INDEXID
-			+ " AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.OPERATION = '"+AuditOperations.DELETE.toString()+"'";
+			+ " AND A.ENGINE_MODE=:"+ENGINEMODE+" AND A.VALID_OPERATION_ID=A.CONTENT_AUDIT_ID AND A.LOCALE=:"+LOCALE+" AND A.OPERATION = '"+AuditOperations.DELETE.toString()+"'";
 	
 	
 	//TODO seleccionar idiomas del contenido
@@ -113,6 +115,8 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 			final UUID contentTypeId = UUID.fromString(rs.getString(i++));
 			final String locale = rs.getString(i++);
 			final String indexId = rs.getString(i++);
+			final String engineString = rs.getString(i++);
+			final AuditEngineMode engineMode = AuditEngineMode.fromString(engineString);
 			final String hash = rs.getString(i++);
 			final String virtualTimeString = rs.getString(i++);
 			final Long virtualTime;
@@ -128,7 +132,8 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 			} else {
 				contentTime = null;
 			}
-			final AuditedContent content = AuditedContent.withVirtualTimeAndHash(contentId, contentTypeId, ImmutableList.<String>of(), locale, indexId, hash, virtualTime,contentTime);
+			
+			final AuditedContent content = AuditedContent.withVirtualTimeAndHash(contentId, contentTypeId, ImmutableList.<String>of(), locale, indexId,engineMode, hash, virtualTime,contentTime);
 
 			return content;
 		}
@@ -159,6 +164,7 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 		parameterMap.put(CONTENTID, content.getContentId());
 		parameterMap.put(CONTENTTYPEID, content.getContentTypeId().toString());
 		parameterMap.put(LOCALE, content.getLocale());
+		parameterMap.put(ENGINEMODE, content.getEngineMode().toString());
 		i = getNamedParameterJdbcTemplate().queryForInt(sqlExistDeleted, parameterMap);
 		if (i==0){
 			if (!task.getOp().equals(AuditOperations.DELETE)){
@@ -190,6 +196,7 @@ public class AuditServiceImpl extends NamedParameterJdbcDaoSupport implements Au
 				parameterMap.put(VIRTUALTIME,  content.getVirtualTime());
 				parameterMap.put(CONTENTTIME,content.getContentTime());
 				parameterMap.put(TIME, timestamp);
+				parameterMap.put(ENGINEMODE, content.getEngineMode().toString());
 				if (content.getLocale()!=null){
 					parameterMap.put(LOCALE, content.getLocale());
 					i = getNamedParameterJdbcTemplate().update(sqlInsert,parameterMap);

@@ -42,24 +42,25 @@ public class AuditedContent {
 	private final Long virtualTime;
 	private final String locale;
 	private final Long contentTime;
+	private final AuditEngineMode engineMode;
 	
-	public static AuditedContent withVirtualTime(String contentId, UUID contentTypeId, List<String> categories, String locale, String indexId, Long virtualTime, Long contentTime) {
-		return new AuditedContent(contentId, contentTypeId,categories, locale, indexId, null, virtualTime,contentTime);
+	public static AuditedContent withVirtualTime(String contentId, UUID contentTypeId, List<String> categories, String locale, String indexId, AuditEngineMode engineMode, Long virtualTime, Long contentTime) {
+		return new AuditedContent(contentId, contentTypeId,categories, locale, indexId,engineMode, null, virtualTime,contentTime);
 	}
 	
-	public static AuditedContent withHash(String contentId, UUID contentTypeId, List<String> categories, String locale, String indexId, String hash, Long contentTime) {
-		return new AuditedContent(contentId, contentTypeId,categories, locale, indexId,hash , null,contentTime);
+	public static AuditedContent withHash(String contentId, UUID contentTypeId, List<String> categories, String locale, String indexId, AuditEngineMode engineMode, String hash, Long contentTime) {
+		return new AuditedContent(contentId, contentTypeId,categories, locale, indexId, engineMode, hash , null,contentTime);
 	}
 	
-	public static AuditedContent withVirtualTimeAndHash(String contentId, UUID contentTypeId, List<String> categories, String locale, String indexId, String hash, Long virtualTime, Long contentTime) {
-		return new AuditedContent(contentId, contentTypeId,categories, locale, indexId,hash , virtualTime,contentTime);
+	public static AuditedContent withVirtualTimeAndHash(String contentId, UUID contentTypeId, List<String> categories, String locale, String indexId, AuditEngineMode engineMode, String hash, Long virtualTime, Long contentTime) {
+		return new AuditedContent(contentId, contentTypeId,categories, locale, indexId, engineMode, hash , virtualTime,contentTime);
 	}
 	
-	public static AuditedContent simple(String contentId, UUID contentTypeId,List<String> categories, String locale, String indexId, Long contentTime) {
-		return new AuditedContent(contentId, contentTypeId, categories, locale, indexId,null , null,contentTime);
+	public static AuditedContent simple(String contentId, UUID contentTypeId,List<String> categories, String locale, String indexId, AuditEngineMode engineMode, Long contentTime) {
+		return new AuditedContent(contentId, contentTypeId, categories, locale, indexId, engineMode, null , null,contentTime);
 	}
 	
-	private AuditedContent(String contentId, UUID contentTypeId,List<String> categories, String locale, String indexId, String hash, Long virtualTime, Long contentTime) {
+	private AuditedContent(String contentId, UUID contentTypeId,List<String> categories, String locale, String indexId,AuditEngineMode engineMode, String hash, Long virtualTime, Long contentTime) {
 		super();
 		Preconditions.checkNotNull(contentId);
 		Preconditions.checkNotNull(contentTypeId);
@@ -72,6 +73,7 @@ public class AuditedContent {
 		this.locale = locale;
 		this.categories=categories;
 		this.contentTime=contentTime;
+		this.engineMode=engineMode;
 	}
 	public String getContentId() {
 		return contentId;
@@ -98,6 +100,10 @@ public class AuditedContent {
 	public Long getContentTime() {
 		return contentTime;
 	}
+	
+	public AuditEngineMode getEngineMode() {
+		return engineMode;
+	}
 
 	@Override
 	public int hashCode() {
@@ -109,6 +115,7 @@ public class AuditedContent {
 		result = prime * result + ((indexId == null) ? 0 : indexId.hashCode());
 		result = prime * result + ((virtualTime == null) ? 0 : virtualTime.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		result = prime * result + ((engineMode == null) ? 0 : engineMode.hashCode());
 		return result;
 	}
 
@@ -150,6 +157,11 @@ public class AuditedContent {
 			if (other.locale != null)
 				return false;
 		} else if (!locale.equals(other.locale))
+			return false;
+		if (engineMode == null) {
+			if (other.engineMode != null)
+				return false;
+		} else if (!engineMode.equals(other.engineMode))
 			return false;
 		return true;
 	}
