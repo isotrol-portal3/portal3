@@ -32,6 +32,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 import java.util.UUID;
 
 import javax.ws.rs.WebApplicationException;
@@ -92,12 +93,12 @@ public abstract class AbstractHTMLRenderingEngine implements RenderingEngine<HTM
 		}
 		return new HTMLFragment() {
 			public void writeTo(OutputStream output, Charset charset) throws IOException {
-				final Stopwatch w = new Stopwatch().start();
+				final Stopwatch w = Stopwatch.createStarted();
 				try {
 					f.writeTo(output, charset);
 				}
 				finally {
-					final long t = w.elapsedMillis();
+					final long t = w.elapsed(TimeUnit.MILLISECONDS);
 					if (t > 150) {
 						logger.warn(String.format("CIP [%s]-[%s] took [%d] ms to render [%s]", cipId, result.getCips()
 							.get(cipId).getCip().getDefinition().getType(), t, name));
@@ -154,7 +155,7 @@ public abstract class AbstractHTMLRenderingEngine implements RenderingEngine<HTM
 		for (UUID cipId : renderers.keySet()) {
 			final HTMLRenderer renderer = renderers.get(cipId);
 			final HTMLFragment f = renderer.getBody();
-			final Stopwatch w = new Stopwatch().start();
+			final Stopwatch w = Stopwatch.createStarted();
 			try {
 				if (f != null) {
 					ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -168,7 +169,7 @@ public abstract class AbstractHTMLRenderingEngine implements RenderingEngine<HTM
 				builder.putMarkup(cipId, "<p>Error: " + e.getMessage() + "</p>");
 			}
 			finally {
-				final long t = w.elapsedMillis();
+				final long t = w.elapsed(TimeUnit.MILLISECONDS);
 				if (t > 150) {
 					logger.warn(String.format("CIP [%s]-[%s] took [%d] ms to render in layout mode", cipId, result
 						.getCips().get(cipId).getCip().getDefinition().getType(), t));

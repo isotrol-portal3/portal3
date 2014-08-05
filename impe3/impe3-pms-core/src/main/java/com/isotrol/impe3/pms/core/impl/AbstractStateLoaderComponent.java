@@ -80,9 +80,9 @@ public abstract class AbstractStateLoaderComponent<T> extends AbstractService im
 	}
 
 	public final T loadOffline(CacheKey key) {
-		final Stopwatch w = new Stopwatch().start();
-		T value = cache.apply(key);
-		offline.add(w.elapsedMillis());
+		final Stopwatch w = Stopwatch.createStarted();
+		T value = cache.getUnchecked(key);
+		offline.add(w.elapsed(TimeUnit.MILLISECONDS));
 		return value;
 	}
 
@@ -95,9 +95,9 @@ public abstract class AbstractStateLoaderComponent<T> extends AbstractService im
 	abstract int getOfflineVersion(EnvironmentEntity e);
 
 	public final T loadOnline(UUID envId) {
-		final Stopwatch w = new Stopwatch().start();
+		final Stopwatch w = Stopwatch.createStarted();
 		T value = getLoader().load(getEdition(envId));
-		online.add(w.elapsedMillis());
+		online.add(w.elapsed(TimeUnit.MILLISECONDS));
 		return value;
 	}
 
@@ -146,9 +146,9 @@ public abstract class AbstractStateLoaderComponent<T> extends AbstractService im
 
 		@Override
 		public T load(CacheKey key) throws Exception {
-			final Stopwatch w = new Stopwatch().start();
+			final Stopwatch w = Stopwatch.createStarted();
 			T value = getLoader().load(getEnvironment(key));
-			long t = w.elapsedMillis();
+			long t = w.elapsed(TimeUnit.MILLISECONDS);
 			offlineLoad.add(t);
 			if (t > 500) {
 				logger.warn(String.format("Loader [%s] took [%d] ms", getLoader().toString(), t));

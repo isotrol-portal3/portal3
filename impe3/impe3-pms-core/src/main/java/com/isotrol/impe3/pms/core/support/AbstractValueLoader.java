@@ -25,6 +25,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 
@@ -134,12 +135,12 @@ public abstract class AbstractValueLoader<E extends WithIdVersion, V, P> impleme
 		}
 
 		public V call() throws Exception {
-			final Stopwatch w = new Stopwatch().start();
+			final Stopwatch w = Stopwatch.createStarted();
 			try {
 				return load(entity, payload);
 			}
 			finally {
-				final long t = w.elapsedMillis();
+				final long t = w.elapsed(TimeUnit.MILLISECONDS);
 				if (t > 150) {
 					logger
 						.warn(String.format("Instance Loader [%s]: Loading instance [%s] took [%d] ms", name, key, t));

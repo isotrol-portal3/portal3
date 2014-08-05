@@ -19,47 +19,44 @@
 
 package com.isotrol.impe3.api;
 
-
-import java.util.Map;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.google.common.base.Function;
-import com.google.common.collect.ComputationException;
-import com.google.common.collect.MapMaker;
-
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 
 /**
- * Test for Computing Map.
+ * Test for Loading Cache.
  * @author Andres Rodriguez
  */
-public class MapTest {
+public class CacheTest {
 	/** Test. */
 	@Test
 	public void test() {
-		Map<Object, Object> m = new MapMaker().makeComputingMap(new F());
+		LoadingCache<Object, Object> m = CacheBuilder.newBuilder().build(new F());
 		final Object o = new Object();
 		boolean ok = false;
 		try {
 			m.get(o);
-		} catch (ComputationException e) {
+		} catch (Exception e) {
 			ok = true;
 		}
 		Assert.assertTrue(ok);
-		Assert.assertTrue(o == m.get(o));
+		Assert.assertTrue(o == m.getUnchecked(o));
 	}
 
-	private class F implements Function<Object, Object> {
+	private class F extends CacheLoader<Object, Object> {
 		private boolean called = false;
 
-		public Object apply(Object from) {
+		@Override
+		public Object load(Object key) throws Exception {
 			if (!called) {
 				called = true;
 				throw new IllegalStateException();
 			}
-			return from;
+			return key;
 		}
 	}
 }

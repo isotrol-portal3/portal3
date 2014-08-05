@@ -25,12 +25,12 @@ import static com.isotrol.impe3.api.RoutableNamedIdentifiable.IS_ROUTABLE;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 
-import com.google.common.base.Function;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.api.Categories;
 import com.isotrol.impe3.api.Category;
@@ -42,11 +42,11 @@ import com.isotrol.impe3.core.Loggers;
  * @author Andres Rodriguez
  */
 final class CategoryRoutingMap {
-	private final ConcurrentMap<CRKey, ImmutableMap<String, Category>> map;
+	private final LoadingCache<CRKey, ImmutableMap<String, Category>> cache;
 
 	CategoryRoutingMap(final Categories categories) {
-		final Function<CRKey, ImmutableMap<String, Category>> computer = new Function<CRKey, ImmutableMap<String, Category>>() {
-			public ImmutableMap<String, Category> apply(CRKey from) {
+		final CacheLoader<CRKey, ImmutableMap<String, Category>> computer = new CacheLoader<CRKey, ImmutableMap<String, Category>>() {
+			public ImmutableMap<String, Category> load(CRKey from) {
 				try {
 					final List<Category> children = categories.getChildren(from.getId());
 					if (children == null || children.isEmpty()) {
@@ -74,13 +74,13 @@ final class CategoryRoutingMap {
 				}
 			}
 		};
-		this.map = new MapMaker().makeComputingMap(computer);
+		this.cache = CacheBuilder.newBuilder().build(computer);
 	}
 
 	Category get(Category current, Locale locale, String segment) {
 		if (current == null || locale == null || segment == null) {
 			return null;
 		}
-		return map.get(new CRKey(locale, current)).get(segment);
+		return cache.getUnchecked(new CRKey(locale, current)).get(segment);
 	}
 }

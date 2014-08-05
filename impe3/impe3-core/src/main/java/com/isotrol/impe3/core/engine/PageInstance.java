@@ -25,6 +25,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 
@@ -156,7 +157,7 @@ public final class PageInstance {
 			// Run the component
 			final ComponentResponse componentResponse = execute(cip, component);
 			// Extractor
-			final Stopwatch watch = new Stopwatch().start();
+			final Stopwatch watch = Stopwatch.createStarted();
 			Builder builder = null;
 			try {
 				final ComponentExtractor extractor = ComponentExtractor.create(cip, component, b, context);
@@ -170,7 +171,7 @@ public final class PageInstance {
 				builder = extractor.extract();
 			}
 			finally {
-				final long t = watch.elapsedMillis();
+				final long t = watch.elapsed(TimeUnit.MILLISECONDS);
 				if (t > 100) {
 					logger.warn(String.format("CIP [%s]-[%s] took [%d] ms to get extracted", cip.getId(), cip
 						.getDefinition().getType(), t));
@@ -183,12 +184,12 @@ public final class PageInstance {
 		}
 
 		private ComponentResponse execute(CIP cip, Component component) throws Exception {
-			final Stopwatch watch = new Stopwatch().start();
+			final Stopwatch watch = Stopwatch.createStarted();
 			try {
 				return doRun(component);
 			}
 			finally {
-				final long t = watch.elapsedMillis();
+				final long t = watch.elapsed(TimeUnit.MILLISECONDS);
 				if (t > 250) {
 					logger.warn(String.format("CIP [%s]-[%s] took [%d] ms to execute", cip.getId(), cip.getDefinition()
 						.getType(), t));
@@ -197,12 +198,12 @@ public final class PageInstance {
 		}
 
 		private void inject(CIP cip, ComponentDefinition<?> dfn, Component component, ComponentRequestContext context) {
-			final Stopwatch watch = new Stopwatch().start();
+			final Stopwatch watch = Stopwatch.createStarted();
 			try {
 				ComponentInjector.inject(dfn, component, context);
 			}
 			finally {
-				final long t = watch.elapsedMillis();
+				final long t = watch.elapsed(TimeUnit.MILLISECONDS);
 				if (t > 100) {
 					logger.warn(String.format("CIP [%s]-[%s] took [%d] ms to get injected", cip.getId(), cip
 						.getDefinition().getType(), t));

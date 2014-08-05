@@ -75,12 +75,12 @@ public final class ObjectsLoader<T> {
 		final CacheLoader<Key, T> loader = new CacheLoader<Key, T>() {
 			@Override
 			public T load(Key key) throws Exception {
-				final Stopwatch w = new Stopwatch().start();
+				final Stopwatch w = Stopwatch.createStarted();
 				try {
 					return computer.apply(key.id);
 				}
 				finally {
-					long t = w.elapsedMillis();
+					long t = w.elapsed(TimeUnit.MILLISECONDS);
 					if (t > 500) {
 						System.out.println(String.format("State Loader [%s] took %d ms", ObjectsLoader.this.name, t));
 					}

@@ -136,7 +136,7 @@ public class HighlighterTest {
 			batchBuilder.add(document.get());
 		}
 
-		final Batch<Long> batch = batchBuilder.build(1L);
+		final Batch<Long, Object> batch = batchBuilder.build(1L);
 		final Store<Long> store = new RAMStore<Long>();
 		final Writer writer = new DefaultWriter();
 		writer.write(store, batch);

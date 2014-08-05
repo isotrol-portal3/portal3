@@ -31,6 +31,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import net.sf.derquinsej.i18n.BundleLocalized;
 import net.sf.derquinsej.i18n.Locales;
@@ -165,7 +166,7 @@ public final class SessionsServiceImpl extends AbstractContextService implements
 
 	private SessionDTO providerLogin(EnvironmentEntity env, UserEntity user, Credentials credentials) {
 		final ExternalUserDataDTO data;
-		final Stopwatch w = new Stopwatch().start();
+		final Stopwatch w = Stopwatch.createStarted();
 		try {
 			data = authenticationProvider.authenticate(credentials);
 		} catch (InvalidCredentialsException e) {
@@ -174,7 +175,7 @@ public final class SessionsServiceImpl extends AbstractContextService implements
 			}
 			return null;
 		} finally {
-			long t = w.elapsedMillis();
+			long t = w.elapsed(TimeUnit.MILLISECONDS);
 			if (t > 250) {
 				logger.warn(String.format("Provider login took [%d] ms", t));
 			}

@@ -25,13 +25,13 @@ import static com.isotrol.impe3.api.RoutableNamedIdentifiable.IS_ROUTABLE;
 
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.api.ContentType;
 import com.isotrol.impe3.api.ContentTypes;
@@ -57,13 +57,13 @@ final class ContentTypeRoutingMap {
 		return new ContentTypeRoutingMap(contentTypes, IS_NAVIGABLE, SEGMENTER);
 	}
 
-	private final ConcurrentMap<Locale, ImmutableMap<String, ContentType>> map;
+	private final LoadingCache<Locale, ImmutableMap<String, ContentType>> cache;
 
 	private ContentTypeRoutingMap(final ContentTypes contentTypes, final Predicate<? super ContentType> predicate,
 		final Segmenter segmenter) {
 		final Iterable<ContentType> types = Iterables.filter(contentTypes.values(), predicate);
-		final Function<Locale, ImmutableMap<String, ContentType>> creation = new Function<Locale, ImmutableMap<String, ContentType>>() {
-			public ImmutableMap<String, ContentType> apply(Locale from) {
+		final CacheLoader<Locale, ImmutableMap<String, ContentType>> creation = new CacheLoader<Locale, ImmutableMap<String, ContentType>>() {
+			public ImmutableMap<String, ContentType> load(Locale from) {
 				try {
 					// No builder to avoid errors because of duplicates.
 					final Map<String, ContentType> map = Maps.newHashMap();
@@ -86,14 +86,14 @@ final class ContentTypeRoutingMap {
 				}
 			}
 		};
-		this.map = new MapMaker().makeComputingMap(creation);
+		this.cache = CacheBuilder.newBuilder().build(creation);
 	}
 
 	ContentType get(Locale locale, String segment) {
 		if (locale == null || segment == null) {
 			return null;
 		}
-		return map.get(locale).get(segment);
+		return cache.getUnchecked(locale).get(segment);
 	}
 
 	interface Segmenter {

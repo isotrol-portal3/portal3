@@ -60,12 +60,12 @@ public class TimingAspect {
 
 	@Around("@within(org.springframework.stereotype.Service)")
 	public Object time(ProceedingJoinPoint pjp) throws Throwable {
-		final Stopwatch w = new Stopwatch().start();
+		final Stopwatch w = Stopwatch.createStarted();
 		try {
 			return pjp.proceed();
 		}
 		finally {
-			final long t = w.elapsedMillis();
+			final long t = w.elapsed(TimeUnit.MILLISECONDS);
 			final String key = pjp.getTarget().getClass().getName() + "." + pjp.getSignature().toShortString();
 			map.add(key, t);
 			if (t > 500) {

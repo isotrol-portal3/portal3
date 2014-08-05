@@ -19,7 +19,6 @@
 
 package com.isotrol.impe3.content.client;
 
-
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.newArrayList;
@@ -28,15 +27,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.UUID;
 
 import net.sf.derquinsej.i18n.Locales;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.MapMaker;
 import com.isotrol.impe3.api.Categories;
 import com.isotrol.impe3.api.Category;
 import com.isotrol.impe3.api.ContentKey;
@@ -62,7 +62,6 @@ import com.isotrol.impe3.nr.api.NodeQueries;
 import com.isotrol.impe3.nr.api.NodeQuery;
 import com.isotrol.impe3.nr.api.Schema;
 
-
 /**
  * Content service support class.
  * @author Andres Rodriguez
@@ -84,7 +83,8 @@ final class ContentServiceSupport {
 		if (type != null) {
 			try {
 				f = f.contentTypes().apply(UUID.fromString(type));
-			} catch (IllegalArgumentException e) {}
+			} catch (IllegalArgumentException e) {
+			}
 		}
 		return f.build();
 	}
@@ -161,8 +161,8 @@ final class ContentServiceSupport {
 		}
 	};
 
-	private final Map<UUID, String> paths = new MapMaker().makeComputingMap(new Function<UUID, String>() {
-		public String apply(UUID input) {
+	private final LoadingCache<UUID, String> paths = CacheBuilder.newBuilder().build(new CacheLoader<UUID, String>() {
+		public String load(UUID input) {
 			final Categories categories = ia.getCategories();
 			final StringBuilder b = new StringBuilder(128);
 			Category c = categories.get(input);
@@ -181,7 +181,7 @@ final class ContentServiceSupport {
 				return null;
 			}
 			CategoryRefPathDTO dto = fill(new CategoryRefPathDTO(), input);
-			dto.setPath(paths.get(input.getId()));
+			dto.setPath(paths.getUnchecked(input.getId()));
 			return dto;
 		}
 	};
@@ -240,16 +240,16 @@ final class ContentServiceSupport {
 			return NodeQueries.matchAll();
 		}
 		switch (type) {
-			case TITLE:
-				return NodeQueries.string(Schema.TITLE, query);
-			case DESCRIPTION:
-				return NodeQueries.string(Schema.DESCRIPTION, query);
-			case CONTENT:
-				return NodeQueries.string(Schema.CONTENT_IDX, query);
-			case TITLE_DESC:
-				return NodeQueries.anyString(query, Schema.TITLE, Schema.DESCRIPTION);
-			default:
-				return NodeQueries.matchAll();
+		case TITLE:
+			return NodeQueries.string(Schema.TITLE, query);
+		case DESCRIPTION:
+			return NodeQueries.string(Schema.DESCRIPTION, query);
+		case CONTENT:
+			return NodeQueries.string(Schema.CONTENT_IDX, query);
+		case TITLE_DESC:
+			return NodeQueries.anyString(query, Schema.TITLE, Schema.DESCRIPTION);
+		default:
+			return NodeQueries.matchAll();
 		}
 	}
 

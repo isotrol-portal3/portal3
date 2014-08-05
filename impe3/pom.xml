@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>impe3-maven</artifactId>
 		<groupId>com.isotrol.impe3.maven</groupId>
-		<version>2.9.121</version>
+		<version>3.0.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.isotrol.impe3</groupId>
@@ -21,7 +21,7 @@
 	</scm>
 
 	<properties>
-		<externalApiVersion>2.9.190</externalApiVersion>
+		<externalApiVersion>3.0.0</externalApiVersion>
 	</properties>
 
 	<build>

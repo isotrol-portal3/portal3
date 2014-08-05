@@ -48,7 +48,7 @@ public class FeedBurnerIndexerTest {
 
 	// @Test
 	public void indexTest() throws InterruptedException {
-		Indexer<Long> indexer = null;
+		Indexer<Long, Object> indexer = null;
 
 		try {
 			indexer = create();
@@ -57,14 +57,14 @@ public class FeedBurnerIndexerTest {
 			Assert.fail("Error: " + e.getMessage());
 		}
 
-		final Batch<Long> batch = indexer.index(null);
+		final Batch<Long, Object> batch = indexer.index(null);
 
 		Assert.assertNotNull(batch);
 		Assert.assertFalse(batch.isEmpty());
 
 	}
 
-	private Indexer<Long> create() throws Exception {
+	private Indexer<Long, Object> create() throws Exception {
 		FeedBurnerIndexer indexer = new FeedBurnerIndexer();
 		indexer.setDefaultContent("feed");
 		indexer.setUrl(url);
