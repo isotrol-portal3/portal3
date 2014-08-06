@@ -1,0 +1,5 @@
+com.isotrol.impe3.web20.client.connector.Web20ConnectorModule
+com.isotrol.impe3.web20.client.content.counter.ContentCounterModule
+com.isotrol.impe3.web20.client.counter.CounterModule
+com.isotrol.impe3.web20.client.populartop.TopResourcesModule
+com.isotrol.impe3.web20.client.adaptor.ContentRepositoryAdaptorModule

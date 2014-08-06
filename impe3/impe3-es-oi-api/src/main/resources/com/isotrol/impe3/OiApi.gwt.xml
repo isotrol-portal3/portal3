@@ -1,0 +1,7 @@
+<module>
+
+	<source path='oi/api' />
+	
+	<public path='public/OiApi' />
+
+</module>

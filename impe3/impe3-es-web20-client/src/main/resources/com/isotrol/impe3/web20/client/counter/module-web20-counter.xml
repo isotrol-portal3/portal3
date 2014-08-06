@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="component" class="com.isotrol.impe3.web20.client.counter.CounterComponent"
+		scope="prototype">
+		<property name="moduleConfig" ref="moduleConfig" />
+	</bean>
+	
+	<bean id="exporter" class="com.isotrol.impe3.web20.client.counter.ActionExporterComponent"
+		scope="prototype" />
+
+	<bean id="counter" class="com.isotrol.impe3.web20.client.counter.CounterAction"
+		scope="prototype">
+		<property name="service" ref="service" />
+		<property name="moduleConfig" ref="moduleConfig" />
+	</bean>
+
+</beans>

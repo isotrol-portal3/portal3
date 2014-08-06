@@ -1,0 +1,11 @@
+<module>
+
+	<source path='web20/gui/api' />
+	
+	<public path='public/Web20GuiApi' />
+	
+	<inherits name='com.isotrol.impe3.Web20Api' />
+
+	<inherits name='com.google.gwt.user.User' />
+
+</module>

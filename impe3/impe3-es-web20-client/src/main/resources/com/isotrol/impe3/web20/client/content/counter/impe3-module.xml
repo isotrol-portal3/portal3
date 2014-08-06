@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="loader"
+		class="com.isotrol.impe3.web20.client.content.counter.ContentImageLoader" />
+
+	<bean id="counter"
+		class="com.isotrol.impe3.web20.client.content.counter.ContentCounterComponent"
+		scope="prototype">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="greatestHits"
+		class="com.isotrol.impe3.web20.client.content.counter.GreatestHitsComponent"
+		scope="prototype">
+		<property name="config" ref="config" />
+		<property name="service" ref="service" />
+	</bean>
+
+	<bean id="countAction"
+		class="com.isotrol.impe3.web20.client.content.counter.ContentCounterAction"
+		scope="prototype">
+		<property name="config" ref="config" />
+		<property name="service" ref="service" />
+		<property name="loader" ref="loader" />
+	</bean>
+
+</beans>

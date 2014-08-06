@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 
+	<context:component-scan
+		base-package="com.isotrol.impe3.es.common.server,com.isotrol.impe3.oi.dao.impl,com.isotrol.impe3.oi.impl" />
+	-->
+		
+	<tx:annotation-driven />
+	
+	
+	<bean id="OIDAOImpl" class="com.isotrol.impe3.oi.dao.impl.OIDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="IndexDAOImpl" class="com.isotrol.impe3.oi.dao.impl.IndexDAOImpl">
+		<property name="store" ref="oistore" />
+		<property name="analyzer" ref="analyzer" />
+	</bean>
+	
+	
+	<bean id="ClassComponent" class="com.isotrol.impe3.oi.impl.ClassComponent">
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />
+		<constructor-arg index="0" ref="ClassSetComponent" />
+		<constructor-arg index="1" ref="ClassNameComponent" />
+	</bean>
+	
+	<bean id="oiClassesService" class="com.isotrol.impe3.oi.impl.ClassesServiceImpl">
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />
+		<property name="classManager" ref="oiClassManager" />
+	</bean>
+
+	<bean id="oiClassManager" class="com.isotrol.impe3.oi.impl.ClassManagerImpl">
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />	
+		<property name="classComponent" ref="ClassComponent" />
+	</bean>
+
+	<bean id="ClassNameComponent" class="com.isotrol.impe3.oi.impl.ClassNameComponent" >
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />	
+	</bean>
+
+	<bean id="ClassSetComponent" class="com.isotrol.impe3.oi.impl.ClassSetComponent" >
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />	
+	</bean>
+
+	<bean id="oiInterviewsIndexer" class="com.isotrol.impe3.oi.impl.InterviewsIndexer">
+		<property name="logTable" ref="oiLogTableManager" />
+		<property name="interviewsService" ref="oiInterviewsService" />
+	</bean>
+	
+	<bean id="oiInterviewsService" class="com.isotrol.impe3.oi.impl.InterviewsServiceImpl">
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />	
+		<property name="memberComponent" ref="OIMemberComponent" />
+		<property name="index" ref="IndexDAOImpl" />
+		<property name="logTableComponent" ref="OILogTableComponent" />
+		<property name="classComponent" ref="ClassComponent" />
+	</bean>
+	
+	<bean id="oiLogTableManager" class="com.isotrol.impe3.oi.impl.LogTableManagerImpl">
+		<property name="logTable" ref="OILogTableComponent" />
+	</bean>
+	
+	<bean id="oiMembersService" class="com.isotrol.impe3.oi.impl.MembersServiceImpl">
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />		
+		<property name="memberComponent" ref="OIMemberComponent" />
+	</bean>
+	<bean id="OILogTableComponent" class="com.isotrol.impe3.oi.impl.OILogTableComponent">
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />	
+	</bean>
+	<bean id="OIMemberComponent" class="com.isotrol.impe3.oi.impl.OIMemberComponent">
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />	
+	</bean>
+	<bean id="oiQuestionsService" class="com.isotrol.impe3.oi.impl.QaAsServiceImpl">
+		<property name="uuidGenerator" ref="UUIDGeneratorComponent" />
+		<property name="dao" ref="OIDAOImpl" />		
+		<property name="memberComponent" ref="OIMemberComponent" />
+	</bean>
+	
+</beans>

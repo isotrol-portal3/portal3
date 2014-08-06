@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<bean id="configuration-properties"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/web20.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+
+	<bean name="/members"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="membersService" />
+		<property name="serviceInterface" value="com.isotrol.impe3.web20.api.MembersService" />
+	</bean>
+
+	<bean name="/communities"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="communitiesService" />
+		<property name="serviceInterface"
+			value="com.isotrol.impe3.web20.api.CommunitiesService" />
+	</bean>
+
+	<bean name="/counters"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="countersService" />
+		<property name="serviceInterface" value="com.isotrol.impe3.web20.api.CountersService" />
+	</bean>
+
+	<bean name="/resources"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="resourcesService" />
+		<property name="serviceInterface" value="com.isotrol.impe3.web20.api.ResourcesService" />
+	</bean>
+
+	<bean name="/ratings"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="ratingsService" />
+		<property name="serviceInterface" value="com.isotrol.impe3.web20.api.RatingsService" />
+	</bean>
+
+	<bean name="/tags"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="tagsService" />
+		<property name="serviceInterface" value="com.isotrol.impe3.web20.api.TagsService" />
+	</bean>
+
+	<bean name="/comments"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="commentsService" />
+		<property name="serviceInterface" value="com.isotrol.impe3.web20.api.CommentsService" />
+	</bean>
+
+	<bean name="/notices"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="noticesService" />
+		<property name="serviceInterface"
+			value="com.isotrol.impe3.web20.api.CommunityNoticesService" />
+	</bean>
+
+	<bean name="/favorites"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="favoritesService" />
+		<property name="serviceInterface" value="com.isotrol.impe3.web20.api.FavoritesService" />
+	</bean>
+
+	<bean name="/recommendations"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="recommendationsService" />
+		<property name="serviceInterface"
+			value="com.isotrol.impe3.web20.api.RecommendationsService" />
+	</bean>
+
+	<bean name="/migration"
+		class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="migrationService" />
+		<property name="serviceInterface"
+			value="com.isotrol.impe3.web20.api.MigrationService" />
+	</bean>
+	<!--
+		<import resource="web20-db.xml" /> <bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" /> </bean>
+
+		<tx:annotation-driven transaction-manager="txManager" />
+	-->
+</beans>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+		<property name="suppressClose" value="true" />
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:mem:" />
+		<property name="username" value="sa" />
+		<property name="password" value="sa" />
+	</bean>
+
+	<bean id="sessionFactory" class="com.isotrol.impe3.web20.support.SessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.H2Dialect
+				hibernate.hbm2ddl.auto=update
+				hibernate.show_sql=false
+				hibernate.id.new_generator_mappings=true
+			</value>
+		</property>
+	</bean>
+
+	<bean id="timeConfig" class="com.isotrol.impe3.web20.server.TimeMapConfig"
+		factory-method="create">
+		<constructor-arg value="5" />
+		<constructor-arg value="true" />
+		<constructor-arg>
+			<list>
+				<value>5</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="analyzer" class="com.isotrol.impe3.lucene.PortalStandardAnalyzer" />
+
+	<bean id="checkpoint" class="net.sf.lucis.core.Checkpoints"
+		factory-method="ofLong" />
+	<bean id="store" class="com.isotrol.impe3.web20.impl.LongRAMStore" />
+	<!-- bean id="store" class="net.sf.lucis.core.impl.FSStore"> <constructor-arg 
+		index="0" ref="checkpoint" /> <constructor-arg index="1" value="/tmp/" /> 
+		</bean -->
+
+	<bean id="indexService" class="com.isotrol.impe3.idx.config.IndexServiceFactoryBean">
+		<constructor-arg index="0" ref="analyzer" />
+		<constructor-arg index="1" ref="store" />
+		<constructor-arg index="2" ref="membersIndexer" />
+	</bean>
+	<!-- <bean id="indexService" class="net.sf.lucis.core.impl.DefaultIndexerService" 
+		init-method="start" destroy-method="stop"> <constructor-arg index="0" ref="store" 
+		/> <constructor-arg index="1" ref="indexWriter" /> <constructor-arg index="2" 
+		ref="membersIndexer" /> </bean> -->
+</beans>

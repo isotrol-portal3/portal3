@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>impe3</artifactId>
+		<groupId>com.isotrol.impe3</groupId>
+		<version>3.0.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<name>IMPE3 :: WEB20 :: ES :: REST</name>
+	<artifactId>impe3-es-web20-rest</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-es-web20-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-spring</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>flexjson</groupId>
+			<artifactId>flexjson</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>

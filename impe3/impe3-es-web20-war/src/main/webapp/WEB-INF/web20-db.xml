@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+
+	<bean id="timeConfig" class="com.isotrol.impe3.web20.server.TimeMapConfig" factory-method="defaultConfig" />
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+		<property name="suppressClose" value="true" />
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:mem:" />
+		<property name="username" value="sa" />
+		<property name="password" value="sa" />
+	</bean>
+
+	<bean id="sessionFactory" class="com.isotrol.impe3.web20.support.SessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.H2Dialect
+				hibernate.hbm2ddl.auto=update
+				hibernate.show_sql=true
+			</value>
+		</property>
+	</bean>
+
+	<bean id="analyzer" class="com.isotrol.impe3.lucene.SpanishAnalyzer" />
+	<bean id="checkpoint" class="net.sf.lucis.core.Checkpoints"
+		factory-method="ofLong" />
+
+	<!-- bean id="store" class="com.isotrol.impe3.web20.impl.LongRAMStore" / -->
+	<bean id="store" class="net.sf.lucis.core.impl.FSStore">
+		<constructor-arg index="0" ref="checkpoint" />
+		<constructor-arg index="1" value="${members.store}" />
+	</bean>
+
+
+
+	<bean id="writerConfiguration" class="net.sf.lucis.core.WriterConfiguration"
+		factory-method="of">
+		<constructor-arg index="0" ref="analyzer" />
+	</bean>
+
+	<bean id="indexWriter" class="net.sf.lucis.core.impl.DefaultWriter">
+		<constructor-arg index="0" ref="writerConfiguration" />
+	</bean>
+
+	<bean id="indexService" class="net.sf.lucis.core.impl.DefaultIndexerService"
+		init-method="start" destroy-method="stop">
+		<constructor-arg index="0" ref="store" />
+		<constructor-arg index="1" ref="indexWriter" />
+		<constructor-arg index="2" ref="membersIndexer" />
+	</bean>
+</beans>

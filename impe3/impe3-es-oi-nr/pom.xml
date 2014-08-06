@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>impe3</artifactId>
+		<groupId>com.isotrol.impe3</groupId>
+		<version>3.0.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>impe3-es-oi-nr</artifactId>
+	<name>IMPE3 :: WEB20 :: ES :: OI :: Node Repository</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-es-oi-server</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-nr-api</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-mapping-api</artifactId>
+		</dependency>		
+	</dependencies>
+
+</project>

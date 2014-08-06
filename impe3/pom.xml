@@ -181,6 +181,16 @@
 		<module>impe3-tickets-jersey</module>
 		<module>impe3-tickets-client</module>
 		<module>impe3-tickets-war</module>
+		<module>impe3-es-web20-server</module>
+		<module>impe3-es-web20-rest</module>
+		<module>impe3-es-web20-client</module>
+		<module>impe3-es-web20-gui-api</module>
+		<module>impe3-es-oi-api</module>
+		<module>impe3-es-oi-server</module>
+		<module>impe3-es-oi-client</module>
+		<module>impe3-es-oi-nr</module>
+		<module>impe3-es-oi-gui-api</module>
+		<module>impe3-es-web20-war</module>
 	</modules>
 
 	<profiles>

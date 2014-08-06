@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="members"
+		class="com.isotrol.impe3.web20.client.connector.MembersRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="communities"
+		class="com.isotrol.impe3.web20.client.connector.CommunitiesRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="counters"
+		class="com.isotrol.impe3.web20.client.connector.CountersRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="resources"
+		class="com.isotrol.impe3.web20.client.connector.ResourcesRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="ratings"
+		class="com.isotrol.impe3.web20.client.connector.RatingsRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="tags"
+		class="com.isotrol.impe3.web20.client.connector.TagsRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="comments"
+		class="com.isotrol.impe3.web20.client.connector.CommentsRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="notices"
+		class="com.isotrol.impe3.web20.client.connector.CommunityNoticesRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="favorites"
+		class="com.isotrol.impe3.web20.client.connector.FavoritesRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>
+
+	<bean id="recommendations"
+		class="com.isotrol.impe3.web20.client.connector.RecommendationsRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>	
+
+	<bean id="migration"
+		class="com.isotrol.impe3.web20.client.connector.MigrationRemoteServiceImpl"
+		init-method="init">
+		<property name="config" ref="config" />
+	</bean>	
+
+</beans>

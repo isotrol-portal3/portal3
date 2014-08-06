@@ -1,0 +1,11 @@
+<module>
+
+	<source path='oi/gui/api' />
+	
+	<public path='public/OiGuiApi' />
+	
+	<inherits name='com.isotrol.impe3.OiApi' />
+
+	<inherits name='com.google.gwt.user.User' />
+
+</module>
