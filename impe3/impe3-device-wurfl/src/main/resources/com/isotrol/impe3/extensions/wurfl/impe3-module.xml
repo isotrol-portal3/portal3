@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="provider"
+		class="com.isotrol.impe3.extensions.wurfl.WURFLDeviceCapabilitiesProvider">
+		<property name="holder" ref="wurflHolder" />
+		<property name="userAgentNormalizer" ref="userAgentNormalizer" />
+	</bean>
+
+
+
+	<!-- WURFLModel --> 
+	<bean id="wurflModel" class="net.sourceforge.wurfl.core.resource.DefaultWURFLModel"> 
+		<constructor-arg index="0"> 
+			<bean class="com.isotrol.impe3.extensions.wurfl.Spring3XMLResource"> 
+				<constructor-arg index="0" value="classpath:/wurfl.xml" /> 
+			</bean> 
+<!-- 			<bean class="net.sourceforge.wurfl.core.resource.SpringXMLResource"> 
+				<constructor-arg index="0" value="classpath:wurfl.zip" /> 
+			</bean> --> 
+		</constructor-arg> 
+	</bean> 
+ 
+	<!-- MatcherManager --> 
+	<bean id="matcherManager" class="net.sourceforge.wurfl.core.handlers.matchers.MatcherManager"> 
+		<constructor-arg ref="wurflModel" /> 
+	</bean> 
+ 
+	<!-- DeviceProvider --> 
+	<bean id="capabilitiesHolderFactory"
+		class="net.sourceforge.wurfl.core.DefaultCapabilitiesHolderFactory"> 
+		<constructor-arg ref="wurflModel" /> 
+	</bean> 
+ 
+	<bean id="markupResolver" class="net.sourceforge.wurfl.core.DefaultMarkupResolver" /> 
+ 
+	<!-- DeviceProvider --> 
+	<bean id="deviceProvider" class="net.sourceforge.wurfl.core.DefaultDeviceProvider"> 
+		<constructor-arg ref="wurflModel" /> 
+		<constructor-arg ref="markupResolver" /> 
+		<constructor-arg ref="capabilitiesHolderFactory" /> 
+	</bean> 
+ 
+	
+	<!-- DeviceCacheProvider --> 
+	<bean id="deviceCacheProvider" class="net.sourceforge.wurfl.core.cache.LRUMapCacheProvider" /> 
+ 
+	<!--
+		<bean id="deviceCacheProvider"
+		class="net.sourceforge.wurfl.core.cache.HashMapCacheProvider" />
+	--> 
+ 
+	<!--
+		<bean id="deviceCacheProvider"
+		class="net.sourceforge.wurfl.core.cache.NullCacheProvider" />
+	--> 
+	
+	<!-- 
+	<bean id="cacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>/WEB-INF/ehcache.xml</value>
+		</property>
+	</bean>
+	
+	<bean id="deviceCacheProvider" class="net.sourceforge.wurfl.core.cache.EhCacheProvider">
+		<property name="cache">
+			<bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+				<property name="cacheManager" ref="cacheManager" />
+				<property name="cacheName" value="net.sourceforge.wurfl.core.Device" />
+			</bean>
+		</property>
+	</bean>
+ 	 --> 
+ 	 
+	<!-- Service --> 
+	<bean id="wurflService" class="net.sourceforge.wurfl.core.DefaultWURFLService"> 
+		<constructor-arg ref="matcherManager" /> 
+		<constructor-arg ref="deviceProvider" /> 
+		<constructor-arg ref="deviceCacheProvider" /> 
+	</bean> 
+	
+	<!-- RequestFactory --> 
+	<bean id="userAgentNormalizerFactory"
+		class="net.sourceforge.wurfl.core.request.DefaultUserAgentNormalizerFactory" /> 
+ 
+	<bean id="userAgentNormalizer" factory-bean="userAgentNormalizerFactory"
+		factory-method="create" /> 
+ 
+	<bean id="userAgentResolver"
+		class="net.sourceforge.wurfl.core.request.DefaultUserAgentResolver" /> 
+ 
+	<bean id="requestFactory"
+		class="net.sourceforge.wurfl.core.request.DefaultWURFLRequestFactory"> 
+		<constructor-arg ref="userAgentResolver" /> 
+		<constructor-arg ref="userAgentNormalizer" /> 
+	</bean> 
+ 
+	<!-- WURFLManager --> 
+	<bean id="wurflManager" class="net.sourceforge.wurfl.core.DefaultWURFLManager"> 
+		<constructor-arg ref="wurflService" /> 
+		<constructor-arg ref="requestFactory" /> 
+	</bean> 
+ 
+	<!-- WURFLUtils --> 
+	<bean id="wurflUtils" class="net.sourceforge.wurfl.core.WURFLUtils"> 
+		<constructor-arg ref="wurflModel" /> 
+	</bean> 
+ 
+	<!-- WURFLHolder --> 
+	<bean id="wurflHolder" class="net.sourceforge.wurfl.core.DefaultWURFLHolder"> 
+		<constructor-arg ref="wurflManager" /> 
+		<constructor-arg ref="wurflUtils" /> 
+	</bean>
+	
+</beans>

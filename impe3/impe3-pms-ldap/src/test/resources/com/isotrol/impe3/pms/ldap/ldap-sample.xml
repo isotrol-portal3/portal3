@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="LDAPAuthentication" class="com.isotrol.impe3.pms.ldap.LDAPAuthenticationProvider">
+		<property name="provider" ref="ldapAuthProvider" />
+		<property name="create" value="true"/>
+	</bean>
+
+
+	<bean id="contextSource"
+		class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		<constructor-arg value="ldap://ldap:389/dc=isotrol,dc=com" />
+		<!-- <property name="userDn" value="cn=manager,dc=springframework,dc=org" />
+		<property name="password" value="password" /> -->
+	</bean>
+
+	<bean id="ldapAuthProvider"
+		class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+		<constructor-arg>
+			<bean
+				class="org.springframework.security.ldap.authentication.BindAuthenticator">
+				<constructor-arg ref="contextSource" />
+				<property name="userDnPatterns">
+					<list>
+						<value>uid={0},ou=human,ou=internal,ou=People</value>
+					</list>
+				</property>
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<bean
+				class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+				<constructor-arg ref="contextSource" />
+				<constructor-arg value="ou=groups" />
+				<property name="groupRoleAttribute" value="ou" />
+			</bean>
+		</constructor-arg>
+	</bean>
+</beans>
