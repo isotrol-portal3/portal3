@@ -176,6 +176,11 @@
 		<module>impe3-online-webapp</module>
 		<module>impe3-pms-ldap</module>
 		<module>impe3-device-wurfl</module>
+		<module>impe3-tickets-domain</module>
+		<module>impe3-tickets-server</module>
+		<module>impe3-tickets-jersey</module>
+		<module>impe3-tickets-client</module>
+		<module>impe3-tickets-war</module>
 	</modules>
 
 	<profiles>

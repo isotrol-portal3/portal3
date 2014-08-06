@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>impe3</artifactId>
+		<groupId>com.isotrol.impe3</groupId>
+		<version>3.0.0</version>
+	</parent>
+	<groupId>com.isotrol.impe3.tickets</groupId>
+	<artifactId>impe3-tickets-war</artifactId>
+	<packaging>war</packaging>
+	<name>IMPE3 :: Tickets :: WAR</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.isotrol.impe3.tickets</groupId>
+			<artifactId>impe3-tickets-server</artifactId>
+			<version>3.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+
+	<profiles>
+		<profile>
+			<id>standalone</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>7.4.4.v20110707</version>
+						<configuration>
+							<webAppConfig>
+								<contextPath>/</contextPath>
+							</webAppConfig>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>com.isotrol.impe3.tickets</groupId>
+					<artifactId>impe3-tickets-server</artifactId>
+					<version>${project.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+</project>
