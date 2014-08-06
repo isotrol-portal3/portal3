@@ -174,6 +174,8 @@
 		<module>impe3-pms-webapp-deps</module>
 		<module>impe3-pms-webapp</module>
 		<module>impe3-online-webapp</module>
+		<module>impe3-pms-ldap</module>
+		<module>impe3-device-wurfl</module>
 	</modules>
 
 	<profiles>
