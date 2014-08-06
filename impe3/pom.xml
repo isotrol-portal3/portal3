@@ -191,6 +191,8 @@
 		<module>impe3-es-oi-nr</module>
 		<module>impe3-es-oi-gui-api</module>
 		<module>impe3-es-web20-war</module>
+		<module>impe3-idx-drupal-api</module>
+		<module>impe3-idx-drupal6</module>
 	</modules>
 
 	<profiles>
