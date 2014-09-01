@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	
+	<!--
+	indexDefaultLanguage: si es true en caso de que el contenido no esté traducido a un idioma
+	indexa la versión del idioma por defecto. Si es false no lo indexa.
+	-->
+	<languages indexDefaultLanguage="true">
+		<!-- Locales idioma[_pais[_variante]] -->
+		<language default="true">es</language>
+		<language>en</language>
+		<language>fr</language>
+	</languages>
+	
+	<resourceTypes>
+		<resourceType content="false" name="folder" id="0"/>
+		<resourceType content="true" name="plain" id="1"/>
+		<resourceType content="true" name="news" id="30">
+			<field name="impe3nr:DESC" value="/IsotrolNormativa/descripcion" stored="true" tokenized="false"/>
+			<field name="impe3nr:TITLE" value="/IsotrolNormativa/titulo" stored="true" tokenized="false"/>
+			<groupping name="grupoPruebas">
+				<group path="/IsotrolNormativa/materia" mapped="true"/>
+				<group path="/IsotrolNormativa/ambito" mapped="false"/>
+				
+			</groupping>
+		</resourceType>
+		
+		<!--
+		<resourceType content="true" name="binary" id="2"/>
+		<resourceType content="true" name="image" id="3"/>
+		<resourceType content="true" name="jsp" id="4"/>
+		<resourceType content="true" name="pointer" id="5"/>
+		<resourceType content="true" name="xmlpage" id="6"/>
+		<resourceType content="true" name="xmlcontent" id="7"/>
+		<resourceType content="false" name="imagegallery" id="8"/>
+		<resourceType content="false" name="downloadgallery" id="9"/>
+		<resourceType content="false" name="linkgallery" id="10"/>
+		<resourceType content="false" name="htmlgallery" id="11"/>
+		<resourceType content="false" name="tablegallery" id="12"/>
+		
+	
+	  	<resourceType content="true" name="actividades" id="82">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="becasPremiosConcursos" id="83">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="enlaceinteres" id="84">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="normativas" id="85">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="subvencionesAyudas" id="86">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="contratacion" id="87">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="texto" id="88">
+			<field name="titulo_ord" value="/IsotrolTextoRestype/titulo" stored="true" tokenized="false"/>
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="noticias" id="89">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="enlace" id="90">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="bop" id="91">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="plenos" id="92">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="empleo" id="93">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="formacion" id="94">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="municipios" id="95">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="archivo" id="96">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="procedimiento" id="97">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="departamento" id="98">
+	  	</resourceType>
+	  	
+	  	<resourceType content="true" name="alcalde" id="99">
+	  	</resourceType>
+	  	-->
+	</resourceTypes>
+
+</configuration>	

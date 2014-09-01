@@ -193,6 +193,11 @@
 		<module>impe3-es-web20-war</module>
 		<module>impe3-idx-drupal-api</module>
 		<module>impe3-idx-drupal6</module>
+		<module>impe3-idx-opencms-api</module>
+		<module>impe3-idx-opencms-common</module>
+		<module>impe3-idx-opencms7</module>
+		<module>impe3-palette-oc7</module>
+		<module>impe3-idx-opencms5</module>
 	</modules>
 
 	<profiles>

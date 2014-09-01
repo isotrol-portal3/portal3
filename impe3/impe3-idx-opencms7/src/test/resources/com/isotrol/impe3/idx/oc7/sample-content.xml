@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<IsotrolNormativas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="opencms://system/modules/com.isotrol.opencms.module.restypes/schemas/Normativa.xsd">
+  <IsotrolNormativa language="es">
+    <Formulario><![CDATA[Normativa]]></Formulario>
+    <titulo><![CDATA[Normativa Ejemplo]]></titulo>
+    <descripcion><![CDATA[<p class="phome">Así, la Dirección General del Libro y del Patrimonio Bibliográfico y Documental, a través del Centro Andaluz de las Letras, pone en marcha programas y actividades que desarrollan los objetivos prioritarios mencionados. Entre estos programas cabe destacar por su importancia e implantación el <strong>Circuito Literario Andaluz</strong>, el <strong>Plan Andaluz de Fomento de la Lectura</strong>, y el homenaje anual a un autor o autora andaluza mediante la publicación de una de sus obras y la celebración de una exposición itinerante.</p>
+<p style="text-align: justify;" class="phome">Mención especial merece el <strong>Pacto Andaluz  por el Libro</strong>, suscrito por la Consejería de Cultura como miembro del Consejo Asesor del mismo, en el que también participan las consejerías de Educación y Ciencia, de Empleo y Desarrollo Tecnológico; la Federación Andaluza de Municipios y Provincias; Canal Sur RTVA; la Unión General de Trabajadores; Comisiones Obreras y la Confederación de Empresarios de Andalucía.</p>
+<ol>
+    <li>lista</li>
+    <li>numerada
+    <ol>
+        <li>asdasdadsadasasd asdaddede</li>
+        <li>asdasdasdasd</li>
+        <li>asdsadasd</li>
+    </ol>
+    </li>
+</ol>
+<p>con caracteres especialesÐ</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></descripcion>
+    <ambito>
+      <link internal="true" type="WEAK">
+        <target><![CDATA[/system/categories/categorizacion/normativa/ambito/autonomico/]]></target>
+        <uuid>CANAL-AMBITO-51f296b4-de22-11dd-9d1c-e1d47d337b7e</uuid>
+      </link>
+    </ambito>
+    <organismoEmisor><![CDATA[Consjereia de cultura]]></organismoEmisor>
+    <modificaciones><![CDATA[Nos se definen]]></modificaciones>
+    <publicacion>
+      <tipoBoletin>
+        <link internal="true" type="WEAK">
+          <target><![CDATA[/system/categories/categorizacion/normativa/tipoboletin/BOE/]]></target>
+          <uuid>b3526a42-de22-11dd-9d1c-e1d47d337b7e</uuid>
+        </link>
+      </tipoBoletin>
+      <fechaBoletin>1234825200000</fechaBoletin>
+      <numeroBoletin><![CDATA[34]]></numeroBoletin>
+    </publicacion>
+    <correcionesErrores><![CDATA[No se definene]]></correcionesErrores>
+    <url>
+      <Externo><![CDATA[http://www.opencms.org/opencms/en/support/faq.html]]></Externo>
+    </url>
+    <InformacionAdicional>
+      <Comentarios><![CDATA[<p>comentarios</p>
+<p>comentarios adicionales</p>]]></Comentarios>
+      <Adjuntos>
+        <URL>
+          <link type="WEAK">
+            <target><![CDATA[/sites/default/demo_en/extra/extranet/documents/opencms-days.pdf]]></target>
+            <uuid>eed5df0f-e545-11dc-8457-51cb880fd12a</uuid>
+          </link>
+        </URL>
+        <Alt><![CDATA[Documento ejemplo]]></Alt>
+      </Adjuntos>
+      <Imagenes>
+        <url>
+          <link type="WEAK">
+            <target><![CDATA[/sites/default/alkacon-documentation/documentation_htmlimport/pics/htmlimport.png]]></target>
+            <uuid>61791f4f-23b6-11dc-ac17-6bb95b7ba28e</uuid>
+          </link>
+        </url>
+        <alt><![CDATA[Imagen ejemplo]]></alt>
+      </Imagenes>
+      <EnlaceInterno>
+        <Nombre><![CDATA[Interno ejemplo]]></Nombre>
+        <URI>
+          <link internal="true" type="WEAK">
+            <target><![CDATA[/PRUEBAS/rsepu/bd.html]]></target>
+            <uuid>e305a73b-f3a3-11dd-a55d-e1d47d337b7e</uuid>
+          </link>
+        </URI>
+      </EnlaceInterno>
+      <EnlaceInterno>
+        <Nombre><![CDATA[Interno ejemplo 2]]></Nombre>
+        <URI>
+          <link internal="true" type="WEAK">
+            <target><![CDATA[/PRUEBAS/rsepu/cc.html]]></target>
+            <uuid>d6af7039-f3b3-11dd-977a-e1d47d337b7e</uuid>
+          </link>
+        </URI>
+      </EnlaceInterno>
+    </InformacionAdicional>
+    <Categorizacion>
+      <link internal="false" type="WEAK">
+        <target><![CDATA[7598bb2a-e864-11dd-8d2e-e1d47d337b7e;cfd6b0e6-edff-11dd-ad62-e1d47d337b7e%%7598bb2a-e864-11dd-8d2e-e1d47d337b7e]]></target>
+      </link>
+    </Categorizacion>
+    <materia>
+      <link internal="true" type="WEAK">
+        <target><![CDATA[/system/categories/categorizacion/normativa/materia/leyes/]]></target>
+        <uuid>CANAL-MATERIAf5cc9f42-ed1f-11dd-958e-e1d47d337b7e</uuid>
+      </link>
+    </materia>
+    <perfiles>
+      <link internal="true" type="WEAK">
+        <target><![CDATA[/system/categories/categorizacion/perfiles/ciudadania/]]></target>
+        <uuid>8d1e8851-f37e-11dd-9fa6-e1d47d337b7e</uuid>
+      </link>
+    </perfiles>
+    <perfiles>
+      <link internal="true" type="WEAK">
+        <target><![CDATA[/system/categories/categorizacion/perfiles/profesionales/]]></target>
+        <uuid>9a344b66-f37e-11dd-9fa6-e1d47d337b7e</uuid>
+      </link>
+    </perfiles>
+    <fechaOrdenacion>1234306800000</fechaOrdenacion>
+    <DestacarEnListado>
+      <link internal="true" type="WEAK">
+        <target><![CDATA[/system/categories/categorizacion/destacar_en_listado/archivos/]]></target>
+        <uuid>7f27bd18-f3af-11dd-b883-e1d47d337b7e</uuid>
+      </link>
+    </DestacarEnListado>
+    <DestacarEnPortada>
+      <link internal="true" type="WEAK">
+        <target><![CDATA[/system/categories/categorizacion/destacar_en_portada/arteemergente/]]></target>
+        <uuid>9466b1f4-f3ae-11dd-b883-e1d47d337b7e</uuid>
+      </link>
+    </DestacarEnPortada>
+    <Programacion>
+      <fechaInicio>1234861740000</fechaInicio>
+      <fechaFin>1235034540000</fechaFin>
+    </Programacion>
+  </IsotrolNormativa>
+</IsotrolNormativas>
