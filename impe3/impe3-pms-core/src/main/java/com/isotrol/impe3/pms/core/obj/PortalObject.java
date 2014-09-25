@@ -300,6 +300,7 @@ public final class PortalObject extends AbstractRoutableObject {
 		Portal.Builder b = Portal.builder().setId(getId()).setMode(model.getMode()).setDevice(defaultDevice)
 			.setName(name.getDisplayName()).setContentTypes(model.getContentTypes())
 			.setCategories(model.getCategories()).setBases(ubases).setProperties(getActiveProperties(portals))
+			.setUncategorized(isUncategorized(portals)).setDue(isDue(portals))
 			.setSetFilters(Maps.transformValues(getSetFilters(), SetFilterValue.TYPE)).setDevices(dm);
 
 		// Locales
