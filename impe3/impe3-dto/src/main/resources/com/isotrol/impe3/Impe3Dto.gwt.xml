@@ -1,0 +1,7 @@
+<module>
+
+	<source path='dto' />
+	
+	<public path='public/Impe3Dto' />
+
+</module>

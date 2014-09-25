@@ -1,0 +1,7 @@
+<module>
+
+	<source path='ext/api' />
+
+	<public path='public/ExtApi' />
+
+</module>

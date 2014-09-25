@@ -1,0 +1,7 @@
+<module>
+
+	<source path='users/api' />
+
+	<public path='public/UsersApi' />
+
+</module>

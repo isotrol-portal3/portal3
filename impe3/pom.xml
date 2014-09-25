@@ -143,6 +143,13 @@
 	</dependencies>
 
 	<modules>
+		<module>impe3-users-api</module>
+		<module>impe3-dto</module>
+		<module>impe3-es-web20-api</module>
+		<module>impe3-content-api</module>
+		<module>impe3-pms-ext-api</module>
+		<module>impe3-es-ticket-api</module>
+		<module>impe3-mapping-api</module>
 		<module>impe3-lucene</module>
 		<module>impe3-hib</module>
 		<module>impe3-es-common-server</module>

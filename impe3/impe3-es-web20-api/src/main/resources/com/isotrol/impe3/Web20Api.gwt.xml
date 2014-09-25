@@ -1,0 +1,10 @@
+<module>
+
+	<source path='web20/api' />
+	<source path='content/api' />
+	
+	<public path='public/Web20Api' />
+
+	<inherits name='com.isotrol.impe3.Impe3Dto' />
+
+</module>
