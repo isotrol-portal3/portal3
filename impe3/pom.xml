@@ -75,42 +75,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- Isotrol Impe3 External APIs -->
-			<dependency>
-				<groupId>com.isotrol.impe3</groupId>
-				<artifactId>impe3-content-api</artifactId>
-				<version>${externalApiVersion}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.isotrol.impe3</groupId>
-				<artifactId>impe3-dto</artifactId>
-				<version>${externalApiVersion}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.isotrol.impe3</groupId>
-				<artifactId>impe3-es-web20-api</artifactId>
-				<version>${externalApiVersion}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.isotrol.impe3</groupId>
-				<artifactId>impe3-users-api</artifactId>
-				<version>${externalApiVersion}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.isotrol.impe3</groupId>
-				<artifactId>impe3-pms-ext-api</artifactId>
-				<version>${externalApiVersion}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.isotrol.impe3</groupId>
-				<artifactId>impe3-es-ticket-api</artifactId>
-				<version>${externalApiVersion}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.isotrol.impe3</groupId>
-				<artifactId>impe3-mapping-api</artifactId>
-				<version>${externalApiVersion}</version>
-			</dependency>
 			<!-- Impe3 Protocol Buffers -->
 			<dependency>
 				<groupId>com.isotrol.impe3</groupId>
