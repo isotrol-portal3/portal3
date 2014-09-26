@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.0.0</version>
+		<version>3.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>impe3-online-webapp-deps</artifactId>
 	<packaging>pom</packaging>
@@ -12,12 +12,12 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId> 
 			<artifactId>impe3-web-online</artifactId>
-			<version>3.0.0</version>
+			<version>3.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-palette</artifactId>
-			<version>3.0.0</version>
+			<version>3.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
