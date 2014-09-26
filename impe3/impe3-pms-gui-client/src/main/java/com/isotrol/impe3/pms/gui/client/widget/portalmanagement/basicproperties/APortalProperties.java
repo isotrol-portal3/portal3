@@ -346,7 +346,7 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 		container.add(cbDevice);
 
 		fields = Arrays.asList(new Field<?>[] {tfTag, cbNodesRepository, cbRoutable, cbRouter, cbLocale,
-			cbRoutingDomain, cbDevice, cbDeviceCapabilities});
+			cbSessionCSRF, cbRoutingDomain, cbDevice, cbDeviceCapabilities});
 	}
 	
 	/** Adds a portal inheritable flag combo. */
