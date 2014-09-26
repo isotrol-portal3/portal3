@@ -44,9 +44,9 @@ import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.isotrol.impe3.gui.common.event.IComponentListeningStrategy;
@@ -65,6 +65,8 @@ import com.isotrol.impe3.pms.api.portal.PortalTemplateDTO;
 import com.isotrol.impe3.pms.api.rd.RoutingDomainSelDTO;
 import com.isotrol.impe3.pms.gui.api.service.IPortalsServiceAsync;
 import com.isotrol.impe3.pms.gui.client.controllers.PortalsController;
+import com.isotrol.impe3.pms.gui.client.data.impl.PortalInheritableFlagModelData;
+import com.isotrol.impe3.pms.gui.client.data.impl.PortalInheritableFlagModelDataFactory;
 import com.isotrol.impe3.pms.gui.client.data.impl.ProviderModelData;
 import com.isotrol.impe3.pms.gui.client.data.impl.RoutingDomainSelModelData;
 import com.isotrol.impe3.pms.gui.client.error.PortalsServiceErrorMessageResolver;
@@ -74,6 +76,7 @@ import com.isotrol.impe3.pms.gui.client.i18n.PmsStyles;
 import com.isotrol.impe3.pms.gui.client.util.PmsChangeEvent;
 import com.isotrol.impe3.pms.gui.client.util.PmsListeningStrategy;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.EPortalImportExportType;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.PortalInheritableFlagComboBox;
 
 
 /**
@@ -109,6 +112,9 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 	/** device of a portal */
 	private ComboBox<ModelData> cbDevice = null;
 	
+	/** Session CSRF flag. */
+	private PortalInheritableFlagComboBox cbSessionCSRF = null;
+	
 	/** routing domanin of a portal */
 	private ComboBox<RoutingDomainSelModelData> cbRoutingDomain = null;
 	
@@ -119,7 +125,7 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 	
 	/** device capabilities of a portal */
 	private ComboBox<ModelData> cbDeviceCapabilities = null;
-
+	
 	/**
 	 * fields that may fire Change events.<br/>
 	 */
@@ -261,7 +267,6 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 	}
 
 	private void addFormFields() {
-
 		// CheckBox property 'routable'
 		cbRoutable = new CheckBox();
 		cbRoutable.addInputStyleName(styles.checkBoxAlignLeft());
@@ -305,6 +310,9 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 		cbLocale.setAllowBlank(true);
 		cbLocale.setStore(new ListStore<ModelData>());
 		container.add(cbLocale);
+		
+		// Session CSRF
+		cbSessionCSRF = addPIFCombo(pmsMessages.labelSessionCSRF());
 
 		// portal's routing domain field
 		cbRoutingDomain = new ComboBox<RoutingDomainSelModelData>();
@@ -339,6 +347,13 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 
 		fields = Arrays.asList(new Field<?>[] {tfTag, cbNodesRepository, cbRoutable, cbRouter, cbLocale,
 			cbRoutingDomain, cbDevice, cbDeviceCapabilities});
+	}
+	
+	/** Adds a portal inheritable flag combo. */
+	private PortalInheritableFlagComboBox addPIFCombo(String label) {
+		final PortalInheritableFlagComboBox cb = new PortalInheritableFlagComboBox(pmsMessages, label);
+		container.add(cb);
+		return cb;
 	}
 
 	/**
@@ -393,6 +408,9 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 				cbLocale.setValue(store.findModel(ProviderModelData.PROPERTY_TO_DISPLAY, propertyLocaleValue));
 			}
 		}
+		
+		// Session CSRF
+		cbSessionCSRF.setFlagValue(portalTemplate.getSessionCSRF());
 
 		// the routing domain provider template
 		RoutingDomainSelDTO currentRoutingDomain = portalTemplate.getDomain();
@@ -428,7 +446,7 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 			}
 		}
 	}
-
+	
 	private void populateRoutingDomainSelectorStore() {
 		List<RoutingDomainSelDTO> availableDomainsDto = portalTemplate.getAvailableDomains();
 		List<RoutingDomainSelModelData> availableDomainsModel = new ArrayList<RoutingDomainSelModelData>();
@@ -563,6 +581,9 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 			}
 		}
 		portalTemplate.getDevice().setCurrent(deviceDto);
+		
+		// Session CSRF
+		portalTemplate.setSessionCSRF(cbSessionCSRF.getFlagValue()); 
 
 		// portal routing domain
 		portalTemplate.setDomain(cbRoutingDomain.getValue().getDTO());

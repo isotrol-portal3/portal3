@@ -53,9 +53,11 @@ public class PortalTemplateDTO extends AbstractRoutable {
 	/** Available locales. */
 	private Map<String, String> locales;
 	/** Include uncategorized. */
-	private Boolean uncategorized;
+	private PortalInheritableFlag uncategorized;
 	/** Only due nodes. */
-	private Boolean due;
+	private PortalInheritableFlag due;
+	/** Whether to use session-based CSRF. */
+	private PortalInheritableFlag sessionCSRF;
 	/** Routing domain. */
 	private RoutingDomainSelDTO domain;
 	/** Available routing domains. */
@@ -197,7 +199,7 @@ public class PortalTemplateDTO extends AbstractRoutable {
 	 * Sets whether to include uncategorized contents.
 	 * @param uncategorized True if uncategorized contents must be included by default.
 	 */
-	public Boolean getUncategorized() {
+	public PortalInheritableFlag getUncategorized() {
 		return uncategorized;
 	}
 
@@ -205,24 +207,37 @@ public class PortalTemplateDTO extends AbstractRoutable {
 	 * Sets whether to include uncategorized contents.
 	 * @param uncategorized True if uncategorized contents must be included by default.
 	 */
-	public void setUncategorized(Boolean uncategorized) {
+	public void setUncategorized(PortalInheritableFlag uncategorized) {
 		this.uncategorized = uncategorized;
 	}
 
 	/**
 	 * Returns whether to include only due contents.
-	 * @return True if only due contents must be included by default.
+	 * @return Whether if only due contents must be included by default.
 	 */
-	public Boolean getDue() {
+	public PortalInheritableFlag getDue() {
 		return due;
 	}
 
 	/**
 	 * Sets whether to include only due contents.
-	 * @param due True if only due contents must be included by default.
+	 * @param due Whether if only due contents must be included by default.
 	 */
-	public void setDue(Boolean due) {
+	public void setDue(PortalInheritableFlag due) {
 		this.due = due;
+	}
+	
+	/** Returns whether to use session-based CSRF. */
+	public PortalInheritableFlag getSessionCSRF() {
+		return sessionCSRF;
+	}
+	
+	/**
+	 * Sets whether to use session-based CSRF.
+	 * @return Whether if the portal uses session-based CSRF. 
+	 */
+	public void setSessionCSRF(PortalInheritableFlag sessionCSRF) {
+		this.sessionCSRF = sessionCSRF;
 	}
 
 	/**
@@ -264,6 +279,13 @@ public class PortalTemplateDTO extends AbstractRoutable {
 			return null;
 		}
 	}
+	
+	private Boolean toBoolean(PortalInheritableFlag flag) {
+		if (flag == null) {
+			return null;
+		}
+		return flag.toBooleanObject();
+	}
 
 	public PortalDTO toPortalDTO() {
 		final PortalDTO dto = new PortalDTO();
@@ -277,8 +299,9 @@ public class PortalTemplateDTO extends AbstractRoutable {
 		dto.setNodeRepository(toDTO(nodeRepository));
 		dto.setDefaultLocale(defaultLocale);
 		dto.setLocales(locales);
-		dto.setUncategorized(uncategorized);
-		dto.setDue(due);
+		dto.setUncategorized(toBoolean(uncategorized));
+		dto.setDue(toBoolean(due));
+		dto.setSessionCSRF(toBoolean(sessionCSRF));
 		if (domain != null) {
 			dto.setDomain(domain.getId());
 		}

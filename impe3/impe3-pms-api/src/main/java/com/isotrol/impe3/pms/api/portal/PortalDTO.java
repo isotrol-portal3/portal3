@@ -57,6 +57,8 @@ public class PortalDTO extends AbstractWithId {
 	private Boolean due;
 	/** Routing domain. */
 	private String domain;
+	/** Whether to use session-based CSRF. */
+	private Boolean sessionCSRF;
 
 	/** Default constructor. */
 	public PortalDTO() {
@@ -254,4 +256,17 @@ public class PortalDTO extends AbstractWithId {
 		this.domain = domain;
 	}
 
+	/** Returns whether to use session-based CSRF. */
+	public Boolean getSessionCSRF() {
+		return sessionCSRF;
+	}
+	
+	/**
+	 * Sets whether to use session-based CSRF.
+	 * @return True if the portal uses session-based CSRF. 
+	 */
+	public void setSessionCSRF(Boolean sessionCSRF) {
+		this.sessionCSRF = sessionCSRF;
+	}
+	
 }

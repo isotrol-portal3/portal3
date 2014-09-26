@@ -386,6 +386,7 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 		}
 		dfn.setUncategorized(dto.getUncategorized());
 		dfn.setDue(dto.getDue());
+		dfn.setSessionCSRF(dto.getSessionCSRF());
 		final String rdId = dto.getDomain();
 		ROUTING_DOMAIN.checkNotNull(rdId, rdId);
 		final RoutingDomainEntity rde = findById(RoutingDomainEntity.class, ROUTING_DOMAIN.toUUID(rdId));

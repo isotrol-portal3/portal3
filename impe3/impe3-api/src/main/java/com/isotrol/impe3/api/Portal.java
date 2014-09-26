@@ -104,6 +104,8 @@ public final class Portal extends AbstractIdentifiable implements IAModel, WithD
 	private final ImmutableMap<String, FilterType> setFilters;
 	/** Devices. */
 	private final DevicesInPortal devices;
+	/** Whether to use session-based CSRF. */
+	private final boolean sessionCSRF;
 
 	/** Constructor. */
 	private Portal(Builder b) {
@@ -121,6 +123,7 @@ public final class Portal extends AbstractIdentifiable implements IAModel, WithD
 		this.due = b.due;
 		this.setFilters = b.setFilters;
 		this.devices = DevicesInPortal.of(b.devices);
+		this.sessionCSRF = b.sessionCSRF;
 	}
 
 	/**
@@ -258,6 +261,11 @@ public final class Portal extends AbstractIdentifiable implements IAModel, WithD
 	public DevicesInPortal getDevices() {
 		return devices;
 	}
+	
+	/** Returns whether to use session-based CSRF. */
+	public boolean isSessionCSRF() {
+		return sessionCSRF;
+	}
 
 	/**
 	 * Builder for Portal.
@@ -290,6 +298,8 @@ public final class Portal extends AbstractIdentifiable implements IAModel, WithD
 		private ImmutableMap<String, FilterType> setFilters = ImmutableMap.of();
 		/** Devices. */
 		private Set<DeviceInPortal> devices;
+		/** Whether to use session-based CSRF. */
+		private boolean sessionCSRF = false;
 
 		/** Constructor. */
 		private Builder() {
@@ -437,6 +447,16 @@ public final class Portal extends AbstractIdentifiable implements IAModel, WithD
 			return thisValue();
 		}
 
+		/**
+		 * Sets whether to use session-based CSRF.
+		 * @param sessionCSRF True if the portal uses session-based CSRF. 
+		 * @return This builder.
+		 */
+		public Builder setSessionCSRF(boolean sessionCSRF) {
+			this.sessionCSRF = sessionCSRF;
+			return this;
+		}
+	
 		/**
 		 * Returns the built portal.
 		 * @return The built portal.

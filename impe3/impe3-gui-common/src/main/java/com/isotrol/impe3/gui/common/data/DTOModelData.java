@@ -62,12 +62,12 @@ public abstract class DTOModelData<D> implements ModelData, DTOBacked<D> {
 		return Collections.unmodifiableSet(set);
 	}
 
-	protected static Set<String> propertySet(String... names) {
+	public static Set<String> propertySet(String... names) {
 		final Set<String> set = new HashSet<String>();
 		return addAll(set, names);
 	}
 
-	protected static Set<String> propertySet(Set<String> base, String... names) {
+	public static Set<String> propertySet(Set<String> base, String... names) {
 		final Set<String> set = new HashSet<String>();
 		set.addAll(base);
 		return addAll(set, names);

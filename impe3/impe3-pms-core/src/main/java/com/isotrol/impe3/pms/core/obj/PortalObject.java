@@ -75,6 +75,7 @@ import com.isotrol.impe3.pms.api.portal.DeviceInPortalDTO;
 import com.isotrol.impe3.pms.api.portal.DeviceInPortalTreeDTO;
 import com.isotrol.impe3.pms.api.portal.PortalCacheDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesTemplateDTO;
+import com.isotrol.impe3.pms.api.portal.PortalInheritableFlag;
 import com.isotrol.impe3.pms.api.portal.PortalNameDTO;
 import com.isotrol.impe3.pms.api.portal.PortalSelDTO;
 import com.isotrol.impe3.pms.api.portal.PortalTemplateDTO;
@@ -164,9 +165,9 @@ public final class PortalObject extends AbstractRoutableObject {
 	/** Portal properties. */
 	private final Supplier<ImmutableMap<String, String>> properties;
 	/** Include uncategorized. */
-	private final Boolean uncategorized;
+	private final PortalInheritableFlag uncategorized;
 	/** Only due nodes. */
-	private final Boolean due;
+	private final PortalInheritableFlag due;
 	/** Default locale. */
 	private final Locale defaultLocale;
 	/** Available locales. A hash map is used because null values are allowed. */
@@ -179,6 +180,8 @@ public final class PortalObject extends AbstractRoutableObject {
 	private final PortalCacheValue cache;
 	/** Portal IA. */
 	private volatile IA ia = null;
+	/** Whether to use session-based CSRF. */
+	private final PortalInheritableFlag sessionCSRF;
 
 	private static ImmutableMap<UUID, DiPObj> deviceMap(DeviceEntity entity) {
 		return ImmutableBiMap.of(entity.getId(), new DiPObj(entity));
@@ -208,11 +211,12 @@ public final class PortalObject extends AbstractRoutableObject {
 		this.nodeRepository = Provider.of(dfn.getNrConnector(), dfn.getNrBean());
 		this.bases = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, BASES_LOADER);
 		this.properties = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, PROPERTIES_LOADER);
-		this.uncategorized = dfn.getUncategorized();
-		this.due = dfn.getDue();
+		this.uncategorized = PortalInheritableFlag.fromBoolean(dfn.getUncategorized());
+		this.due = PortalInheritableFlag.fromBoolean(dfn.getDue());
 		this.defaultLocale = MoreLocales.fromString(dfn.getDefaultLocale(), MoreLocales.FALLBACK);
 		this.locales = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, LOCALES_LOADER);
 		this.setFilters = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, SETFILTERS_LOADER);
+		this.sessionCSRF = PortalInheritableFlag.fromBoolean(dfn.getSessionCSRF());
 		// Devices
 		this.devices = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, DEVICES_LOADER);
 		// Cache
@@ -360,19 +364,27 @@ public final class PortalObject extends AbstractRoutableObject {
 	}
 
 	public boolean isUncategorized(PortalsObject portals) {
-		if (uncategorized != null) {
-			return uncategorized.booleanValue();
-		}
 		final PortalObject parent = portals.getParent(getId());
-		return parent != null ? parent.isUncategorized(portals) : true;
+		if (uncategorized != PortalInheritableFlag.INHERIT || parent == null) {
+			return uncategorized.toBoolean(true);
+		}
+		return parent.isUncategorized(portals);
 	}
 
 	public boolean isDue(PortalsObject portals) {
-		if (due != null) {
-			return due.booleanValue();
-		}
 		final PortalObject parent = portals.getParent(getId());
-		return parent != null ? parent.isDue(portals) : true;
+		if (due != PortalInheritableFlag.INHERIT || parent == null) {
+			return due.toBoolean(true);
+		}
+		return parent.isDue(portals);
+	}
+	
+	public boolean isSessionCSRF(PortalsObject portals) {
+		final PortalObject parent = portals.getParent(getId());
+		if (sessionCSRF != PortalInheritableFlag.INHERIT || parent == null) {
+			return sessionCSRF.toBoolean(false);
+		}
+		return parent.isSessionCSRF(portals);
 	}
 
 	final Map<String, String> getActiveBases(PortalsObject portals) {
@@ -553,6 +565,7 @@ public final class PortalObject extends AbstractRoutableObject {
 		dto.setLocales(Maps.newHashMap(locales.get()));
 		dto.setUncategorized(uncategorized);
 		dto.setDue(due);
+		dto.setSessionCSRF(sessionCSRF);
 		dto.setDomain(rds.get(domainId).toSel());
 		dto.setAvailableDomains(rds.map2sel(true));
 		return dto;

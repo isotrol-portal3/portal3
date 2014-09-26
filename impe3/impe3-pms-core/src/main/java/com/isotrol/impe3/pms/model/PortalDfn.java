@@ -184,6 +184,9 @@ public class PortalDfn extends AbstractRoutableDfn<PortalDfn, PortalEntity, Port
 	/** Editions. */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "published")
 	private Set<PortalEdition> editions;
+	/** Whether to use session-based CSRF. */
+	@Column(name = "PRTL_SESSION_CSRF", nullable = true)
+	private Boolean sessionCSRF;
 
 	/** Default constructor. */
 	public PortalDfn() {
@@ -696,5 +699,18 @@ public class PortalDfn extends AbstractRoutableDfn<PortalDfn, PortalEntity, Port
 	 */
 	public void setCache(PortalCacheValue cache) {
 		this.cache = cache;
+	}
+	
+	/** Returns whether to use session-based CSRF. */
+	public Boolean getSessionCSRF() {
+		return sessionCSRF;
+	}
+	
+	/**
+	 * Sets whether to use session-based CSRF.
+	 * @return True if the portal uses session-based CSRF. 
+	 */
+	public void setSessionCSRF(Boolean sessionCSRF) {
+		this.sessionCSRF = sessionCSRF;
 	}
 }
