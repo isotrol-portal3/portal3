@@ -81,7 +81,7 @@ public final class SessionParamsFactory {
 		private Empty() {
 		}
 
-		public <T> Object get(String parameter, Class<T> type) {
+		public <T> T get(String parameter, Class<T> type) {
 			return null;
 		}
 
@@ -104,7 +104,7 @@ public final class SessionParamsFactory {
 		 * 
 		 * @see com.isotrol.impe3.api.SessionParams#get(java.lang.String, java.lang.Class)
 		 */
-		public final <T> Object get(String parameter, Class<T> type) {
+		public final <T> T get(String parameter, Class<T> type) {
 			Preconditions.checkNotNull(type);
 			Object value = get(parameter);
 			if (value != null) {

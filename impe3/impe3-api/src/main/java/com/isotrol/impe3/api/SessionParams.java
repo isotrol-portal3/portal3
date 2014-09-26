@@ -42,7 +42,7 @@ public interface SessionParams extends Parameters<Object> {
 	 * @return The value or null if there is no parameter with the provided name.
 	 * @throws ClassCastException if the value is not a subclass of the requested type.
 	 */
-	<T> Object get(String parameter, Class<T> type);
+	<T> T get(String parameter, Class<T> type);
 
 	/**
 	 * Returns a subset of this collection that contains only the provided parameter names.
