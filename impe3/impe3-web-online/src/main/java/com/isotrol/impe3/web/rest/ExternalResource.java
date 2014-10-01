@@ -75,7 +75,7 @@ public class ExternalResource extends AbstractResource {
 	public Response getPage(@PathParam("path") @Encoded String path) {
 		final PathSegments segments = PathSegments.of(path, true);
 		final HttpSession session = getSession();
-		final HttpRequestContext requestContext = RequestContexts.http(request, securityContext.isSecure(), HeadersFactory.of(headers),
+		final HttpRequestContext requestContext = RequestContexts.http(getCSRFToken(), request, securityContext.isSecure(), HeadersFactory.of(headers),
 			CookiesFactory.of(headers), RequestParamsFactory.of(uri), SessionParamsFactory.of(session));
 		try {
 			final PageResponse response = getEngine().process(segments, headers, requestContext);
@@ -86,6 +86,9 @@ public class ExternalResource extends AbstractResource {
 					session.removeAttribute(key);
 				} else {
 					session.setAttribute(key, value);
+				}
+				if (response.getPortal().isSessionCSRF()) {
+					saveCSRFToken();
 				}
 			}
 			return response.getResponse();

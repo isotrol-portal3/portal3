@@ -19,7 +19,6 @@
 
 package com.isotrol.impe3.core;
 
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Map;
@@ -27,25 +26,33 @@ import java.util.Map;
 import javax.ws.rs.core.Response;
 
 import com.google.common.collect.ImmutableMap;
-
+import com.isotrol.impe3.api.Portal;
 
 /**
- * A page response contains the HTTP response and an optional map elements to include in the session.
+ * A page response contains the HTTP response and an optional map elements to include in the
+ * session.
  * @author Andres Rodriguez
  */
 public final class PageResponse {
+	/** Portal that generated the response. */
+	private final Portal portal;
 	/** HTTP response. */
 	private final Response response;
 	/** Session elements. */
 	private final Map<String, Object> session;
 
-	public PageResponse(final Response response, Map<String, Object> session) {
+	public PageResponse(final Portal portal, final Response response, Map<String, Object> session) {
+		this.portal = checkNotNull(portal);
 		this.response = checkNotNull(response);
 		if (session == null) {
 			this.session = ImmutableMap.of();
 		} else {
 			this.session = session;
 		}
+	}
+
+	public Portal getPortal() {
+		return portal;
 	}
 
 	public Response getResponse() {

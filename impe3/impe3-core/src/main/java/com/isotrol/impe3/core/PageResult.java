@@ -43,6 +43,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.isotrol.impe3.api.PageRequestContext;
+import com.isotrol.impe3.api.Portal;
 import com.isotrol.impe3.api.component.CacheMode;
 import com.isotrol.impe3.api.component.CacheScope;
 import com.isotrol.impe3.api.component.ComponentETagMode;
@@ -59,6 +60,8 @@ import com.isotrol.impe3.api.component.RenderContext;
  * @author Andres Rodriguez
  */
 public abstract class PageResult {
+	/** Portal that generated the response. */
+	private final Portal portal;
 	/** Session data. */
 	private final Map<String, Object> session;
 
@@ -72,7 +75,12 @@ public abstract class PageResult {
 	}
 
 	private PageResult(Builder b) {
+		this.portal = b.pageContext.getPortalModel().getPortal();
 		this.session = Collections.unmodifiableMap(b.session);
+	}
+	
+	public final Portal getPortal() {
+		return portal;
 	}
 
 	public final Map<String, Object> getSession() {
@@ -88,7 +96,7 @@ public abstract class PageResult {
 		}
 
 		public PageResponse getPageResponse() {
-			return new PageResponse(response, getSession());
+			return new PageResponse(getPortal(), response, getSession());
 		}
 	}
 

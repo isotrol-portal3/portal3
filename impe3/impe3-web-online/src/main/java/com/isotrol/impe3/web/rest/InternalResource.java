@@ -156,7 +156,7 @@ public class InternalResource extends AbstractResource {
 		}
 		final UUID cip = toUUID(cipId, "CIP Id");
 		final HttpSession session = getSession();
-		final HttpRequestContext requestContext = RequestContexts.http(request, securityContext.isSecure(),
+		final HttpRequestContext requestContext = RequestContexts.http(getCSRFToken(), request, securityContext.isSecure(),
 			HeadersFactory.of(headers), CookiesFactory.of(headers), RequestParamsFactory.of(uri),
 			SessionParamsFactory.of(session));
 		final Engine engine = getEngine();

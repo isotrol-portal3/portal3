@@ -19,18 +19,13 @@
 
 package com.isotrol.impe3.core.support;
 
-
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.isotrol.impe3.api.support.URIs.queryParameters;
 
 import java.net.URI;
-import java.util.Locale;
-import java.util.UUID;
 
 import javax.ws.rs.core.UriBuilder;
 
 import com.google.common.collect.Multimap;
-import com.isotrol.impe3.api.Device;
 import com.isotrol.impe3.api.FileId;
 import com.isotrol.impe3.api.PageURI;
 import com.isotrol.impe3.api.PathSegments;
@@ -39,14 +34,11 @@ import com.isotrol.impe3.api.Route;
 import com.isotrol.impe3.api.URIGenerator;
 import com.isotrol.impe3.api.support.URIs;
 
-
 /**
  * Abstract URI generator implementation.
  * @author Andres Rodriguez.
  */
 public abstract class AbstractURIGenerator implements URIGenerator {
-	/** Action path segment. */
-	protected static final String ACTION = "action";
 	/** Portal. */
 	private final Portal portal;
 	/** Portal base. */
@@ -72,6 +64,7 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getPortal()
 	 */
+	@Override
 	public Portal getPortal() {
 		return portal;
 	}
@@ -79,6 +72,7 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getBase()
 	 */
+	@Override
 	public final UriBuilder getBase() {
 		return UriBuilder.fromUri(base);
 	}
@@ -86,6 +80,7 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteBase()
 	 */
+	@Override
 	public UriBuilder getAbsoluteBase() {
 		return UriBuilder.fromUri(absBase);
 	}
@@ -93,6 +88,7 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURI(com.isotrol.impe3.api.Route)
 	 */
+	@Override
 	public URI getURI(Route route) {
 		final PageURI page = getRouteSegments(route);
 		if (page == null) {
@@ -107,8 +103,10 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	}
 
 	/**
-	 * @see com.isotrol.impe3.api.URIGenerator#getURI(com.isotrol.impe3.api.Route, com.google.common.collect.Multimap)
+	 * @see com.isotrol.impe3.api.URIGenerator#getURI(com.isotrol.impe3.api.Route,
+	 *      com.google.common.collect.Multimap)
 	 */
+	@Override
 	public URI getURI(Route route, Multimap<String, ?> parameters) {
 		final URI uri = getURI(route);
 		if (uri == null) {
@@ -122,6 +120,7 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteURI(com.isotrol.impe3.api.Route)
 	 */
+	@Override
 	public URI getAbsoluteURI(Route route) {
 		final PageURI page = getRouteSegments(route);
 		if (page == null) {
@@ -137,8 +136,9 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteURI(com.isotrol.impe3.api.Route,
-	 * com.google.common.collect.Multimap)
+	 *      com.google.common.collect.Multimap)
 	 */
+	@Override
 	public URI getAbsoluteURI(Route route, Multimap<String, ?> parameters) {
 		final URI uri = getAbsoluteURI(route);
 		if (uri == null) {
@@ -152,6 +152,7 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURI(com.isotrol.impe3.api.FileId)
 	 */
+	@Override
 	public URI getURI(FileId file) {
 		return getBase().path("-/file/" + file.getId().toString().toLowerCase() + "/" + file.getName()).build();
 	}
@@ -159,20 +160,24 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURI(com.isotrol.impe3.api.FileId, java.lang.String)
 	 */
+	@Override
 	public URI getURI(FileId file, String name) {
 		return getBase().path("-/fitem/" + file.getId().toString().toLowerCase() + "/" + name).build();
 	}
-	
+
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteURI(com.isotrol.impe3.api.FileId)
 	 */
+	@Override
 	public URI getAbsoluteURI(FileId file) {
 		return getAbsoluteBase().path("-/file/" + file.getId().toString().toLowerCase() + "/" + file.getName()).build();
 	}
-	
+
 	/**
-	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteURI(com.isotrol.impe3.api.FileId, java.lang.String)
+	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteURI(com.isotrol.impe3.api.FileId,
+	 *      java.lang.String)
 	 */
+	@Override
 	public URI getAbsoluteURI(FileId file, String name) {
 		return getAbsoluteBase().path("-/fitem/" + file.getId().toString().toLowerCase() + "/" + name).build();
 	}
@@ -187,6 +192,7 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURIByBase(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public URI getURIByBase(String base, String path) {
 		return getURIByBase(portal.getBase(base), path);
 	}
@@ -194,42 +200,9 @@ public abstract class AbstractURIGenerator implements URIGenerator {
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURIByMDBase(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public URI getURIByMDBase(String base, String path) {
 		return getURIByBase(portal.getMDBase(base), path);
-	}
-
-	/**
-	 * @see com.isotrol.impe3.api.URIGenerator#getActionURI(com.isotrol.impe3.api.Route, java.util.UUID,
-	 * java.lang.String, com.google.common.collect.Multimap)
-	 */
-	private URI getActionURI(UriBuilder b, Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
-		checkNotNull(from, "The calling route must be provided");
-		checkNotNull(cipId, "The CIP Id must be provided");
-		checkNotNull(name, "The action name must be provided");
-		final String portalId = portal.getId().toString();
-		final Device d = from.getDevice();
-		final String deviceId = d != null ? d.getStringId() : new UUID(0L, 0L).toString();
-		final Locale l = from.getLocale();
-		final String locale = l != null ? l.toString() : "en";
-		b.segment("-", ACTION, portalId, deviceId, locale, cipId.toString(), name);
-		queryParameters(b, parameters);
-		queryParameters(b, RouteParams.toParams(from));
-		return b.build();
-	}
-
-	/**
-	 * @see com.isotrol.impe3.api.URIGenerator#getActionURI(com.isotrol.impe3.api.Route, java.util.UUID,
-	 * java.lang.String, com.google.common.collect.Multimap)
-	 */
-	public final URI getActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
-		return getActionURI(getBase(), from, cipId, name, parameters);
-	}
-	
-	/**
-	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteActionURI(com.isotrol.impe3.api.Route, java.util.UUID, java.lang.String, com.google.common.collect.Multimap)
-	 */
-	public URI getAbsoluteActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
-		return getActionURI(getAbsoluteBase(), from, cipId, name, parameters);
 	}
 
 	protected PageURI getRouteSegments(Route route) {

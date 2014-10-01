@@ -47,98 +47,122 @@ public abstract class ForwardingPortalRequestContext extends ForwardingRequestCo
 
 	protected abstract PortalRequestContext delegate();
 
+	@Override
 	public UUID getPortalId() {
 		return delegate().getPortalId();
 	}
 
+	@Override
 	public ModelInfo getPortalModelInfo() {
 		return delegate().getPortalModelInfo();
 	}
 
+	@Override
 	public PrincipalContext getPrincipalContext() {
 		return delegate().getPrincipalContext();
 	}
 
+	@Override
 	public ContentLoader getContentLoader() {
 		return delegate().getContentLoader();
 	}
 
+	@Override
 	public Portal getPortal() {
 		return delegate().getPortal();
 	}
 
+	@Override
 	public UriBuilder getBase() {
 		return delegate().getBase();
 	}
 
+	@Override
 	public UriBuilder getAbsoluteBase() {
 		return delegate().getAbsoluteBase();
 	}
 
+	@Override
 	public URI getURI(Route route) {
 		return delegate().getURI(route);
 	}
 
+	@Override
 	public URI getURI(Route route, Multimap<String, ?> parameters) {
 		return delegate().getURI(route, parameters);
 	}
 	
+	@Override
 	public URI getAbsoluteURI(Route route) {
 		return delegate().getAbsoluteURI(route);
 	}
 
+	@Override
 	public URI getAbsoluteURI(Route route, Multimap<String, ?> parameters) {
 		return delegate().getAbsoluteURI(route, parameters);
 	}
 
+	@Override
 	public URI getURI(FileId file) {
 		return delegate().getURI(file);
 	}
 
+	@Override
 	public URI getURI(FileId file, String name) {
 		return delegate().getURI(file, name);
 	}
 
+	@Override
 	public URI getAbsoluteURI(FileId file) {
 		return delegate().getAbsoluteURI(file);
 	}
 
+	@Override
 	public URI getAbsoluteURI(FileId file, String name) {
 		return delegate().getAbsoluteURI(file, name);
 	}
 
+	@Override
 	public URI getURIByBase(String base, String path) {
 		return delegate().getURIByBase(base, path);
 	}
 
+	@Override
 	public URI getURIByMDBase(String base, String path) {
 		return delegate().getURIByMDBase(base, path);
 	}
 
+	@Override
 	public URI getActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
 		return delegate().getActionURI(from, cipId, name, parameters);
 	}
 
+	@Override
 	public URI getAbsoluteActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
 		return delegate().getAbsoluteActionURI(from, cipId, name, parameters);
 	}
 
+	@Override
 	public URI getURI(PageKey page) {
 		return delegate().getURI(page);
 	}
 	
+	@Override
 	public URI getURI(PageKey page, Multimap<String, ?> parameters) {
 		return delegate().getURI(page, parameters);
 	}
 	
+	@Override
 	public URI getAbsoluteURI(PageKey page) {
 		return delegate().getAbsoluteURI(page);
 	}
 	
+	@Override
 	public URI getAbsoluteURI(PageKey page, Multimap<String, ?> parameters) {
 		return delegate().getAbsoluteURI(page, parameters);
 	}
 
+	@Override
 	public URI getPortalRelativeURI(String path, Multimap<String, ?> parameters) {
 		return delegate().getPortalRelativeURI(path, parameters);
 	}

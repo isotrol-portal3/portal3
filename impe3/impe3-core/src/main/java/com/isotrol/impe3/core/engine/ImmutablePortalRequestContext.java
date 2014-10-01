@@ -21,13 +21,16 @@ package com.isotrol.impe3.core.engine;
 
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.isotrol.impe3.api.support.URIs.queryParameters;
 
 import java.net.URI;
+import java.util.Locale;
 import java.util.UUID;
 
 import javax.ws.rs.core.UriBuilder;
 
 import com.google.common.collect.Multimap;
+import com.isotrol.impe3.api.Device;
 import com.isotrol.impe3.api.FileId;
 import com.isotrol.impe3.api.ModelInfo;
 import com.isotrol.impe3.api.PageKey;
@@ -39,6 +42,7 @@ import com.isotrol.impe3.api.Route;
 import com.isotrol.impe3.api.URIGenerator;
 import com.isotrol.impe3.api.content.ContentLoader;
 import com.isotrol.impe3.api.support.URIs;
+import com.isotrol.impe3.core.support.RouteParams;
 
 
 /**
@@ -46,6 +50,9 @@ import com.isotrol.impe3.api.support.URIs;
  * @author Andres Rodriguez
  */
 class ImmutablePortalRequestContext extends ImmutableRequestContext implements PortalRequestContext {
+	/** Action path segment. */
+	private static final String ACTION = "action";
+	
 	private final ModelInfo modelInfo;
 	private final URIGenerator uriGenerator;
 	private final PrincipalContext principalContext;
@@ -76,78 +83,120 @@ class ImmutablePortalRequestContext extends ImmutableRequestContext implements P
 		}
 	}
 
+	@Override
 	public final UUID getPortalId() {
 		return getPortal().getId();
 	}
 
+	@Override
 	public final ModelInfo getPortalModelInfo() {
 		return modelInfo;
 	}
 
+	@Override
 	public final Portal getPortal() {
 		return uriGenerator.getPortal();
 	}
 
+	@Override
 	public final UriBuilder getBase() {
 		return uriGenerator.getBase();
 	}
 
+	@Override
 	public final UriBuilder getAbsoluteBase() {
 		return uriGenerator.getAbsoluteBase();
 	}
 
+	@Override
 	public final URI getURI(Route route) {
 		return uriGenerator.getURI(route);
 	}
 
+	@Override
 	public final URI getURI(Route route, Multimap<String, ?> parameters) {
 		return uriGenerator.getURI(route, parameters);
 	}
 
+	@Override
 	public final URI getAbsoluteURI(Route route) {
 		return uriGenerator.getAbsoluteURI(route);
 	}
 
+	@Override
 	public final URI getAbsoluteURI(Route route, Multimap<String, ?> parameters) {
 		return uriGenerator.getAbsoluteURI(route, parameters);
 	}
 
+	@Override
 	public final URI getURI(FileId file) {
 		return uriGenerator.getURI(file);
 	}
 
+	@Override
 	public final URI getURI(FileId file, String name) {
 		return uriGenerator.getURI(file, name);
 	}
 
+	@Override
 	public final URI getAbsoluteURI(FileId file) {
 		return uriGenerator.getAbsoluteURI(file);
 	}
 
+	@Override
 	public final URI getAbsoluteURI(FileId file, String name) {
 		return uriGenerator.getAbsoluteURI(file, name);
 	}
 
+	@Override
 	public final URI getURIByBase(String base, String path) {
 		return uriGenerator.getURIByBase(base, path);
 	}
 
+	@Override
 	public final URI getURIByMDBase(String base, String path) {
 		return uriGenerator.getURIByMDBase(base, path);
 	}
+	
+	private URI getActionURI(UriBuilder b, Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
+		checkNotNull(from, "The calling route must be provided");
+		checkNotNull(cipId, "The CIP Id must be provided");
+		checkNotNull(name, "The action name must be provided");
+		final String portalId = getPortalId().toString();
+		final Device d = from.getDevice();
+		final String deviceId = d != null ? d.getStringId() : new UUID(0L, 0L).toString();
+		final Locale l = from.getLocale();
+		final String locale = l != null ? l.toString() : "en";
+		b.segment("-", ACTION, portalId, deviceId, locale, cipId.toString(), name);
+		queryParameters(b, parameters);
+		queryParameters(b, RouteParams.toParams(getCSRFToken(), from));
+		return b.build();
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.isotrol.impe3.api.PortalRequestContext#getActionURI(com.isotrol.impe3.api.Route, java.util.UUID, java.lang.String, com.google.common.collect.Multimap)
+	 */
+	@Override
 	public final URI getActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
-		return uriGenerator.getActionURI(from, cipId, name, parameters);
+		return getActionURI(getBase(), from, cipId, name, parameters);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.isotrol.impe3.api.PortalRequestContext#getAbsoluteActionURI(com.isotrol.impe3.api.Route, java.util.UUID, java.lang.String, com.google.common.collect.Multimap)
+	 */
+	@Override
+	public URI getAbsoluteActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
+		return getActionURI(getAbsoluteBase(), from, cipId, name, parameters);
 	}
 
-	public final URI getAbsoluteActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
-		return uriGenerator.getAbsoluteActionURI(from, cipId, name, parameters);
-	}
-
+	@Override
 	public final PrincipalContext getPrincipalContext() {
 		return principalContext;
 	}
 
+	@Override
 	public ContentLoader getContentLoader() {
 		return contentLoader;
 	}
@@ -156,22 +205,27 @@ class ImmutablePortalRequestContext extends ImmutableRequestContext implements P
 		return Route.of(isSecure(), pageKey, getDevice(), getLocale());
 	}
 
+	@Override
 	public URI getURI(PageKey page) {
 		return getURI(getRoute(page));
 	}
 
+	@Override
 	public URI getURI(PageKey page, Multimap<String, ?> parameters) {
 		return getURI(getRoute(page), parameters);
 	}
 
+	@Override
 	public URI getAbsoluteURI(PageKey page) {
 		return getAbsoluteURI(getRoute(page));
 	}
 
+	@Override
 	public URI getAbsoluteURI(PageKey page, Multimap<String, ?> parameters) {
 		return getAbsoluteURI(getRoute(page), parameters);
 	}
 
+	@Override
 	public URI getPortalRelativeURI(String path, Multimap<String, ?> parameters) {
 		final UriBuilder b = UriBuilder.fromUri(getURI(PageKey.main()));
 		b.path(path);

@@ -19,18 +19,14 @@
 
 package com.isotrol.impe3.api;
 
-
 import java.net.URI;
-import java.util.UUID;
 
 import javax.ws.rs.core.UriBuilder;
 
 import com.google.common.collect.Multimap;
 
-
 /**
- * Interface for an URI generator.
- * URIs Generators only exist inside a portal.
+ * Interface for an URI generator. URIs Generators only exist inside a portal.
  * @author Andres Rodriguez
  */
 public interface URIGenerator {
@@ -39,6 +35,7 @@ public interface URIGenerator {
 	 * @return The portal.
 	 */
 	Portal getPortal();
+
 	/**
 	 * Returns a new URI builder initalized at the portal's routing domain base.
 	 * @return A new URI builder.
@@ -50,7 +47,7 @@ public interface URIGenerator {
 	 * @return A new URI builder.
 	 */
 	UriBuilder getAbsoluteBase();
-	
+
 	/**
 	 * Returns the URI for the specified route.
 	 * @param route Route to convert into an URI.
@@ -80,7 +77,7 @@ public interface URIGenerator {
 	 * @return The URI for the specified route.
 	 */
 	URI getAbsoluteURI(Route route, Multimap<String, ?> parameters);
-	
+
 	/**
 	 * Returns the URI for the specified file.
 	 * @param file File to convert into an URI.
@@ -126,25 +123,5 @@ public interface URIGenerator {
 	 * @return The requested URI {@code null} if the base is not found.
 	 */
 	URI getURIByMDBase(String base, String path);
-
-	/**
-	 * Returns an action URI.
-	 * @param from Calling route.
-	 * @param cipId Component in page Id.
-	 * @param name Action name.
-	 * @param parameters Action query parameters.
-	 * @return The requested URI.
-	 */
-	URI getActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters);
-
-	/**
-	 * Returns an absolute action URI.
-	 * @param from Calling route.
-	 * @param cipId Component in page Id.
-	 * @param name Action name.
-	 * @param parameters Action query parameters.
-	 * @return The requested URI.
-	 */
-	URI getAbsoluteActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters);
 
 }

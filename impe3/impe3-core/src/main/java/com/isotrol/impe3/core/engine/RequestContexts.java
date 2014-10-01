@@ -92,9 +92,9 @@ public final class RequestContexts {
 		return ImmutableHttpRequestContext.EMPTY;
 	}
 
-	public static ImmutableHttpRequestContext http(Request request, boolean secure, Headers headers, Cookies cookies,
+	public static ImmutableHttpRequestContext http(UUID csrfToken, Request request, boolean secure, Headers headers, Cookies cookies,
 		RequestParams requestParams, SessionParams sessionParams) {
-		return new ImmutableHttpRequestContext(request, secure, headers, cookies, requestParams, sessionParams);
+		return new ImmutableHttpRequestContext(csrfToken, request, secure, headers, cookies, requestParams, sessionParams);
 	}
 
 	static ImmutableHttpRequestContext copyOf(HttpRequestContext context) {
@@ -102,7 +102,7 @@ public final class RequestContexts {
 		if (context instanceof ImmutableHttpRequestContext) {
 			return (ImmutableHttpRequestContext) context;
 		}
-		return new ImmutableHttpRequestContext(context.getJAXRSRequest(), context.isSecure(), context.getHeaders(),
+		return new ImmutableHttpRequestContext(context.getCSRFToken(), context.getJAXRSRequest(), context.isSecure(), context.getHeaders(),
 			context.getCookies(), context.getRequestParams(), context.getSessionParams());
 	}
 

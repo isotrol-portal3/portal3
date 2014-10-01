@@ -21,7 +21,6 @@ package com.isotrol.impe3.api.support;
 
 
 import java.net.URI;
-import java.util.UUID;
 
 import javax.ws.rs.core.UriBuilder;
 
@@ -47,6 +46,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getPortal()
 	 */
+	@Override
 	public Portal getPortal() {
 		return delegate().getPortal();
 	}
@@ -54,6 +54,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getBase()
 	 */
+	@Override
 	public UriBuilder getBase() {
 		return delegate().getBase();
 	}
@@ -61,6 +62,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteBase()
 	 */
+	@Override
 	public UriBuilder getAbsoluteBase() {
 		return delegate().getAbsoluteBase();
 	}
@@ -68,6 +70,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURI(com.isotrol.impe3.api.FileId)
 	 */
+	@Override
 	public URI getURI(FileId file) {
 		return delegate().getURI(file);
 	}
@@ -75,6 +78,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteURI(com.isotrol.impe3.api.FileId)
 	 */
+	@Override
 	public URI getAbsoluteURI(FileId file) {
 		return delegate().getAbsoluteURI(file);
 	}
@@ -82,6 +86,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURI(com.isotrol.impe3.api.Route)
 	 */
+	@Override
 	public URI getURI(Route route) {
 		return delegate().getURI(route);
 	}
@@ -89,6 +94,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURI(com.isotrol.impe3.api.Route, com.google.common.collect.Multimap)
 	 */
+	@Override
 	public URI getURI(Route route, Multimap<String, ?> parameters) {
 		return delegate().getURI(route, parameters);
 	}
@@ -96,6 +102,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteURI(com.isotrol.impe3.api.Route)
 	 */
+	@Override
 	public URI getAbsoluteURI(Route route) {
 		return delegate().getAbsoluteURI(route);
 	}
@@ -103,6 +110,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteURI(com.isotrol.impe3.api.Route, com.google.common.collect.Multimap)
 	 */
+	@Override
 	public URI getAbsoluteURI(Route route, Multimap<String, ?> parameters) {
 		return delegate().getAbsoluteURI(route, parameters);
 	}
@@ -110,6 +118,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURI(com.isotrol.impe3.api.FileId, java.lang.String)
 	 */
+	@Override
 	public URI getURI(FileId file, String name) {
 		return delegate().getURI(file, name);
 	}
@@ -117,6 +126,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteURI(com.isotrol.impe3.api.FileId, java.lang.String)
 	 */
+	@Override
 	public URI getAbsoluteURI(FileId file, String name) {
 		return delegate().getAbsoluteURI(file, name);
 	}
@@ -124,6 +134,7 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURIByBase(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public URI getURIByBase(String base, String path) {
 		return delegate().getURIByBase(base, path);
 	}
@@ -131,21 +142,9 @@ public abstract class ForwardingURIGenerator extends ForwardingObject implements
 	/**
 	 * @see com.isotrol.impe3.api.URIGenerator#getURIByMDBase(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public URI getURIByMDBase(String base, String path) {
 		return delegate().getURIByMDBase(base, path);
 	}
-	
-	/**
-	 * @see com.isotrol.impe3.api.URIGenerator#getActionURI(com.isotrol.impe3.api.Route, java.util.UUID, java.lang.String, com.google.common.collect.Multimap)
-	 */
-	public URI getActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
-		return delegate().getActionURI(from, cipId, name, parameters);
-	}
-	
-	/**
-	 * @see com.isotrol.impe3.api.URIGenerator#getAbsoluteActionURI(com.isotrol.impe3.api.Route, java.util.UUID, java.lang.String, com.google.common.collect.Multimap)
-	 */
-	public URI getAbsoluteActionURI(Route from, UUID cipId, String name, Multimap<String, Object> parameters) {
-		return delegate().getAbsoluteActionURI(from, cipId, name, parameters);
-	}
+
 }

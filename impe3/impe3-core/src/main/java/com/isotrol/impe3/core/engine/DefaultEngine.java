@@ -145,6 +145,7 @@ public abstract class DefaultEngine implements Engine {
 		// 1 - Portal resolution
 		final ResolvedPortal resolvedPortal = getPortal(path, headers, request);
 		final PortalModel portalModel = resolvedPortal.getPortalModel();
+		final Portal portal = portalModel.getPortal();
 		// 2 - Device resolution
 		final DeviceCapabilities caps = getDeviceCapabilities(portalModel, headers);
 		final DeviceResolutionParams deviceParams = new DeviceResolutionParams(headers, request,
@@ -152,17 +153,16 @@ public abstract class DefaultEngine implements Engine {
 			resolvedPortal.getParameters(), model.getDevices(), caps);
 		final ResolvedDevice resolvedDevice = getDevice(portalModel, deviceParams);
 		if (!resolvedDevice.isNormal()) {
-			return new PageResponse(resolvedDevice.getResponse(), ImmutableMap.<String, Object> of());
+			return new PageResponse(portal, resolvedDevice.getResponse(), ImmutableMap.<String, Object> of());
 		}
 		// 3 - Locale resolution
 		final LocaleResolutionParams localeParams = new LocaleResolutionParams(deviceParams, resolvedDevice);
 		final ResolvedLocale resolvedLocale = getLocale(portalModel, localeParams);
 		if (!resolvedLocale.isNormal()) {
-			return new PageResponse(resolvedLocale.getResponse(), ImmutableMap.<String, Object> of());
+			return new PageResponse(portal, resolvedLocale.getResponse(), ImmutableMap.<String, Object> of());
 		}
 		// 4 - Page resolution
 		// 4.1 - Context building
-		final Portal portal = portalModel.getPortal();
 		final UUID portalId = portal.getId();
 		final PrincipalContext pc = principalContextBuilder.apply(portalId);
 		final Device device = resolvedDevice.getDevice();
@@ -175,7 +175,7 @@ public abstract class DefaultEngine implements Engine {
 			portalRequestContext);
 		final ResolvedPage resolvedPage = getPage(portalModel, pageParams);
 		if (!resolvedPage.isNormal()) {
-			return new PageResponse(resolvedPage.getResponse(), ImmutableMap.<String, Object> of());
+			return new PageResponse(portal, resolvedPage.getResponse(), ImmutableMap.<String, Object> of());
 		}
 		final PageContext pageContext = getPageContext(portalModel, portalRequestContext, resolvedPage);
 		if (pageContext == null) {
@@ -310,6 +310,7 @@ public abstract class DefaultEngine implements Engine {
 		}
 		final PageRequestContext context = pageContext.getContext();
 		final PortalModel model = pageContext.getPortalModel();
+		final Portal portal = model.getPortal();
 		try {
 			final PageInstance pi = new PageInstance(pageContext);
 			// Run the page
@@ -348,7 +349,7 @@ public abstract class DefaultEngine implements Engine {
 				if (logger.isTraceEnabled()) {
 					logger.trace("External redirection requested");
 				}
-				return new PageResponse(((External) cr).getResponse(), pr.getSession());
+				return new PageResponse(portal, ((External) cr).getResponse(), pr.getSession());
 			}
 			// Internal redirection
 			if (logger.isTraceEnabled()) {
@@ -385,7 +386,7 @@ public abstract class DefaultEngine implements Engine {
 		ok.apply(rb);
 		// Render response
 		final Response response = getRenderingEngine(pi).render(pi, ok, rb);
-		return new PageResponse(response, ok.getSession());
+		return new PageResponse(model.getPortal(), response, ok.getSession());
 	}
 
 	/**
@@ -396,9 +397,10 @@ public abstract class DefaultEngine implements Engine {
 	public Object getAction(UUID portalId, UUID deviceId, Locale locale, UUID cipId, String name, HttpHeaders headers,
 		HttpRequestContext request, MultivaluedMap<String, String> query) {
 		final PortalModel portalModel = actionFound(model.getPortal(portalId), "Portal not found");
+		final Portal portal = portalModel.getPortal();
 		final Device device = actionFound(model.getDevices().get(deviceId), "Device not found");
 		final CIP cip = actionFound(portalModel.getPages().getCIP(cipId), "CIP not found");
-		final Route route = actionFound(RouteParams.fromParams(portalModel.getPortal(), model.getDevices(), query),
+		final Route route = actionFound(RouteParams.fromParams(portal, model.getDevices(), query),
 			"Invalid source route");
 		final PrincipalContext principalContext = principalContextBuilder.apply(portalId);
 		// TODO
@@ -407,7 +409,12 @@ public abstract class DefaultEngine implements Engine {
 		final PortalRequestContext portalRequestContext = RequestContexts.portal(portalModel.getModelInfo(), rc,
 			portalModel.getURIGenerator(), principalContext, portalModel.getContentLoader(crc));
 		final ActionContext context = RequestContexts.action(portalRequestContext, name, cipId, route);
-		return actionFound(cip.getAction(context), "Action not found");
+		final Object action = actionFound(cip.getAction(context), "Action not found");
+		// Check CSRF token
+		if (portal.isSessionCSRF()) {
+			actionFound(request.getCSRFToken().equals(RouteParams.getSessionCSRF(query)), "Invalid CSRF token");
+		}
+		return action;
 	}
 
 	public final PageResponse processActionException(UUID portalId, UUID deviceId, Locale locale, HttpHeaders headers,

@@ -19,12 +19,12 @@
 
 package com.isotrol.impe3.core.support;
 
-
 import java.util.Locale;
 import java.util.UUID;
 
 import javax.ws.rs.core.MultivaluedMap;
 
+import net.derquinse.common.uuid.UUIDs;
 import net.sf.derquinsej.i18n.Locales;
 
 import org.springframework.util.StringUtils;
@@ -49,7 +49,6 @@ import com.isotrol.impe3.api.PageKey.WithNavigation;
 import com.isotrol.impe3.api.Portal;
 import com.isotrol.impe3.api.Route;
 
-
 /**
  * Page key to Action Parameters support.
  * @author Andres Rodriguez.
@@ -70,6 +69,7 @@ public final class RouteParams {
 	private static final String CONTENT_ID = "i3id";
 	private static final String DEVICE = "i3d";
 	private static final String LOCALE = "i3l";
+	private static final String SESSIONCSRF = "i3csrf";
 
 	private static final String TYPE_M = "M";
 	private static final String TYPE_S = "S";
@@ -77,7 +77,7 @@ public final class RouteParams {
 	private static final String TYPE_L = "L";
 	private static final String TYPE_C = "C";
 
-	public static Multimap<String, String> toParams(Route route) {
+	public static Multimap<String, String> toParams(UUID csrfToken, Route route) {
 		if (route == null) {
 			return ImmutableMultimap.of();
 		}
@@ -127,6 +127,9 @@ public final class RouteParams {
 		if (device != null) {
 			p.put(DEVICE, device.getId().toString());
 		}
+		if (csrfToken != null) {
+			p.put(SESSIONCSRF, csrfToken.toString());
+		}
 		return p;
 	}
 
@@ -174,15 +177,26 @@ public final class RouteParams {
 			try {
 				UUID uuid = UUID.fromString(d);
 				device = devices.get(uuid);
-			} catch (IllegalArgumentException e) {}
+			} catch (IllegalArgumentException e) {
+			}
 		}
 		String l = p.getFirst(LOCALE);
 		if (StringUtils.hasText(l)) {
 			try {
 				locale = Locales.fromString(l);
-			} catch (IllegalArgumentException e) {}
+			} catch (IllegalArgumentException e) {
+			}
 		}
 		return Route.of(p.containsKey(SECURE), key, device, locale);
+	}
+
+	/**
+	 * Gets the session CSRF param from an action query parameters.
+	 * @param p Query parameters.
+	 * @return The recovered token or {@code null} if no valid token is found.
+	 */
+	public static UUID getSessionCSRF(MultivaluedMap<String, String> p) {
+		return UUIDs.safeFromString(p.getFirst(SESSIONCSRF));
 	}
 
 	private static NavigationKey getNavigation(Portal portal, MultivaluedMap<String, String> p, boolean withContentType) {

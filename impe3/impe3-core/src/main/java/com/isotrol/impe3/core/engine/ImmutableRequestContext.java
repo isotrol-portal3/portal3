@@ -21,6 +21,7 @@ package com.isotrol.impe3.core.engine;
 
 
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.ws.rs.core.Request;
 
@@ -59,38 +60,52 @@ class ImmutableRequestContext implements RequestContext {
 		}
 	}
 
+	@Override
 	public final Device getDevice() {
 		return clientContext.getDevice();
 	}
 
+	@Override
 	public final DeviceCapabilities getDeviceCapabilities() {
 		return clientContext.getDeviceCapabilities();
 	}
 
+	@Override
 	public final Locale getLocale() {
 		return clientContext.getLocale();
 	}
+	
+	@Override
+	public final UUID getCSRFToken() {
+		return httpContext.getCSRFToken();
+	}
 
+	@Override
 	public final Request getJAXRSRequest() {
 		return httpContext.getJAXRSRequest();
 	}
 
+	@Override
 	public final boolean isSecure() {
 		return httpContext.isSecure();
 	}
 
+	@Override
 	public final Headers getHeaders() {
 		return httpContext.getHeaders();
 	}
 
+	@Override
 	public final Cookies getCookies() {
 		return httpContext.getCookies();
 	}
 
+	@Override
 	public final RequestParams getRequestParams() {
 		return httpContext.getRequestParams();
 	}
 
+	@Override
 	public final SessionParams getSessionParams() {
 		return httpContext.getSessionParams();
 	}

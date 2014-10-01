@@ -22,6 +22,8 @@ package com.isotrol.impe3.core.engine;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.UUID;
+
 import javax.ws.rs.core.Request;
 
 import net.sf.derquinsej.Proxies;
@@ -42,6 +44,7 @@ import com.isotrol.impe3.core.impl.SessionParamsFactory;
  * @author Andres Rodriguez
  */
 final class ImmutableHttpRequestContext implements HttpRequestContext {
+	private final UUID csrfToken;
 	private final Request request;
 	private final boolean secure;
 	private final Headers headers;
@@ -52,6 +55,7 @@ final class ImmutableHttpRequestContext implements HttpRequestContext {
 	static final ImmutableHttpRequestContext EMPTY = new ImmutableHttpRequestContext();
 
 	private ImmutableHttpRequestContext() {
+		this.csrfToken = UUID.randomUUID();
 		this.request = Proxies.alwaysNull(Request.class);
 		this.secure = false;
 		this.headers = HeadersFactory.of();
@@ -60,8 +64,9 @@ final class ImmutableHttpRequestContext implements HttpRequestContext {
 		this.sessionParams = SessionParamsFactory.of();
 	}
 
-	ImmutableHttpRequestContext(Request request, boolean secure, Headers headers, Cookies cookies,
+	ImmutableHttpRequestContext(UUID csrfToken, Request request, boolean secure, Headers headers, Cookies cookies,
 		RequestParams requestParams, SessionParams sessionParams) {
+		this.csrfToken = checkNotNull(csrfToken);
 		this.request = checkNotNull(request);
 		this.secure = secure;
 		this.headers = checkNotNull(headers);
@@ -69,27 +74,38 @@ final class ImmutableHttpRequestContext implements HttpRequestContext {
 		this.requestParams = checkNotNull(requestParams);
 		this.sessionParams = checkNotNull(sessionParams);
 	}
+	
+	@Override
+	public UUID getCSRFToken() {
+		return csrfToken;
+	}
 
+	@Override
 	public Request getJAXRSRequest() {
 		return request;
 	}
 
+	@Override
 	public boolean isSecure() {
 		return secure;
 	}
 
+	@Override
 	public Headers getHeaders() {
 		return headers;
 	}
 
+	@Override
 	public Cookies getCookies() {
 		return cookies;
 	}
 
+	@Override
 	public RequestParams getRequestParams() {
 		return requestParams;
 	}
 
+	@Override
 	public SessionParams getSessionParams() {
 		return sessionParams;
 	}

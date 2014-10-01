@@ -19,6 +19,8 @@
 
 package com.isotrol.impe3.api;
 
+import java.util.UUID;
+
 import javax.ws.rs.core.Request;
 
 
@@ -27,6 +29,9 @@ import javax.ws.rs.core.Request;
  * @author Andres Rodriguez
  */
 public interface HttpRequestContext {
+	/** Returns the CSRF Token. */
+	UUID getCSRFToken();
+	
 	/** Returns the JAX-RS Request .*/
 	Request getJAXRSRequest();
 	

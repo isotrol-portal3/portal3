@@ -30,6 +30,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MultivaluedMap;
 
+import net.sf.derquinsej.uuid.UUIDGenerator;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -53,8 +55,12 @@ import com.sun.jersey.spi.inject.Inject;
 
 /**
  * Base class for IMPE JAX-RS resources.
+ * All resources must be prototypes, that is, per request.
  */
 public abstract class AbstractResource {
+	/** Session key used for Session CSRF support. */
+	private static final String SK_SESSIONCSRF = "impe3:sessionCSRF";
+
 	@Context
 	private ServletConfig servletConfig;
 	@Context
@@ -63,6 +69,12 @@ public abstract class AbstractResource {
 	private FileLoader fileLoader;
 	@Inject
 	private EngineModelLoader loader;
+	@Inject
+	private UUIDGenerator uuidGenerator;
+	
+	/** CSRF Token. Assumes all resources are prototypes. */
+	private UUID csrfToken = null;
+	
 	final Logger logger = Loggers.page();
 
 	public AbstractResource() {
@@ -71,6 +83,30 @@ public abstract class AbstractResource {
 	protected final HttpSession getSession() {
 		return servletRequest.getSession();
 	}
+	
+	/** Gets the CSRF token from the session, creating one (but not saving it) if needed. */
+	protected final UUID getCSRFToken() {
+		// Assumes resources are prototypes
+		if (csrfToken == null) {
+			Object o = getSession().getAttribute(SK_SESSIONCSRF);
+			if (o instanceof UUID) {
+				csrfToken = (UUID)o;
+			} else {
+				csrfToken = uuidGenerator.get();
+			}
+		}
+		return csrfToken;
+	}
+	
+	/** Saves the CSRF token from the session if the stored value is different from the current one. */
+	protected final void saveCSRFToken() {
+		final UUID token = getCSRFToken();
+		final Object current = getSession().getAttribute(SK_SESSIONCSRF);
+		if (!token.equals(current)) {
+			getSession().setAttribute(SK_SESSIONCSRF, token);
+		}
+	}
+	
 
 	protected final boolean isOnline() {
 		return "ONLINE".equals(servletConfig.getInitParameter("impe.mode"));

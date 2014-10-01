@@ -21,6 +21,7 @@ package com.isotrol.impe3.api.support;
 
 
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.ws.rs.core.Request;
 
@@ -45,38 +46,52 @@ public abstract class ForwardingRequestContext extends ForwardingObject implemen
 
 	protected abstract RequestContext delegate();
 
+	@Override
+	public UUID getCSRFToken() {
+		return delegate().getCSRFToken();
+	}
+	
+	@Override
 	public Request getJAXRSRequest() {
 		return delegate().getJAXRSRequest();
 	}
 
+	@Override
 	public boolean isSecure() {
 		return delegate().isSecure();
 	}
 
+	@Override
 	public Headers getHeaders() {
 		return delegate().getHeaders();
 	}
 
+	@Override
 	public Cookies getCookies() {
 		return delegate().getCookies();
 	}
 
+	@Override
 	public RequestParams getRequestParams() {
 		return delegate().getRequestParams();
 	}
 
+	@Override
 	public Device getDevice() {
 		return delegate().getDevice();
 	}
 
+	@Override
 	public DeviceCapabilities getDeviceCapabilities() {
 		return delegate().getDeviceCapabilities();
 	}
 
+	@Override
 	public Locale getLocale() {
 		return delegate().getLocale();
 	}
 
+	@Override
 	public SessionParams getSessionParams() {
 		return delegate().getSessionParams();
 	}
