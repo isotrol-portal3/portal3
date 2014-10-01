@@ -52,6 +52,7 @@ import com.isotrol.impe3.api.DeviceRouter;
 import com.isotrol.impe3.api.DeviceType;
 import com.isotrol.impe3.api.HttpRequestContext;
 import com.isotrol.impe3.api.LocaleResolutionParams;
+import com.isotrol.impe3.api.NoCSRFCheck;
 import com.isotrol.impe3.api.NotFoundPortalException;
 import com.isotrol.impe3.api.PageKey;
 import com.isotrol.impe3.api.PageRequestContext;
@@ -411,7 +412,7 @@ public abstract class DefaultEngine implements Engine {
 		final ActionContext context = RequestContexts.action(portalRequestContext, name, cipId, route);
 		final Object action = actionFound(cip.getAction(context), "Action not found");
 		// Check CSRF token
-		if (portal.isSessionCSRF()) {
+		if (portal.isSessionCSRF() && !action.getClass().isAnnotationPresent(NoCSRFCheck.class)) {
 			actionFound(request.getCSRFToken().equals(RouteParams.getSessionCSRF(query)), "Invalid CSRF token");
 		}
 		return action;
