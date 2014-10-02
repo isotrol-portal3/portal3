@@ -20,6 +20,7 @@
 package com.isotrol.impe3.core.engine;
 
 
+import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.net.URI;
@@ -28,7 +29,6 @@ import java.util.UUID;
 
 import javax.xml.transform.Source;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
 import com.isotrol.impe3.api.ContentKey;
@@ -84,7 +84,7 @@ public final class ImmutableComponentRequestContext extends ImmutablePageRequest
 		this.templateModel = templateModel;
 		this.tag = tag;
 		this.source = source;
-		this.criteriaTransformer = Objects.firstNonNull(criteriaTransformer, ContentCriteriaTransformer.identity());
+		this.criteriaTransformer = firstNonNull(criteriaTransformer, ContentCriteriaTransformer.identity());
 		this.contentLoader = TransformerContentLoader.transform(context.getContentLoader(), this.criteriaTransformer);
 	}
 

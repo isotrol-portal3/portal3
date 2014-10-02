@@ -38,9 +38,8 @@ import com.isotrol.impe3.web20.api.MembershipSelFilterDTO;
  */
 public class MembersRemoteServiceImpl extends WithHessian<MembersService> implements MembersService {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<MembersService> serviceClass() {
 		return MembersService.class;
 	}
 

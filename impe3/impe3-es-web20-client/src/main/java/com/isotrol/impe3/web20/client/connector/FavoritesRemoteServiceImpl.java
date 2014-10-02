@@ -30,9 +30,8 @@ import com.isotrol.impe3.web20.api.FavoritesService;
  */
 public class FavoritesRemoteServiceImpl extends WithHessian<FavoritesService> implements FavoritesService  {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<FavoritesService> serviceClass() {
 		return FavoritesService.class;
 	}
 	

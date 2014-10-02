@@ -37,9 +37,8 @@ import com.isotrol.impe3.web20.api.ResourceCounterDTO;
  */
 public class CommentsRemoteServiceImpl extends WithHessian<CommentsService> implements CommentsService  {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<CommentsService> serviceClass() {
 		return CommentsService.class;
 	}
 	

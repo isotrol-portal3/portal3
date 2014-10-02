@@ -33,9 +33,8 @@ import com.isotrol.impe3.web20.api.MigrationService;
  */
 public class MigrationRemoteServiceImpl extends WithHessian<MigrationService> implements MigrationService {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<MigrationService> serviceClass() {
 		return MigrationService.class;
 	}
 

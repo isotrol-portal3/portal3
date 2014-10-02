@@ -116,7 +116,7 @@ public abstract class NamedIdentifiable extends AbstractIdentifiable {
 		private void checkBuilder() {
 			Preconditions.checkState(mechanism != Mechanism.DIRECT);
 			if (nameBuilder == null) {
-				nameBuilder = new LocalizedBuilder<Name>();
+				nameBuilder = LocalizedBuilder.create();
 			}
 			mechanism = Mechanism.BUILDER;
 		}

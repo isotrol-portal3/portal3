@@ -20,6 +20,7 @@
 package com.isotrol.impe3.api.content;
 
 
+import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Map;
@@ -29,7 +30,6 @@ import net.sf.derquinse.lucis.GroupResult;
 
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
-import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
 
 
@@ -96,6 +96,6 @@ public final class OneLevelGroupResult<T> implements Function<T, Integer> {
 		if (input == null) {
 			return 0;
 		}
-		return Objects.firstNonNull(map.get(input), 0);
+		return firstNonNull(map.get(input), 0);
 	}
 }

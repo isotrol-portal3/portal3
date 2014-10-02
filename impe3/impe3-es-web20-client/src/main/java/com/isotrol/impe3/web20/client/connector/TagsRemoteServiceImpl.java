@@ -34,9 +34,8 @@ import com.isotrol.impe3.web20.api.UsedTagDTO;
  */
 public class TagsRemoteServiceImpl extends WithHessian<TagsService> implements TagsService {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<TagsService> serviceClass() {
 		return TagsService.class;
 	}
 

@@ -20,6 +20,7 @@
 package com.isotrol.impe3.core.config;
 
 
+import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -40,7 +41,6 @@ import net.sf.derquinsej.Methods;
 import net.sf.derquinsej.i18n.Localized;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -265,7 +265,7 @@ public final class ConfigurationDefinition<T extends Configuration> extends Defi
 				this.compressed = false;
 			}
 			if (String.class.equals(klass) && m.isAnnotationPresent(StringStyle.class)) {
-				this.stringStyle = Objects.firstNonNull(m.getAnnotation(StringStyle.class).value(), StringItemStyle.NORMAL);
+				this.stringStyle = firstNonNull(m.getAnnotation(StringStyle.class).value(), StringItemStyle.NORMAL);
 			} else {
 				this.stringStyle = StringItemStyle.NORMAL;
 			}

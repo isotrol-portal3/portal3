@@ -34,9 +34,8 @@ import com.isotrol.impe3.web20.api.ResourceCounterDTO;
  */
 public class CountersRemoteServiceImpl extends WithHessian<CountersService> implements CountersService {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<CountersService> serviceClass() {
 		return CountersService.class;
 	}
 

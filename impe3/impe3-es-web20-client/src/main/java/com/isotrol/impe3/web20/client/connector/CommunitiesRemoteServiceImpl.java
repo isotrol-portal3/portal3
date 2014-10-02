@@ -40,9 +40,8 @@ import com.isotrol.impe3.web20.api.MemberFilterDTO;
  */
 public class CommunitiesRemoteServiceImpl extends WithHessian<CommunitiesService> implements CommunitiesService {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<CommunitiesService> serviceClass() {
 		return CommunitiesService.class;
 	}
 

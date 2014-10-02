@@ -37,7 +37,7 @@ import com.isotrol.impe3.web20.api.ResourceRatingDTO;
 public class RatingsRemoteServiceImpl extends WithHessian<RatingsService> implements RatingsService {
 
 	@Override
-	protected Class<?> serviceClass() {
+	protected Class<RatingsService> serviceClass() {
 		return RatingsService.class;
 	}
 

@@ -30,9 +30,8 @@ import com.isotrol.impe3.web20.api.NoticeFilterDTO;
  */
 public class CommunityNoticesRemoteServiceImpl extends WithHessian<CommunityNoticesService> implements CommunityNoticesService  {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<CommunityNoticesService> serviceClass() {
 		return CommunityNoticesService.class;
 	}
 	

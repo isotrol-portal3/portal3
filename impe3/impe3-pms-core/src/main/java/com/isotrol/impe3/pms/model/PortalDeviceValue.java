@@ -20,8 +20,8 @@
 package com.isotrol.impe3.pms.model;
 
 
+import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.firstNonNull;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

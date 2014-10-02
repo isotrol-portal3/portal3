@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>impe3-maven</artifactId>
 		<groupId>com.isotrol.impe3.maven</groupId>
-		<version>3.0.0</version>
+		<version>3.0.2</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.isotrol.impe3</groupId>
@@ -19,10 +19,6 @@
 		<url>http://code.google.com/p/isotrol-portal/source/browse/?repo=p3</url>
 		<tag>HEAD</tag>
 	</scm>
-
-	<properties>
-		<externalApiVersion>3.0.0</externalApiVersion>
-	</properties>
 
 	<build>
 		<plugins>
@@ -189,7 +185,7 @@
 							<links>
 								<link>http://jsr311.java.net/nonav/releases/1.1</link>
 								<link>http://jersey.java.net/nonav/apidocs/1.2/jersey</link>
-								<link>http://docs.guava-libraries.googlecode.com/git-history/v13.0/javadoc/</link>
+								<link>http://docs.guava-libraries.googlecode.com/git-history/v18.0/javadoc/</link>
 							</links>
 							<version>false</version>
 							<doctitle>Port@l API (version ${project.version})</doctitle>

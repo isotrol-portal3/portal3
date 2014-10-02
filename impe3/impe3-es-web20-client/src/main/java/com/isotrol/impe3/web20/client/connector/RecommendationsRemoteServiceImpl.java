@@ -34,9 +34,8 @@ import com.isotrol.impe3.web20.api.RecommendationsService;
 public class RecommendationsRemoteServiceImpl extends WithHessian<RecommendationsService> implements
 	RecommendationsService {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<RecommendationsService> serviceClass() {
 		return RecommendationsService.class;
 	}
 

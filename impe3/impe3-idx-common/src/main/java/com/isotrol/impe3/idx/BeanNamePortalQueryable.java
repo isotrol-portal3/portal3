@@ -20,9 +20,9 @@
 package com.isotrol.impe3.idx;
 
 
-import org.springframework.beans.factory.BeanNameAware;
+import static com.google.common.base.MoreObjects.firstNonNull;
 
-import com.google.common.base.Objects;
+import org.springframework.beans.factory.BeanNameAware;
 
 
 /**
@@ -61,6 +61,6 @@ public abstract class BeanNamePortalQueryable implements PortalQueryable, BeanNa
 	 * @see com.isotrol.impe3.idx.PortalIndexer#getDescription()
 	 */
 	public String getDescription() {
-		return Objects.firstNonNull(description, name);
+		return firstNonNull(description, name);
 	}
 }

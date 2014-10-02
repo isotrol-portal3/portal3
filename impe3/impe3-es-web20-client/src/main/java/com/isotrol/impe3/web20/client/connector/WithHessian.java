@@ -28,7 +28,7 @@ import com.isotrol.impe3.web20.api.Web20Service;
  * 
  * @author Emilio Escobar Reyero
  */
-public abstract class WithHessian <T extends Web20Service> extends ForwardingObject {
+public abstract class WithHessian<T extends Web20Service> extends ForwardingObject {
 
 	private Web20ConnectorConfig config;
 	private T service;
@@ -39,21 +39,17 @@ public abstract class WithHessian <T extends Web20Service> extends ForwardingObj
 		return service;
 	}
 	
-	protected abstract Class serviceClass();
+	protected abstract Class<T> serviceClass();
 	protected abstract String serviceUrl();
 	
 	public void init() throws MalformedURLException {
 		final HessianProxyFactory factory = new HessianProxyFactory();
 		factory.setHessian2Reply(true);
 		factory.setHessian2Request(true);
-		service = (T)factory.create(serviceClass(), serviceUrl());
+		@SuppressWarnings("unchecked")
+		final T s = (T)factory.create(serviceClass(), serviceUrl());
+		this.service = s;
 	}
-	
-	/*
-	protected T service() {
-		return service;
-	}
-	*/
 	
 	public String server() {
 		return config.serverUrl();

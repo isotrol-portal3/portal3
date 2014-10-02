@@ -20,9 +20,10 @@
 package com.isotrol.impe3.connectors.locale;
 
 
+import static com.google.common.base.MoreObjects.firstNonNull;
+
 import java.util.Locale;
 
-import com.google.common.base.Objects;
 import com.isotrol.impe3.api.LocaleResolutionParams;
 import com.isotrol.impe3.api.LocaleResolver;
 import com.isotrol.impe3.api.ResolvedLocale;
@@ -43,7 +44,7 @@ public class PortalDefaultLocaleResolver implements LocaleResolver {
 	 */
 	public ResolvedLocale resolveLocale(LocaleResolutionParams params) {
 		Locale locale = params.getPortal().getDefaultLocale();
-		return new ResolvedLocale(params.getPath(), Objects.firstNonNull(locale, SPANISH), params.getParameters());
+		return new ResolvedLocale(params.getPath(), firstNonNull(locale, SPANISH), params.getParameters());
 	}
 
 }

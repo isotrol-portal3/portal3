@@ -20,6 +20,7 @@
 package com.isotrol.impe3.idx.config;
 
 
+import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.base.Preconditions.checkNotNull;
 import net.sf.lucis.core.Delays;
 import net.sf.lucis.core.Factory;
@@ -32,7 +33,6 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Supplier;
 
 
@@ -63,7 +63,7 @@ abstract class AbstractIndexServiceFactoryBean implements FactoryBean<IndexerSer
 	}
 
 	public final void setBeanName(String name) {
-		this.name = Objects.firstNonNull(name, "IndexService");
+		this.name = firstNonNull(name, "IndexService");
 	}
 
 	final Analyzer getAnalyzer() {

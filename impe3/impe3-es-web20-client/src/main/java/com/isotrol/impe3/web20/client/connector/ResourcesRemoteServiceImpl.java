@@ -27,9 +27,8 @@ import com.isotrol.impe3.web20.api.ResourcesService;
  */
 public class ResourcesRemoteServiceImpl extends WithHessian<ResourcesService> implements ResourcesService {
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected Class serviceClass() {
+	protected Class<ResourcesService> serviceClass() {
 		return ResourcesService.class;
 	}
 	
