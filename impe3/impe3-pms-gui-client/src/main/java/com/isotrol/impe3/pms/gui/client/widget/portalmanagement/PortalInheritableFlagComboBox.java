@@ -22,21 +22,31 @@
  */
 package com.isotrol.impe3.pms.gui.client.widget.portalmanagement;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
+import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.ComboBox;
+import com.isotrol.impe3.gui.common.data.DTOModelData;
 import com.isotrol.impe3.pms.api.portal.PortalInheritableFlag;
-import com.isotrol.impe3.pms.gui.client.data.impl.PortalInheritableFlagModelData;
 import com.isotrol.impe3.pms.gui.client.i18n.PmsMessages;
 
 /**
- * Combo bos used for {@link PortalInheritableFlag}
+ * Combo box used for {@link PortalInheritableFlag}
  * @author Andres Rodriguez
  */
-public final class PortalInheritableFlagComboBox extends ComboBox<PortalInheritableFlagModelData> {
+public final class PortalInheritableFlagComboBox extends ComboBox<PortalInheritableFlagComboBox.Model> {
+	/** Key property. */
+	private static final String KEY = "key";
+	/** Display name property. */
+	private static final String DISPLAY_NAME = "displayName";
+	/** Properties collection. */
+	private static final Set<String> PROPERTIES = DTOModelData.propertySet(KEY, DISPLAY_NAME);
+
 	/** Display names map. */
 	private final Map<PortalInheritableFlag, String> map;
 
@@ -53,21 +63,17 @@ public final class PortalInheritableFlagComboBox extends ComboBox<PortalInherita
 		this.map = Collections.unmodifiableMap(m);
 		setFieldLabel(label);
 		setTriggerAction(TriggerAction.ALL);
-		setDisplayField(PortalInheritableFlagModelData.DISPLAY_NAME);
+		setDisplayField(DISPLAY_NAME);
 		setEditable(false);
 		setAllowBlank(false);
 		setStore(newStore());
 	}
 
-	private PortalInheritableFlagModelData newModel(PortalInheritableFlag value) {
-		return new PortalInheritableFlagModelData(map, value);
-	}
-
-	private ListStore<PortalInheritableFlagModelData> newStore() {
-		final ListStore<PortalInheritableFlagModelData> store = new ListStore<PortalInheritableFlagModelData>();
-		store.add(newModel(PortalInheritableFlag.INHERIT));
-		store.add(newModel(PortalInheritableFlag.ON));
-		store.add(newModel(PortalInheritableFlag.OFF));
+	private ListStore<Model> newStore() {
+		final ListStore<Model> store = new ListStore<Model>();
+		store.add(new Model(PortalInheritableFlag.INHERIT));
+		store.add(new Model(PortalInheritableFlag.ON));
+		store.add(new Model(PortalInheritableFlag.OFF));
 		return store;
 	}
 
@@ -75,11 +81,101 @@ public final class PortalInheritableFlagComboBox extends ComboBox<PortalInherita
 		if (value == null) {
 			value = PortalInheritableFlag.INHERIT;
 		}
-		setValue(getStore().findModel(PortalInheritableFlagModelData.KEY, value));
+		setValue(getStore().findModel(KEY, value));
 	}
 
 	public PortalInheritableFlag getFlagValue() {
 		return getValue().getValue();
 	}
+	
+	/**
+	 * ModelData for {@link PortalInheritableFlag}
+	 * @author Andres Rodriguez
+	 */
+	final class Model implements ModelData {
+		/** Current value. */
+		private PortalInheritableFlag value;
+
+		/**
+		 * Constructor
+		 * @param value Initial value.
+		 */
+		Model(PortalInheritableFlag value) {
+			this.value = value != null ? value : PortalInheritableFlag.INHERIT;
+		}
+
+		/** Returns the display name for the provided value. */
+		private String getDisplayName(PortalInheritableFlag value) {
+			if (value == null) {
+				value = PortalInheritableFlag.INHERIT;
+			}
+			return map.get(value);
+		}
+
+		/** Returns the display name for the current value. */
+		private String getDisplayName() {
+			return getDisplayName(value);
+		}
+		
+		/** Returns the flag value. */
+		PortalInheritableFlag getValue() {
+			return value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see com.extjs.gxt.ui.client.data.ModelData#get(java.lang.String)
+		 */
+		@Override
+		@SuppressWarnings("unchecked")
+		public <X> X get(String property) {
+			if (KEY.equals(property)) {
+				return (X) value;
+			} else if (DISPLAY_NAME.equals(property)) {
+				return (X) getDisplayName();
+			}
+			throw new IllegalArgumentException("Invalid property");
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see com.extjs.gxt.ui.client.data.ModelData#getProperties()
+		 */
+		@Override
+		public Map<String, Object> getProperties() {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put(KEY, value);
+			map.put(DISPLAY_NAME, getDisplayName());
+			return map;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see com.extjs.gxt.ui.client.data.ModelData#getPropertyNames()
+		 */
+		@Override
+		public Collection<String> getPropertyNames() {
+			return PROPERTIES;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see com.extjs.gxt.ui.client.data.ModelData#remove(java.lang.String)
+		 */
+		@Override
+		public <X> X remove(String property) {
+			throw new UnsupportedOperationException();
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see com.extjs.gxt.ui.client.data.ModelData#set(java.lang.String, java.lang.Object)
+		 */
+		@Override
+		public <X> X set(String property, X value) {
+			throw new UnsupportedOperationException();
+		}
+	}
+	
 
 }

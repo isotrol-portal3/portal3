@@ -65,8 +65,6 @@ import com.isotrol.impe3.pms.api.portal.PortalTemplateDTO;
 import com.isotrol.impe3.pms.api.rd.RoutingDomainSelDTO;
 import com.isotrol.impe3.pms.gui.api.service.IPortalsServiceAsync;
 import com.isotrol.impe3.pms.gui.client.controllers.PortalsController;
-import com.isotrol.impe3.pms.gui.client.data.impl.PortalInheritableFlagModelData;
-import com.isotrol.impe3.pms.gui.client.data.impl.PortalInheritableFlagModelDataFactory;
 import com.isotrol.impe3.pms.gui.client.data.impl.ProviderModelData;
 import com.isotrol.impe3.pms.gui.client.data.impl.RoutingDomainSelModelData;
 import com.isotrol.impe3.pms.gui.client.error.PortalsServiceErrorMessageResolver;
