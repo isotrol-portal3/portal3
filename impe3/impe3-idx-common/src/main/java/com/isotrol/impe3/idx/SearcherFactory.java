@@ -21,20 +21,20 @@ package com.isotrol.impe3.idx;
 
 import java.util.List;
 
+import net.sf.lucis.core.DirectoryProvider;
+import net.sf.lucis.core.Queryable;
+import net.sf.lucis.core.support.Queryables;
+
 import org.springframework.beans.factory.FactoryBean;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
-import net.sf.lucis.core.DirectoryProvider;
-import net.sf.lucis.core.Queryable;
-import net.sf.lucis.core.support.Queryables;
-
 /**
  * Support class implements a factory for lucis queryable.
  * @author Emilio Escobar Reyero
  */
-public class SearcherFactory implements FactoryBean {
+public class SearcherFactory implements FactoryBean<Queryable> {
 
 	final List<DirectoryProvider> stores;
 
@@ -42,23 +42,24 @@ public class SearcherFactory implements FactoryBean {
 	 * Return Queryables.simple if only have one store and Queryables.multi in other case
 	 * @see org.springframework.beans.factory.FactoryBean#getObject()
 	 */
-	public Object getObject() throws Exception {
+	public Queryable getObject() throws Exception {
 		if (stores.size() == 1) {
 			return Queryables.simple(stores.get(0));
 		} else {
 			return Queryables.multi(stores);
 		}
 	}
-	
+
 	/** Returns Queryable class */
 	public Class<Queryable> getObjectType() {
 		return Queryable.class;
 	}
+
 	/** Return false. */
 	public boolean isSingleton() {
 		return false;
 	}
-	
+
 	/**
 	 * Create a new factory.
 	 * @param store lucis store must be non null object
@@ -67,7 +68,7 @@ public class SearcherFactory implements FactoryBean {
 		Preconditions.checkNotNull(store);
 		this.stores = ImmutableList.of(store);
 	}
-	
+
 	/**
 	 * Create a new factory.
 	 * @param store lucis store must be non null object

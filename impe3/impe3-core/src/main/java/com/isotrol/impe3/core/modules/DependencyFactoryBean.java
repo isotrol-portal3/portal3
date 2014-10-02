@@ -32,7 +32,7 @@ import com.google.common.base.Preconditions;
  * Spring factory bean to supply a dependency. All dependencies are singletons.
  * @author Andres Rodriguez.
  */
-public class DependencyFactoryBean implements FactoryBean {
+public class DependencyFactoryBean implements FactoryBean<Object> {
 	private final Class<?> type;
 	private final Object value;
 

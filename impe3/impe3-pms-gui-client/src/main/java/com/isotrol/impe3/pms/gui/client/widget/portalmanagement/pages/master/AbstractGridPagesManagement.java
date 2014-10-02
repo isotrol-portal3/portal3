@@ -280,7 +280,7 @@ public abstract class AbstractGridPagesManagement extends AbstractPagesManagemen
 		});
 		grid.setSelectionModel(sm);
 
-		grid.addListener(Events.RowDoubleClick, new Listener<GridEvent>() {
+		grid.addListener(Events.RowDoubleClick, new Listener<GridEvent<?>>() {
 			/*
 			 * (non-Javadoc)
 			 * 
@@ -289,7 +289,7 @@ public abstract class AbstractGridPagesManagement extends AbstractPagesManagemen
 			/**
 			 * <br/>
 			 */
-			public void handleEvent(GridEvent be) {
+			public void handleEvent(GridEvent<?> be) {
 				getSelectedAndDisplayDetails();
 			}
 		});

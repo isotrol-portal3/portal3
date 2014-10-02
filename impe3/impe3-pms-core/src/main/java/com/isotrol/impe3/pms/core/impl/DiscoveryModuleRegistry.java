@@ -41,7 +41,7 @@ import com.isotrol.impe3.pms.core.ModuleRegistry;
  * @author Andres Rodriguez.
  */
 @Component
-public final class DiscoveryModuleRegistry implements FactoryBean {
+public final class DiscoveryModuleRegistry implements FactoryBean<ModuleRegistry> {
 	private static final String PATH = "META-INF/impe3.modules";
 	private static final String ENCODING = "UTF-8";
 	private static final char COMMENT = '#';
@@ -112,7 +112,7 @@ public final class DiscoveryModuleRegistry implements FactoryBean {
 	/**
 	 * @see org.springframework.beans.factory.FactoryBean#getObject()
 	 */
-	public Object getObject() throws Exception {
+	public ModuleRegistry getObject() throws Exception {
 		return registry;
 	}
 

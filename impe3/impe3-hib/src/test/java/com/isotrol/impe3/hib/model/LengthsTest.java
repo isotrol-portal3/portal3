@@ -19,7 +19,8 @@
 
 package com.isotrol.impe3.hib.model;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 /**
@@ -30,11 +31,15 @@ public class LengthsTest {
 
 	@Test
 	public void valuesTest() {
-		Assert.assertTrue(Lengths.UUID == 36);
-		Assert.assertTrue(Lengths.NAME == 100);
-		Assert.assertTrue(Lengths.TITLE == 256);
-		Assert.assertTrue(Lengths.DESCRIPTION == 1024);
-		Assert.assertTrue(Lengths.LOCALE == 16);
+		check(Lengths.UUID, 36);
+		check(Lengths.NAME, 100);
+		check(Lengths.TITLE, 256);
+		check(Lengths.DESCRIPTION, 1024);
+		check(Lengths.LOCALE, 16);
+	}
+	
+	private void check(int actual, int expected) {
+		assertTrue(actual == expected);
 	}
 	
 	

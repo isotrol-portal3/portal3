@@ -25,6 +25,7 @@ import net.sf.lucis.core.Delays;
 import net.sf.lucis.core.FullIndexer;
 import net.sf.lucis.core.IndexerService;
 import net.sf.lucis.core.ReindexingStore;
+import net.sf.lucis.core.ReindexingWriter;
 import net.sf.lucis.core.impl.DefaultReindexingWriter;
 import net.sf.lucis.core.impl.ReindexingIndexerService;
 
@@ -39,11 +40,11 @@ public final class FullIndexServiceFactoryBean extends AbstractIndexServiceFacto
 	/** Store. */
 	private final ReindexingStore store;
 	/** Delays. */
-	private final FullIndexer indexer;
+	private final FullIndexer<?> indexer;
 	/** Service. */
-	private volatile ReindexingIndexerService service = null;
+	private volatile ReindexingIndexerService<?> service = null;
 
-	FullIndexServiceFactoryBean(Analyzer analyzer, ReindexingStore store, FullIndexer indexer) {
+	FullIndexServiceFactoryBean(Analyzer analyzer, ReindexingStore store, FullIndexer<?> indexer) {
 		super(analyzer);
 		this.store = checkNotNull(store, "The store must be provided");
 		this.indexer = checkNotNull(indexer, "The indexer must be provided");
@@ -53,7 +54,8 @@ public final class FullIndexServiceFactoryBean extends AbstractIndexServiceFacto
 		if (service == null) {
 			final DefaultReindexingWriter writer = new DefaultReindexingWriter(getSupplier());
 			writer.setName(getWriterName());
-			ReindexingIndexerService s = new ReindexingIndexerService(store, writer, indexer, null, isPasive());
+			// Through a method to avoid generic warnings
+			ReindexingIndexerService<?> s = createService(writer, indexer);
 			s.setName(getName());
 			Delays d = getDelays();
 			if (d != null) {
@@ -62,6 +64,10 @@ public final class FullIndexServiceFactoryBean extends AbstractIndexServiceFacto
 			s.start();
 			service = s;
 		}
+	}
+	
+	private <T> ReindexingIndexerService<T> createService(ReindexingWriter writer, FullIndexer<T> indexer) {
+		return new ReindexingIndexerService<T>(store, writer, indexer, null, isPasive());
 	}
 
 	public IndexerService getObject() throws Exception {
