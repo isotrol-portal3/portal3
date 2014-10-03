@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.0.1-SNAPSHOT</version>
+		<version>3.0.3</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>impe3-idx-drupal6</artifactId>
@@ -13,17 +13,17 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-nr-api</artifactId>
-			<version>3.0.1-SNAPSHOT</version>
+			<version>3.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-nr-core</artifactId>
-			<version>3.0.1-SNAPSHOT</version>
+			<version>3.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-idx-common</artifactId>
-			<version>3.0.1-SNAPSHOT</version>
+			<version>3.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-idx-drupal-api</artifactId>
-			<version>3.0.1-SNAPSHOT</version>
+			<version>3.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.lucis</groupId>
