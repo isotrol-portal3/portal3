@@ -20,6 +20,8 @@
 package com.isotrol.impe3.pms.model;
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
@@ -33,7 +35,7 @@ import com.isotrol.impe3.api.ETagMode;
  * @author Andres Rodriguez
  */
 @Embeddable
-public class PortalCacheValue {
+public class PortalCacheValue implements Serializable {
 	/** Serial UID. */
 	private static final long serialVersionUID = 7086743993573822282L;
 	/** Whether the configuration is inherited. */

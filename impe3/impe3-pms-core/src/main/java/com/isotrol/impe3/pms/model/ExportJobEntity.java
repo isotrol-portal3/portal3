@@ -24,6 +24,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -32,7 +33,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CollectionOfElements;
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Type;
 
@@ -60,7 +60,7 @@ public class ExportJobEntity extends WithCreatedEntity {
 	@Type(type = "impeId")
 	private UUID otherId;
 	/** Other ids. */
-	@CollectionOfElements(fetch = FetchType.EAGER)
+	@ElementCollection(fetch = FetchType.EAGER)
 	@JoinTable(name = "PMS_EXPORT_JOB_ITEM", joinColumns = @JoinColumn(name = "EJOB_ID", nullable = false))
 	@Column(name = "EJOB_ITEM_ID")
 	@Type(type = "impeId")

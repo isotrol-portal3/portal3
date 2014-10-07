@@ -20,13 +20,7 @@
 package com.isotrol.impe3.pms.core;
 
 
-import static junit.framework.Assert.assertTrue;
-
-import java.util.Map;
-
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 /**

@@ -86,11 +86,11 @@ public final class PortalLoaderImpl extends AbstractStateLoaderComponent<Portals
 		// Page detail loader.
 		this.pageDetailLoader = new PageDetailLoader() {
 			public CIPsObject loadCIPs(PageObject page) {
-				return cips.apply(page.getCacheKey());
+				return cips.getUnchecked(page.getCacheKey());
 			}
 
 			public LayoutObject loadLayout(PageObject page) {
-				return layout.apply(page.getCacheKey());
+				return layout.getUnchecked(page.getCacheKey());
 			}
 		};
 	}
@@ -128,7 +128,7 @@ public final class PortalLoaderImpl extends AbstractStateLoaderComponent<Portals
 			final CacheKey portalsKey = portal.getPortalsKey();
 			PortalEntity e = loadOfflineEntity(portalsKey.getId(), portal.getId());
 			final CacheKey key = CacheKey.create(portal.getId(), e.getComponentVersion());
-			return componentsCache.apply(key);
+			return componentsCache.getUnchecked(key);
 		} else {
 			return componentComputer.loadOnline(portals, portal);
 		}
@@ -143,7 +143,7 @@ public final class PortalLoaderImpl extends AbstractStateLoaderComponent<Portals
 			final CacheKey portalsKey = portal.getPortalsKey();
 			PortalEntity e = loadOfflineEntity(portalsKey.getId(), portal.getId());
 			final CacheKey key = CacheKey.create(portal.getId(), e.getPageVersion());
-			return pagesCache.apply(key);
+			return pagesCache.getUnchecked(key);
 		} else {
 			return pagesComputer.loadOnline(portals, portal);
 		}

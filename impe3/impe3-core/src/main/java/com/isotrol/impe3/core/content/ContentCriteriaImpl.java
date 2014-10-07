@@ -19,7 +19,7 @@
 
 package com.isotrol.impe3.core.content;
 
-
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Iterables.transform;
 
@@ -34,7 +34,6 @@ import net.sf.derquinse.lucis.Page;
 import net.sf.derquinse.lucis.Result;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -60,7 +59,6 @@ import com.isotrol.impe3.nr.api.NodeQuery;
 import com.isotrol.impe3.nr.api.NodeRepository;
 import com.isotrol.impe3.nr.api.NodeSort;
 import com.isotrol.impe3.nr.api.Schema;
-
 
 /**
  * Content criteria implementation.
@@ -123,7 +121,7 @@ final class ContentCriteriaImpl extends ContentCriteria {
 	 * @param filter Base filter.
 	 */
 	ContentCriteriaImpl(Portal portal, ContentType contentType, Function<UUID, NodeRepository> repositories,
-		Function<Node, Content> node2content, Locale locale) {
+			Function<Node, Content> node2content, Locale locale) {
 		this.portal = checkNotNull(portal);
 		this.contentType = contentType;
 		this.repositories = checkNotNull(repositories);
@@ -131,10 +129,10 @@ final class ContentCriteriaImpl extends ContentCriteria {
 		this.locale = locale;
 		this.filterBuilder = NodeFilter.builder().due(portal.isDue());
 		// TODO
-		//if (portal.isUncategorized()) {
-			//this.filterBuilder.uncategorized(FilterType.OPTIONAL);
-		//} else {
-			//this.filterBuilder.uncategorized(FilterType.FORBIDDEN);
+		// if (portal.isUncategorized()) {
+		// this.filterBuilder.uncategorized(FilterType.OPTIONAL);
+		// } else {
+		// this.filterBuilder.uncategorized(FilterType.FORBIDDEN);
 		// }
 		if (!portal.getSetFilters().isEmpty()) {
 			this.filterBuilder.sets().apply(portal.getSetFilters());
@@ -339,8 +337,7 @@ final class ContentCriteriaImpl extends ContentCriteria {
 		} else {
 			results = ImmutableList.<Content> copyOf(transform(nodes, node2content));
 		}
-		return new Page<Content>(page.getTotalHits(), page.getMaxScore(), page.getTime(), page.getFirstResult(),
-			results);
+		return new Page<Content>(page.getTotalHits(), page.getMaxScore(), page.getTime(), page.getFirstResult(), results);
 	}
 
 	/**
@@ -362,8 +359,7 @@ final class ContentCriteriaImpl extends ContentCriteria {
 		} else {
 			results = ImmutableList.<Content> copyOf(transform(nodes, node2content));
 		}
-		return new Page<Content>(page.getTotalHits(), page.getMaxScore(), page.getTime(), page.getFirstResult(),
-			results);
+		return new Page<Content>(page.getTotalHits(), page.getMaxScore(), page.getTime(), page.getFirstResult(), results);
 	}
 
 	/**
@@ -398,7 +394,8 @@ final class ContentCriteriaImpl extends ContentCriteria {
 	}
 
 	/**
-	 * @see com.isotrol.impe3.api.content.ContentCriteria#groupBy(java.lang.String, com.google.common.base.Function)
+	 * @see com.isotrol.impe3.api.content.ContentCriteria#groupBy(java.lang.String,
+	 *      com.google.common.base.Function)
 	 */
 	@Override
 	public <T> OneLevelGroupResult<T> groupBy(String field, Function<String, ? extends T> transformer) {
@@ -458,7 +455,7 @@ final class ContentCriteriaImpl extends ContentCriteria {
 
 	/**
 	 * @see com.isotrol.impe3.api.content.ContentCriteria#addQuery(com.isotrol.impe3.nr.api.NodeQuery,
-	 * com.isotrol.impe3.nr.api.NRBooleanClause.Occur)
+	 *      com.isotrol.impe3.nr.api.NRBooleanClause.Occur)
 	 */
 	@Override
 	public ContentCriteria addQuery(NodeQuery query, Occur occurr) {
@@ -572,10 +569,10 @@ final class ContentCriteriaImpl extends ContentCriteria {
 		protected void doApply(String value, FilterType type) {
 			filterBuilder.sets().apply(value, type);
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.sets().toString()).toString();
+			return toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.sets().toString()).toString();
 		}
 	}
 
@@ -588,10 +585,10 @@ final class ContentCriteriaImpl extends ContentCriteria {
 		protected void doApply(Category value, FilterType type) {
 			filterBuilder.categories().apply(value.getId(), type);
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.categories().toString()).toString();
+			return toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.categories().toString()).toString();
 		}
 	}
 
@@ -604,10 +601,10 @@ final class ContentCriteriaImpl extends ContentCriteria {
 		protected void doApply(ContentType value, FilterType type) {
 			filterBuilder.contentTypes().apply(value.getId(), type);
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.contentTypes().toString()).toString();
+			return toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.contentTypes().toString()).toString();
 		}
 	}
 
@@ -620,10 +617,10 @@ final class ContentCriteriaImpl extends ContentCriteria {
 		protected void doApply(Locale value, FilterType type) {
 			filterBuilder.locales().apply(value, type);
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.locales().toString()).toString();
+			return toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.locales().toString()).toString();
 		}
 	}
 
@@ -636,10 +633,10 @@ final class ContentCriteriaImpl extends ContentCriteria {
 		protected void doApply(String value, FilterType type) {
 			filterBuilder.tags().apply(value, type);
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.tags().toString()).toString();
+			return toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.tags().toString()).toString();
 		}
 	}
 
@@ -652,10 +649,10 @@ final class ContentCriteriaImpl extends ContentCriteria {
 		protected void doApply(ContentKey value, FilterType type) {
 			filterBuilder.keys().apply(value.getNodeKey(), type);
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.keys().toString()).toString();
+			return toStringHelper(getClass().getSuperclass()).addValue(filterBuilder.keys().toString()).toString();
 		}
 	}
 

@@ -38,7 +38,6 @@ import com.isotrol.impe3.test.TestSupport;
 public class ImgComponentTest {
 	private static TestEnvironment environment;
 	private static FileId file;
-	private static FileId bundle;
 	private ModuleTester<ImgModule> module = null;
 	private ComponentTester<ImgComponent> tester = null;
 
@@ -46,7 +45,7 @@ public class ImgComponentTest {
 	public static void environment() {
 		TestEnvironmentBuilder b = new TestEnvironmentBuilder();
 		file = b.file(ImgComponentTest.class, "graph.gif");
-		bundle = b.bundle(ImgComponentTest.class, "graph.zip");
+		b.bundle(ImgComponentTest.class, "graph.zip");
 		environment = b.get();
 	}
 

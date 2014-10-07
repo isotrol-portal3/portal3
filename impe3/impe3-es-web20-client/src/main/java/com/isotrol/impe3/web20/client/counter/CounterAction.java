@@ -24,7 +24,6 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Response;
 
 import com.google.common.collect.Sets;

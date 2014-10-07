@@ -23,6 +23,7 @@ package com.isotrol.impe3.pms.model;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -32,8 +33,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CollectionOfElements;
 
 import com.google.common.collect.Sets;
 import com.isotrol.impe3.pms.api.GlobalAuthority;
@@ -80,19 +79,19 @@ public class UserEntity extends WithCreatedUpdatedEntity {
 	@Column(name = "DELETED", nullable = true)
 	private Boolean deleted = false;
 	/** Global roles. */
-	@CollectionOfElements(fetch = FetchType.LAZY)
+	@ElementCollection(fetch = FetchType.LAZY)
 	@JoinTable(name = "PMS_USER_GROLE", joinColumns = @JoinColumn(name = "USER_ID"))
 	@Column(name = "GLOBAL_ROLE", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Set<GlobalRole> globalRoles;
 	/** Global authorities. */
-	@CollectionOfElements(fetch = FetchType.LAZY)
+	@ElementCollection(fetch = FetchType.LAZY)
 	@JoinTable(name = "PMS_USER_GA", joinColumns = @JoinColumn(name = "USER_ID"))
 	@Column(name = "GLOBAL_AUTH", nullable = false, length = Lengths.NAME)
 	@Enumerated(EnumType.STRING)
 	private Set<GlobalAuthority> globalAuthorities;
 	/** Portal authorities. */
-	@CollectionOfElements(fetch = FetchType.LAZY)
+	@ElementCollection(fetch = FetchType.LAZY)
 	@JoinTable(name = "PMS_USER_PA", joinColumns = @JoinColumn(name = "USER_ID"))
 	private Set<PortalAuthorityValue> portalAuthorities;
 

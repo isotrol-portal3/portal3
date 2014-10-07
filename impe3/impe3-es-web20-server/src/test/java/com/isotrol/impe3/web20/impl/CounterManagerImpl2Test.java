@@ -28,13 +28,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.isotrol.impe3.dto.ServiceException;
-import com.isotrol.impe3.web20.api.CounterEventDTO;
-import com.isotrol.impe3.web20.api.CounterFilterDTO;
 import com.isotrol.impe3.web20.api.ResourceCounterDTO;
 import com.isotrol.impe3.web20.server.CounterManager;
 import com.isotrol.impe3.web20.server.CounterMap;
-import com.isotrol.impe3.web20.server.CounterMap.Entry;
-import com.isotrol.impe3.web20.server.CounterMap.Key;
 
 
 /**
@@ -55,13 +51,6 @@ public class CounterManagerImpl2Test extends AbstractCounterTest {
 		assertNotNull(service);
 	}
 	
-	private void check(CounterMap map, Key key) {
-		for (Entry e : map.get(key, Integer.MAX_VALUE)) {
-			assertEquals(e.getCount(), map.getResource(key, e.getResourceId()));
-		}
-		
-	}
-
 	@Test
 	public void aggregation() throws ServiceException {
 		for (int i = 0; i < 100; i++) {

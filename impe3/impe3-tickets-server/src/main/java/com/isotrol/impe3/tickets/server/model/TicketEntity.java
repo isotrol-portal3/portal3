@@ -22,15 +22,14 @@ package com.isotrol.impe3.tickets.server.model;
 import java.util.Map;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.MapKey;
 
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.hib.model.Lengths;
@@ -67,9 +66,9 @@ public class TicketEntity extends VersionedEntity {
 	private int available;
 
 	/** Ticket payload. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "IMPE3_TICKET_PAYLOAD", joinColumns = @JoinColumn(name = "TCKT_ID", nullable = false))
-	@MapKey(columns = @Column(name = "TCKT_NAME", length = Lengths.NAME))
+	@MapKeyColumn(name = "TCKT_NAME", length = Lengths.NAME)
 	@Column(name = "TCKT_VALUE", length = Lengths.DESCRIPTION)
 	private Map<String, String> payload;
 

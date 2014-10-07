@@ -21,14 +21,12 @@ package com.isotrol.impe3.web20.impl;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.isotrol.impe3.dto.ServiceException;
 import com.isotrol.impe3.web20.api.RatingEventDTO;
 import com.isotrol.impe3.web20.api.RatingsService;
-import com.isotrol.impe3.web20.api.SourceDTO;
 
 
 /**

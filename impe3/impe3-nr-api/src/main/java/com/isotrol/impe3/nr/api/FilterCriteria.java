@@ -20,6 +20,7 @@
 package com.isotrol.impe3.nr.api;
 
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Arrays;
@@ -27,7 +28,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.nr.api.NodeFilter.Builder;
@@ -202,6 +202,6 @@ public abstract class FilterCriteria<T> implements IsEmptyFlag, IsNullFlag {
 	
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).addValue(criteria).toString();
+		return toStringHelper(this).addValue(criteria).toString();
 	}
 }

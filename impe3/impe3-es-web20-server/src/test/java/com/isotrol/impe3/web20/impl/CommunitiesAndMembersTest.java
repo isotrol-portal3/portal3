@@ -82,6 +82,7 @@ public class CommunitiesAndMembersTest extends MemoryContextTest {
 
 	//@Test
 	public void testComplete() throws Exception {
+		@SuppressWarnings("unchecked")
 		final Store<Long> store = getBean(Store.class);
 		final Writer writer = getBean(Writer.class);
 		final Batch.Builder<Long> builder = Batch.builder();

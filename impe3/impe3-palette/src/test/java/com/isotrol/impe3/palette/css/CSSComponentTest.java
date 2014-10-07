@@ -24,7 +24,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.isotrol.impe3.api.FileId;
 import com.isotrol.impe3.test.ComponentTester;
 import com.isotrol.impe3.test.ModuleTester;
 import com.isotrol.impe3.test.TestEnvironment;
@@ -38,8 +37,6 @@ import com.isotrol.impe3.test.TestSupport;
  */
 public class CSSComponentTest {
 	private static TestEnvironment environment;
-	private static FileId template;
-	private static FileId content;
 	private ModuleTester<CSSModule> module = null;
 	private ComponentTester<CSSComponent> tester = null;
 

@@ -34,7 +34,6 @@ import com.google.common.base.Stopwatch;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.isotrol.impe3.core.Loggers;
 
 
 /**
@@ -43,7 +42,6 @@ import com.isotrol.impe3.core.Loggers;
  * @param <T> Objects type.
  */
 public final class ObjectsLoader<T> {
-	@SuppressWarnings("unused")
 	private final String name;
 	private final LoadingCache<Key, T> cache;
 

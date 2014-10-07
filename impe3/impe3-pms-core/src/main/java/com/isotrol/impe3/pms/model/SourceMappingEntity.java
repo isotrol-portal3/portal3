@@ -23,13 +23,12 @@ package com.isotrol.impe3.pms.model;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CollectionOfElements;
 
 
 /**
@@ -49,15 +48,15 @@ public class SourceMappingEntity extends OfEnvironment {
 	@Column(name = "DESCRIPTION", length = Lengths.MAX)
 	private String description;
 	/** Set mappings. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "SET_MAPPING", joinColumns = @JoinColumn(name = "SRCM_ID"))
 	private List<SetMappingValue> sets;
 	/** Content type mappings. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "CONTENT_TYPE_MAPPING", joinColumns = @JoinColumn(name = "SRCM_ID"))
 	private List<ContentTypeMappingValue> contentTypes;
 	/** Category mappings. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "CATEGORY_MAPPING", joinColumns = @JoinColumn(name = "SRCM_ID"))
 	private List<CategoryMappingValue> categories;
 

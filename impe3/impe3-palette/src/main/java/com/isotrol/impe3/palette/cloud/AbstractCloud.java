@@ -91,7 +91,7 @@ public abstract class AbstractCloud extends AbstractVisualContentComponent {
 
 		if (logger.isTraceEnabled()) {
 			logger.trace("BackMillis {}ms at now {}ms so {}ms.",
-				new String[] {String.valueOf(backMillis), String.valueOf(e), String.valueOf(s)});
+				String.valueOf(backMillis), String.valueOf(e), String.valueOf(s));
 		}
 
 		final Date end = new Date(e);

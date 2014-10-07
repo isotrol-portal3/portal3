@@ -26,7 +26,6 @@ import com.isotrol.impe3.api.metadata.Description;
 import com.isotrol.impe3.api.metadata.Name;
 import com.isotrol.impe3.api.metadata.Version;
 import com.isotrol.impe3.api.modules.Module;
-import com.isotrol.impe3.api.modules.SpringSimple;
 
 
 /**

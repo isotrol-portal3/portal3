@@ -23,7 +23,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

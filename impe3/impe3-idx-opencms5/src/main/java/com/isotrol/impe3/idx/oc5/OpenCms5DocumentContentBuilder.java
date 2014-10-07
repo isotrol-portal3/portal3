@@ -31,6 +31,7 @@ import com.isotrol.impe3.idx.oc.IndexCommand;
 import com.isotrol.impe3.idx.oc.IndexConfiguration;
 import com.isotrol.impe3.idx.oc.OpenCmsDatabaseReader;
 
+@SuppressWarnings("unused")
 public class OpenCms5DocumentContentBuilder implements DocumentContentBuilder<Task>{
 
 	/** Default encoding utf-8 */

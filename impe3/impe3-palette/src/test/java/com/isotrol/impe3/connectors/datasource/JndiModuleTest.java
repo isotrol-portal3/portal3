@@ -20,12 +20,9 @@
 package com.isotrol.impe3.connectors.datasource;
 
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.isotrol.impe3.core.modules.ModuleDefinition;
-import com.isotrol.impe3.test.ModuleTester;
-import com.isotrol.impe3.test.TestEnvironment;
 
 
 /**
@@ -34,20 +31,10 @@ import com.isotrol.impe3.test.TestEnvironment;
  * @author Andres Rodriguez Chamorro
  */
 public class JndiModuleTest {
-	private static TestEnvironment environment;
-	private static ModuleTester<JndiModule> tester;
-
-	@BeforeClass
-	public static void setUp() {
-		// environment = new TestEnvironmentBuilder().get();
-		// tester = environment.getModule(JndiModule.class);
-	}
-
 	/** Module definition. */
 	@Test
 	public void module() {
-		@SuppressWarnings("unused")
-		final ModuleDefinition<JndiModule> md = ModuleDefinition.of(JndiModule.class);
+		ModuleDefinition.of(JndiModule.class);
 	}
 
 	/** Start. */

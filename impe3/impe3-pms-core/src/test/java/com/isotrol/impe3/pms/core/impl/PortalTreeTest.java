@@ -64,9 +64,4 @@ public class PortalTreeTest extends MemoryContextTest {
 		final String id = loadPortal(parentId);
 		return id;
 	}
-
-	private String create() throws PMSException {
-		return create(null);
-	}
-
 }

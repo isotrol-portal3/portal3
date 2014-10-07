@@ -23,7 +23,6 @@ package com.isotrol.impe3.freemarker;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -45,7 +44,7 @@ public class PathTest {
 		TestEnvironmentBuilder b = new TestEnvironmentBuilder();
 		Category c = b.category("root", null);
 		Category c1 = b.category("c1", c.getId());
-		Category c2 = b.category("c2", null);
+		b.category("c2", null);
 		b.category("c11", c1.getId());
 		environment = b.get();
 	}
@@ -67,7 +66,6 @@ public class PathTest {
 	 */
 	@Test
 	public void path() throws Exception {
-		final Categories c = environment.getCategories();
 		yes("root", true);
 		yes("/root", true);
 		yes("/root/", true);

@@ -21,7 +21,6 @@ package com.isotrol.impe3.web20.mappers;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
-import com.isotrol.impe3.web20.api.MemberSelDTO;
 import com.isotrol.impe3.web20.model.MemberEntity;
 import com.isotrol.impe3.web20.server.MemberMiniDTO;
 

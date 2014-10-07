@@ -32,7 +32,6 @@ import com.google.common.collect.Maps;
 import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.category.CategoriesService;
 import com.isotrol.impe3.pms.api.category.CategoryDTO;
-import com.isotrol.impe3.pms.api.category.CategorySelDTO;
 import com.isotrol.impe3.pms.api.category.CategoryTreeDTO;
 import com.isotrol.impe3.pms.core.MemoryContextTest;
 
@@ -45,13 +44,6 @@ public abstract class AbstractCategoryTest extends MemoryContextTest {
 	private CategoriesService service;
 	private CategoryTreeDTO root;
 	private Map<String, CategoryTreeDTO> map;
-
-	private void check(CategorySelDTO dto) {
-		assertNotNull(dto);
-		assertNotNull(dto.getId());
-		assertNotNull(dto.getName());
-		assertNotNull(dto.getName());
-	}
 
 	private static void contains(Iterable<CategoryTreeDTO> categories, String id) {
 		for (CategoryTreeDTO node : categories) {

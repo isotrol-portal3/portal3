@@ -168,9 +168,9 @@ public class MigrationManagerImpl extends AbstractWeb20Service implements Migrat
 	
 	@Transactional(rollbackFor = Throwable.class)
 	public List<String> getMemberWithoutGlobal(String serviceId) throws ServiceException {
-		final List objs = getDao().findMembersNoGlobal();
-		return Lists.transform(objs, new Function<String, String>() {
-			public String apply(String from) {
+		final List<Object[]> objs = getDao().findMembersNoGlobal();
+		return Lists.transform(objs, new Function<Object[], String>() {
+			public String apply(Object[] from) {
 			return from.toString();
 		}
 		});

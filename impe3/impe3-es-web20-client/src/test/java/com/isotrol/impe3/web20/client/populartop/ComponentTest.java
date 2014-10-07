@@ -18,7 +18,6 @@
  */
 package com.isotrol.impe3.web20.client.populartop;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -26,12 +25,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.isotrol.impe3.core.config.ConfigurationBuilder;
-import com.isotrol.impe3.test.ModuleTester;
 import com.isotrol.impe3.test.TestEnvironment;
 import com.isotrol.impe3.test.TestEnvironmentBuilder;
 import com.isotrol.impe3.test.TestSupport;
-import com.isotrol.impe3.web20.client.counter.CounterConfig;
-import com.isotrol.impe3.web20.client.counter.CounterModule;
 
 /**
  * Testing top component. 
@@ -39,7 +35,6 @@ import com.isotrol.impe3.web20.client.counter.CounterModule;
  */
 public class ComponentTest {
 	private static TestEnvironment environment;
-	private ModuleTester<TopResourcesModule> module;
 	
 	@BeforeClass
 	public static void environment() {
@@ -49,7 +44,7 @@ public class ComponentTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		module = environment.getModule(TopResourcesModule.class);
+		environment.getModule(TopResourcesModule.class);
 		
 		final ConfigurationBuilder<TopResourcesConfig> moduleConfig = TestSupport.builder(TopResourcesConfig.class);
 		moduleConfig.set("counterType", "TYPE1");

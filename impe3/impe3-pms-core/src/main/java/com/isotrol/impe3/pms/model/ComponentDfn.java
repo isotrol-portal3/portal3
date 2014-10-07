@@ -24,15 +24,14 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.MapKey;
 
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.core.modules.ModuleDefinition;
@@ -60,9 +59,9 @@ public class ComponentDfn extends WithUpdatedEntity implements WithModuleDfn {
 	@JoinColumn(name = "CNFG_ID", nullable = true)
 	private ConfigurationEntity configuration;
 	/** Dependencies. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "COMPONENT_DFN_DEPS", joinColumns = @JoinColumn(name = "CMPT_DFN_ID", nullable = false))
-	@MapKey(columns = @Column(name = "DEPENDENCY_NAME", length = Lengths.NAME))
+	@MapKeyColumn(name = "DEPENDENCY_NAME", length = Lengths.NAME)
 	private Map<String, RequiredDependencyValue> dependencies;
 
 	/** Default constructor. */

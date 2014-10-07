@@ -67,12 +67,9 @@ public class DefaultPageTest extends MemoryContextTest {
 
 	private String ct1;
 	private String cg0;
-	private String cg1;
 	private String portalId;
 	private String portalPath;
 	private PageLoader loader;
-	private String componentId;
-	private String cipId;
 	private String pageName;
 	private Page page;
 	private EngineModelLoader service;
@@ -85,7 +82,7 @@ public class DefaultPageTest extends MemoryContextTest {
 		final PortalsService ps = getBean(PortalsService.class);
 		ct1 = loadContentType("ct").getId();
 		cg0 = loadCategory(null, 0).getId();
-		cg1 = loadCategory(null, 1).getId();
+		loadCategory(null, 1).getId();
 		final ConnectorsService cs = getBean(ConnectorsService.class);
 		final ModuleInstanceTemplateDTO template1 = cs.newTemplate(CalculatorConnectorModule.class.getName());
 		template1.setName(testString());
@@ -93,7 +90,7 @@ public class DefaultPageTest extends MemoryContextTest {
 		portalId = loadPortal();
 		assertFalse(ps.isOfflineReady(portalId));
 		portalPath = ps.getName(portalId).getName().getPath();
-		componentId = loadComponent(portalId, CalculatorComponentModule.class);
+		loadComponent(portalId, CalculatorComponentModule.class);
 		loader = new PageLoader(portalId);
 		page = loader.create(PageClass.DEFAULT);
 		page.putComponents();

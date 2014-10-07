@@ -24,16 +24,15 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.MapKey;
 
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.api.DeviceType;
@@ -56,7 +55,6 @@ public class DeviceEntity extends WithCreatedUpdatedEntity {
 	@Column(name = "DESCRIPTION", length = Lengths.DESCRIPTION)
 	private String description;
 	/** Whether the device has layout. */
-	@SuppressWarnings("unused")
 	@Column(name = "LAYOUT", nullable = false)
 	private boolean layout = false;
 	/** Layout width. */
@@ -79,9 +77,9 @@ public class DeviceEntity extends WithCreatedUpdatedEntity {
 	@Column(name = "DVCE_UA_RE", nullable = true)
 	private Boolean userAgentRE;
 	/** Device properties. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "DEVICE_PROPERTY", joinColumns = @JoinColumn(name = "DVCE_ID", nullable = false))
-	@MapKey(columns = @Column(name = "DVCE_PROP_NAME", length = Lengths.NAME))
+	@MapKeyColumn(name = "DVCE_PROP_NAME", length = Lengths.NAME)
 	@Column(name = "DVCE_PROP_VALUE", length = Lengths.DESCRIPTION)
 	private Map<String, String> properties;
 

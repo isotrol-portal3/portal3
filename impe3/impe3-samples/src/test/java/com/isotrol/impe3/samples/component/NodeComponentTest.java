@@ -23,7 +23,6 @@ package com.isotrol.impe3.samples.component;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.isotrol.impe3.api.Category;
 import com.isotrol.impe3.api.ContentType;
 import com.isotrol.impe3.nr.api.NodeKey;
 import com.isotrol.impe3.nr.api.NodeRepository;
@@ -43,7 +42,6 @@ import com.isotrol.impe3.test.TestSupport;
 public class NodeComponentTest {
 	private static TestEnvironment env;
 	private static ContentType contentType;
-	private static Category category;
 	private static NodeRepository repository;
 	private static ModuleTester<NodeComponentModule> module;
 	private static ComponentTester<NodeComponent> component;
@@ -52,7 +50,7 @@ public class NodeComponentTest {
 	public static void environment() {
 		final TestEnvironmentBuilder teb = new TestEnvironmentBuilder();
 		contentType = teb.contentType("contentType");
-		category = teb.category("category", null);
+		teb.category("category", null);
 		env = teb.get();
 		TestRepositoryBuilder trb = env.getRepositoryBuilder();
 		for (int i = 0; i < 100; i++) {

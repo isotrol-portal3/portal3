@@ -20,12 +20,9 @@
 package com.isotrol.impe3.connectors.uri;
 
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.isotrol.impe3.core.modules.ModuleDefinition;
-import com.isotrol.impe3.test.TestEnvironment;
-import com.isotrol.impe3.test.TestEnvironmentBuilder;
 
 
 /**
@@ -34,16 +31,9 @@ import com.isotrol.impe3.test.TestEnvironmentBuilder;
  * @author Andres Rodriguez Chamorro
  */
 public class FileBundleURIBuilderModuleTest {
-	private static TestEnvironment environment;
-
-	@BeforeClass
-	public static void setUp() {
-		environment = new TestEnvironmentBuilder().get();
-	}
-
 	/** Module definition. */
 	@Test
 	public void module() {
-		final ModuleDefinition<FileBundleURIBuilderModule> md = ModuleDefinition.of(FileBundleURIBuilderModule.class);
+		ModuleDefinition.of(FileBundleURIBuilderModule.class);
 	}
 }

@@ -21,8 +21,6 @@ package com.isotrol.impe3.web20.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,7 +53,7 @@ public class RatingManagerImpl2Test extends AbstractRatingTest {
 		service.register(event(RESOURCE1, 4, AGG1), true);
 		Long groupId = service.getGroupId(filter(AGG1));
 		RatingMap map = service.loadTimeMap(null);
-		List<Entry> entries = map.get(groupId, 10);
+		map.get(groupId, 10);
 		assertEquals(6L, map.size());
 		check(map, groupId);
 	}

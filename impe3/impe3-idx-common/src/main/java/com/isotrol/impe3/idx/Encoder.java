@@ -117,7 +117,12 @@ public final class Encoder {
 			}
 		}
 		// Fallback to default encoding
-		return URLEncoder.encode(source);
+		try {
+			return URLEncoder.encode(source, C_URI_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			logger.warn("UTF-8 Encoding unsupported exception.");
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
@@ -165,7 +170,12 @@ public final class Encoder {
 			}
 		}
 		// Fallback to default decoding
-		return URLDecoder.decode(source);
+		try {
+			return URLDecoder.decode(source, C_URI_ENCODING);
+		} catch (UnsupportedEncodingException e) {
+			logger.warn("UTF-8 Encoding unsupported exception.");
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

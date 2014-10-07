@@ -25,19 +25,18 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.MapKey;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -107,14 +106,14 @@ public class MemberEntity extends VersionedEntity {
 	private String lastName;
 
 	/** Member properties. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "WEB20_MEMBER_PROPERTY", joinColumns = @JoinColumn(name = "MMBR_ID", nullable = false))
-	@MapKey(columns = @Column(name = "MMBR_PROPERTY_NAME", length = Lengths.NAME))
+	@MapKeyColumn(name = "MMBR_PROPERTY_NAME", length = Lengths.NAME)
 	@Column(name = "MMBR_PROPERTY_VALUE", length = Lengths.DESCRIPTION)
 	private Map<String, String> properties;
 
 	/** Member profiles. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "WEB20_MEMBER_PROFILE", joinColumns = @JoinColumn(name = "MMBR_ID", nullable = false))
 	@Column(name = "MMBR_PROFILE_NAME", length = Lengths.NAME)
 	private Set<String> profiles;

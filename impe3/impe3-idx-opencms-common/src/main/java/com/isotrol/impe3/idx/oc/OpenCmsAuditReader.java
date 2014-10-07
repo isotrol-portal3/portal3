@@ -57,7 +57,6 @@ public class OpenCmsAuditReader extends NamedParameterJdbcDaoSupport implements 
 		map.put("checkpoint", checkpoint);
 		map.put("total", total);
 
-		@SuppressWarnings("unchecked")
 		final List<Task> list = getNamedParameterJdbcTemplate().query(sql, map, Task.MAPPER);
 
 		return cleanTaskList(list);

@@ -24,11 +24,13 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CollectionOfElements;
@@ -42,6 +44,7 @@ import com.google.common.collect.Maps;
  * Entity that represents a page definition.
  * @author Andres Rodriguez
  */
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "PAGE_DFN")
 public class PageDfn extends WithUpdatedEntity {
@@ -79,9 +82,9 @@ public class PageDfn extends WithUpdatedEntity {
 	@MapKey(columns = @Column(name = "CIP_ID", length = Lengths.UUID), type=@Type(type="impeId"))
 	private Map<UUID, CIPValue> components;
 	/** Page layout. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "PAGE_LAYOUT", joinColumns = @JoinColumn(name = "PAGE_ID", nullable = false))
-	@MapKey(columns = @Column(name = "LYT_ID"))
+	@MapKeyColumn(name = "LYT_ID")
 	private Map<Integer, LayoutValue> layout;
 
 	/** Default constructor. */

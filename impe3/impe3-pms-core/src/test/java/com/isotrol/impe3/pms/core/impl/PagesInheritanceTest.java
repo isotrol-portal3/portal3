@@ -42,7 +42,6 @@ import com.isotrol.impe3.pms.core.MemoryContextTest.PageLoader.Page;
 public class PagesInheritanceTest extends MemoryContextTest {
 	private static final String N1 = "Name1";
 	private static final String N2 = "Name2";
-	private static final String N3 = "Name3";
 	
 	private String p1;
 	private String p2;

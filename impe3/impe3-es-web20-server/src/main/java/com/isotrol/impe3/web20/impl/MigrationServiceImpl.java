@@ -60,6 +60,7 @@ public class MigrationServiceImpl extends AbstractWeb20Service implements Migrat
 	/** Migration manager. */
 	private MigrationManager migrationManager;
 	/** Log table */
+	@SuppressWarnings("unused")
 	private LogTableComponent logTable;
 	
 	//@Transactional(rollbackFor = Throwable.class)
@@ -251,10 +252,6 @@ public class MigrationServiceImpl extends AbstractWeb20Service implements Migrat
 		}
 	}
 
-	private void task(String uuid, String name, int task) throws ServiceException {
-		logTable.insert(uuid, name, task);
-	}
-	
 	private MemberEntity fillMember(MemberEntity entity, MemberDTO dto) {
 		final Calendar date = Calendar.getInstance();
 		date.setTime(dto.getDate());

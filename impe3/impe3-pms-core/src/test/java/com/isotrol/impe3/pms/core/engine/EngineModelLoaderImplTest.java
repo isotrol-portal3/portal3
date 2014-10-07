@@ -70,7 +70,6 @@ import com.isotrol.impe3.pms.api.page.PagesService;
 import com.isotrol.impe3.pms.api.portal.PortalsService;
 import com.isotrol.impe3.pms.core.EnvironmentManager;
 import com.isotrol.impe3.pms.core.MemoryContextTest;
-import com.isotrol.impe3.pms.core.MemoryContextTest.PageLoader;
 import com.isotrol.impe3.pms.core.MemoryContextTest.PageLoader.Page;
 import com.isotrol.impe3.samples.calculator.CalculatorComponentModule;
 import com.isotrol.impe3.samples.calculator.CalculatorConnectorModule;
@@ -89,7 +88,6 @@ public class EngineModelLoaderImplTest extends MemoryContextTest {
 	private static String portalId;
 	private static String portalPath;
 	private static PageLoader loader;
-	private static String componentId;
 	private static String cipId;
 	private static String pageName;
 	private static PageLoc page;
@@ -110,7 +108,7 @@ public class EngineModelLoaderImplTest extends MemoryContextTest {
 		cs.save(template1.toModuleInstanceDTO());
 		portalId = loadPortal();
 		portalPath = getBean(PortalsService.class).getName(portalId).getName().getPath();
-		componentId = loadComponent(portalId, CalculatorComponentModule.class);
+		loadComponent(portalId, CalculatorComponentModule.class);
 		loader = new PageLoader(portalId);
 		pageName = testString();
 		page = loader.loadSpecial(pageName);

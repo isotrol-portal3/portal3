@@ -23,7 +23,6 @@ package com.isotrol.impe3.pms.core.obj;
 import java.util.UUID;
 
 import com.google.common.base.Function;
-import com.google.common.base.Functions;
 import com.google.common.base.Predicate;
 import com.isotrol.impe3.api.Name;
 import com.isotrol.impe3.pms.api.Inherited;

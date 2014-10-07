@@ -200,6 +200,7 @@ public class MembersServiceImplTest extends MemoryContextTest {
 
 	//@Test
 	public void testSearch() throws Exception {
+		@SuppressWarnings("unchecked")
 		final Store<Long> store = getBean(Store.class);
 		final Writer writer = getBean(Writer.class);
 		final Batch.Builder<Long> builder = Batch.builder();

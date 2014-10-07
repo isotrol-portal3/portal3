@@ -55,9 +55,11 @@ import com.isotrol.impe3.oi.api.InterviewsService;
 public class OiNodeRepository implements NodeRepository, InitializingBean {
 
 	/** Local mappings service. */
+	@SuppressWarnings("unused")
 	private MappingsService mappingsService;
 
 	/** Interviews Service. */
+	@SuppressWarnings("unused")
 	private InterviewsService interviewsService;
 
 	/** Store */

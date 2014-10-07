@@ -283,12 +283,6 @@ public class IndexDAOImpl implements IndexDAO, InitializingBean {
 
 		}
 
-		private BooleanClause clause(StringFilterDTO str, String field) {
-			final Query q = query(str, field);
-
-			return new BooleanClause(q, BooleanClause.Occur.SHOULD);
-		}
-
 		private Query query(StringFilterDTO str, String field) {
 			final Query q;
 			if (StringMatchMode.EXACT.equals(str.getMatchMode())) {

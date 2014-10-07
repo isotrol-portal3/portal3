@@ -90,9 +90,9 @@ public class IdxOiModuleTest extends MemoryContextTest {
 	//@Test
 	public void testModule() throws Exception {
 		// Index staff
+		@SuppressWarnings("unchecked")
 		final Store<Long> store = getBean(Store.class);
 		final Writer writer = getBean(Writer.class);
-		final Batch.Builder<Long> builder = Batch.builder();
 
 		final String commuuid = UUID.randomUUID().toString();
 

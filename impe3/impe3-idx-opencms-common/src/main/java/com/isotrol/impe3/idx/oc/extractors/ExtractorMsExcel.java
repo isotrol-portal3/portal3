@@ -93,12 +93,12 @@ public final class ExtractorMsExcel {
 					result.append(":\n\n");
 				}
 
-				Iterator rowIt = sheet.rowIterator();
+				Iterator<?> rowIt = sheet.rowIterator();
 				while (rowIt.hasNext()) {
 					HSSFRow row = (HSSFRow) rowIt.next();
 					if (row != null) {
 						boolean hasContent = false;
-						Iterator it = row.cellIterator();
+						Iterator<?> it = row.cellIterator();
 						while (it.hasNext()) {
 							HSSFCell cell = (HSSFCell) it.next();
 							String text = null;

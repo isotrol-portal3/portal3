@@ -46,6 +46,7 @@ public class ContentComponent implements Component {
 	/** Content repository. */
 	private ContentRepository contentRepository;
 	/** Navigation key. */
+	@SuppressWarnings("unused")
 	private NavigationKey navigationKey;
 	/** Content key. */
 	private ContentKey contentKey;

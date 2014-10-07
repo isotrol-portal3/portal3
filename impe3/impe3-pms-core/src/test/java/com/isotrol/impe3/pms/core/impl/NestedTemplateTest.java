@@ -27,8 +27,6 @@ import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.connector.ConnectorsService;
 import com.isotrol.impe3.pms.api.minst.ModuleInstanceTemplateDTO;
 import com.isotrol.impe3.pms.api.page.PageClass;
-import com.isotrol.impe3.pms.api.page.PortalPagesLoc;
-import com.isotrol.impe3.pms.api.portal.PortalsService;
 import com.isotrol.impe3.pms.core.MemoryContextTest;
 import com.isotrol.impe3.pms.core.MemoryContextTest.PageLoader.Page;
 import com.isotrol.impe3.samples.calculator.CalculatorComponentModule;

@@ -25,16 +25,16 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.MapKey;
 import org.hibernate.annotations.Type;
 
 import com.google.common.base.Objects;
@@ -80,13 +80,13 @@ public class PortalUserEntity {
 	@Column(name = "ACTIVE", nullable = false)
 	private boolean active = true;
 	/** User properties. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "PORTAL_USER_PROPERTY", joinColumns = @JoinColumn(name = "PUSR_ID", nullable = false))
-	@MapKey(columns = @Column(name = "PROPERTY_NAME", length = Lengths.NAME))
+	@MapKeyColumn(name = "PROPERTY_NAME", length = Lengths.NAME)
 	@Column(name = "PROPERTY_VALUE", length = Lengths.DESCRIPTION)
 	private Map<String, String> properties;
 	/** User roles. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "PORTAL_USER_ROLE", joinColumns = @JoinColumn(name = "PUSR_ID", nullable = false))
 	@Column(name = "ROLE_NAME", length = Lengths.NAME)
 	private Set<String> roles;

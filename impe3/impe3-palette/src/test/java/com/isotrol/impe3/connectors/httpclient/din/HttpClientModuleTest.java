@@ -20,15 +20,9 @@
 package com.isotrol.impe3.connectors.httpclient.din;
 
 
-import junit.framework.Assert;
-
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.isotrol.impe3.connectors.httpclient.Response;
-import com.isotrol.impe3.connectors.httpclient.din.HttpClientConfig;
-import com.isotrol.impe3.connectors.httpclient.din.HttpClientModule;
 import com.isotrol.impe3.core.modules.ModuleDefinition;
 import com.isotrol.impe3.test.ModuleTester;
 import com.isotrol.impe3.test.TestEnvironment;

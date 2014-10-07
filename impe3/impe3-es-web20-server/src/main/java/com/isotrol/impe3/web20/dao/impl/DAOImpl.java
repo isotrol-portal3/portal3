@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.hibernate.Criteria;
-import org.hibernate.LockMode;
+import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -588,14 +588,14 @@ public class DAOImpl extends com.isotrol.impe3.hib.dao.DAOImpl implements DAO {
 	 * @see com.isotrol.impe3.web20.dao.DAO#getNextValue(java.lang.String)
 	 */
 	public synchronized long getNextValue(String id) throws SequenceNotFoundException {
-		SequenceEntity seq = (SequenceEntity) getSession().get(SequenceEntity.class, id, LockMode.UPGRADE);
+		SequenceEntity seq = (SequenceEntity) getSession().get(SequenceEntity.class, id, LockOptions.UPGRADE);
 		if (seq == null) {
 			seq = new SequenceEntity(id, 0);
 			try {
 				getSession().save(seq);
 				flush();
 			} catch (Exception e) {
-				seq = (SequenceEntity) getSession().get(SequenceEntity.class, id, LockMode.UPGRADE);
+				seq = (SequenceEntity) getSession().get(SequenceEntity.class, id, LockOptions.UPGRADE);
 				if (seq == null) {
 					throw new SequenceNotFoundException(id);
 				}

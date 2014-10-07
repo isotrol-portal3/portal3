@@ -20,15 +20,10 @@
 package com.isotrol.impe3.pms.core.engine;
 
 
-import static com.google.common.base.Preconditions.checkState;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import net.sf.derquinsej.concurrent.ActiveObjectSupport;
-
-import com.google.common.collect.ImmutableList;
-import com.isotrol.impe3.core.modules.StartedModule;
 
 
 /**

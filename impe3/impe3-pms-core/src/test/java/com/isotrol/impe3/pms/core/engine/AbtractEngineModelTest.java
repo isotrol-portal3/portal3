@@ -48,15 +48,13 @@ import com.isotrol.impe3.pms.core.MemoryContextTest;
 public abstract class AbtractEngineModelTest extends MemoryContextTest {
 	private static final HttpHeaders EMPTY_HEADERS = new MockHttpHeaders();
 
-	private static EngineModelLoader service;
-
 	/**
 	 * Class set up.
 	 * @throws PMSException
 	 */
 	@BeforeClass
 	public static void load() throws PMSException {
-		service = getBean(EngineModelLoader.class);
+		getBean(EngineModelLoader.class);
 	}
 
 	protected static void out(Response response) throws Exception {

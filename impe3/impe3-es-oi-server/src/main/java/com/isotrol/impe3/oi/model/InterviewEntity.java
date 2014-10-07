@@ -24,17 +24,16 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.MapKey;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
@@ -102,9 +101,9 @@ public class InterviewEntity extends VersionedEntity {
 	private Set<ClassEntity> classes;
 
 	/** Interview properties. */
-	@CollectionOfElements
+	@ElementCollection
 	@JoinTable(name = "OI_INTERVIEW_PROPERTY", joinColumns = @JoinColumn(name = "INTE_ID", nullable = false))
-	@MapKey(columns = @Column(name = "INTE_PROPERTY_NAME", length = Lengths.NAME))
+	@MapKeyColumn(name = "INTE_PROPERTY_NAME", length = Lengths.NAME)
 	@Column(name = "INTE_PROPERTY_VALUE", length = Lengths.DESCRIPTION)
 	private Map<String, String> properties;
 	

@@ -44,7 +44,6 @@ public class PageMapKeyTest {
 	private static ContentType ct1;
 	private static Category root;
 	private static Category level1;
-	private static Category level2;
 	private static Portal portal;
 
 	@BeforeClass

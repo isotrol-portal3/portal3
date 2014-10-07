@@ -24,8 +24,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Calendar;
 import java.util.List;
 
+import net.sf.derquinsej.hib3.seq.SequenceNotFoundException;
+
 import org.hibernate.Criteria;
-import org.hibernate.LockMode;
+import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -47,11 +49,11 @@ import com.isotrol.impe3.oi.model.ClassEntity;
 import com.isotrol.impe3.oi.model.ClassNameEntity;
 import com.isotrol.impe3.oi.model.ClassSetEntity;
 import com.isotrol.impe3.oi.model.InterviewEntity;
-import com.isotrol.impe3.oi.model.OIMemberEntity;
-import com.isotrol.impe3.oi.model.QaAEntity;
-import com.isotrol.impe3.oi.model.OISequenceEntity;
-import com.isotrol.impe3.oi.server.ClassKey;
 import com.isotrol.impe3.oi.model.OILogTableEntity;
+import com.isotrol.impe3.oi.model.OIMemberEntity;
+import com.isotrol.impe3.oi.model.OISequenceEntity;
+import com.isotrol.impe3.oi.model.QaAEntity;
+import com.isotrol.impe3.oi.server.ClassKey;
 import com.isotrol.impe3.oi.server.LogTableFilterDTO;
 
 
@@ -230,14 +232,14 @@ public class OIDAOImpl extends com.isotrol.impe3.hib.dao.DAOImpl implements DAO 
 	 * @see com.isotrol.impe3.oi.dao.DAO#getNextValue(java.lang.String)
 	 */
 	public synchronized long getNextValue(String id) throws ServiceException {
-		OISequenceEntity seq = (OISequenceEntity) getSession().get(OISequenceEntity.class, id, LockMode.UPGRADE);
+		OISequenceEntity seq = (OISequenceEntity) getSession().get(OISequenceEntity.class, id, LockOptions.UPGRADE);
 		if (seq == null) {
 			seq = new OISequenceEntity(id, 0);
 			try {
 				getSession().save(seq);
 				flush();
 			} catch (Exception e) {
-				seq = (OISequenceEntity) getSession().get(OISequenceEntity.class, id, LockMode.UPGRADE);
+				seq = (OISequenceEntity) getSession().get(OISequenceEntity.class, id, LockOptions.UPGRADE);
 				if (seq == null) {
 					throw new ServiceException();
 				}

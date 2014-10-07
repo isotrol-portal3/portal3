@@ -71,6 +71,7 @@ import com.isotrol.impe3.web20.server.MemberSchema;
 public class MemberIdxDAOImpl implements MemberIdxDAO, InitializingBean {
 
 	/** Store */
+	@SuppressWarnings("unused")
 	private Store<Long> store;
 	/** Queryable. */
 	private Queryable queryable;

@@ -30,6 +30,7 @@ import com.isotrol.impe3.idx.oc7.api.OpenCms7Schema;
  * @author Emilio Escobar Reyero
  *
  */
+@SuppressWarnings("deprecation")
 public class OpenCms7SchemaTest {
 
 	@Test

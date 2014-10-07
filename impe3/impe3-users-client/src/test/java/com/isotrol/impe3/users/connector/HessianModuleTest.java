@@ -20,12 +20,9 @@
 package com.isotrol.impe3.users.connector;
 
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.isotrol.impe3.core.modules.ModuleDefinition;
-import com.isotrol.impe3.test.ModuleTester;
-import com.isotrol.impe3.test.TestEnvironment;
 
 
 /**
@@ -34,26 +31,9 @@ import com.isotrol.impe3.test.TestEnvironment;
  * @author Andres Rodriguez Chamorro
  */
 public class HessianModuleTest {
-	private static TestEnvironment environment;
-	private static ModuleTester<HessianModule> tester;
-
-	@BeforeClass
-	public static void setUp() {
-		// environment = new TestEnvironmentBuilder().get();
-		// tester = environment.getModule(JndiModule.class);
-	}
-
 	/** Module definition. */
 	@Test
 	public void module() {
-		@SuppressWarnings("unused")
-		final ModuleDefinition<HessianModule> md = ModuleDefinition.of(HessianModule.class);
+		ModuleDefinition.of(HessianModule.class);
 	}
-
-	/** Start. */
-	@Test
-	public void start() {
-		// tester.start("config", TestSupport.config(ScheduledExecutorConfig.class, "poolSize", 3));
-	}
-
 }

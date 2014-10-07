@@ -83,7 +83,6 @@ public class FeedFlickrIndexer implements Indexer<Long, Object> {
 
 				final nu.xom.Document xml = getXmlDocument(input);
 
-				@SuppressWarnings("unchecked")
 				final Set<String> channels = categories(input);
 
 				final String id = ISO9075.encode(input.getUri());
@@ -174,6 +173,7 @@ public class FeedFlickrIndexer implements Indexer<Long, Object> {
 					item.appendChild(desc);
 				}
 
+				@SuppressWarnings("unchecked")
 				final List<SyndCategory> categories = input.getCategories();
 
 				if (categories != null) {
@@ -192,6 +192,7 @@ public class FeedFlickrIndexer implements Indexer<Long, Object> {
 			}
 
 			private Set<String> categories(SyndEntryImpl input) {
+				@SuppressWarnings("unchecked")
 				final List<SyndCategoryImpl> categories = input.getCategories();
 
 				if (categories != null && !categories.isEmpty()) {
@@ -202,6 +203,7 @@ public class FeedFlickrIndexer implements Indexer<Long, Object> {
 				} else {
 					final Object others = input.getForeignMarkup();
 					if (others instanceof List) {
+						@SuppressWarnings("unchecked")
 						final List<Element> elements = (List<Element>) others;
 						if (elements == null || elements.isEmpty()) {
 							return Sets.newHashSetWithExpectedSize(0);

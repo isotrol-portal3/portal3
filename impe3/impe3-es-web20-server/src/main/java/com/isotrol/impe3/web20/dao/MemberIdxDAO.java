@@ -20,7 +20,6 @@ package com.isotrol.impe3.web20.dao;
 
 import com.isotrol.impe3.dto.PageDTO;
 import com.isotrol.impe3.dto.PageFilter;
-import com.isotrol.impe3.web20.api.CommunityMemberSelDTO;
 import com.isotrol.impe3.web20.api.CommunityMembersFilterDTO;
 import com.isotrol.impe3.web20.api.MemberFilterDTO;
 import com.isotrol.impe3.web20.api.MemberSelDTO;

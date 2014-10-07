@@ -21,23 +21,12 @@ package com.isotrol.impe3.pms.core.impl;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.Maps;
 import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.State;
-import com.isotrol.impe3.pms.api.category.CategoriesService;
 import com.isotrol.impe3.pms.api.category.CategoryDTO;
-import com.isotrol.impe3.pms.api.category.CategorySelDTO;
-import com.isotrol.impe3.pms.api.category.CategoryTreeDTO;
-import com.isotrol.impe3.pms.core.MemoryContextTest;
 
 
 /**

@@ -192,6 +192,7 @@ public class FeedBurnerIndexer implements Indexer<Long, Object> {
 					item.appendChild(desc);
 				}
 
+				@SuppressWarnings("unchecked")
 				final List<SyndCategory> categories = input.getCategories();
 
 				if (categories != null) {

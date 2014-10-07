@@ -29,7 +29,6 @@ import org.junit.Test;
 import com.isotrol.impe3.pms.ext.api.AuthenticationProvider;
 import com.isotrol.impe3.pms.ext.api.Credentials;
 import com.isotrol.impe3.pms.ext.api.ExternalUserDataDTO;
-import com.isotrol.impe3.pms.ext.api.InvalidCredentialsException;
 
 
 public class LDAPAuthenticationProviderTest extends MemoryContextTest {

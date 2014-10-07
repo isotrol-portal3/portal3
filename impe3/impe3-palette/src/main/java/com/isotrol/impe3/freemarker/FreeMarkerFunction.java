@@ -30,6 +30,7 @@ import freemarker.template.TemplateModelException;
  * IMPE3 FreeMarker Function.
  * @author Andres Rodriguez
  */
+@SuppressWarnings("deprecation")
 public abstract class FreeMarkerFunction implements TemplateMethodModel {
 	/** Default constructor. */
 	public FreeMarkerFunction() {

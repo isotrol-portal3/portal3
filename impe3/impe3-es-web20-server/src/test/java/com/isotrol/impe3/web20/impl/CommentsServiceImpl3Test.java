@@ -19,12 +19,9 @@
 package com.isotrol.impe3.web20.impl;
 
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -37,8 +34,6 @@ import com.isotrol.impe3.web20.api.CommentRateDTO;
 import com.isotrol.impe3.web20.api.CommentsService;
 import com.isotrol.impe3.web20.api.MaxCommentRatesException;
 import com.isotrol.impe3.web20.api.NotAllowOwnerCommentRateException;
-import com.isotrol.impe3.web20.api.ResourceByCommunityCounterDTO;
-import com.isotrol.impe3.web20.api.ResourceCounterDTO;
 
 
 /**

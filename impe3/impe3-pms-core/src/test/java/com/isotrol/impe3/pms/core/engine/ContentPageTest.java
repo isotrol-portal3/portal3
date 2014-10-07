@@ -28,7 +28,6 @@ import com.isotrol.impe3.pms.api.minst.ModuleInstanceTemplateDTO;
 import com.isotrol.impe3.pms.api.page.PageClass;
 import com.isotrol.impe3.pms.api.portal.PortalsService;
 import com.isotrol.impe3.pms.core.MemoryContextTest.PageLoader.Page;
-import com.isotrol.impe3.pms.core.engine.EngineModelLoader;
 import com.isotrol.impe3.samples.calculator.CalculatorComponentModule;
 import com.isotrol.impe3.samples.calculator.CalculatorConnectorModule;
 
@@ -38,36 +37,27 @@ import com.isotrol.impe3.samples.calculator.CalculatorConnectorModule;
  * @author Andres Rodriguez
  */
 public class ContentPageTest extends AbtractEngineModelTest {
-	private String ct1;
-	private String cg0;
-	private String cg1;
 	private String portalId;
-	private String portalPath;
 	private PageLoader loader;
-	private String componentId;
-	private String cipId;
-	private String pageName;
 	private Page page;
-	private EngineModelLoader service;
 
 	/**
 	 * Portal with default page.
 	 */
 	@Test
 	public void test() throws Exception {
-		ct1 = loadContentType("ct").getId();
-		cg0 = loadCategory(null, 0).getId();
-		cg1 = loadCategory(null, 1).getId();
+		loadContentType("ct").getId();
+		loadCategory(null, 0).getId();
+		loadCategory(null, 1).getId();
 		final ConnectorsService cs = getBean(ConnectorsService.class);
 		final ModuleInstanceTemplateDTO template1 = cs.newTemplate(CalculatorConnectorModule.class.getName());
 		template1.setName(testString());
 		cs.save(template1.toModuleInstanceDTO());
 		portalId = loadPortal();
-		portalPath = getBean(PortalsService.class).getName(portalId).getName().getPath();
-		componentId = loadComponent(portalId, CalculatorComponentModule.class);
+		getBean(PortalsService.class).getName(portalId).getName().getPath();
+		loadComponent(portalId, CalculatorComponentModule.class);
 		loader = new PageLoader(portalId);
 		page = loader.create(PageClass.CONTENT);
-		//page.setContentType(ct1);
 		page.putComponents();
 		page.save();
 		page.layout();

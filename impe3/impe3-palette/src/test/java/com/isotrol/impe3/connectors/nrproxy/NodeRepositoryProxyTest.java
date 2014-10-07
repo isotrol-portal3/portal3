@@ -49,7 +49,7 @@ public class NodeRepositoryProxyTest {
 	/** Module definition. */
 	@Test
 	public void module() {
-		final ModuleDefinition<NodeRepositoryProxyModule> md = ModuleDefinition.of(NodeRepositoryProxyModule.class);
+		ModuleDefinition.of(NodeRepositoryProxyModule.class);
 	}
 
 	/** Module loading. */
@@ -63,6 +63,7 @@ public class NodeRepositoryProxyTest {
 	}
 
 	private static class TestNR extends ForwardingNodeRepository {
+		@SuppressWarnings("unused")
 		private final EngineMode mode;
 
 		TestNR(EngineMode mode) {
