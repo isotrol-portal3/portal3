@@ -77,6 +77,9 @@ public abstract class CategoryComponent extends AbstractFreeMarkerComponent {
 	/** Route. */
 	private Route route = null;
 	
+	/** Current navigation key. */
+	private NavigationKey navigationKey;
+	
 	/** Locale. */
 	private Locale locale = null;
 	
@@ -142,6 +145,11 @@ public abstract class CategoryComponent extends AbstractFreeMarkerComponent {
 		this.route = route;
 		this.locale = (route != null) ? route.getLocale() : null;
 	}
+	
+	@Inject
+	public void setNavigationKey(NavigationKey navigationKey) {
+		this.navigationKey = navigationKey;
+	}
 
 	protected Categories getCategories() {
 		return categories;
@@ -192,16 +200,13 @@ public abstract class CategoryComponent extends AbstractFreeMarkerComponent {
 			return config.current();
 		}
 		
-		final PageKey p = route.getPage();
-		if(p instanceof WithNavigation) {
-			final NavigationKey navigationKey = ((WithNavigation)p).getNavigationKey();
-			if (navigationKey != null && navigationKey.isCategory()) {
-				Category c = navigationKey.getCategory();
-				if (categories.containsValue(c)) {
-					return c;
-				}
+		if (navigationKey != null && navigationKey.isCategory()) {
+			Category c = navigationKey.getCategory();
+			if (categories.containsValue(c)) {
+				return c;
 			}
 		}
+
 		return null;
 	}
 
