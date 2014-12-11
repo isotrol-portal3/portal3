@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.0.3</version>
+		<version>3.0.4</version>
 	</parent>
 	<artifactId>impe3-content-client</artifactId>
 	<name>IMPE3 :: Content Client</name>
@@ -11,12 +11,12 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-api</artifactId>
-			<version>3.0.3</version>
+			<version>3.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-content-api</artifactId>
-			<version>3.0.3</version>
+			<version>3.0.4</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -2,7 +2,7 @@
   <parent>
     <artifactId>impe3</artifactId>
     <groupId>com.isotrol.impe3</groupId>
-    <version>3.0.3</version>
+    <version>3.0.4</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>impe3-samples</artifactId>
@@ -11,18 +11,18 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-core</artifactId>
-			<version>3.0.3</version>
+			<version>3.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-test</artifactId>
-			<version>3.0.3</version>
+			<version>3.0.4</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-nr-core</artifactId>
-			<version>3.0.3</version>
+			<version>3.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
