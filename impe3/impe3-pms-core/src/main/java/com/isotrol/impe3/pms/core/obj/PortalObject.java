@@ -305,7 +305,8 @@ public final class PortalObject extends AbstractRoutableObject {
 			.setName(name.getDisplayName()).setContentTypes(model.getContentTypes())
 			.setCategories(model.getCategories()).setBases(ubases).setProperties(getActiveProperties(portals))
 			.setUncategorized(isUncategorized(portals)).setDue(isDue(portals))
-			.setSetFilters(Maps.transformValues(getSetFilters(), SetFilterValue.TYPE)).setDevices(dm);
+			.setSetFilters(Maps.transformValues(getSetFilters(), SetFilterValue.TYPE)).setDevices(dm)
+			.setSessionCSRF(isSessionCSRF(portals));
 
 		// Locales
 		if (defaultLocale != null) {
@@ -379,7 +380,7 @@ public final class PortalObject extends AbstractRoutableObject {
 		return parent.isDue(portals);
 	}
 	
-	public boolean isSessionCSRF(PortalsObject portals) {
+	private boolean isSessionCSRF(PortalsObject portals) {
 		final PortalObject parent = portals.getParent(getId());
 		if (sessionCSRF != PortalInheritableFlag.INHERIT || parent == null) {
 			return sessionCSRF.toBoolean(false);
