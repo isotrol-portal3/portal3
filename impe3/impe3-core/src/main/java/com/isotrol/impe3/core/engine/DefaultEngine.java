@@ -53,6 +53,7 @@ import com.isotrol.impe3.api.DeviceType;
 import com.isotrol.impe3.api.HttpRequestContext;
 import com.isotrol.impe3.api.LocaleResolutionParams;
 import com.isotrol.impe3.api.NoCSRFCheck;
+import com.isotrol.impe3.api.NoCallingRoute;
 import com.isotrol.impe3.api.NotFoundPortalException;
 import com.isotrol.impe3.api.PageKey;
 import com.isotrol.impe3.api.PageRequestContext;
@@ -401,8 +402,9 @@ public abstract class DefaultEngine implements Engine {
 		final Portal portal = portalModel.getPortal();
 		final Device device = actionFound(model.getDevices().get(deviceId), "Device not found");
 		final CIP cip = actionFound(portalModel.getPages().getCIP(cipId), "CIP not found");
-		final Route route = actionFound(RouteParams.fromParams(portal, model.getDevices(), query),
-			"Invalid source route");
+		// Calling route
+		final Route callingRoute = RouteParams.fromParams(portal, model.getDevices(), query);
+		final Route route = callingRoute != null ? callingRoute : Route.of(request.isSecure(), PageKey.main(), device, locale);
 		final PrincipalContext principalContext = principalContextBuilder.apply(portalId);
 		// TODO
 		final ClientRequestContext crc = RequestContexts.client(device, DefaultDeviceCapabilities.get(device), locale);
@@ -414,6 +416,10 @@ public abstract class DefaultEngine implements Engine {
 		// Check CSRF token
 		if (portal.isSessionCSRF() && !action.getClass().isAnnotationPresent(NoCSRFCheck.class)) {
 			actionFound(request.getCSRFToken().equals(RouteParams.getSessionCSRF(query)), "Invalid CSRF token");
+		}
+		// Check if calling route is needed
+		if (callingRoute == null && !action.getClass().isAnnotationPresent(NoCallingRoute.class)) {
+			actionFound(callingRoute, "Invalid source route");
 		}
 		return action;
 	}

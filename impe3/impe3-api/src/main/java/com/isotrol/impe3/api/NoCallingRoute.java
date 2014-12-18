@@ -17,41 +17,18 @@
  * along with Port@l.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.isotrol.impe3.api.component;
+package com.isotrol.impe3.api;
 
-
-import java.util.UUID;
-
-import com.isotrol.impe3.api.PortalRequestContext;
-import com.isotrol.impe3.api.Route;
-
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Port@l Action Request Context.
+ * Annotation to specify that an action does not need the calling page route.
  * @author Andres Rodriguez
  */
-public interface ActionContext extends PortalRequestContext {
-	/**
-	 * Returns the action name.
-	 * @return The action name.
-	 */
-	String getName();
-
-	/**
-	 * Returns the calling CIP id.
-	 * @return The calling CIP id.
-	 */
-	UUID getId();
-
-	/**
-	 * Returns the calling route (if known).
-	 * @return The calling route (if known).
-	 */
-	Route getRoute();
-	
-	/**
-	 * Returns a fake render context for a running action.
-	 * @return A render context.
-	 */
-	RenderContext getRenderContext();
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface NoCallingRoute {
 }
