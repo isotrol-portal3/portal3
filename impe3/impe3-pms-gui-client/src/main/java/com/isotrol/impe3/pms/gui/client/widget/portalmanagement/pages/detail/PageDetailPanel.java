@@ -423,7 +423,7 @@ public class PageDetailPanel extends AbstractPageDetailPanel {
 		} else if (selectionPolicy == ESelectionPolicy.HIERARCHY) {
 			heading = getPmsMessages().headerRootCategorySelector();
 		}
-		wCategories.setHeading(heading);
+		wCategories.setHeadingText(heading);
 	}
 
 	/**

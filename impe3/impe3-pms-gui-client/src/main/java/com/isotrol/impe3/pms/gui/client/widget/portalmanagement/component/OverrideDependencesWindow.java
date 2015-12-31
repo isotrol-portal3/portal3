@@ -113,7 +113,7 @@ public class OverrideDependencesWindow extends TypicalWindow implements IDetailP
 	private void initThis() {
 		setWidth(PmsConstants.DETAIL_WINDOW_WIDTH);
 		setScrollMode(Scroll.AUTO);
-		setHeading(pmsMessages.dependencesWidgetTitle());
+		setHeadingText(pmsMessages.dependencesWidgetTitle());
 	}
 
 

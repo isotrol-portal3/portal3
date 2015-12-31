@@ -313,7 +313,7 @@ public abstract class APortalName extends TypicalWindow implements IDetailPanel 
 		setModal(true);
 		setWidth(600);
 		setAutoHeight(true);
-		setHeading(getHeadingText());
+		setHeadingText(getHeadingText());
 		setClosable(false);
 		setShadow(false);
 	}
@@ -359,7 +359,7 @@ public abstract class APortalName extends TypicalWindow implements IDetailPanel 
 	 */
 	private void addGridLocales() {
 		ContentPanel containerGrid = new ContentPanel(new FitLayout());
-		containerGrid.setHeading(pmsMessages.labelOtherLocales());
+		containerGrid.setHeadingText(pmsMessages.labelOtherLocales());
 		containerGrid.setStyleAttribute("margin", "0 10px 10px");
 		containerGrid.setHeight(GRID_PANEL_HEIGHT);
 
@@ -374,7 +374,7 @@ public abstract class APortalName extends TypicalWindow implements IDetailPanel 
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(LocaleNameModel.PROPERTY_LOCALE);
-		column.setHeader(pmsMessages.columnHeaderLanguage());
+		column.setHeaderText(pmsMessages.columnHeaderLanguage());
 		column.setWidth(COL_LOCALE_WIDTH);
 		column.setRenderer(new HtmlEncodeGridCellRenderer());
 		column.setEditor(new CellEditor(createTextFieldEditor(true)));
@@ -382,7 +382,7 @@ public abstract class APortalName extends TypicalWindow implements IDetailPanel 
 
 		column = new ColumnConfig();
 		column.setId(LocaleNameModel.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COL_NAME_WIDTH);
 		column.setRenderer(new HtmlEncodeGridCellRenderer());
 		column.setEditor(new CellEditor(createTextFieldEditor(false)));

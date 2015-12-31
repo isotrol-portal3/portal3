@@ -89,7 +89,7 @@ public class AllOwnComponentManagement extends AOwnComponentManagement {
 		ColumnConfig column = new ColumnConfig();
 		column.setRenderer(correctnessRenderer);
 		column.setId(ModuleInstanceSelModelData.PROPERTY_CORRECTNESS);
-		column.setHeader(getPmsMessages().columnHeaderValid());
+		column.setHeaderText(getPmsMessages().columnHeaderValid());
 		column.setWidth(COLUMN_CORRECTNESS_WIDTH);
 		configs.add(3, column);
 	}

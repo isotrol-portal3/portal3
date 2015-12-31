@@ -181,7 +181,7 @@ public abstract class APropertiesManagement<M extends ModelData> extends PmsCont
 	 */
 	private void initThis() {
 		setLayout(new FitLayout());
-		setHeading(getHeaderText());
+		setHeadingText(getHeaderText());
 	}
 
 	/**

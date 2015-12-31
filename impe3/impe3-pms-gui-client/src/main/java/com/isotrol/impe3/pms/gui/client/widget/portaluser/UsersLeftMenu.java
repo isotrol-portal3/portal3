@@ -74,7 +74,7 @@ public class UsersLeftMenu extends ALeftPanel {
 	protected void configMenuPanel(LayoutContainer container) {
 
 		ContentPanel cpUsersManagementMenu = new ContentPanel();
-		cpUsersManagementMenu.setHeading(userMessages.menuItem1SystemManagement());
+		cpUsersManagementMenu.setHeadingText(userMessages.menuItem1SystemManagement());
 		// cpUsersManagementMenu.setIconStyle(PmsStyles.ADMINICON);
 		cpUsersManagementMenu.setAutoHeight(true);
 		cpUsersManagementMenu.setBodyBorder(false);

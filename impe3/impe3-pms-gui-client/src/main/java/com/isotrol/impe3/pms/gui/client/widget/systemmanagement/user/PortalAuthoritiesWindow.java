@@ -178,7 +178,7 @@ public class PortalAuthoritiesWindow extends TypicalWindow implements IDetailPan
 	 * Inits this component properties.<br/>
 	 */
 	private void initThis() {
-		setHeading(pmsMessages.headerPortalAuthorities(userSelDto.getDisplayName(), portalSelDto.getName()));
+		setHeadingText(pmsMessages.headerPortalAuthorities(userSelDto.getDisplayName(), portalSelDto.getName()));
 		setWidth(Constants.SMALL_WINDOW_WIDTH);
 		setLayout(new FitLayout());
 		setScrollMode(Scroll.AUTOY);

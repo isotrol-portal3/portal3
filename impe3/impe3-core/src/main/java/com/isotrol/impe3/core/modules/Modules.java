@@ -36,6 +36,7 @@ import com.isotrol.impe3.api.ContentTypes;
 import com.isotrol.impe3.api.Devices;
 import com.isotrol.impe3.api.EngineMode;
 import com.isotrol.impe3.api.FileLoader;
+import com.isotrol.impe3.api.PortalConfiguration;
 import com.isotrol.impe3.api.PortalKeys;
 import com.isotrol.impe3.api.URIGenerator;
 import com.isotrol.impe3.api.component.Component;
@@ -61,7 +62,7 @@ public final class Modules {
 	/** Forbidden types in relationships. */
 	@SuppressWarnings("unchecked")
 	private static final ImmutableSet<Class<?>> FORBIDDEN = of(Component.class, ModuleStarter.class,
-		StartedModule.class, Configuration.class, URIGenerator.class, RenderContext.class, ComponentRenderer.class,
+		StartedModule.class, PortalConfiguration.class, Configuration.class, URIGenerator.class, RenderContext.class, ComponentRenderer.class,
 		ContentLoader.class);
 
 	/** Forbidden provisions. */

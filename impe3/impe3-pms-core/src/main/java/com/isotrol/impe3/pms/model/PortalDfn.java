@@ -188,6 +188,12 @@ public class PortalDfn extends AbstractRoutableDfn<PortalDfn, PortalEntity, Port
 	@Column(name = "PRTL_SESSION_CSRF", nullable = true)
 	private Boolean sessionCSRF;
 
+	/** Portal Configuration Values. */
+	@ElementCollection
+	@JoinTable(name = "PORTAL_CONFIGURATION", joinColumns = @JoinColumn(name = "PRTL_ID", nullable = false))
+	@MapKeyColumn(name = "CNFG_BEAN_NAME", length = Lengths.DESCRIPTION)
+	private Map<String, PortalConfigurationValue> portalConfiguration;
+	
 	/** Default constructor. */
 	public PortalDfn() {
 	}
@@ -713,4 +719,20 @@ public class PortalDfn extends AbstractRoutableDfn<PortalDfn, PortalEntity, Port
 	public void setSessionCSRF(Boolean sessionCSRF) {
 		this.sessionCSRF = sessionCSRF;
 	}
+
+	/**
+	 * @return the portalConfiguration
+	 */
+	public Map<String, PortalConfigurationValue> getPortalConfiguration() {
+		return portalConfiguration;
+	}
+
+	/**
+	 * @param portalConfiguration the portalConfiguration to set
+	 */
+	public void setPortalConfiguration(Map<String, PortalConfigurationValue> portalConfiguration) {
+		this.portalConfiguration = portalConfiguration;
+	}
+	
+	
 }

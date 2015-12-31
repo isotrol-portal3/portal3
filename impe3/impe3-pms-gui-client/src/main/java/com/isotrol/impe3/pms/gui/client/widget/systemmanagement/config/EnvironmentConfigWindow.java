@@ -192,7 +192,7 @@ public class EnvironmentConfigWindow extends TypicalWindow implements IDetailPan
 		setModal(true);
 		setWidth(500);
 		setAutoHeight(true);
-		setHeading(pmsMessages.menuItem2Configuration());
+		setHeadingText(pmsMessages.menuItem2Configuration());
 	}
 
 	private void addFormFields() {

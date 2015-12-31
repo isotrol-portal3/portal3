@@ -83,6 +83,7 @@ import com.isotrol.impe3.pms.api.portal.DiPDTO;
 import com.isotrol.impe3.pms.api.portal.IllegalPortalParentException;
 import com.isotrol.impe3.pms.api.portal.PortalCacheDTO;
 import com.isotrol.impe3.pms.api.portal.PortalCategoryMode;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesTemplateDTO;
@@ -309,6 +310,8 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 	@Transactional(rollbackFor = Throwable.class)
 	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
 	public List<PropertyDTO> getAvailableProperties(String portalId) throws PMSException {
+		loadContextGlobal().toPortal(portalId).getPortalConfigurations();
+		
 		return loadContextGlobal().toPortal(portalId).getAvailableProperties();
 	}
 
@@ -322,6 +325,15 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 		return ctx.getProperties();
 	}
 
+	/**
+	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getAvailableProperties(java.lang.String)
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
+	public List<PortalConfigurationSelDTO> getPortalConfigurations(String portalId) throws PMSException {
+		return loadContextGlobal().toPortal(portalId).getPortalConfigurations();
+	}
+	
 	/**
 	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getPortals()
 	 */

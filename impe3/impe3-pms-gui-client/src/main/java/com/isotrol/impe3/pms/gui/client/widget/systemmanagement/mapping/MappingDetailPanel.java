@@ -388,9 +388,9 @@ public class MappingDetailPanel extends TypicalWindow implements IDetailPanel {
 		setLayout(new FitLayout());
 		setLayoutOnChange(true);
 		if (isEdition()) {
-			setHeading(sourceMappingTemplateDto.getMapping().getName());
+			setHeadingText(sourceMappingTemplateDto.getMapping().getName());
 		} else {
-			setHeading(messages.headerDetailPanel());
+			setHeadingText(messages.headerDetailPanel());
 		}
 		setWidth(Constants.EIGHTY_FIVE_PERCENT);
 		setHeight(WINDOW_HEIGHT);
@@ -493,7 +493,7 @@ public class MappingDetailPanel extends TypicalWindow implements IDetailPanel {
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(ContentTypeMappingModelData.PROPERTY_CONTENT_TYPE);
-		column.setHeader(pmsMessages.columnHeaderContentType());
+		column.setHeaderText(pmsMessages.columnHeaderContentType());
 		column.setRenderer(ctCellRenderer);
 		column.setWidth(COL_CONTENT_TYPE_WIDTH);
 		column.setEditor(editor);
@@ -501,7 +501,7 @@ public class MappingDetailPanel extends TypicalWindow implements IDetailPanel {
 
 		column = new ColumnConfig();
 		column.setId(ContentTypeMappingModelData.PROPERTY_MAPPING);
-		column.setHeader(pmsMessages.columnHeaderMapping());
+		column.setHeaderText(pmsMessages.columnHeaderMapping());
 		column.setWidth(COL_MAPPING_WIDTH);
 		column.setRenderer(new GridCellRenderer<ContentTypeMappingModelData>() {
 			public Object render(ContentTypeMappingModelData model, String property, ColumnData config, int rowIndex,
@@ -623,13 +623,13 @@ public class MappingDetailPanel extends TypicalWindow implements IDetailPanel {
 		final ColumnConfig columnTree = new ColumnConfig();
 		columnTree.setId(CategoryMappingModelData.PROPERTY_CATEGORY);
 		columnTree.setRenderer(catCellRenderer);
-		columnTree.setHeader(pmsMessages.columnHeaderCategory());
+		columnTree.setHeaderText(pmsMessages.columnHeaderCategory());
 		columnTree.setWidth(COL_CATEGORY_WIDTH);
 		configs.add(columnTree);
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(CategoryMappingModelData.PROPERTY_MAPPING);
-		column.setHeader(pmsMessages.columnHeaderMapping());
+		column.setHeaderText(pmsMessages.columnHeaderMapping());
 		column.setWidth(COL_MAPPING_WIDTH);
 		column.setRenderer(new GridCellRenderer<CategoryMappingModelData>() {
 
@@ -784,7 +784,7 @@ public class MappingDetailPanel extends TypicalWindow implements IDetailPanel {
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(SetMappingModelData.PROPERTY_SET);
-		column.setHeader(pmsMessages.columnHeaderSet());
+		column.setHeaderText(pmsMessages.columnHeaderSet());
 		column.setWidth(COL_CONTENT_TYPE_WIDTH);
 		column.setRenderer(new HtmlEncodeGridCellRenderer());
 		column.setEditor(new CellEditor(tfCtEditor));
@@ -792,7 +792,7 @@ public class MappingDetailPanel extends TypicalWindow implements IDetailPanel {
 
 		column = new ColumnConfig();
 		column.setId(SetMappingModelData.PROPERTY_MAPPING);
-		column.setHeader(pmsMessages.columnHeaderMapping());
+		column.setHeaderText(pmsMessages.columnHeaderMapping());
 		column.setWidth(COL_MAPPING_WIDTH);
 		column.setRenderer(new GridCellRenderer<SetMappingModelData>() {
 			public Object render(SetMappingModelData model, String property, ColumnData config, int rowIndex,
@@ -1199,7 +1199,7 @@ public class MappingDetailPanel extends TypicalWindow implements IDetailPanel {
 	 */
 	private void createCategoryTreePopup() {
 		catWindow = new Window();
-		catWindow.setHeading(pmsMessages.headerCategorySelector());
+		catWindow.setHeadingText(pmsMessages.headerCategorySelector());
 		catWindow.setScrollMode(Scroll.AUTO);
 		catWindow.setHeight(CATEGORIES_POPUP_HEIGHT);
 		catWindow.setWidth(CATEGORIES_POPUP_WIDTH);

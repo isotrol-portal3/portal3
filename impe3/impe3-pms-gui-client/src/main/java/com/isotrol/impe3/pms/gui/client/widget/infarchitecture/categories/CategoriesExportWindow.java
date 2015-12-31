@@ -138,7 +138,7 @@ public class CategoriesExportWindow extends TypicalWindow {
 		setAutoHeight(true);
 		setModal(true);
 		setHeaderVisible(true);
-		setHeading(pmsMessages.headerCategoriesExport());
+		setHeadingText(pmsMessages.headerCategoriesExport());
 		setClosable(false);
 		setScrollMode(Scroll.NONE);
 

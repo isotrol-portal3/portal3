@@ -198,7 +198,7 @@ public class PortalDeviceEditionPanel extends TypicalWindow implements IDetailPa
 		setHeight(500);
 		setModal(true);
 		setHeaderVisible(true);
-		setHeading("Dispositivos");
+		setHeadingText("Dispositivos");
 		setClosable(false);
 		setScrollMode(Scroll.AUTO);
 	}
@@ -250,7 +250,7 @@ public class PortalDeviceEditionPanel extends TypicalWindow implements IDetailPa
 		CheckColumnConfig checkColumn = new CheckColumnConfig();
 		checkColumn.setId(DeviceInPortalModelData.PROPERTY_ACTIVE);
 		checkColumn.setWidth(50);
-		checkColumn.setHeader(pmsMessages.columnHeaderActive());
+		checkColumn.setHeaderText(pmsMessages.columnHeaderActive());
 		checkColumn.setAlignment(HorizontalAlignment.CENTER);
 		CellEditor checkActiveEditor = new CellEditor(new CheckBox());
 		checkColumn.setEditor(checkActiveEditor);
@@ -284,7 +284,7 @@ public class PortalDeviceEditionPanel extends TypicalWindow implements IDetailPa
 		};
 		checkDefaultColumn.setId(DeviceInPortalModelData.PROPERTY_DEFAULT);
 		checkDefaultColumn.setWidth(50);
-		checkDefaultColumn.setHeader(pmsMessages.columnHeaderDefault());
+		checkDefaultColumn.setHeaderText(pmsMessages.columnHeaderDefault());
 		checkDefaultColumn.setAlignment(HorizontalAlignment.CENTER);
 		CellEditor checkDefaultEditor = new CellEditor(new CheckBox());
 		checkDefaultColumn.setEditor(checkDefaultEditor);
@@ -294,13 +294,13 @@ public class PortalDeviceEditionPanel extends TypicalWindow implements IDetailPa
 		config.setId(DeviceInPortalModelData.PROPERTY_NAME);
 		config.setWidth(100);
 		config.setRenderer(new HtmlEncodeTreeGridCellRenderer());
-		config.setHeader(pmsMessages.columnHeaderDevice());
+		config.setHeaderText(pmsMessages.columnHeaderDevice());
 		configs.add(config);
 
 		config = new ColumnConfig();
 		config.setId(DeviceInPortalModelData.PROPERTY_PATH);
 		config.setWidth(200);
-		config.setHeader(pmsMessages.columnHeaderName());
+		config.setHeaderText(pmsMessages.columnHeaderName());
 		config.setRenderer(new HtmlEncodeGridCellRenderer());
 		TextField<String> textEditor = new TextField<String>();
 		config.setEditor(new CellEditor(textEditor));
@@ -310,7 +310,7 @@ public class PortalDeviceEditionPanel extends TypicalWindow implements IDetailPa
 		config = new ColumnConfig();
 		config.setId(DeviceInPortalModelData.PROPERTY_USE_NAME);
 		config.setWidth(200);
-		config.setHeader(pmsMessages.columnHeaderNameUse());
+		config.setHeaderText(pmsMessages.columnHeaderNameUse());
 		final ComboBox<SimpleModelData> cbUseName = new ComboBox<SimpleModelData>();
 		cbUseName.setTriggerAction(TriggerAction.ALL);
 		cbUseName.setForceSelection(true);

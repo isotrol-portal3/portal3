@@ -275,7 +275,7 @@ public class RoutingDomainDetailsEditor extends TypicalWindow implements IDetail
 		} else { // edit
 			title = pmsMessages.headerRoutingDomainEditorEdit(routingDomainDto.getName());
 		}
-		setHeading(title);
+		setHeadingText(title);
 
 		String name = routingDomainDto.getName();
 		tfName.setValue(name);

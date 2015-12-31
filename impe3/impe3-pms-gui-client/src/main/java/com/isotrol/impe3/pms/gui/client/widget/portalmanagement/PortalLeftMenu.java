@@ -224,7 +224,7 @@ public class PortalLeftMenu extends ALeftPanel {
 
 	private void addGeneralAdminItemMenu(LayoutContainer container) {
 		adminPanel = new MenuItemLevelOnePanel();
-		adminPanel.setHeading(getPmsMessages().menuItem1GeneralManagement());
+		adminPanel.setHeadingText(getPmsMessages().menuItem1GeneralManagement());
 		adminPanel.setIconStyle(getPmsStyles().iconPortalManagement());
 		container.add(adminPanel);
 
@@ -405,7 +405,7 @@ public class PortalLeftMenu extends ALeftPanel {
 	@SuppressWarnings("unused")
 	private void addDisplayItemMenu(LayoutContainer container) {
 		MenuItemLevelOnePanel panel = new MenuItemLevelOnePanel();
-		panel.setHeading(getPmsMessages().menuItem1Display());
+		panel.setHeadingText(getPmsMessages().menuItem1Display());
 		panel.setIconStyle(getStyles().iPreview());
 		container.add(panel);
 
@@ -454,7 +454,7 @@ public class PortalLeftMenu extends ALeftPanel {
 	private void addComponentsItemMenu(LayoutContainer container) {
 
 		MenuItemLevelOnePanel panel = new MenuItemLevelOnePanel();
-		panel.setHeading(getPmsMessages().headerComponentsManagement());
+		panel.setHeadingText(getPmsMessages().headerComponentsManagement());
 		panel.setIconStyle(getPmsStyles().menuIconComponentsPackages());
 		container.add(panel);
 
@@ -524,7 +524,7 @@ public class PortalLeftMenu extends ALeftPanel {
 	private void addPagesItemMenu(LayoutContainer container) {
 
 		MenuItemLevelOnePanel panel = new MenuItemLevelOnePanel();
-		panel.setHeading(getPmsMessages().menuItem1Pages());
+		panel.setHeadingText(getPmsMessages().menuItem1Pages());
 		panel.setIconStyle(getPmsStyles().iconPage());
 		container.add(panel);
 
@@ -643,7 +643,7 @@ public class PortalLeftMenu extends ALeftPanel {
 	private void addHelpItemMenu(LayoutContainer container) {
 
 		MenuItemLevelOnePanel panel = new MenuItemLevelOnePanel();
-		panel.setHeading(getPmsMessages().menuItem1Help());
+		panel.setHeadingText(getPmsMessages().menuItem1Help());
 		panel.setIconStyle(getPmsStyles().menuIconHelp());
 		container.add(panel);
 

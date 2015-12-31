@@ -57,4 +57,12 @@ public class TypicalWindow extends GenericWindow {
 		setWidth(Constants.EIGHTY_FIVE_PERCENT);
 		setClosable(true);
 	}
+
+	/**
+	 * Sets the title text for the panel as HTML.
+	 * @param dateTimePickerText The title text.
+	 */
+	public void setHeading(String text) {
+		this.setHeadingText(text);
+	}
 }

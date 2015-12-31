@@ -22,12 +22,13 @@ package com.isotrol.impe3.core.modules;
 
 import java.lang.reflect.Method;
 
-import net.sf.derquinsej.i18n.Localized;
-
 import com.google.common.base.Predicate;
 import com.isotrol.impe3.core.config.ConfigurationDefinition;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.support.Named;
 import com.isotrol.impe3.core.support.NamedSupport;
+
+import net.sf.derquinsej.i18n.Localized;
 
 
 /**
@@ -43,6 +44,8 @@ public class Dependency extends Relationship {
 	private final boolean internal;
 	/** If the dependency is the configuration. */
 	private final boolean configuration;
+	/** If the dependency is a portal configuration. */
+	private final boolean portalConfiguration;
 
 	/** Predicate for required dependencies. */
 	public static final Predicate<Dependency> IS_REQUIRED = new Predicate<Dependency>() {
@@ -59,7 +62,7 @@ public class Dependency extends Relationship {
 
 	static final Predicate<Dependency> IS_EXTERNAL = new Predicate<Dependency>() {
 		public boolean apply(Dependency input) {
-			return !input.internal && !input.configuration;
+			return !input.internal && !input.configuration && !input.portalConfiguration;
 		}
 	};
 
@@ -69,6 +72,7 @@ public class Dependency extends Relationship {
 		this.required = required;
 		this.internal = Modules.isInternalDependency(type);
 		this.configuration = ConfigurationDefinition.IS_CONFIGURATION.apply(type);
+		this.portalConfiguration = PortalConfigurationDefinition.IS_PORTAL_CONFIGURATION.apply(type);
 	}
 
 	/**
@@ -96,4 +100,12 @@ public class Dependency extends Relationship {
 	public boolean isConfiguration() {
 		return configuration;
 	}
+
+	/**
+	 * @return the portalConfiguration
+	 */
+	public boolean isPortalConfiguration() {
+		return portalConfiguration;
+	}
+	
 }

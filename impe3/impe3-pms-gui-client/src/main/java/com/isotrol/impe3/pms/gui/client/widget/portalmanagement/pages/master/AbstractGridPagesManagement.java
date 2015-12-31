@@ -244,7 +244,7 @@ public abstract class AbstractGridPagesManagement extends AbstractPagesManagemen
 		// name
 		column = new ColumnConfig();
 		column.setId(PageSelModelData.PROPERTY_NAME);
-		column.setHeader(getPmsMessages().columnHeaderName());
+		column.setHeaderText(getPmsMessages().columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		GridCellRenderer<InheritedPageSelModelData> renderer = getNameCellRenderer();
 		if (renderer != null) {
@@ -256,7 +256,7 @@ public abstract class AbstractGridPagesManagement extends AbstractPagesManagemen
 		column = new ColumnConfig();
 		column.setId(PageSelModelData.PROPERTY_DESCRIPTION);
 		column.setWidth(COLUMN_DESCRIPTION_WIDTH);
-		column.setHeader(getPmsMessages().columnHeaderDescription());
+		column.setHeaderText(getPmsMessages().columnHeaderDescription());
 		configs.add(column);
 
 		ColumnModel cm = new ColumnModel(configs);

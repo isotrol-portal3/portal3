@@ -167,7 +167,7 @@ public abstract class AModuleView<M extends ModelData, D> extends LayoutContaine
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(AbstractModuleModelData.PROPERTY_NAME);
-		column.setHeader(pmsMessages.labelName());
+		column.setHeaderText(pmsMessages.labelName());
 		column.setWidth(COLUMNNAMEWIDTH);
 		configs.add(column);
 

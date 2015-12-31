@@ -248,19 +248,19 @@ public class InheritedComponentManagement extends PmsContentPanel {
 
 		column = new ColumnConfig();
 		column.setId(Constants.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(InheritedComponentInstanceSelModelData.PROPERTY_MODULE);
-		column.setHeader(pmsMessages.columnHeaderModule());
+		column.setHeaderText(pmsMessages.columnHeaderModule());
 		column.setWidth(COLUMN_MODULE_WIDTH);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(InheritedComponentInstanceSelModelData.PROPERTY_CONFIGURATION);
-		column.setHeader(pmsMessages.columnHeaderConfiguration());
+		column.setHeaderText(pmsMessages.columnHeaderConfiguration());
 		column.setWidth(COLUMN_CONFIGURATION_WIDTH);
 		column.setRenderer(new GridCellRenderer<InheritedComponentInstanceSelModelData>() {
 
@@ -287,7 +287,7 @@ public class InheritedComponentManagement extends PmsContentPanel {
 
 		column = new ColumnConfig();
 		column.setId(InheritedComponentInstanceSelModelData.PROPERTY_DEPENDENCIES);
-		column.setHeader(pmsMessages.columnHeaderDependences());
+		column.setHeaderText(pmsMessages.columnHeaderDependences());
 		column.setWidth(COLUMN_DEPENDENCIES_WIDTH);
 		column.setRenderer(new GridCellRenderer<InheritedComponentInstanceSelModelData>() {
 

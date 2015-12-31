@@ -72,7 +72,7 @@ public abstract class AModuleDTOView<M extends AbstractModuleModelData<D>, D ext
 	private void addColumnVersion(List<ColumnConfig> configs) {
 		ColumnConfig column = new ColumnConfig();
 		column.setId(AbstractModuleModelData.PROPERTY_VERSION);
-		column.setHeader(getPmsMessages().labelVersion());
+		column.setHeaderText(getPmsMessages().labelVersion());
 		column.setWidth(COLUMNVERSIONWIDTH);
 		
 		configs.add(column);

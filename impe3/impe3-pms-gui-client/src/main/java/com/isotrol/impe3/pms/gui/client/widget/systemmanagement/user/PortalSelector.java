@@ -128,7 +128,7 @@ public class PortalSelector extends TypicalWindow implements IInitializableWidge
 	 * Inits this component properties.<br/>
 	 */
 	private void initThis() {
-		setHeading(pmsMessages.headerPortalSelector());
+		setHeadingText(pmsMessages.headerPortalSelector());
 		setWidth(Constants.SMALL_WINDOW_WIDTH);
 		setClosable(true);
 		setLayout(new FitLayout());

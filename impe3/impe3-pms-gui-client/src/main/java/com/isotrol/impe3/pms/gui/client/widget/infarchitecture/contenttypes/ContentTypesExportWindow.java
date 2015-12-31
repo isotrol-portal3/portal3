@@ -161,7 +161,7 @@ public class ContentTypesExportWindow extends TypicalWindow {
 	@Override
 	protected void beforeRender() {
 
-		setHeading(pmsMessages.headerContentTypesExport());
+		setHeadingText(pmsMessages.headerContentTypesExport());
 		setClosable(true);
 		setWidth(WINDOW_WIDTH);
 		setLayout(new FitLayout());
@@ -227,13 +227,13 @@ public class ContentTypesExportWindow extends TypicalWindow {
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(ContentTypeSelModelData.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(ContentTypeSelModelData.PROPERTY_DESCRIPTION);
-		column.setHeader(pmsMessages.columnHeaderDescription());
+		column.setHeaderText(pmsMessages.columnHeaderDescription());
 		column.setWidth(COLUMN_DESCRIPTION_WIDTH);
 		configs.add(column);
 

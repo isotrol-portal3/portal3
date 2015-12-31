@@ -289,7 +289,7 @@ public class ChangeUserInfoWindow extends Window implements IDetailPanel {
 			}
 
 			public void onSuccess(Void result) {
-				userInfoPanel.getLabelUsername().setText(tfDisplayName.getValue());
+				userInfoPanel.getLabelUsername().setHtml(tfDisplayName.getValue());
 				
 				hide();
 				util.unmask();

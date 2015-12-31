@@ -169,7 +169,7 @@ public class ConnectorsExportWindow extends TypicalWindow {
 	@Override
 	protected void beforeRender() {
 
-		setHeading(pmsMessages.headerConnectorsExport());
+		setHeadingText(pmsMessages.headerConnectorsExport());
 		setClosable(true);
 		setWidth(WINDOW_WIDTH);
 		setLayout(new FitLayout());
@@ -232,19 +232,19 @@ public class ConnectorsExportWindow extends TypicalWindow {
 		ColumnConfig column = new ColumnConfig();
 		column.setId(ModuleInstanceSelModelData.PROPERTY_CORRECTNESS);
 		column.setRenderer(correctnessRenderer);
-		column.setHeader(pmsMessages.columnHeaderValid());
+		column.setHeaderText(pmsMessages.columnHeaderValid());
 		column.setWidth(Constants.COLUMN_ICON_WIDTH);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(ModuleInstanceSelModelData.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(ModuleInstanceSelModelData.PROPERTY_DESCRIPTION);
-		column.setHeader(pmsMessages.columnHeaderDescription());
+		column.setHeaderText(pmsMessages.columnHeaderDescription());
 		column.setWidth(COLUMN_DESCRIPTION_WIDTH);
 		configs.add(column);
 

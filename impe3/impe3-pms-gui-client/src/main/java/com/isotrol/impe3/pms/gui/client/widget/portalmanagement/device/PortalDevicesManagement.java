@@ -256,7 +256,7 @@ public class PortalDevicesManagement extends PmsContentPanel {
 		ColumnConfig config = new ColumnConfig();
 		config.setId(DeviceInPortalModelData.PROPERTY_ACTIVE);
 		config.setWidth(50);
-		config.setHeader(pmsMessages.columnHeaderActive());
+		config.setHeaderText(pmsMessages.columnHeaderActive());
 		config.setRenderer(booleanCellRenderer);
 		config.setAlignment(HorizontalAlignment.CENTER);
 		configs.add(config);
@@ -264,7 +264,7 @@ public class PortalDevicesManagement extends PmsContentPanel {
 		config = new ColumnConfig();
 		config.setId(DeviceInPortalModelData.PROPERTY_DEFAULT);
 		config.setWidth(50);
-		config.setHeader(pmsMessages.columnHeaderDefault());
+		config.setHeaderText(pmsMessages.columnHeaderDefault());
 		config.setRenderer(booleanCellRenderer);
 		config.setAlignment(HorizontalAlignment.CENTER);
 		configs.add(config);
@@ -273,20 +273,20 @@ public class PortalDevicesManagement extends PmsContentPanel {
 		config.setId(DeviceInPortalModelData.PROPERTY_NAME);
 		config.setWidth(COLUMN_NAME_WIDTH);
 		config.setRenderer(new HtmlEncodeTreeGridCellRenderer());
-		config.setHeader(pmsMessages.columnHeaderDevice());
+		config.setHeaderText(pmsMessages.columnHeaderDevice());
 		configs.add(config);
 
 		config = new ColumnConfig();
 		config.setId(DeviceInPortalModelData.PROPERTY_PATH);
 		config.setWidth(200);
-		config.setHeader(pmsMessages.columnHeaderName());
+		config.setHeaderText(pmsMessages.columnHeaderName());
 		config.setRenderer(new HtmlEncodeGridCellRenderer());
 		configs.add(config);
 
 		config = new ColumnConfig();
 		config.setId(DeviceInPortalModelData.PROPERTY_USE_NAME);
 		config.setWidth(200);
-		config.setHeader(pmsMessages.columnHeaderNameUse());
+		config.setHeaderText(pmsMessages.columnHeaderNameUse());
 		config.setRenderer(new GridCellRenderer<DeviceInPortalModelData>() {
 
 			public Object render(DeviceInPortalModelData model, String property, ColumnData config, int rowIndex,

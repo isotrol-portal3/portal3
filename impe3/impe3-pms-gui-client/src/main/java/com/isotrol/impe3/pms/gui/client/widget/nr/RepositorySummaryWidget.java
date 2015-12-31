@@ -192,7 +192,7 @@ public class RepositorySummaryWidget extends ARepositoryWidget {
 		setLayout(new BorderLayout());
 		setBorders(false);
 		setBodyBorder(false);
-		setHeading(getNrMessages().menuItem2RepositorySummary());
+		setHeadingText(getNrMessages().menuItem2RepositorySummary());
 
 		Header header = getHeader();
 		header.addStyleName(styles.noSideBorders());
@@ -206,7 +206,7 @@ public class RepositorySummaryWidget extends ARepositoryWidget {
 		cpTop = new ContentPanel(formSupport.getStandardLayout(true));
 		cpTop.setBorders(true);
 		cpTop.setBodyBorder(false);
-		cpTop.setHeading(getNrMessages().headerRepositoryGeneralInfo());
+		cpTop.setHeadingText(getNrMessages().headerRepositoryGeneralInfo());
 		cpTop.setBodyStyle("padding:10px");
 
 		Header header = cpTop.getHeader();
@@ -242,7 +242,7 @@ public class RepositorySummaryWidget extends ARepositoryWidget {
 		cpCenter = new ContentPanel(new FitLayout());
 		cpCenter.setBorders(true);
 		cpCenter.setBodyBorder(false);
-		cpCenter.setHeading(getNrMessages().headerNodesSummary());
+		cpCenter.setHeadingText(getNrMessages().headerNodesSummary());
 
 		Header header = cpCenter.getHeader();
 		header.addStyleName(styles.noSideBorders());

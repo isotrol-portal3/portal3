@@ -35,6 +35,7 @@ import com.isotrol.impe3.api.Category;
 import com.isotrol.impe3.api.Configuration;
 import com.isotrol.impe3.api.ContentType;
 import com.isotrol.impe3.api.FileId;
+import com.isotrol.impe3.api.PortalConfiguration;
 import com.isotrol.impe3.core.support.NamedSupport;
 
 
@@ -67,6 +68,17 @@ class ConfigurationType {
 	}
 
 	static final ConfigurationType of(Class<? extends Configuration> configClass, String name, Class<?> type) {
+		if (type.isEnum()) {
+			return new EnumType(type);
+		}
+		final ConfigurationType ct = ConfigurationType.TYPES.get(type);
+		if (ct == null) {
+			throw new IllegalTypeConfigurationException(configClass, name, type);
+		}
+		return (ConfigurationType) ct;
+	}
+	
+	static final ConfigurationType ofPortal(Class<? extends PortalConfiguration> configClass, String name, Class<?> type) {
 		if (type.isEnum()) {
 			return new EnumType(type);
 		}

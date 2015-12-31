@@ -31,6 +31,7 @@ import com.isotrol.impe3.pms.api.PropertyDTO;
 import com.isotrol.impe3.pms.api.portal.BaseDTO;
 import com.isotrol.impe3.pms.api.portal.BasesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalCacheDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesTemplateDTO;
@@ -346,6 +347,11 @@ public class PortalsController extends ChangeEventSupport implements IPortalsSer
 		service.getAvailableProperties(portalId, callback);
 	}
 
+	@Override
+	public void getPortalConfigurations(String portalId, AsyncCallback<List<PortalConfigurationSelDTO>> callback) {
+		service.getPortalConfigurations(portalId, callback);
+	}
+	
 	/**
 	 * (non-Javadoc)
 	 * @see com.isotrol.impe3.pms.gui.api.service.IPortalsServiceAsync#clearSetFilters(java.lang.String,
@@ -608,4 +614,5 @@ public class PortalsController extends ChangeEventSupport implements IPortalsSer
 	public void setPortalCache(PortalCacheDTO cache, AsyncCallback<Void> callback) {
 		service.setPortalCache(cache, callback);
 	}
+
 }
