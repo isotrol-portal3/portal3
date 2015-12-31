@@ -226,7 +226,7 @@ public abstract class ADeviceDetailsEditor extends TypicalWindow implements IDet
 		setAutoHeight(true);
 		setModal(true);
 		setHeaderVisible(true);
-		setHeading(getHeadingText());
+		setHeadingText(getHeadingText());
 		setClosable(false);
 		setScrollMode(Scroll.NONE);
 
@@ -356,7 +356,7 @@ public abstract class ADeviceDetailsEditor extends TypicalWindow implements IDet
 
 	private void addPropertiesGrid() {
 		ContentPanel containerGrid = new ContentPanel(new FitLayout());
-		containerGrid.setHeading(pmsMessages.headerPropertiesManagement());
+		containerGrid.setHeadingText(pmsMessages.headerPropertiesManagement());
 		containerGrid.setStyleAttribute("margin", "0 0 10px");
 		containerGrid.setHeight(250);
 

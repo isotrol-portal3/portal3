@@ -27,6 +27,7 @@ import com.isotrol.impe3.pms.api.PropertyDTO;
 import com.isotrol.impe3.pms.api.portal.BaseDTO;
 import com.isotrol.impe3.pms.api.portal.BasesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalCacheDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesTemplateDTO;
@@ -232,6 +233,13 @@ public interface IPortalsServiceAsync {
 	 */
 	void importProperties(String id, String fileId, boolean remove, AsyncCallback<Void> callback);
 
+	/**
+	 * Returns the portal configurations. The inherited properties are mixed in.
+	 * @param portalId Portal Id.
+	 * @return The portal configurations.
+	 */
+	void getPortalConfigurations(String portalId, AsyncCallback<List<PortalConfigurationSelDTO>> callback);
+	
 	/**
 	 * Return the portal's URLs.
 	 * @param portalId Portal Id.

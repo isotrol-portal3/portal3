@@ -103,7 +103,7 @@ public class CommentsLeftPanel extends ALeftPanel {
 
 		ContentPanel panel = new ContentPanel();
 		panel.setAutoHeight(true);
-		panel.setHeading(commentsMessages.menuHeaderComments());
+		panel.setHeadingText(commentsMessages.menuHeaderComments());
 		panel.setIconStyle(commentsStyles.menuIconCommentHeader());
 		panel.setBodyBorder(false);
 		panel.getHeader().addStyleName(getStyles().noSideBorders());

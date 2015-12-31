@@ -259,7 +259,7 @@ public abstract class APortalProperties extends TypicalWindow implements IDetail
 		setModal(true);
 		setWidth(600);
 		setAutoHeight(true);
-		setHeading(getHeadingText());
+		setHeadingText(getHeadingText());
 		setClosable(false);
 		setShadow(false);
 	}

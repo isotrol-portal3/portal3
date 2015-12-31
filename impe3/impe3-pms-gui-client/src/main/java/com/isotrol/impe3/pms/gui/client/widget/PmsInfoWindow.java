@@ -96,7 +96,7 @@ public class PmsInfoWindow extends Window {
 		setFrame(true);
 		setAutoHeight(true);
 		setClosable(true);
-		setHeading(pmsMessages.headerAboutPortalWindow());
+		setHeadingText(pmsMessages.headerAboutPortalWindow());
 		getHeader().setIcon(IconHelper.createPath("img/portal30.gif"));
 		setLayout(new FitLayout());
 	}

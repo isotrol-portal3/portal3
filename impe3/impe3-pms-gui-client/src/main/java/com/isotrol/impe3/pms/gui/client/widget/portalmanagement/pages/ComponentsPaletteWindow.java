@@ -168,7 +168,7 @@ public class ComponentsPaletteWindow extends TypicalWindow {
 		this.componentsReceiver = receiver;
 		this.portalPagesLoc = portalLocator;
 
-		setHeading(pmsMessages.headerComponentsPalette());
+		setHeadingText(pmsMessages.headerComponentsPalette());
 		setClosable(true);
 		setWidth(PALETTE_WINDOW_WIDTH);
 		setLayout(new FitLayout());
@@ -234,7 +234,7 @@ public class ComponentsPaletteWindow extends TypicalWindow {
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(PaletteModelData.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		// render to show a tooltip
 		column.setRenderer(new GridCellRenderer<PaletteModelData>() {
@@ -251,7 +251,7 @@ public class ComponentsPaletteWindow extends TypicalWindow {
 
 		column = new ColumnConfig();
 		column.setId(PaletteModelData.PROPERTY_DESCRIPTION);
-		column.setHeader(pmsMessages.columnHeaderDescription());
+		column.setHeaderText(pmsMessages.columnHeaderDescription());
 		column.setWidth(COLUMN_DESCRIPTION_WIDTH);
 		configs.add(column);
 

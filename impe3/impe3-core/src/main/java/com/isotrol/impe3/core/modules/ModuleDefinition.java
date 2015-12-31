@@ -56,6 +56,7 @@ import com.isotrol.impe3.api.content.ContentLoader;
 import com.isotrol.impe3.api.modules.Module;
 import com.isotrol.impe3.core.Loggers;
 import com.isotrol.impe3.core.config.ConfigurationDefinition;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.support.Definition;
 import com.isotrol.impe3.core.support.SingleValueSupport;
 
@@ -192,15 +193,26 @@ public abstract class ModuleDefinition<T extends Module> extends Definition<T> {
 	public ConfigurationDefinition<?> getConfiguration() {
 		return null;
 	}
+	
+	public PortalConfigurationDefinition<?> getPortalConfiguration() {
+		return null;
+	}
 
 	public boolean isConfigurationRequired() {
 		return false;
 	}
 
+	public boolean isPortalConfigurationDependencyRequired() {
+		return false;
+	}
 	public boolean isConfigurationDependencyRequired() {
 		return false;
 	}
 
+	public String getPortalConfigurationBeanName() {
+		return null;
+	}
+	
 	public String getConfigurationBeanName() {
 		return null;
 	}
@@ -267,6 +279,8 @@ public abstract class ModuleDefinition<T extends Module> extends Definition<T> {
 		private final ImmutableMap<String, Dependency> dependencies;
 		private final ConfigurationDefinition<?> configuration;
 		private final Dependency configurationDependency;
+		private final PortalConfigurationDefinition<?> portalConfiguration;
+		private final Dependency portalConfigurationDependency;
 		private final Set<String> actions;
 		private final DefaultListableBeanFactory registry;
 
@@ -277,6 +291,8 @@ public abstract class ModuleDefinition<T extends Module> extends Definition<T> {
 			this.dependencies = ImmutableMap.copyOf(loader.getDependencies());
 			this.configuration = loader.getConfiguration();
 			this.configurationDependency = loader.getConfigurationDependency();
+			this.portalConfiguration = loader.getPortalConfiguration();
+			this.portalConfigurationDependency = loader.getPortalConfigurationDependency();
 			this.actions = ImmutableSet.copyOf(loader.getActions());
 			this.registry = loader.getRegistry();
 		}
@@ -304,6 +320,14 @@ public abstract class ModuleDefinition<T extends Module> extends Definition<T> {
 			return Maps.filterValues(dependencies, Dependency.IS_INTERNAL);
 		}
 
+		/**
+		 * @return the portalConfiguration
+		 */
+		@Override
+		public PortalConfigurationDefinition<?> getPortalConfiguration() {
+			return portalConfiguration;
+		}
+
 		@Override
 		public ConfigurationDefinition<?> getConfiguration() {
 			return configuration;
@@ -318,6 +342,14 @@ public abstract class ModuleDefinition<T extends Module> extends Definition<T> {
 		}
 
 		@Override
+		public boolean isPortalConfigurationDependencyRequired() {
+			if (portalConfigurationDependency == null) {
+				return false;
+			}
+			return portalConfigurationDependency.isRequired() && isConfigurationRequired();
+		}
+		
+		@Override
 		public boolean isConfigurationDependencyRequired() {
 			if (configurationDependency == null) {
 				return false;
@@ -325,6 +357,12 @@ public abstract class ModuleDefinition<T extends Module> extends Definition<T> {
 			return configurationDependency.isRequired() && isConfigurationRequired();
 		}
 
+		@Override
+		public String getPortalConfigurationBeanName() {
+			Preconditions.checkState(portalConfigurationDependency != null);
+			return portalConfigurationDependency.getBeanName();
+		}
+		
 		@Override
 		public String getConfigurationBeanName() {
 			Preconditions.checkState(configurationDependency != null);
@@ -385,12 +423,17 @@ public abstract class ModuleDefinition<T extends Module> extends Definition<T> {
 			public StartedModule<T> start(ApplicationContext parent) {
 				final Map<String, Object> suppliedDeps;
 				if (configurationDependency == null || !configurationDependency.isRequired() || supplied.containsKey(configurationDependency.getBeanName())) {
-					suppliedDeps = supplied;
+					suppliedDeps = Maps.newHashMap(supplied);
 				} else {
 					checkState(!configuration.hasMBPItems(),"Missing required configuration for module [%s]", getTypeName());
 					suppliedDeps = Maps.newHashMap(supplied);
 					suppliedDeps.put(getConfigurationBeanName(), configuration.builder().get());
 				}
+				// Add portal configuration
+				if (portalConfigurationDependency != null) {
+					suppliedDeps.put(getPortalConfigurationBeanName(), portalConfiguration.builder().get());
+				}
+				
 				final Set<String> required = Maps.filterValues(dependencies, Dependency.IS_REQUIRED).keySet();
 				final Set<String> missing = Sets.difference(required, suppliedDeps.keySet());
 				checkState(missing.isEmpty(), "Missing required dependencies %s for module [%s]", missing,

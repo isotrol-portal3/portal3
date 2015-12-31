@@ -187,7 +187,7 @@ public class LocalesMappingWindow extends TypicalWindow {
 		this.localizedNamesReceiver = receiver;
 		this.localizedNames = localizedNames != null ? localizedNames : new HashMap<String, NameDTO>();
 
-		setHeading(pmsMessages.headerLanguages());
+		setHeadingText(pmsMessages.headerLanguages());
 		setClosable(true);
 		setWidth(WINDOW_WIDTH);
 		setHeight(WINDOW_HEIGHT);
@@ -222,21 +222,21 @@ public class LocalesMappingWindow extends TypicalWindow {
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(LocalizedNameModel.PROPERTY_LOCALE);
-		column.setHeader(pmsMessages.columnHeaderLanguage());
+		column.setHeaderText(pmsMessages.columnHeaderLanguage());
 		column.setWidth(COLUMN_LOCALE_WIDTH);
 		column.setEditor(new CellEditor(creteTextFieldEditor()));
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(LocalizedNameModel.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		column.setEditor(new CellEditor(creteTextFieldEditor()));
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(LocalizedNameModel.PROPERTY_PATH);
-		column.setHeader(pmsMessages.columnHeaderPath());
+		column.setHeaderText(pmsMessages.columnHeaderPath());
 		column.setWidth(COLUMN_PATH_WIDTH);
 		column.setEditor(new CellEditor(creteTextFieldEditor()));
 		configs.add(column);

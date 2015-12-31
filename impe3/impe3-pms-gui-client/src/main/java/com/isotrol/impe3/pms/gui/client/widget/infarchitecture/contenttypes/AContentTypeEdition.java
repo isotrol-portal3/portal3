@@ -417,7 +417,7 @@ public abstract class AContentTypeEdition extends TypicalWindow implements IDeta
 	 */
 	private void displayBoundDataValues() {
 
-		setHeading(getHeadingText());
+		setHeadingText(getHeadingText());
 
 		String displayName = contentTypeDto.getDefaultName().getDisplayName();
 		tfName.setValue(displayName);

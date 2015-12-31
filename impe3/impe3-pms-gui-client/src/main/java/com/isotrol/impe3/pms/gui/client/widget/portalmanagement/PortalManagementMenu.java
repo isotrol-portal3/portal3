@@ -114,7 +114,7 @@ public class PortalManagementMenu extends AManagementMenu {
 		setAutoHeight(true);
 		setLayoutOnChange(true);
 
-		setHeading(getPmsMessages().menuItem1PortalManagement());
+		setHeadingText(getPmsMessages().menuItem1PortalManagement());
 		getHeader().addStyleName(getGuiCommonStyles().noSideBorders());
 	}
 

@@ -216,7 +216,7 @@ public class PortalCachePanel extends TypicalWindow implements IDetailPanel {
 		setModal(true);
 		setWidth(500);
 		setAutoHeight(true);
-		setHeading(pmsMessages.menuItem2Cache());
+		setHeadingText(pmsMessages.menuItem2Cache());
 		setClosable(false);
 		setShadow(false);
 	}

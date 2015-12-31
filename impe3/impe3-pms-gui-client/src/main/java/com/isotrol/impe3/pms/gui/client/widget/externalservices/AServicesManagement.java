@@ -227,13 +227,13 @@ public abstract class AServicesManagement extends PmsContentPanel {
 		ColumnConfig ccName = new ColumnConfig();
 		ccName.setId(ExternalServiceModelData.PROPERTY_NAME);
 		ccName.setWidth(COLUMN_NAME_WIDTH);
-		ccName.setHeader(pmsMessages.columnHeaderName());
+		ccName.setHeaderText(pmsMessages.columnHeaderName());
 		configs.add(ccName);
 
 		ColumnConfig ccDescription = new ColumnConfig();
 		ccDescription.setId(ExternalServiceModelData.PROPERTY_DESCRIPTION);
 		ccDescription.setWidth(COLUMN_DESCRIPTION_WIDTH);
-		ccDescription.setHeader(pmsMessages.columnHeaderDescription());
+		ccDescription.setHeaderText(pmsMessages.columnHeaderDescription());
 		configs.add(ccDescription);
 
 		ColumnModel cm = new ColumnModel(configs);

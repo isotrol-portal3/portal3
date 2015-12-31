@@ -335,7 +335,7 @@ public class UserEditorPanel extends Window implements IDetailPanel {
 
 		cpProperties = new ContentPanel();
 		cpProperties.setHeight("250");
-		cpProperties.setHeading(messages.headerPropertiesPanel());
+		cpProperties.setHeadingText(messages.headerPropertiesPanel());
 		cpProperties.setLayout(new FitLayout());
 
 		addToolBar();

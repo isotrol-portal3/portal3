@@ -108,7 +108,7 @@ public class NrLeftPanel extends ALeftPanel {
 
 		ContentPanel panel = new ContentPanel();
 		panel.setAutoHeight(true);
-		panel.setHeading(nrMessages.menuHeaderNodesRepository());
+		panel.setHeadingText(nrMessages.menuHeaderNodesRepository());
 		panel.setIconStyle(nrStyles.menuIconNrHeader());
 		panel.setBodyBorder(false);
 		panel.getHeader().addStyleName(getStyles().noSideBorders());

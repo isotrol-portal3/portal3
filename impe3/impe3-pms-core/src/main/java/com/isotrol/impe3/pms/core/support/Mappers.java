@@ -27,8 +27,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import net.sf.derquinsej.i18n.Locales;
+import java.util.UUID;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -36,6 +35,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.api.Identifiables;
+import com.isotrol.impe3.core.modules.ModuleDefinition;
 import com.isotrol.impe3.core.support.Named;
 import com.isotrol.impe3.pbuf.BaseProtos.DependencyPB;
 import com.isotrol.impe3.pbuf.BaseProtos.LocalizedNamePB;
@@ -46,13 +46,18 @@ import com.isotrol.impe3.pms.api.PropertyDTO;
 import com.isotrol.impe3.pms.api.WithLocalizedNameDTO;
 import com.isotrol.impe3.pms.api.config.UploadedFileDTO;
 import com.isotrol.impe3.pms.api.minst.DependencyDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
 import com.isotrol.impe3.pms.api.user.DoneDTO;
 import com.isotrol.impe3.pms.api.user.UserSelDTO;
+import com.isotrol.impe3.pms.core.obj.ComponentObject;
+import com.isotrol.impe3.pms.core.obj.PortalObject;
 import com.isotrol.impe3.pms.model.Done;
 import com.isotrol.impe3.pms.model.FileEntity;
 import com.isotrol.impe3.pms.model.NameValue;
 import com.isotrol.impe3.pms.model.UserEntity;
 import com.isotrol.impe3.pms.model.WithLocalizedName;
+
+import net.sf.derquinsej.i18n.Locales;
 
 
 /**
@@ -196,6 +201,32 @@ public final class Mappers {
 		return list;
 	}
 	
+	/**
+	 * Portal configurations map to list of DTOs.
+	 * @param components List of ComponentObject.
+	 * @return List of PortalConfigurationSelDTO
+	 */
+	public static List<PortalConfigurationSelDTO> pconfig2seldto(Map<UUID, ComponentObject> components, PortalObject portal) {
+		
+		final List<PortalConfigurationSelDTO> list;
+		
+		if (components == null || components.isEmpty()) {
+			list = Lists.newArrayListWithCapacity(0);
+		} else {
+			list = Lists.newArrayListWithCapacity(components.size());
+			
+//			portal.getp
+			
+			for (ComponentObject obj : components.values()) {
+				ModuleDefinition def = obj.getModule();
+				list.add(new PortalConfigurationSelDTO(def.getPortalConfiguration().getType().getName(), 
+						(String) def.getPortalConfiguration().getName().get(), 
+						(String) def.getPortalConfiguration().getDescription().get(), 
+						portal.getStringId()));
+			}
+		}
+		return list;
+	}
 
 	/**
 	 * Copy a default and localized names from the model to a dto.

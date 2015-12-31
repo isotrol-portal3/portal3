@@ -302,13 +302,13 @@ public class SourceMappingManagement extends PmsContentPanel {
 
 		column = new ColumnConfig();
 		column.setId(SourceMappingSelModelData.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(SourceMappingSelModelData.PROPERTY_DESCRIPTION);
-		column.setHeader(pmsMessages.columnHeaderDescription());
+		column.setHeaderText(pmsMessages.columnHeaderDescription());
 		column.setWidth(COLUMN_DESCRPTION_WIDTH);
 		configs.add(column);
 

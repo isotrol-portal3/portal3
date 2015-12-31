@@ -184,7 +184,7 @@ public class InformationArchitectureManagement extends LayoutContainer {
 
 	private void addAssociatedCategoriesPanel() {
 		pCat = new ContentPanel();
-		pCat.setHeading(pmsMessages.headerCategoriesManagement());
+		pCat.setHeadingText(pmsMessages.headerCategoriesManagement());
 		
 		ColumnConfig ccTitle = new ColumnConfig(
 				CategorySelModelData.PROPERTY_NAME,
@@ -258,7 +258,7 @@ public class InformationArchitectureManagement extends LayoutContainer {
 		pPossibleCat = new ContentPanel();
 		pPossibleCat.addStyleName(pmsStyles.detailPanelRight());
 		pPossibleCat.hide();
-		pPossibleCat.setHeading(pmsMessages.headerCategorySelector());
+		pPossibleCat.setHeadingText(pmsMessages.headerCategorySelector());
 		pPossibleCat.setScrollMode(Scroll.AUTO);
 		pPossibleCat.setHeight(POPUPS_HEIGHT);
 

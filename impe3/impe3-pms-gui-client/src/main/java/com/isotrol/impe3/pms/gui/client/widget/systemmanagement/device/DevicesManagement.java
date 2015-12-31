@@ -204,7 +204,7 @@ public class DevicesManagement extends PmsContentPanel {
 								csDto.setName(cDto.getName());
 
 								store.update(model);
-								// item.setText((String) csModelData.get(treeBinder.getDisplayProperty()));
+								// item.setValue((String) csModelData.get(treeBinder.getDisplayProperty()));
 							}
 							break;
 						default: // shouldn't happen..

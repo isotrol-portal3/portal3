@@ -247,7 +247,7 @@ public abstract class AbstractTreePagesManagement<D extends DTOModelData<?>, E e
 		config.setId(getPropertyToDisplay());
 		config.setWidth(200);
 		// config.setFixed(true);
-		config.setHeader(getPmsMessages().columnHeaderName());
+		config.setHeaderText(getPmsMessages().columnHeaderName());
 		config.setRenderer(new TreePageCellRenderer());
 		columns.add(config);
 

@@ -160,6 +160,7 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 	private final String name;
 	private final String description;
 	private final ConfigurationObject configuration;
+	private final PortalConfigurationObject portalConfiguration;
 	private final boolean missingConfiguration;
 	/** Dependencies. */
 	private final Deps deps;
@@ -174,6 +175,7 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 		this.name = dfn.getName();
 		this.description = dfn.getDescription();
 		this.configuration = ConfigurationObject.of(this.module.getConfiguration(), dfn.getConfiguration());
+		this.portalConfiguration = PortalConfigurationObject.of(this.module.getPortalConfiguration(), dfn.getConfiguration());
 		this.missingConfiguration = this.module.isConfigurationDependencyRequired() && this.configuration == null;
 		this.deps = DEPS_LOADER.get(dfn, this.module);
 	}
@@ -196,6 +198,10 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 			this.configuration = m.configuration;
 			this.missingConfiguration = m.missingConfiguration;
 		}
+		
+		// TODO: EDIAZ		
+		this.portalConfiguration = PortalConfigurationObject.of(this.module.getPortalConfiguration(), null);
+		
 		// Dependencies
 		if (o != null && o.getDependencySet() != null) {
 			this.deps = ODEPS_LOADER.get(o.getDependencySet(), this.module);
@@ -368,6 +374,13 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 
 	ConfigurationObject getConfiguration() {
 		return configuration;
+	}
+
+	/**
+	 * @return the portalConfiguration
+	 */
+	PortalConfigurationObject getPortalConfiguration() {
+		return portalConfiguration;
 	}
 
 	final Iterable<DependencyPB> dependenciesPB() {

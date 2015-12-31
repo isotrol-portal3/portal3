@@ -157,7 +157,7 @@ public class ValidConnectorsManagement extends AConnectorsManagement {
 	private void createConnectorModuleSelector() {
 
 		modulesWindow = new Window();
-		modulesWindow.setHeading(getPmsMessages().headerConnectorSelector());
+		modulesWindow.setHeadingText(getPmsMessages().headerConnectorSelector());
 		modulesWindow.setModal(true);
 		modulesWindow.setResizable(false);
 		modulesWindow.setWidth(Constants.SIXTY_FIVE_PERCENT);
@@ -190,7 +190,7 @@ public class ValidConnectorsManagement extends AConnectorsManagement {
 
 		ColumnConfig cName = new ColumnConfig();
 		cName.setId(ConnectorModuleModelData.PROPERTY_NAME);
-		cName.setHeader(getPmsMessages().columnHeaderName());
+		cName.setHeaderText(getPmsMessages().columnHeaderName());
 		cName.setWidth(350);
 
 		ColumnModel columnModel = new ColumnModel(Arrays.asList(new ColumnConfig[] {expander, cId, cName}));

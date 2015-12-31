@@ -167,7 +167,7 @@ public class ComponentsExportWindow extends TypicalWindow {
 	@Override
 	protected void beforeRender() {
 
-		setHeading(pmsMessages.headerComponentsExport());
+		setHeadingText(pmsMessages.headerComponentsExport());
 		setClosable(true);
 		setWidth(WINDOW_WIDTH);
 		setLayout(new FitLayout());
@@ -229,13 +229,13 @@ public class ComponentsExportWindow extends TypicalWindow {
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(ModuleInstanceSelModelData.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(ModuleInstanceSelModelData.PROPERTY_DESCRIPTION);
-		column.setHeader(pmsMessages.columnHeaderDescription());
+		column.setHeaderText(pmsMessages.columnHeaderDescription());
 		column.setWidth(COLUMN_DESCRIPTION_WIDTH);
 		configs.add(column);
 

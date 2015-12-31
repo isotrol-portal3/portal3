@@ -318,14 +318,14 @@ public abstract class AConnectorsManagement extends PmsContentPanel implements I
 		column = new ColumnConfig();
 		column.setRenderer(stateCellRenderer);
 		column.setId(ModuleInstanceSelModelData.PROPERTY_STATE);
-		column.setHeader(pmsMessages.columnHeaderState());
+		column.setHeaderText(pmsMessages.columnHeaderState());
 		column.setWidth(COLUMN_STATE_WIDTH);
 		configs.add(column);
 
 		// key
 		column = new ColumnConfig();
 		column.setId(ModuleInstanceSelModelData.PROPERTY_KEY);
-		column.setHeader("");
+		column.setHeaderText("");
 		column.setWidth(COLUMN_KEY_WIDTH);
 		column.setRenderer(gearCellRenderer);
 		column.setSortable(false);
@@ -334,14 +334,14 @@ public abstract class AConnectorsManagement extends PmsContentPanel implements I
 		// name
 		column = new ColumnConfig();
 		column.setId(ModuleInstanceSelModelData.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(PROPERTY_MODULE);
 		column.setWidth(COLUMN_MODULE_WIDTH);
-		column.setHeader(pmsMessages.columnHeaderModule());
+		column.setHeaderText(pmsMessages.columnHeaderModule());
 		column.setRenderer(moduleNameCellRenderer);
 		column.setSortable(false);
 		configs.add(column);

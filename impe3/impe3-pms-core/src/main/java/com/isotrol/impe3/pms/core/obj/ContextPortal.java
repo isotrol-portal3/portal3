@@ -20,6 +20,7 @@
 package com.isotrol.impe3.pms.core.obj;
 
 
+import static com.isotrol.impe3.pms.core.support.Mappers.pconfig2seldto;
 import static com.isotrol.impe3.pms.core.support.Mappers.prop2dto;
 
 import java.util.List;
@@ -48,6 +49,7 @@ import com.isotrol.impe3.pms.api.page.PaletteDTO;
 import com.isotrol.impe3.pms.api.portal.BaseDTO;
 import com.isotrol.impe3.pms.api.portal.BasesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalCacheDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesTemplateDTO;
 import com.isotrol.impe3.pms.api.portal.PortalNameDTO;
 import com.isotrol.impe3.pms.api.portal.PortalTemplateDTO;
@@ -276,6 +278,10 @@ public class ContextPortal extends Context2 {
 			}
 		}
 		return list;
+	}
+
+	public final List<PortalConfigurationSelDTO> getPortalConfigurations() throws PMSException {
+		return pconfig2seldto(getComponents().delegate(), portal);
 	}
 
 	public final List<PropertyDTO> getAvailableProperties() {

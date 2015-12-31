@@ -250,7 +250,7 @@ public class UserDetails extends TypicalWindow implements IDetailPanel {
 		} else {
 			heading = pmsMessages.headerUserEditionPanel() + ": " + userTemplate.getName();
 		}
-		setHeading(heading);
+		setHeadingText(heading);
 
 		getHeader().addTool(buttonsSupport.createHelpToolButton(settings.pmsUsersAdminPortalManualUrl()));
 	}

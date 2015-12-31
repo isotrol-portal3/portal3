@@ -153,7 +153,7 @@ public class GrantedAuthoritiesWindow extends TypicalWindow {
 	 * Inits this component properties.<br/>
 	 */
 	private void initThis() {
-		setHeading(pmsMessages.headerUserAuthorities(userDto.getDisplayName()));
+		setHeadingText(pmsMessages.headerUserAuthorities(userDto.getDisplayName()));
 		setClosable(true);
 		setLayout(new RowLayout());
 		setLayoutOnChange(true);

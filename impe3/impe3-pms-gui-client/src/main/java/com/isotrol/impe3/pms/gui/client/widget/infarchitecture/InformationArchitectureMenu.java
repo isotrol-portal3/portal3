@@ -78,7 +78,7 @@ public class InformationArchitectureMenu extends AManagementMenu {
 		setIconStyle(getPmsStyles().menuIconInformationArchitecture());
 		setBodyBorder(false);
 		
-		setHeading(getPmsMessages().menuItem1InformationArchitecture());
+		setHeadingText(getPmsMessages().menuItem1InformationArchitecture());
 		getHeader().addStyleName(getGuiCommonStyles().noSideBorders());
 	}
 

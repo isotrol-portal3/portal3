@@ -287,7 +287,7 @@ public abstract class Frame<D extends FrameDTO> extends VerticalPanel {
 
 		public CSSWindow() {
 
-			setHeading(pmsMessages.headerFrameConfigurationPanel());
+			setHeadingText(pmsMessages.headerFrameConfigurationPanel());
 			setModal(true);
 			setHideOnButtonClick(true);
 			setResizable(false);

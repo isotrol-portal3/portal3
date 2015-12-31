@@ -225,7 +225,7 @@ public class CategoryManagement extends PmsContentPanel {
 								csDto.setName(cDto.getDefaultName().getDisplayName());
 
 								store.update(model);
-								// item.setText((String) csModelData.get(treeBinder.getDisplayProperty()));
+								// item.setValue((String) csModelData.get(treeBinder.getDisplayProperty()));
 							}
 							break;
 						default: // shouldn't happen..

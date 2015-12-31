@@ -427,19 +427,19 @@ public class PortalUsersList extends ContentPanel implements IInitializableWidge
 		ColumnConfig ccName = new ColumnConfig();
 		ccName.setId(PortalUserSelModelData.PROPERTY_NAME);
 		ccName.setWidth(COLUMN_NAME_WIDTH);
-		ccName.setHeader(commonMessagesBundle.columnHeaderUsername());
+		ccName.setHeaderText(commonMessagesBundle.columnHeaderUsername());
 		configs.add(ccName);
 
 		ColumnConfig ccDisplay = new ColumnConfig();
 		ccDisplay.setId(PortalUserSelModelData.PROPERTY_DISPLAY_NAME);
 		ccDisplay.setWidth(COLUMN_DISPLAY_NAME_WIDTH);
-		ccDisplay.setHeader(commonMessagesBundle.columnHeaderDisplayName());
+		ccDisplay.setHeaderText(commonMessagesBundle.columnHeaderDisplayName());
 		configs.add(ccDisplay);
 
 		ColumnConfig ccActive = new ColumnConfig();
 		ccActive.setId(PortalUserSelModelData.PROPERTY_ACTIVE);
 		ccActive.setWidth(COLUMN_ACTIVE_WIDTH);
-		ccActive.setHeader(commonMessagesBundle.columnHeaderActive());
+		ccActive.setHeaderText(commonMessagesBundle.columnHeaderActive());
 		ccActive.setSortable(false);
 		ccActive.setRenderer(activeCellRenderer);
 		ccActive.setAlignment(HorizontalAlignment.CENTER);

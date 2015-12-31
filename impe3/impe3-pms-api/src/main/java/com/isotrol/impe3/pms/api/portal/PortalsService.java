@@ -223,6 +223,13 @@ public interface PortalsService {
 	void importProperties(String id, String fileId, boolean remove) throws PMSException;
 
 	/**
+	 * Returns the portal configurations. The inherited properties are mixed in.
+	 * @param portalId Portal Id.
+	 * @return The portal configurations.
+	 */
+	List<PortalConfigurationSelDTO> getPortalConfigurations(String portalId) throws PMSException;
+	
+	/**
 	 * Return the portal's URLs.
 	 * @param portalId Portal Id.
 	 * @return The portal's URLs.
