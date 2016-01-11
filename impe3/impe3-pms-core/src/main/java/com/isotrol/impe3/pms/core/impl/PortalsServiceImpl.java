@@ -75,6 +75,7 @@ import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.PortalAuthority;
 import com.isotrol.impe3.pms.api.PropertyDTO;
 import com.isotrol.impe3.pms.api.category.CategorySelDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.minst.ProvidedDTO;
 import com.isotrol.impe3.pms.api.portal.BaseDTO;
 import com.isotrol.impe3.pms.api.portal.BasesDTO;
@@ -111,6 +112,7 @@ import com.isotrol.impe3.pms.core.obj.DeviceObject;
 import com.isotrol.impe3.pms.core.obj.MessageMappers;
 import com.isotrol.impe3.pms.core.obj.PortalObject;
 import com.isotrol.impe3.pms.core.obj.PortalsObject;
+import com.isotrol.impe3.pms.core.obj.ComponentObject.Inherited;
 import com.isotrol.impe3.pms.core.support.InUseProviders;
 import com.isotrol.impe3.pms.core.support.Mappers;
 import com.isotrol.impe3.pms.core.support.MoreLocales;
@@ -325,15 +327,6 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 		return ctx.getProperties();
 	}
 
-	/**
-	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getAvailableProperties(java.lang.String)
-	 */
-	@Transactional(rollbackFor = Throwable.class)
-	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
-	public List<PortalConfigurationSelDTO> getPortalConfigurations(String portalId) throws PMSException {
-		return loadContextGlobal().toPortal(portalId).getPortalConfigurations();
-	}
-	
 	/**
 	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getPortals()
 	 */
@@ -940,4 +933,23 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 		}
 	}
 
+	
+	/**
+	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getAvailableProperties(java.lang.String)
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
+	public List<PortalConfigurationSelDTO> getPortalConfigurations(String portalId) throws PMSException {
+		return loadContextGlobal().toPortal(portalId).getPortalConfigurations();
+	}
+	
+	/**
+	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getAvailableProperties(java.lang.String)
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
+	public ConfigurationTemplateDTO getPortalConfiguration(String portalId, String beanName) throws PMSException {
+		return loadContextGlobal().toPortal(portalId).getPortalConfiguration(beanName);
+	}
+	
 }

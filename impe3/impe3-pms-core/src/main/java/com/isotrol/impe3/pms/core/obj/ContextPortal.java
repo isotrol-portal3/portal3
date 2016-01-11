@@ -21,6 +21,7 @@ package com.isotrol.impe3.pms.core.obj;
 
 
 import static com.isotrol.impe3.pms.core.support.Mappers.pconfig2seldto;
+import static com.isotrol.impe3.pms.core.support.Mappers.pconfig2def;
 import static com.isotrol.impe3.pms.core.support.Mappers.prop2dto;
 
 import java.util.List;
@@ -29,6 +30,8 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import com.google.common.collect.Lists;
+import com.isotrol.impe3.api.PortalConfiguration;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.modules.ModuleDefinition;
 import com.isotrol.impe3.pbuf.portal.PortalProtos.BasesPB;
 import com.isotrol.impe3.pbuf.portal.PortalProtos.PortalNamePB;
@@ -39,6 +42,7 @@ import com.isotrol.impe3.pms.api.EntityNotFoundException;
 import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.PropertyDTO;
 import com.isotrol.impe3.pms.api.component.InheritedComponentInstanceSelDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.minst.DependencyDTO;
 import com.isotrol.impe3.pms.api.minst.DependencyTemplateDTO;
 import com.isotrol.impe3.pms.api.minst.ModuleInstanceSelDTO;
@@ -280,10 +284,6 @@ public class ContextPortal extends Context2 {
 		return list;
 	}
 
-	public final List<PortalConfigurationSelDTO> getPortalConfigurations() throws PMSException {
-		return pconfig2seldto(getComponents().delegate(), portal);
-	}
-
 	public final List<PropertyDTO> getAvailableProperties() {
 		return prop2dto(portal.getActiveProperties(portals));
 	}
@@ -367,6 +367,21 @@ public class ContextPortal extends Context2 {
 
 	public ContextDevicePages toDevice(String deviceId) throws PMSException {
 		return toDevice(NotFoundProviders.DEVICE.toUUID(deviceId));
+	}
+
+
+	public final List<PortalConfigurationSelDTO> getPortalConfigurations() throws PMSException {
+		return pconfig2seldto(getComponents().delegate(), portal);
+	}
+	
+	public final List<PortalConfigurationDefinition<?>> getPortalConfigurationsDef() throws PMSException {
+		return pconfig2def(getComponents().delegate(), portal);
+	}
+	
+	public ConfigurationTemplateDTO getPortalConfiguration(String beanName) {
+		portal.getPortalConfiguration().get(beanName).getPortalConfiguration();
+//		PortalConfigurationObject.template(getpor, ctx, portal);
+		return null;
 	}
 
 	// ////////////////// End Page operations.
