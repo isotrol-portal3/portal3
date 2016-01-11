@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.springframework.jdbc.object.MappingSqlQueryWithParameters;
+
 import java.util.UUID;
 
 import com.google.common.base.Function;
@@ -35,6 +38,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.api.Identifiables;
+import com.isotrol.impe3.api.PortalConfiguration;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.modules.ModuleDefinition;
 import com.isotrol.impe3.core.support.Named;
 import com.isotrol.impe3.pbuf.BaseProtos.DependencyPB;
@@ -202,33 +207,6 @@ public final class Mappers {
 	}
 	
 	/**
-	 * Portal configurations map to list of DTOs.
-	 * @param components List of ComponentObject.
-	 * @return List of PortalConfigurationSelDTO
-	 */
-	public static List<PortalConfigurationSelDTO> pconfig2seldto(Map<UUID, ComponentObject> components, PortalObject portal) {
-		
-		final List<PortalConfigurationSelDTO> list;
-		
-		if (components == null || components.isEmpty()) {
-			list = Lists.newArrayListWithCapacity(0);
-		} else {
-			list = Lists.newArrayListWithCapacity(components.size());
-			
-//			portal.getp
-			
-			for (ComponentObject obj : components.values()) {
-				ModuleDefinition def = obj.getModule();
-				list.add(new PortalConfigurationSelDTO(def.getPortalConfiguration().getType().getName(), 
-						(String) def.getPortalConfiguration().getName().get(), 
-						(String) def.getPortalConfiguration().getDescription().get(), 
-						portal.getStringId(), true, true));
-			}
-		}
-		return list;
-	}
-
-	/**
 	 * Copy a default and localized names from the model to a dto.
 	 * @param value Value
 	 * @param dto DTO.
@@ -291,4 +269,44 @@ public final class Mappers {
 		return Lists.newArrayList(Iterables.transform(from, function));
 	}
 
+	/**
+	 * Portal configurations map to list of DTOs.
+	 * @param components List of ComponentObject.
+	 * @return List of PortalConfigurationSelDTO
+	 */
+	public static List<PortalConfigurationSelDTO> pconfig2seldto(Map<UUID, ComponentObject> components, PortalObject portal) {
+		
+		final List<PortalConfigurationSelDTO> list;
+		
+		if (components == null || components.isEmpty()) {
+			list = Lists.newArrayListWithCapacity(0);
+		} else {
+			list = Lists.newArrayListWithCapacity(components.size());
+			
+			for (ComponentObject obj : components.values()) {
+				ModuleDefinition def = obj.getModule();
+				list.add(new PortalConfigurationSelDTO(def.getPortalConfiguration().getType().getName(), 
+						(String) def.getPortalConfiguration().getName().get(), 
+						(String) def.getPortalConfiguration().getDescription().get(), 
+						portal.getStringId(), true, true));
+			}
+		}
+		return list;
+	}
+	
+	/**
+	 * Portal configurations map to list of DTOs.
+	 * @param components List of ComponentObject.
+	 * @return List of PortalConfigurationSelDTO
+	 */
+	public static Map<String, PortalConfigurationDefinition<?>> pconfig2def(Map<UUID, ComponentObject> components, PortalObject portal) {
+		
+		final Map<String, PortalConfigurationDefinition<?>> list = Maps.newHashMap();;
+		
+		for (ComponentObject obj : components.values()) {
+			ModuleDefinition def = obj.getModule();
+			list.put(def.getPortalConfiguration().getType().getName(), def.getPortalConfiguration());
+		}
+		return list;
+	}
 }

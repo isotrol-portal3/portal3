@@ -24,6 +24,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.isotrol.impe3.pms.api.PropertyDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.portal.BaseDTO;
 import com.isotrol.impe3.pms.api.portal.BasesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalCacheDTO;
@@ -232,13 +233,6 @@ public interface IPortalsServiceAsync {
 	 * @param callback
 	 */
 	void importProperties(String id, String fileId, boolean remove, AsyncCallback<Void> callback);
-
-	/**
-	 * Returns the portal configurations. The inherited properties are mixed in.
-	 * @param portalId Portal Id.
-	 * @return The portal configurations.
-	 */
-	void getPortalConfigurations(String portalId, AsyncCallback<List<PortalConfigurationSelDTO>> callback);
 	
 	/**
 	 * Return the portal's URLs.
@@ -342,4 +336,19 @@ public interface IPortalsServiceAsync {
 	 * @param callback
 	 */
 	void setPortalCache(PortalCacheDTO cache, AsyncCallback<Void> callback);
+
+	/**
+	 * Returns the portal configurations. The inherited properties are mixed in.
+	 * @param portalId Portal Id.
+	 * @return The portal configurations.
+	 */
+	void getPortalConfigurations(String portalId, AsyncCallback<List<PortalConfigurationSelDTO>> callback);
+	
+	/**
+	 * Returns the portal configurations. The inherited properties are mixed in.
+	 * @param portalId Portal Id.
+	 * @param beanName Bean name.
+	 * @return The portal configurations.
+	 */
+	void getPortalConfiguration(String portalId, String beanName, AsyncCallback<ConfigurationTemplateDTO> callback);
 }
