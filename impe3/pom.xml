@@ -28,7 +28,7 @@
 				<configuration>
 					<header>http://training.isotrol-portal.googlecode.com/git/license-header.txt</header>
 					<quiet>false</quiet>
-					<failIfMissing>true</failIfMissing>
+					<failIfMissing>false</failIfMissing>
 					<aggregate>true</aggregate>
 					<useDefaultExcludes>true</useDefaultExcludes>
 					<useDefaultMapping>true</useDefaultMapping>
