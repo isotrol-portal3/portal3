@@ -175,7 +175,7 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 		this.name = dfn.getName();
 		this.description = dfn.getDescription();
 		this.configuration = ConfigurationObject.of(this.module.getConfiguration(), dfn.getConfiguration());
-		this.portalConfiguration = PortalConfigurationObject.of(this.module.getPortalConfiguration(), dfn.getConfiguration());
+		this.portalConfiguration = PortalConfigurationObject.of(this.module.getPortalConfiguration(), dfn);
 		this.missingConfiguration = this.module.isConfigurationDependencyRequired() && this.configuration == null;
 		this.deps = DEPS_LOADER.get(dfn, this.module);
 	}

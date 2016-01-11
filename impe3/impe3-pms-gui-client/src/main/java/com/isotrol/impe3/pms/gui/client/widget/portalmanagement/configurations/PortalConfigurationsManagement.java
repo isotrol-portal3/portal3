@@ -31,6 +31,7 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
+//import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.isotrol.impe3.gui.common.renderer.GearCellRenderer;
@@ -40,17 +41,16 @@ import com.isotrol.impe3.gui.common.util.Buttons;
 import com.isotrol.impe3.gui.common.util.Constants;
 import com.isotrol.impe3.gui.common.util.CustomizableStoreFilter;
 import com.isotrol.impe3.gui.common.util.Util;
-import com.isotrol.impe3.pms.api.component.InheritedComponentInstanceSelDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
 import com.isotrol.impe3.pms.api.portal.PortalNameDTO;
-import com.isotrol.impe3.pms.api.portalConfig.PortalConfigurationInstanceSelDTO;
-import com.isotrol.impe3.pms.gui.api.service.IComponentsServiceAsync;
-import com.isotrol.impe3.pms.gui.api.service.IConfigurationsServiceAsync;
+//mport com.isotrol.impe3.pms.api.portalConfig.PortalConfigurationInstanceSelDTO;
+
+
 import com.isotrol.impe3.pms.gui.api.service.IPortalsServiceAsync;
-import com.isotrol.impe3.pms.gui.client.controllers.ConfigurationsController;
+
 import com.isotrol.impe3.pms.gui.client.controllers.PortalsController;
 import com.isotrol.impe3.pms.gui.client.data.impl.InheritedComponentInstanceSelModelData;
-import com.isotrol.impe3.pms.gui.client.data.impl.ModuleInstanceSelModelData;
 import com.isotrol.impe3.pms.gui.client.data.impl.PortalConfigurationInstanceSelModelData;
 import com.isotrol.impe3.pms.gui.client.error.ComponentsErrorMessageResolver;
 import com.isotrol.impe3.pms.gui.client.error.ServiceErrorsProcessor;
@@ -59,6 +59,7 @@ import com.isotrol.impe3.pms.gui.client.util.PmsChangeEvent;
 import com.isotrol.impe3.pms.gui.client.util.PmsContentPanel;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.ComponentsImportWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.InheritedComponentsExportWindow;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.OverrideConfigurationWindow;
 import com.isotrol.impe3.gui.common.i18n.GuiCommonMessages;
 import com.isotrol.impe3.gui.common.i18n.GuiCommonStyles;
 import com.isotrol.impe3.pms.gui.client.i18n.PmsMessages;
@@ -237,16 +238,16 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 		column.setId(PortalConfigurationInstanceSelModelData.PROPERTY_VALIDITY);
 		column.setHeaderText(pmsMessages.columnHeaderValidity());
 		column.setWidth(COLUMN_CONFIGURATION_WIDTH);
-		configs.add(column);
-	/*	column.setRenderer(new GridCellRenderer<InheritedComponentInstanceSelModelData>() {
+		//configs.add(column);
+		column.setRenderer(new GridCellRenderer<PortalConfigurationInstanceSelModelData>() {
 
-			public Object render(InheritedComponentInstanceSelModelData model, String property, ColumnData config,
-				int rowIndex, int colIndex, ListStore<InheritedComponentInstanceSelModelData> store,
-				Grid<InheritedComponentInstanceSelModelData> grid) {
+			public Object render(PortalConfigurationInstanceSelModelData model, String property, ColumnData config,
+				int rowIndex, int colIndex, ListStore<PortalConfigurationInstanceSelModelData> store,
+				Grid<PortalConfigurationInstanceSelModelData> grid) {
 
 				String icon = null;
 				String title = null;
-				Boolean configuration = model.getDTO().getConfiguration();
+				Boolean configuration = model.getDTO().isValidity();
 				if (configuration == null) {
 					return "";
 				} else if (configuration) {
@@ -259,33 +260,13 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 				return TEMPLATE_ICON_CELL.replaceAll(PATTERN_ICON, icon).replaceAll(PATTERN_TITLE, title);
 			}
 		});
-		configs.add(column);*/
+		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(PortalConfigurationInstanceSelModelData.PROPERTY_HERENCY);
 		column.setHeaderText(pmsMessages.columnHeaderHerency());
 		column.setWidth(COLUMN_DEPENDENCIES_WIDTH);
-		/*column.setRenderer(new GridCellRenderer<PortalConfigurationInstanceSelModelData>() {
-
-			public Object render(InheritedComponentInstanceSelModelData model, String property, ColumnData config,
-				int rowIndex, int colIndex, ListStore<InheritedComponentInstanceSelModelData> store,
-				Grid<InheritedComponentInstanceSelModelData> grid) {
-
-				String icon = null;
-				String title = null;
-				Boolean dependencies = model.getDTO().getDependencies();
-				if (dependencies == null) {
-					return "";
-				} else if (dependencies) {
-					icon = Constants.OK_IMAGE;
-					title = pmsMessages.titleComponentOverrideDependences();
-				} else {
-					icon = Constants.ERROR_IMAGE;
-					title = pmsMessages.titleComponentInheritedDependences();
-				}
-				return TEMPLATE_ICON_CELL.replaceAll(PATTERN_ICON, icon).replaceAll(PATTERN_TITLE, title);
-			}
-		});*/
+		
 		configs.add(column);
 
 		ColumnModel cm = new ColumnModel(configs);
@@ -304,7 +285,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 		gridView.setForceFit(true);
 
 		add(grid);
-		//show();
+		
 	}
 	
 	private void addToolBars() {
@@ -316,10 +297,12 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 				new SelectionListener<ButtonEvent>() {
 					@Override
 					public void componentSelected(ButtonEvent ce) {
-						return ;
+						final PortalConfigurationInstanceSelModelData selected = grid.getSelectionModel().getSelectedItem();
+						tryGetConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
+						
 					}
 				});
-			ttiEditConfiguration.disable();
+			ttiEditConfiguration.setEnabled(true);
 			toolBar.add(new SeparatorToolItem());
 
 		// override configuration button
@@ -328,10 +311,11 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					return ;
+					final PortalConfigurationInstanceSelModelData selected = grid.getSelectionModel().getSelectedItem();
+					tryGetConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
 				}
 			});
-		ttiOverrideConfiguration.disable();
+		ttiOverrideConfiguration.setEnabled(true);
 		toolBar.add(new SeparatorToolItem());
 
 		// inherit configuration button
@@ -339,10 +323,11 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			.ttEditFatherConfiguration(), guiCommonStyles.iEdit(), toolBar, new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				return ;
+				final PortalConfigurationInstanceSelModelData selected = grid.getSelectionModel().getSelectedItem();
+				tryGetConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
 							}
 		});
-		ttiEditFatherConfiguration.disable();
+		ttiEditFatherConfiguration.setEnabled(true);
 		toolBar.add(new SeparatorToolItem());
 		
 		
@@ -351,10 +336,11 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 				.ttInheritConfiguration(), guiCommonStyles.iEdit(), toolBar, new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
-					return ;
+					final PortalConfigurationInstanceSelModelData selected = grid.getSelectionModel().getSelectedItem();
+					tryGetConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
 								}
 			});
-			ttiInheritConfiguration.disable();
+			ttiInheritConfiguration.setEnabled(true);
 			toolBar.add(new SeparatorToolItem());
 			
 			
@@ -481,7 +467,32 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 //
 //	}
 	}
+	
+	private void tryGetConfiguration(final String id, final String bean) {
+		mask(pmsMessages.mskComponent());
 
+		AsyncCallback<ConfigurationTemplateDTO> callback = new AsyncCallback<ConfigurationTemplateDTO>() {
+			public void onFailure(Throwable arg0) {
+				unmask();
+				errorProcessor.processError(arg0, errorMessageResolver, pmsMessages.msgErrorRetrieveComponent());
+			}
+
+			public void onSuccess(ConfigurationTemplateDTO arg0) {
+				showConfiguration(arg0, id);
+				unmask();
+			}
+		};
+		portalService.getPortalConfiguration(portalNameDto.getId(),bean, callback);
+	}
+	
+	
+	
+	private void showConfiguration(ConfigurationTemplateDTO configurationTemplate, String configId) {
+		OverrideConfigurationWindow configurationDetailPanel = PmsFactory.getInstance()
+			.getOverrideConfigurationWindow();
+		configurationDetailPanel.init(configurationTemplate, portalNameDto.getId(), configId);
+		configurationDetailPanel.show();
+	}
 	
 	/**
 	 * Retrieves the components instances registered for the bound portal.<br/>

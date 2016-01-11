@@ -23,7 +23,9 @@ package com.isotrol.impe3.pms.gui.api.service;
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.PropertyDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.portal.BaseDTO;
 import com.isotrol.impe3.pms.api.portal.BasesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalCacheDTO;
@@ -342,4 +344,7 @@ public interface IPortalsServiceAsync {
 	 * @param callback
 	 */
 	void setPortalCache(PortalCacheDTO cache, AsyncCallback<Void> callback);
+	
+	
+	void getPortalConfiguration(String portalId, String beanName,AsyncCallback<ConfigurationTemplateDTO> callback);
 }

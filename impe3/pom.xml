@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>impe3-maven</artifactId>
 		<groupId>com.isotrol.impe3.maven</groupId>
-		<version>3.0.3</version>
+		<version>3.0.6</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.isotrol.impe3</groupId>

@@ -68,10 +68,13 @@ import com.isotrol.impe3.pms.core.FileManager;
 import com.isotrol.impe3.pms.core.support.AbstractValueLoader;
 import com.isotrol.impe3.pms.core.support.Mappers;
 import com.isotrol.impe3.pms.model.CategoryEntity;
+import com.isotrol.impe3.pms.model.ComponentDfn;
 import com.isotrol.impe3.pms.model.ConfigurationEntity;
 import com.isotrol.impe3.pms.model.ConfigurationValue;
 import com.isotrol.impe3.pms.model.ContentTypeEntity;
 import com.isotrol.impe3.pms.model.FileEntity;
+import com.isotrol.impe3.pms.model.PortalConfigurationValue;
+import com.isotrol.impe3.pms.model.WithModuleDfn;
 
 
 /**
@@ -185,14 +188,21 @@ public final class PortalConfigurationObject extends AbstractIdentifiable {
 	/**
 	 * Creates a new configuration object.
 	 * @param definition Configuration definition.
-	 * @param entity Configuration entity.
+	 * @param dfn Configuration entity.
 	 * @return A configuration object or {@code null} if any of the arguments is {@code null}.
 	 */
-	static PortalConfigurationObject of(PortalConfigurationDefinition<?> definition, ConfigurationEntity entity) {
-		if (definition == null || entity == null) {
+	static PortalConfigurationObject of(PortalConfigurationDefinition<?> definition, WithModuleDfn dfn) {
+		if (definition == null || dfn == null) {
 			return null;
 		}
-		return LOADER.get(entity, definition);
+		
+		// Si es componente, leemos la configuracion por portal
+		if (ComponentDfn.class.isAssignableFrom(dfn.getClass())) {
+			PortalConfigurationValue value = ((ComponentDfn) dfn).getComponent().getPortal().getCurrent().getPortalConfiguration().get(definition.getType().getName()); 
+			return value != null ? LOADER.get(value.getPortalConfiguration(), definition) : null;
+		} 
+		
+		return null;
 	}
 
 	private static ConfigurationTemplateDTO create(PortalConfigurationDefinition<?> definition, Context1 ctx,
