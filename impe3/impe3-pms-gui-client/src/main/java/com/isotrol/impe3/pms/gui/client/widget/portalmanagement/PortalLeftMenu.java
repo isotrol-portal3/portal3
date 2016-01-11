@@ -65,6 +65,7 @@ import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.cache.PortalCach
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.collection.CollectionsManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.AOwnComponentManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.InheritedComponentManagement;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.configurations.PortalConfigurationsManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.device.PortalDevicesManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.names.PortalNameEditionPanel;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.pages.master.CategoryPagesManagement;
@@ -137,6 +138,10 @@ public class PortalLeftMenu extends ALeftPanel {
 
 	/** "Category pages" item ID.<br/> */
 	private static final String ID_CATEGORY_PAGES = "category-pages";
+	
+	
+	/** "Categories pages" item ID.<br/> */
+	private static final String ID_CONFIGURATIONS_PAGES = "portal-configurations-pages";
 
 	/** "Content pages" item ID.<br/> */
 	private static final String ID_CONTENT_PAGES = "content-pages";
@@ -257,8 +262,12 @@ public class PortalLeftMenu extends ALeftPanel {
 		lModels.add(iProperties);
 
 		// item: Portal management
-		iAdmin = new MenuItemModelData(getPmsMessages().menuItem2Configuration(), getStyles().iEdit(), ID_GENERAL_MNT);
+		iAdmin = new MenuItemModelData(getPmsMessages().menuItem2Parametros(), getStyles().iEdit(), ID_GENERAL_MNT);
 		lModels.add(iAdmin);
+		
+		// item: Portal 
+		MenuItemModelData iconfigurations=new MenuItemModelData(getPmsMessages().menuItem2Configurations(),getPmsStyles().iconAdmin(), ID_CONFIGURATIONS_PAGES);
+		lModels.add(iconfigurations);
 
 		// item: Parent Portal
 		MenuItemModelData iParent = new MenuItemModelData(getPmsMessages().menuItem2ParentPortal(), getPmsStyles()
@@ -298,8 +307,14 @@ public class PortalLeftMenu extends ALeftPanel {
 						AvailableBasesWidget widget = factory.getAvailableBasesWidget();
 						widget.init(portalName);
 						tabItemManager.addTabItem(widget, getPmsMessages().headerBasesManagement());
+					} else if (itemId.equals(ID_CONFIGURATIONS_PAGES)) {
+						PortalConfigurationsManagement widget = factory.getPortalConfigurationsManagement();
+								
+						widget.init(portalName);
+						tabItemManager.addTabItem(widget, getPmsMessages().headerPortalConfigurationsTab());
 					} else if (itemId.equals(ID_PROPERTIES)) {
 						AvailablePropertiesWidget widget = factory.getAvailablePropertiesWidget();
+						
 						widget.init(portalName);
 						tabItemManager.addTabItem(widget, getPmsMessages().headerPropertiesManagement());
 					} else if (itemId.equals(ID_START_PAGE)) {

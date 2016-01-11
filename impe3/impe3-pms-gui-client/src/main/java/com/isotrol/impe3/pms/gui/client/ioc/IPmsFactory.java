@@ -77,6 +77,7 @@ import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.Overri
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.OverrideDependencesWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.ValidOwnComponentManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.WarningOwnComponentManagement;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.configurations.PortalConfigurationsManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.device.PortalDeviceEditionPanel;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.device.PortalDevicesManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.names.PortalNameCreationPanel;
@@ -622,6 +623,9 @@ public interface IPmsFactory extends Ginjector {
 	 * @return the widget with the available portal bases
 	 */
 	AvailableBasesWidget getAvailableBasesWidget();
+	
+	
+	PortalConfigurationsManagement getPortalConfigurationsManagement();
 	
 	/**
 	 * @return the widget with the available portal properties

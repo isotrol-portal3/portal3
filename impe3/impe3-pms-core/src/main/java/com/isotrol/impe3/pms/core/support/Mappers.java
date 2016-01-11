@@ -222,7 +222,7 @@ public final class Mappers {
 				list.add(new PortalConfigurationSelDTO(def.getPortalConfiguration().getType().getName(), 
 						(String) def.getPortalConfiguration().getName().get(), 
 						(String) def.getPortalConfiguration().getDescription().get(), 
-						portal.getStringId()));
+						portal.getStringId(), true, true));
 			}
 		}
 		return list;
