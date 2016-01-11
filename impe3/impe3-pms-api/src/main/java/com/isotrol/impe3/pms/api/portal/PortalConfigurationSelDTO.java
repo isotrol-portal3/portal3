@@ -34,14 +34,19 @@ public final class PortalConfigurationSelDTO extends AbstractDescribedWithId {
 	//** Name. */
 	private String beanName;
 
+	private boolean validity;
+	
+	private boolean inherited;
 	
 	
-	public PortalConfigurationSelDTO(String beanName, String name, String description, String portalId) {
+	public PortalConfigurationSelDTO(String beanName, String name, String description, String portalId, boolean validity, boolean inherited) {
 		super();
 		this.setName(name);
 		this.setDescription(description);
 		this.setId(portalId);
 		this.beanName = beanName;
+		this.validity = validity;
+		this.inherited = inherited;
 	}
 
 	/** Default constructor. */
@@ -60,6 +65,22 @@ public final class PortalConfigurationSelDTO extends AbstractDescribedWithId {
 	 */
 	public void setBeanName(String beanName) {
 		this.beanName = beanName;
+	}
+
+	public boolean isValidity() {
+		return validity;
+	}
+
+	public void setValidity(boolean validity) {
+		this.validity = validity;
+	}
+
+	public boolean isInherited() {
+		return inherited;
+	}
+
+	public void setInherited(boolean inherited) {
+		this.inherited = inherited;
 	}
 	
 }
