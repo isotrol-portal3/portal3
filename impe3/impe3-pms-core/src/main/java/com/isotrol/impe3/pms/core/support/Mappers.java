@@ -49,9 +49,11 @@ import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.config.UploadedFileDTO;
 import com.isotrol.impe3.pms.api.minst.DependencyDTO;
 import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO.EstadoHerencia;
 import com.isotrol.impe3.pms.api.user.DoneDTO;
 import com.isotrol.impe3.pms.api.user.UserSelDTO;
 import com.isotrol.impe3.pms.core.obj.ComponentObject;
+import com.isotrol.impe3.pms.core.obj.ComponentsObject;
 import com.isotrol.impe3.pms.core.obj.ContextGlobal;
 import com.isotrol.impe3.pms.core.obj.PortalObject;
 import com.isotrol.impe3.pms.model.Done;
@@ -272,7 +274,8 @@ public final class Mappers {
 	 * @param components List of ComponentObject.
 	 * @return List of PortalConfigurationSelDTO
 	 */
-	public static List<PortalConfigurationSelDTO> pconfig2seldto(Map<UUID, ComponentObject> components, PortalObject portal) {
+	public static List<PortalConfigurationSelDTO> pconfig2seldto(Map<UUID, ComponentObject> components, 
+			ComponentsObject objects, PortalObject portal) {
 		
 		final List<PortalConfigurationSelDTO> list;
 		
@@ -280,13 +283,17 @@ public final class Mappers {
 			list = Lists.newArrayListWithCapacity(0);
 		} else {
 			list = Lists.newArrayListWithCapacity(components.size());
-			
+		
 			for (ComponentObject obj : components.values()) {
-				ModuleDefinition def = obj.getModule();
-				list.add(new PortalConfigurationSelDTO(def.getPortalConfiguration().getType().getName(), 
-						(String) def.getPortalConfiguration().getName().get(), 
-						(String) def.getPortalConfiguration().getDescription().get(), 
-						portal.getStringId(), true,Herencia.PROPIO));
+				PortalConfigurationDefinition<?> pcd = obj.getModule().getPortalConfiguration();
+				String beanName = pcd.getType().getName();
+				
+				list.add(new PortalConfigurationSelDTO(beanName, 
+						(String) pcd.getName().get(), 
+						(String) pcd.getDescription().get(), 
+						portal.getStringId(), !obj.isPortalConfigurationError(), 
+							(objects.isOwned(obj.getId()) ? EstadoHerencia.PROPIO : 
+								(portal.hasPortalConfiguration(beanName) ? EstadoHerencia.SOBREESCRITO : EstadoHerencia.HEREDADO))));
 			}
 		}
 		return list;
@@ -297,13 +304,22 @@ public final class Mappers {
 	 * @param components List of ComponentObject.
 	 * @return List of PortalConfigurationSelDTO
 	 */
-	public static Map<String, ConfigurationTemplateDTO> pconfig2temp(Map<UUID, ComponentObject> components, PortalObject portal, ContextGlobal ctx) {
+	public static Map<String, ConfigurationTemplateDTO> pconfig2temp(Map<UUID, ComponentObject> components, ComponentsObject objects, 
+			PortalObject portal, ContextGlobal ctx) {
 		
-		final Map<String, ConfigurationTemplateDTO> list = Maps.newHashMap();;
+		final Map<String, ConfigurationTemplateDTO> list = Maps.newHashMap();
 		
 		for (ComponentObject obj : components.values()) {
 			ModuleDefinition def = obj.getModule();
-			list.put(def.getPortalConfiguration().getType().getName(), obj.toTemplateDTO(ctx).getPortalConfiguration());
+			
+			String beanName = def.getPortalConfiguration().getType().getName();
+			
+//			portal.getPortalConfiguration().get(beanName).getPortalConfiguration().getValues().values();
+//			
+//			PortalConfigurationObject pco = PortalConfigurationObject.of(def.getPortalConfiguration(), portal.getPortalConfiguration().get(def.getPortalConfiguration().getType().getName()).getPortalConfiguration());
+//			pco.toTemplateDTO(ctx);
+			
+			list.put(beanName, obj.toTemplateDTO(ctx).getPortalConfiguration());
 		}
 		return list;
 	}

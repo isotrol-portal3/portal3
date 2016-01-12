@@ -30,6 +30,7 @@ import com.isotrol.impe3.pms.api.component.InheritedComponentInstanceSelDTO;
 import com.isotrol.impe3.pms.core.FileManager;
 import com.isotrol.impe3.pms.model.ComponentDfn;
 import com.isotrol.impe3.pms.model.OverridenComponentValue;
+import com.isotrol.impe3.pms.model.PortalDfn;
 
 
 /**
@@ -70,13 +71,14 @@ public class ComponentObject extends ModuleObject {
 	 * Overriding constructor.
 	 * @param c Component.
 	 * @param o Overriding definition.
+	 * @param dfn 
 	 */
-	private ComponentObject(ComponentObject c, OverridenComponentValue o) {
-		super(c, o);
+	private ComponentObject(ComponentObject c, OverridenComponentValue o, PortalDfn dfn) {
+		super(c, o, dfn);
 	}
 
-	ComponentObject.Inherited override(OverridenComponentValue o) {
-		return new ComponentObject.Inherited(this, o);
+	ComponentObject.Inherited override(OverridenComponentValue o, PortalDfn dfn) {
+		return new ComponentObject.Inherited(this, o, dfn);
 	}
 
 	@Override
@@ -107,9 +109,10 @@ public class ComponentObject extends ModuleObject {
 		 * Constructor.
 		 * @param c Component.
 		 * @param o Overriding definition.
+		 * @param dfn 
 		 */
-		Inherited(ComponentObject c, OverridenComponentValue o) {
-			super(c, o);
+		Inherited(ComponentObject c, OverridenComponentValue o, PortalDfn dfn) {
+			super(c, o, dfn);
 			if (c.getModule().getConfiguration() == null) {
 				this.configuration = null;
 			} else {

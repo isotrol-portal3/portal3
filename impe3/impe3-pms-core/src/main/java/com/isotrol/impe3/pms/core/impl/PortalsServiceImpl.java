@@ -333,8 +333,6 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 	@Transactional(rollbackFor = Throwable.class)
 	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
 	public List<PropertyDTO> getAvailableProperties(String portalId) throws PMSException {
-		loadContextGlobal().toPortal(portalId).getPortalConfigurations();
-		
 		return loadContextGlobal().toPortal(portalId).getAvailableProperties();
 	}
 
@@ -1008,5 +1006,28 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 			ce = portalConfigurationManager.update(cdef, ce, config);
 		}
 		pcv.setPortalConfiguration(ce);
+	}
+	
+	/**
+	 * Clear portal configuration.
+	 * @param portalId Portal id.
+	 * @param beanName Bean name.
+	 * @return ConfigurationTemplateDTO.
+	 * @throws PMSException.
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_SET, portal=PortalAuthority.SET)
+	public ConfigurationTemplateDTO clearConfiguration(String portalId, String beanName) throws PMSException {
+		final ContextPortal context = loadContextGlobal().toPortal(portalId);
+		
+		final PortalEntity entity = loadPortal(context.getPortalId());
+		final PortalDfn portalDfn = portalManager.touchOffline(entity);
+		portalManager.touchComponents(context.getPortals(), entity);
+		
+		if (portalDfn.getPortalConfiguration() != null && portalDfn.getPortalConfiguration().get(beanName) != null) {
+			portalConfigurationManager.delete(portalDfn.getPortalConfiguration().get(beanName).getPortalConfiguration());
+		}
+		
+		return getPortalConfiguration(portalId, beanName);
 	}
 }

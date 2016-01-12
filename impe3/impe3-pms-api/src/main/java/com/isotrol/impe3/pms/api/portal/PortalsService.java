@@ -351,4 +351,13 @@ public interface PortalsService {
 	 */
 	public ConfigurationTemplateDTO savePortalConfiguration(String portalId, String beanName,
 		List<ConfigurationItemDTO> config) throws PMSException;
+	
+	/**
+	 * Clear portal configuration.
+	 * @param portalId Portal id.
+	 * @param beanName Bean name.
+	 * @return ConfigurationTemplateDTO.
+	 * @throws PMSException.
+	 */
+	public ConfigurationTemplateDTO clearConfiguration(String portalId, String beanName) throws PMSException;
 }

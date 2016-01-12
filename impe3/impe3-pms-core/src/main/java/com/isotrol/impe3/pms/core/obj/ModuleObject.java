@@ -76,6 +76,8 @@ import com.isotrol.impe3.pms.core.ModuleRegistry;
 import com.isotrol.impe3.pms.core.support.AbstractValueLoader;
 import com.isotrol.impe3.pms.model.DependencySetEntity;
 import com.isotrol.impe3.pms.model.OverridenComponentValue;
+import com.isotrol.impe3.pms.model.PortalConfigurationValue;
+import com.isotrol.impe3.pms.model.PortalDfn;
 import com.isotrol.impe3.pms.model.WithDependencies;
 import com.isotrol.impe3.pms.model.WithIdVersion;
 import com.isotrol.impe3.pms.model.WithModuleDfn;
@@ -185,8 +187,9 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 	 * Overriding constructor.
 	 * @param m Module to override.
 	 * @param o Overriding information.
+	 * @param dfn 
 	 */
-	ModuleObject(ModuleObject m, OverridenComponentValue o) {
+	ModuleObject(ModuleObject m, OverridenComponentValue o, PortalDfn dfn) {
 		super(m.getId());
 		this.module = m.getModule();
 		this.name = m.getName();
@@ -199,8 +202,13 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 			this.configuration = m.configuration;
 			this.missingConfiguration = m.missingConfiguration;
 		}
-		
-		this.portalConfiguration = m.getPortalConfiguration();
+		PortalConfigurationDefinition<?> pcd = this.module.getPortalConfiguration();
+		PortalConfigurationValue pcv = dfn.getActivePortalConfigurationValue(pcd.getType().getName());
+		if (pcv != null) {
+			this.portalConfiguration = PortalConfigurationObject.of(pcd, pcv.getPortalConfiguration());
+		} else {
+			this.portalConfiguration = null;
+		}
 		
 		// Dependencies
 		if (o != null && o.getDependencySet() != null) {
@@ -264,7 +272,7 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 	}
 
 	public boolean isPortalConfigurationError() {
-		return portalConfiguration != null && portalConfiguration.isError();
+		return portalConfiguration == null || portalConfiguration.isError();
 	}
 	
 	public Correctness getCorrectness() {
@@ -401,7 +409,7 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 	/**
 	 * @return the portalConfiguration
 	 */
-	PortalConfigurationObject getPortalConfiguration() {
+	public PortalConfigurationObject getPortalConfiguration() {
 		return portalConfiguration;
 	}
 

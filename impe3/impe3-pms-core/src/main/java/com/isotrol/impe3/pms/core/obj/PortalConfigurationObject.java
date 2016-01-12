@@ -205,6 +205,21 @@ public final class PortalConfigurationObject extends AbstractIdentifiable {
 		return null;
 	}
 
+	/**
+	 * Creates a new configuration object.
+	 * @param definition Configuration definition.
+	 * @param dfn Configuration entity.
+	 * @return A configuration object or {@code null} if any of the arguments is {@code null}.
+	 */
+	public static PortalConfigurationObject of(PortalConfigurationDefinition<?> definition, ConfigurationEntity entity) {
+		if (definition == null || entity == null) {
+			return null;
+		}
+		
+		// Si es componente, leemos la configuracion por portal
+		return LOADER.get(entity, definition);
+	}
+	
 	private static ConfigurationTemplateDTO create(PortalConfigurationDefinition<?> definition, Context1 ctx,
 		PortalConfigurationObject object) {
 		final ConfigurationTemplateDTO dto = new ConfigurationTemplateDTO();

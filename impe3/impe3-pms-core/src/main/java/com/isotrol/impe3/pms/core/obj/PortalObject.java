@@ -217,7 +217,7 @@ public final class PortalObject extends AbstractRoutableObject {
 		this.nodeRepository = Provider.of(dfn.getNrConnector(), dfn.getNrBean());
 		this.bases = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, BASES_LOADER);
 		this.properties = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, PROPERTIES_LOADER);
-		
+//		((PortalConfigurationValue)tx.getTxSupplier(PortalDfn.class, dfn.getParent().getCurrentId(), null, PORTAL_CONFIGURATION_LOADER).get().values().toArray()[0]).getPortalConfiguration().getValues().values()
 		this.portalConfiguration = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, PORTAL_CONFIGURATION_LOADER);
 		
 		this.uncategorized = PortalInheritableFlag.fromBoolean(dfn.getUncategorized());
@@ -283,10 +283,14 @@ public final class PortalObject extends AbstractRoutableObject {
 	/**
 	 * @return the portalConfiguration
 	 */
-	ImmutableMap<String, PortalConfigurationValue> getPortalConfiguration() {
+	public ImmutableMap<String, PortalConfigurationValue> getPortalConfiguration() {
 		return portalConfiguration.get();
 	}
 
+	public boolean hasPortalConfiguration(String beanName) {
+		return (portalConfiguration != null && getPortalConfiguration() != null && getPortalConfiguration().containsKey(beanName));
+	}
+	
 	public ImmutableMap<String, SetFilterValue> getSetFilters() {
 		return setFilters.get();
 	}
