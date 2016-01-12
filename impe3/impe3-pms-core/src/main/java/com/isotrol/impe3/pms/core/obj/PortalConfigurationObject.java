@@ -73,6 +73,7 @@ import com.isotrol.impe3.pms.model.ConfigurationEntity;
 import com.isotrol.impe3.pms.model.ConfigurationValue;
 import com.isotrol.impe3.pms.model.ContentTypeEntity;
 import com.isotrol.impe3.pms.model.FileEntity;
+import com.isotrol.impe3.pms.model.PortalConfigurationValue;
 import com.isotrol.impe3.pms.model.WithModuleDfn;
 
 
@@ -197,8 +198,8 @@ public final class PortalConfigurationObject extends AbstractIdentifiable {
 		
 		// Si es componente, leemos la configuracion por portal
 		if (ComponentDfn.class.isAssignableFrom(dfn.getClass())) {
-						
-//			return ((ComponentDfn) dfn).getComponent().getPortal().getCurrent().getPortalConfiguration();
+			PortalConfigurationValue value = ((ComponentDfn) dfn).getComponent().getPortal().getCurrent().getPortalConfiguration().get(definition.getType().getName()); 
+			return value != null ? LOADER.get(value.getPortalConfiguration(), definition) : null;
 		} 
 		
 		return null;
