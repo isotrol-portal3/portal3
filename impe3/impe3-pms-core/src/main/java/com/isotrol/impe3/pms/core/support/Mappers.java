@@ -305,7 +305,7 @@ public final class Mappers {
 		
 		for (ComponentObject obj : components.values()) {
 			ModuleDefinition def = obj.getModule();
-			list.put(def.getPortalConfiguration().getType().getName(), def.getPortalConfiguration());
+			list.put(def.getPortalConfigurationBeanName(), def.getPortalConfiguration());
 		}
 		return list;
 	}

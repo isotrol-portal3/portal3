@@ -371,6 +371,9 @@ public class ContextPortal extends Context2 {
 
 
 	public final List<PortalConfigurationSelDTO> getPortalConfigurations() throws PMSException {
+		
+		PortalConfigurationObject.template(getPortalConfigurationsDef().get("es.impe3.componentes.servertime.PortalNombreSedeConfig"), getGlobal());
+		
 		return pconfig2seldto(getComponents().delegate(), portal);
 	}
 	
