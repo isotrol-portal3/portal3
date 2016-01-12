@@ -41,8 +41,10 @@ import com.isotrol.impe3.gui.common.util.Buttons;
 import com.isotrol.impe3.gui.common.util.Constants;
 import com.isotrol.impe3.gui.common.util.CustomizableStoreFilter;
 import com.isotrol.impe3.gui.common.util.Util;
+import com.isotrol.impe3.pms.api.component.InheritedComponentInstanceSelDTO;
 import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO.Herencia;
 import com.isotrol.impe3.pms.api.portal.PortalNameDTO;
 //mport com.isotrol.impe3.pms.api.portalConfig.PortalConfigurationInstanceSelDTO;
 
@@ -51,6 +53,7 @@ import com.isotrol.impe3.pms.gui.api.service.IPortalsServiceAsync;
 
 import com.isotrol.impe3.pms.gui.client.controllers.PortalsController;
 import com.isotrol.impe3.pms.gui.client.data.impl.InheritedComponentInstanceSelModelData;
+import com.isotrol.impe3.pms.gui.client.data.impl.ModuleInstanceSelModelData;
 import com.isotrol.impe3.pms.gui.client.data.impl.PortalConfigurationInstanceSelModelData;
 import com.isotrol.impe3.pms.gui.client.error.ComponentsErrorMessageResolver;
 import com.isotrol.impe3.pms.gui.client.error.ServiceErrorsProcessor;
@@ -201,7 +204,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 
 		initThis();
 		initComponent();
-		//addListeners();
+		addListeners();
 		tryGetConfigurations();
 	}
 	
@@ -303,7 +306,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 						
 					}
 				});
-			ttiEditConfiguration.setEnabled(true);
+			ttiEditConfiguration.setEnabled(false);
 			toolBar.add(new SeparatorToolItem());
 
 		// override configuration button
@@ -316,7 +319,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 					tryGetConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
 				}
 			});
-		ttiOverrideConfiguration.setEnabled(true);
+		ttiOverrideConfiguration.setEnabled(false);
 		toolBar.add(new SeparatorToolItem());
 
 		// inherit configuration button
@@ -328,12 +331,12 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 				tryGetConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
 							}
 		});
-		ttiEditFatherConfiguration.setEnabled(true);
+		ttiEditFatherConfiguration.setEnabled(false);
 		toolBar.add(new SeparatorToolItem());
 		
 		
 		
-		ttiInheritConfiguration = buttonsSupport.addGenericButton(pmsMessages.labelInheritConfiguration(), pmsMessages
+		/*ttiInheritConfiguration = buttonsSupport.addGenericButton(pmsMessages.labelInheritConfiguration(), pmsMessages
 				.ttInheritConfiguration(), guiCommonStyles.iEdit(), toolBar, new SelectionListener<ButtonEvent>() {
 				@Override
 				public void componentSelected(ButtonEvent ce) {
@@ -341,13 +344,38 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 					tryGetConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
 								}
 			});
-			ttiInheritConfiguration.setEnabled(true);
+			ttiInheritConfiguration.setEnabled(false);
 			toolBar.add(new SeparatorToolItem());
 			
 			
 			
 			toolBar.add(new FillToolItem());
-
+*/
+		
+		
+			ttiInheritConfiguration = buttonsSupport.addGenericButton(pmsMessages.labelInheritConfiguration(), pmsMessages
+				.ttInheritConfiguration(), guiCommonStyles.iDelete(), toolBar, new SelectionListener<ButtonEvent>() {
+				@Override
+				public void componentSelected(ButtonEvent ce) {
+					final PortalConfigurationInstanceSelModelData selected = grid.getSelectionModel().getSelectedItem();
+					if (selected != null) {
+						Listener<MessageBoxEvent> lConfirm = new Listener<MessageBoxEvent>() {
+							public void handleEvent(MessageBoxEvent be) {
+								Button clicked = be.getButtonClicked();
+								if (clicked != null && clicked.getItemId().equals(Dialog.YES)) {
+									tryClearConfiguration(selected.getDTO());
+									
+								}
+							}
+						};
+						MessageBox.confirm(messages.headerConfirmWindow(), pmsMessages.msgConfirmClearPortalConfiguration(),
+							lConfirm).setModal(true);
+					}
+				}
+			});
+			ttiInheritConfiguration.disable();
+			//toolBar.add(new SeparatorToolItem());
+			toolBar.add(new FillToolItem());
 			filter = new CustomizableStoreFilter<PortalConfigurationInstanceSelModelData>(Arrays.asList(new String[] {
 					PortalConfigurationInstanceSelModelData.PROPERTY_NAME, PortalConfigurationInstanceSelModelData.PROPERTY_DESCRIPTION,
 					PortalConfigurationInstanceSelModelData.PROPERTY_HERENCY, PortalConfigurationInstanceSelModelData.PROPERTY_VALIDITY}));
@@ -408,7 +436,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 				PmsChangeEvent event = (PmsChangeEvent) ce;
 				switch (event.getType()) {
 					case PmsChangeEvent.UPDATE:
-						//onComponentUpdate((InheritedComponentInstanceSelDTO) event.getEventInfo());
+						tryGetConfigurations();
 						break;
 					case PmsChangeEvent.IMPORT:
 						tryGetConfigurations();
@@ -440,33 +468,51 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			}
 		});
 	}
-
+	
 	private void enableDisableButtons(PortalConfigurationInstanceSelModelData model) {
-		boolean configuration = model.getDTO().isInherited();
+		Herencia configuration = model.getDTO().getInherited();
 	
 
-//	if (configuration == null) {
-//		ttiOverrideConfiguration.disable();
-//		ttiEditConfiguration.disable();;
-//		ttiEditFatherConfiguration.disable();
-//		ttiInheritConfiguration.disable();
-//	} else if(configuration=="propio") {
-//		ttiEditConfiguration.setEnabled(true);
-//		ttiEditFatherConfiguration.disable();
-//		ttiInheritConfiguration.disable();
-//		ttiOverrideConfiguration.disable();
-//	} else if(configuration=="heredado no sobreescrito") {
-//		ttiEditConfiguration.disable();
-//		ttiEditFatherConfiguration.setEnabled(true);;
-//		ttiInheritConfiguration.disable();
-//		ttiOverrideConfiguration.setEnabled(true);
-//	}else if(configuration=="heredado sobreescrito"){
-//		ttiEditConfiguration.setEnabled(true);
-//		ttiEditFatherConfiguration.disable();;
-//		ttiInheritConfiguration.setEnabled(true);
-//		ttiOverrideConfiguration.disable();
-//
-//	}
+	if (configuration == null) {
+		ttiOverrideConfiguration.disable();
+		ttiEditConfiguration.disable();;
+		ttiEditFatherConfiguration.disable();
+		ttiInheritConfiguration.disable();
+	} else if(configuration==Herencia.PROPIO) {
+		ttiEditConfiguration.setEnabled(true);
+		ttiEditFatherConfiguration.setEnabled(true);
+		ttiInheritConfiguration.setEnabled(true);
+		ttiOverrideConfiguration.setEnabled(true);
+	} else if(configuration==Herencia.HEREDADO) {
+		ttiEditConfiguration.disable();
+		ttiEditFatherConfiguration.setEnabled(true);;
+		ttiInheritConfiguration.disable();
+		ttiOverrideConfiguration.setEnabled(true);
+	}else if(configuration==Herencia.SOBREESCRITO){
+		ttiEditConfiguration.setEnabled(true);
+		ttiEditFatherConfiguration.disable();;
+		ttiInheritConfiguration.setEnabled(true);
+		ttiOverrideConfiguration.disable();
+
+	}
+	}
+	
+	private void tryClearConfiguration(PortalConfigurationSelDTO dto) {
+		mask(pmsMessages.mskClearOverrideConfiguration());
+		AsyncCallback<PortalConfigurationSelDTO> callback = new AsyncCallback<PortalConfigurationSelDTO>() {
+
+			public void onSuccess(PortalConfigurationSelDTO result) {
+				unmask();
+				util.info(pmsMessages.msgSuccessClearConfiguration());
+			}
+
+			public void onFailure(Throwable caught) {
+				unmask();
+				util.error(pmsMessages.msgErrorClearConfiguration());
+			}
+		};
+		
+		//componentsService.clearConfiguration(portalNameDto.getId(), dto.getComponent().getId(), callback);
 	}
 	
 	private void tryGetConfiguration(final String id, final String bean) {

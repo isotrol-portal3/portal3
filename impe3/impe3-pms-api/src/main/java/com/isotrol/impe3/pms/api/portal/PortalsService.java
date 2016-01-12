@@ -22,6 +22,7 @@ package com.isotrol.impe3.pms.api.portal;
 
 import java.util.List;
 
+//import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.isotrol.impe3.pms.api.EntityNotFoundException;
 import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.PropertyDTO;
@@ -351,4 +352,6 @@ public interface PortalsService {
 	 */
 	public ConfigurationTemplateDTO savePortalConfiguration(String portalId, String beanName,
 		List<ConfigurationItemDTO> config) throws PMSException;
+	
+	//public boolean clearConfiguration(String id, String bean);
 }

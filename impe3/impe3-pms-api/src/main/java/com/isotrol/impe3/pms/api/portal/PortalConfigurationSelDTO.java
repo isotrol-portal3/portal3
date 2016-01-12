@@ -36,17 +36,28 @@ public final class PortalConfigurationSelDTO extends AbstractDescribedWithId {
 
 	private boolean validity;
 	
-	private boolean inherited;
+	public enum Herencia {
+	   PROPIO,
+	   HEREDADO,
+	   SOBREESCRITO
+	}
+
+	 private Herencia inherited;
+
+	    /**
+	     * @param text
+	     */
 	
 	
-	public PortalConfigurationSelDTO(String beanName, String name, String description, String portalId, boolean validity, boolean inherited) {
+	
+	public PortalConfigurationSelDTO(String beanName, String name, String description, String portalId, boolean validity, Herencia inherited) {
 		super();
 		this.setName(name);
 		this.setDescription(description);
 		this.setId(portalId);
 		this.beanName = beanName;
 		this.validity = validity;
-		this.inherited = inherited;
+		this.inherited =inherited;
 	}
 
 	/** Default constructor. */
@@ -75,11 +86,11 @@ public final class PortalConfigurationSelDTO extends AbstractDescribedWithId {
 		this.validity = validity;
 	}
 
-	public boolean isInherited() {
+	public Herencia getInherited() {
 		return inherited;
 	}
 
-	public void setInherited(boolean inherited) {
+	public void setInherited(Herencia inherited) {
 		this.inherited = inherited;
 	}
 	

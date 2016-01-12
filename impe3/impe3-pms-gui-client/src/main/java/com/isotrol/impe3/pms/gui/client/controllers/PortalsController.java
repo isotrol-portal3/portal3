@@ -628,4 +628,16 @@ public class PortalsController extends ChangeEventSupport implements IPortalsSer
 		service.savePortalConfiguration(id, bean, confsDto, callback);		
 	}
 
-}
+	/*@Override
+	public void clearConfiguration(String id, String bean, AsyncCallback<PortalConfigurationSelDTO> callback) {
+		// TODO Auto-generated method stub
+		
+	}*/
+	
+	/*@Override
+	public void clearConfiguration(String id, String bean,AsyncCallback<PortalConfigurationSelDTO> callback) {
+		//service.clearConfiguration(id, bean,callback);	
+*/		
+	}
+
+

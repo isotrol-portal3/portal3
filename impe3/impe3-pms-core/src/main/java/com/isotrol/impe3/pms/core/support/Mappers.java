@@ -52,6 +52,7 @@ import com.isotrol.impe3.pms.api.WithLocalizedNameDTO;
 import com.isotrol.impe3.pms.api.config.UploadedFileDTO;
 import com.isotrol.impe3.pms.api.minst.DependencyDTO;
 import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO.Herencia;
 import com.isotrol.impe3.pms.api.user.DoneDTO;
 import com.isotrol.impe3.pms.api.user.UserSelDTO;
 import com.isotrol.impe3.pms.core.obj.ComponentObject;
@@ -288,7 +289,7 @@ public final class Mappers {
 				list.add(new PortalConfigurationSelDTO(def.getPortalConfiguration().getType().getName(), 
 						(String) def.getPortalConfiguration().getName().get(), 
 						(String) def.getPortalConfiguration().getDescription().get(), 
-						portal.getStringId(), true, true));
+						portal.getStringId(), true,Herencia.PROPIO));
 			}
 		}
 		return list;
