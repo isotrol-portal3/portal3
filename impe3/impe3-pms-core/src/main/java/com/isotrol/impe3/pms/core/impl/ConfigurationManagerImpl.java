@@ -42,16 +42,16 @@ import com.isotrol.impe3.api.Category;
 import com.isotrol.impe3.api.ContentType;
 import com.isotrol.impe3.api.FileId;
 import com.isotrol.impe3.core.Loggers;
-import com.isotrol.impe3.core.config.ConfigurationDefinition;
-import com.isotrol.impe3.core.config.ConfigurationDefinition.Item;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition.Item;
 import com.isotrol.impe3.pbuf.BaseProtos.ConfigurationPB;
 import com.isotrol.impe3.pbuf.BaseProtos.ConfigurationValuePB;
 import com.isotrol.impe3.pbuf.BaseProtos.FileContentPB;
 import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.config.ConfigurationItemDTO;
 import com.isotrol.impe3.pms.api.config.UploadedFileDTO;
-import com.isotrol.impe3.pms.core.ConfigurationManager;
 import com.isotrol.impe3.pms.core.FileManager;
+import com.isotrol.impe3.pms.core.PortalConfigurationManager;
 import com.isotrol.impe3.pms.core.support.NotFoundProviders;
 import com.isotrol.impe3.pms.model.CategoryEntity;
 import com.isotrol.impe3.pms.model.ConfigurationEntity;
@@ -62,12 +62,12 @@ import com.isotrol.impe3.pms.model.FilePurpose;
 
 
 /**
- * Implementation of ConfigurationManager.
- * @author Andres Rodriguez.
+ * Implementation of PortalConfigurationManager.
+ * @author Enrique Diaz.
  */
-@Service("configurationManager")
+@Service("portalConfigurationManager")
 public final class ConfigurationManagerImpl extends AbstractEntityService<ConfigurationEntity> implements
-	ConfigurationManager {
+	PortalConfigurationManager {
 
 	/** Logger. */
 	private final Logger logger = Loggers.pms();
@@ -84,7 +84,7 @@ public final class ConfigurationManagerImpl extends AbstractEntityService<Config
 	 * java.util.Collection)
 	 */
 	@Transactional(rollbackFor = Throwable.class)
-	public ConfigurationEntity create(ConfigurationDefinition<?> cd, Collection<ConfigurationItemDTO> configuration)
+	public ConfigurationEntity create(PortalConfigurationDefinition<?> cd, Collection<ConfigurationItemDTO> configuration)
 		throws PMSException {
 		final ConfigurationEntity entity = new ConfigurationEntity();
 		setValues(cd, entity, configuration);
@@ -98,7 +98,7 @@ public final class ConfigurationManagerImpl extends AbstractEntityService<Config
 	 * com.isotrol.impe3.pbuf.BaseProtos.ConfigurationPB)
 	 */
 	@Transactional(rollbackFor = Throwable.class)
-	public ConfigurationEntity create(ConfigurationDefinition<?> cd, ConfigurationPB configuration) throws PMSException {
+	public ConfigurationEntity create(PortalConfigurationDefinition<?> cd, ConfigurationPB configuration) throws PMSException {
 		return create(cd, pb2dto(configuration));
 	}
 
@@ -107,7 +107,7 @@ public final class ConfigurationManagerImpl extends AbstractEntityService<Config
 	 * com.isotrol.impe3.pms.model.ConfigurationEntity, java.util.Collection)
 	 */
 	@Transactional(rollbackFor = Throwable.class)
-	public ConfigurationEntity update(ConfigurationDefinition<?> cd, ConfigurationEntity entity,
+	public ConfigurationEntity update(PortalConfigurationDefinition<?> cd, ConfigurationEntity entity,
 		Collection<ConfigurationItemDTO> configuration) throws PMSException {
 		setValues(cd, entity, configuration);
 		return entity;
@@ -118,7 +118,7 @@ public final class ConfigurationManagerImpl extends AbstractEntityService<Config
 	 * com.isotrol.impe3.pms.model.ConfigurationEntity, com.isotrol.impe3.pbuf.BaseProtos.ConfigurationPB)
 	 */
 	@Transactional(rollbackFor = Throwable.class)
-	public ConfigurationEntity update(ConfigurationDefinition<?> cd, ConfigurationEntity entity,
+	public ConfigurationEntity update(PortalConfigurationDefinition<?> cd, ConfigurationEntity entity,
 		ConfigurationPB configuration) throws PMSException {
 		return update(cd, entity, pb2dto(configuration));
 	}
@@ -128,7 +128,7 @@ public final class ConfigurationManagerImpl extends AbstractEntityService<Config
 	 * java.util.UUID, java.util.Collection)
 	 */
 	@Transactional(rollbackFor = Throwable.class)
-	public ConfigurationEntity update(ConfigurationDefinition<?> cd, UUID id,
+	public ConfigurationEntity update(PortalConfigurationDefinition<?> cd, UUID id,
 		Collection<ConfigurationItemDTO> configuration) throws PMSException {
 		return update(cd, load(id), configuration);
 	}
@@ -138,12 +138,12 @@ public final class ConfigurationManagerImpl extends AbstractEntityService<Config
 	 * java.util.UUID, com.isotrol.impe3.pbuf.BaseProtos.ConfigurationPB)
 	 */
 	@Transactional(rollbackFor = Throwable.class)
-	public ConfigurationEntity update(ConfigurationDefinition<?> cd, UUID id, ConfigurationPB configuration)
+	public ConfigurationEntity update(PortalConfigurationDefinition<?> cd, UUID id, ConfigurationPB configuration)
 		throws PMSException {
 		return update(cd, load(id), configuration);
 	}
 
-	private void setValues(ConfigurationDefinition<?> cd, ConfigurationEntity entity,
+	private void setValues(PortalConfigurationDefinition<?> cd, ConfigurationEntity entity,
 		Collection<ConfigurationItemDTO> configuration) throws PMSException {
 		checkNotNull(configuration);
 		checkArgument(!configuration.isEmpty() || cd.getMBPParameters().isEmpty());
