@@ -333,8 +333,6 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 	@Transactional(rollbackFor = Throwable.class)
 	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
 	public List<PropertyDTO> getAvailableProperties(String portalId) throws PMSException {
-		loadContextGlobal().toPortal(portalId).getPortalConfigurations();
-		
 		return loadContextGlobal().toPortal(portalId).getAvailableProperties();
 	}
 

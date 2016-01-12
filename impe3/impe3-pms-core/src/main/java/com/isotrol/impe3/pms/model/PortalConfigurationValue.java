@@ -36,7 +36,7 @@ import com.google.common.base.Objects;
 public class PortalConfigurationValue implements Cloneable {
 
 	/** Configuration */
-	@ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "CNFG_ID", nullable = false)
 	private ConfigurationEntity portalConfiguration;
 	

@@ -43,7 +43,7 @@ import com.isotrol.impe3.gui.common.util.CustomizableStoreFilter;
 import com.isotrol.impe3.gui.common.util.Util;
 import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
-import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO.Herencia;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO.EstadoHerencia;
 import com.isotrol.impe3.pms.api.portal.PortalNameDTO;
 //mport com.isotrol.impe3.pms.api.portalConfig.PortalConfigurationInstanceSelDTO;
 
@@ -443,7 +443,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 	}
 
 	private void enableDisableButtons(PortalConfigurationInstanceSelModelData model) {
-		Herencia configuration = model.getDTO().getInherited();
+		EstadoHerencia configuration = model.getDTO().getInherited();
 	
 
 	if (configuration == null) {
@@ -451,17 +451,17 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 		ttiEditConfiguration.disable();;
 		ttiEditFatherConfiguration.disable();
 		ttiInheritConfiguration.disable();
-	} else if(configuration==Herencia.PROPIO) {
+	} else if(configuration==EstadoHerencia.PROPIO) {
 		ttiEditConfiguration.setEnabled(true);
 		ttiEditFatherConfiguration.disable();
 		ttiInheritConfiguration.disable();
 		ttiOverrideConfiguration.disable();
-	} else if(configuration==Herencia.HEREDADO) {
+	} else if(configuration==EstadoHerencia.HEREDADO) {
 		ttiEditConfiguration.disable();
 		ttiEditFatherConfiguration.setEnabled(true);
 		ttiInheritConfiguration.disable();
 		ttiOverrideConfiguration.setEnabled(true);
-	}else if(configuration==Herencia.SOBREESCRITO){
+	}else if(configuration==EstadoHerencia.SOBREESCRITO){
 		ttiEditConfiguration.setEnabled(true);
 		ttiEditFatherConfiguration.disable();;
 		ttiInheritConfiguration.setEnabled(true);

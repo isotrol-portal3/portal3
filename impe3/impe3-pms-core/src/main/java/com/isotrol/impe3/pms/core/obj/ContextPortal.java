@@ -371,7 +371,7 @@ public class ContextPortal extends Context2 {
 
 
 	public final List<PortalConfigurationSelDTO> getPortalConfigurations() throws PMSException {
-		return pconfig2seldto(getComponents().delegate(), portal);
+		return pconfig2seldto(getComponents().delegate(), getComponents(), portal);
 	}
 	
 	public final Map<String, PortalConfigurationDefinition<?>> getPortalConfigurationsDef() throws PMSException {
@@ -379,7 +379,7 @@ public class ContextPortal extends Context2 {
 	}
 	
 	private final Map<String, ConfigurationTemplateDTO> getPortalConfigurationsTemplate() throws PMSException {
-		return pconfig2temp(getComponents().delegate(), portal, getGlobal());
+		return pconfig2temp(getComponents().delegate(), getComponents(), portal, getGlobal());
 	}
 	
 	public ConfigurationTemplateDTO getPortalConfiguration(String beanName) throws PMSException {
