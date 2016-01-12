@@ -48,7 +48,7 @@ public class PortalConfigurationInstanceSelModelData extends DTOModelData<Portal
 		} else if (property.equals(PROPERTY_VALIDITY)) {
 			res = config.isValidity();
 		} else if (property.equals(PROPERTY_HERENCY)) {
-			res = config.isInherited();
+			res = config.getInherited();
 		} else {
 			throw new IllegalArgumentException("Property not readable: " + property);
 		}

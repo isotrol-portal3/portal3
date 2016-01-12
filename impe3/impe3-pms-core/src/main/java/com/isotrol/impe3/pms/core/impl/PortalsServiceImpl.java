@@ -995,7 +995,7 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 		// Update it
 		final PortalEntity entity = loadPortal(context.getPortalId());
 		final PortalDfn portalDfn = portalManager.touchOffline(entity);
-		
+		portalManager.touchComponents(context.getPortals(), entity);
 		PortalConfigurationValue pcv = portalDfn.getPortalConfiguration().get(beanName);
 		if (pcv == null) {
 			pcv = new PortalConfigurationValue();

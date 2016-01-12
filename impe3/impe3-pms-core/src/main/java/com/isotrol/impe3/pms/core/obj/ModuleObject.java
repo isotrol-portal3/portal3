@@ -55,6 +55,7 @@ import com.isotrol.impe3.api.FileLoader;
 import com.isotrol.impe3.core.ImpeIAModel;
 import com.isotrol.impe3.core.Loggers;
 import com.isotrol.impe3.core.config.ConfigurationDefinition;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.modules.Dependency;
 import com.isotrol.impe3.core.modules.ModuleDefinition;
 import com.isotrol.impe3.core.modules.ModuleException;
@@ -199,8 +200,7 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 			this.missingConfiguration = m.missingConfiguration;
 		}
 		
-		// TODO: EDIAZ		
-		this.portalConfiguration = PortalConfigurationObject.of(this.module.getPortalConfiguration(), null);
+		this.portalConfiguration = m.getPortalConfiguration();
 		
 		// Dependencies
 		if (o != null && o.getDependencySet() != null) {
@@ -263,6 +263,10 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 		return isError() || !deps.extra.isEmpty() || (configuration != null && configuration.isWarning());
 	}
 
+	public boolean isPortalConfigurationError() {
+		return portalConfiguration != null && portalConfiguration.isError();
+	}
+	
 	public Correctness getCorrectness() {
 		if (isError()) {
 			return Correctness.ERROR;
@@ -313,6 +317,18 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 			}
 			dto.setConfiguration(ct);
 		}
+		
+		final PortalConfigurationDefinition<?> pcd = module.getPortalConfiguration();
+		if (pcd != null) {
+			final ConfigurationTemplateDTO ct;
+			if (portalConfiguration != null) {
+				ct = portalConfiguration.toTemplateDTO(ctx);
+			} else {
+				ct = PortalConfigurationObject.template(pcd, ctx);
+			}
+			dto.setPortalConfiguration(ct);
+		}
+		
 		return dto;
 	}
 
@@ -360,6 +376,12 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 			if (configuration != null) {
 				ms.put(md.getConfigurationBeanName(), configuration.get(model));
 			}
+			
+			// 4 - Portal Configuration
+			if (portalConfiguration != null) {
+				ms.put(md.getPortalConfigurationBeanName(), portalConfiguration.get(model));
+			}
+			
 			return ms;
 		} catch (RuntimeException e) {
 			Loggers.pms().error("--> Error starting module Id [{}]...", getId());

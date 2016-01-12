@@ -27,9 +27,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.springframework.jdbc.object.MappingSqlQueryWithParameters;
-
 import java.util.UUID;
 
 import com.google.common.base.Function;
@@ -38,7 +35,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.api.Identifiables;
-import com.isotrol.impe3.api.PortalConfiguration;
 import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.modules.ModuleDefinition;
 import com.isotrol.impe3.core.support.Named;
@@ -49,12 +45,14 @@ import com.isotrol.impe3.pms.api.Described;
 import com.isotrol.impe3.pms.api.NameDTO;
 import com.isotrol.impe3.pms.api.PropertyDTO;
 import com.isotrol.impe3.pms.api.WithLocalizedNameDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.config.UploadedFileDTO;
 import com.isotrol.impe3.pms.api.minst.DependencyDTO;
 import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
 import com.isotrol.impe3.pms.api.user.DoneDTO;
 import com.isotrol.impe3.pms.api.user.UserSelDTO;
 import com.isotrol.impe3.pms.core.obj.ComponentObject;
+import com.isotrol.impe3.pms.core.obj.ContextGlobal;
 import com.isotrol.impe3.pms.core.obj.PortalObject;
 import com.isotrol.impe3.pms.model.Done;
 import com.isotrol.impe3.pms.model.FileEntity;
@@ -288,8 +286,24 @@ public final class Mappers {
 				list.add(new PortalConfigurationSelDTO(def.getPortalConfiguration().getType().getName(), 
 						(String) def.getPortalConfiguration().getName().get(), 
 						(String) def.getPortalConfiguration().getDescription().get(), 
-						portal.getStringId(), true, true));
+						portal.getStringId(), true,Herencia.PROPIO));
 			}
+		}
+		return list;
+	}
+	
+	/**
+	 * Portal configurations map to list of DTOs.
+	 * @param components List of ComponentObject.
+	 * @return List of PortalConfigurationSelDTO
+	 */
+	public static Map<String, ConfigurationTemplateDTO> pconfig2temp(Map<UUID, ComponentObject> components, PortalObject portal, ContextGlobal ctx) {
+		
+		final Map<String, ConfigurationTemplateDTO> list = Maps.newHashMap();;
+		
+		for (ComponentObject obj : components.values()) {
+			ModuleDefinition def = obj.getModule();
+			list.put(def.getPortalConfiguration().getType().getName(), obj.toTemplateDTO(ctx).getPortalConfiguration());
 		}
 		return list;
 	}

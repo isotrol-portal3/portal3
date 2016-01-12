@@ -20,8 +20,9 @@
 package com.isotrol.impe3.pms.core.obj;
 
 
-import static com.isotrol.impe3.pms.core.support.Mappers.pconfig2seldto;
 import static com.isotrol.impe3.pms.core.support.Mappers.pconfig2def;
+import static com.isotrol.impe3.pms.core.support.Mappers.pconfig2seldto;
+import static com.isotrol.impe3.pms.core.support.Mappers.pconfig2temp;
 import static com.isotrol.impe3.pms.core.support.Mappers.prop2dto;
 
 import java.util.List;
@@ -30,7 +31,6 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import com.google.common.collect.Lists;
-import com.isotrol.impe3.api.PortalConfiguration;
 import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.modules.ModuleDefinition;
 import com.isotrol.impe3.pbuf.portal.PortalProtos.BasesPB;
@@ -378,8 +378,12 @@ public class ContextPortal extends Context2 {
 		return pconfig2def(getComponents().delegate(), portal);
 	}
 	
+	private final Map<String, ConfigurationTemplateDTO> getPortalConfigurationsTemplate() throws PMSException {
+		return pconfig2temp(getComponents().delegate(), portal, getGlobal());
+	}
+	
 	public ConfigurationTemplateDTO getPortalConfiguration(String beanName) throws PMSException {
-		return PortalConfigurationObject.template(getPortalConfigurationsDef().get(beanName), getGlobal());
+		return getPortalConfigurationsTemplate().get(beanName);
 	}
 
 	// ////////////////// End Page operations.
