@@ -27,8 +27,8 @@ import java.util.Map;
 import com.extjs.gxt.ui.client.data.ChangeEventSource;
 import com.extjs.gxt.ui.client.data.ChangeEventSupport;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.PropertyDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationItemDTO;
 import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.portal.BaseDTO;
 import com.isotrol.impe3.pms.api.portal.BasesDTO;
@@ -616,10 +616,16 @@ public class PortalsController extends ChangeEventSupport implements IPortalsSer
 	public void setPortalCache(PortalCacheDTO cache, AsyncCallback<Void> callback) {
 		service.setPortalCache(cache, callback);
 	}
-	
+
 	@Override
-	public void getPortalConfiguration(String portalId, String beanName,AsyncCallback<ConfigurationTemplateDTO> callback) {
+	public void getPortalConfiguration(String portalId, String beanName, AsyncCallback<ConfigurationTemplateDTO> callback) {
 		service.getPortalConfiguration(portalId, beanName, callback);
+	}
+
+	@Override
+	public void savePortalConfiguration(String id, String bean, List<ConfigurationItemDTO> confsDto,
+			AsyncCallback<ConfigurationTemplateDTO> callback) {
+		service.savePortalConfiguration(id, bean, confsDto, callback);		
 	}
 
 }

@@ -75,6 +75,7 @@ import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.Inheri
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.InheritedComponentsExportWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.OverrideConfigurationWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.OverrideDependencesWindow;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.PortalConfigurationWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.ValidOwnComponentManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.WarningOwnComponentManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.configurations.PortalConfigurationsManagement;
@@ -781,4 +782,10 @@ public interface IPmsFactory extends Ginjector {
 	 * @return the window to change the user password
 	 */
 	ChangeUserPwdWindow getChangeUserPwdWindow();
+	
+	/**
+	 * 
+	 * @return @return the window to charge the portal configuration
+	 */
+	PortalConfigurationWindow getPortalConfigurationWindow();
 }

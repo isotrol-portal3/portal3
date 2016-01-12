@@ -60,6 +60,7 @@ import com.isotrol.impe3.pms.gui.client.util.PmsContentPanel;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.ComponentsImportWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.InheritedComponentsExportWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.OverrideConfigurationWindow;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.PortalConfigurationWindow;
 import com.isotrol.impe3.gui.common.i18n.GuiCommonMessages;
 import com.isotrol.impe3.gui.common.i18n.GuiCommonStyles;
 import com.isotrol.impe3.pms.gui.client.i18n.PmsMessages;
@@ -478,7 +479,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			}
 
 			public void onSuccess(ConfigurationTemplateDTO arg0) {
-				showConfiguration(arg0, id);
+				showConfiguration(arg0,bean);
 				unmask();
 			}
 		};
@@ -487,10 +488,9 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 	
 	
 	
-	private void showConfiguration(ConfigurationTemplateDTO configurationTemplate, String configId) {
-		OverrideConfigurationWindow configurationDetailPanel = PmsFactory.getInstance()
-			.getOverrideConfigurationWindow();
-		configurationDetailPanel.init(configurationTemplate, portalNameDto.getId(), configId);
+	private void showConfiguration(ConfigurationTemplateDTO configurationTemplate, String bean) {
+		PortalConfigurationWindow configurationDetailPanel = PmsFactory.getInstance().getPortalConfigurationWindow();
+		configurationDetailPanel.init(configurationTemplate, portalNameDto.getId(), bean);
 		configurationDetailPanel.show();
 	}
 	
