@@ -25,6 +25,7 @@ import java.util.List;
 import com.isotrol.impe3.pms.api.EntityNotFoundException;
 import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.PropertyDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationItemDTO;
 import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 
 
@@ -341,4 +342,13 @@ public interface PortalsService {
 	 * @return The portal configurations.
 	 */
 	ConfigurationTemplateDTO getPortalConfiguration(String portalId, String beanName) throws PMSException;
+	
+	/**
+	 * Save portal configuration.
+	 * @param portalId Portal id.
+	 * @param beanName Bean name.
+	 * @param config Config to save.
+	 */
+	public ConfigurationTemplateDTO savePortalConfiguration(String portalId, String beanName,
+		List<ConfigurationItemDTO> config) throws PMSException;
 }
