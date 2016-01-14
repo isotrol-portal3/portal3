@@ -312,12 +312,6 @@ public final class Mappers {
 			ModuleDefinition def = obj.getModule();
 			
 			String beanName = def.getPortalConfiguration().getType().getName();
-			
-//			portal.getPortalConfiguration().get(beanName).getPortalConfiguration().getValues().values();
-//			
-//			PortalConfigurationObject pco = PortalConfigurationObject.of(def.getPortalConfiguration(), portal.getPortalConfiguration().get(def.getPortalConfiguration().getType().getName()).getPortalConfiguration());
-//			pco.toTemplateDTO(ctx);
-			
 			list.put(beanName, obj.toTemplateDTO(ctx).getPortalConfiguration());
 		}
 		return list;
