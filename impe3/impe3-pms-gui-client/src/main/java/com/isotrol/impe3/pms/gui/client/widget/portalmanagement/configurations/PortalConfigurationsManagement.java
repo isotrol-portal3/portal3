@@ -468,7 +468,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			}
 		});
 	}
-	
+
 	private void enableDisableButtons(PortalConfigurationInstanceSelModelData model) {
 		Herencia configuration = model.getDTO().getInherited();
 	

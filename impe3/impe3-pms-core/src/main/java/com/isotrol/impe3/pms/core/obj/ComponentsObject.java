@@ -111,7 +111,10 @@ public final class ComponentsObject extends ModulesObject<ComponentObject> {
 			ImmutableMap.Builder<UUID, Inherited> ib = ImmutableMap.builder();
 			for (Entry<UUID, ComponentObject> e : parent.entrySet()) {
 				final UUID id = e.getKey();
-				ib.put(id, e.getValue().override(map.get(id)));
+				
+				Inherited inh = e.getValue().override(map.get(id), dfn);
+				//inh.getPortalConfiguration()
+				ib.put(id, inh);
 			}
 			this.inherited = ib.build();
 			Map<UUID, ComponentObject> ab = Maps.newHashMap();
