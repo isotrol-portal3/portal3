@@ -349,7 +349,7 @@ public interface IPortalsServiceAsync {
 	
 	void getPortalConfiguration(String portalId, String beanName,AsyncCallback<ConfigurationTemplateDTO> callback);
 
-	void savePortalConfiguration(String id, String bean, List<ConfigurationItemDTO> confsDto, AsyncCallback<ConfigurationTemplateDTO> callback);
+	void savePortalConfiguration(String id, String bean,boolean inherited, List<ConfigurationItemDTO> confsDto, AsyncCallback<ConfigurationTemplateDTO> callback);
 	
 	void clearConfiguration(String id, String bean,AsyncCallback<ConfigurationTemplateDTO> callback);
 }

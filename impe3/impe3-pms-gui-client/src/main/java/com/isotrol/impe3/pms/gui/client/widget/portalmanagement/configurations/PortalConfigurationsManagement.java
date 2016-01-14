@@ -256,10 +256,10 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 					return "";
 				} else if (configuration) {
 					icon = Constants.OK_IMAGE;
-					title = pmsMessages.titleComponentOverrideConfiguration();
+					title = pmsMessages.titlePortalConfigurationValid();
 				} else {
 					icon = Constants.ERROR_IMAGE;
-					title = pmsMessages.titleComponentInheritedConfiguration();
+					title = pmsMessages.titlePortalConfigurationInValid();
 				}
 				return TEMPLATE_ICON_CELL.replaceAll(PATTERN_ICON, icon).replaceAll(PATTERN_TITLE, title);
 			}
@@ -328,30 +328,11 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
 				final PortalConfigurationInstanceSelModelData selected = grid.getSelectionModel().getSelectedItem();
-				tryGetConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
-							}
+				tryGetInheritedConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
+			}
 		});
 		ttiEditFatherConfiguration.setEnabled(false);
 		toolBar.add(new SeparatorToolItem());
-		
-		
-		
-		/*ttiInheritConfiguration = buttonsSupport.addGenericButton(pmsMessages.labelInheritConfiguration(), pmsMessages
-				.ttInheritConfiguration(), guiCommonStyles.iEdit(), toolBar, new SelectionListener<ButtonEvent>() {
-				@Override
-				public void componentSelected(ButtonEvent ce) {
-					final PortalConfigurationInstanceSelModelData selected = grid.getSelectionModel().getSelectedItem();
-					tryGetConfiguration(selected.getDTO().getId(), selected.getDTO().getBeanName());
-								}
-			});
-			ttiInheritConfiguration.setEnabled(false);
-			toolBar.add(new SeparatorToolItem());
-			
-			
-			
-			toolBar.add(new FillToolItem());
-*/
-		
 		
 			ttiInheritConfiguration = buttonsSupport.addGenericButton(pmsMessages.labelInheritConfiguration(), pmsMessages
 				.ttInheritConfiguration(), guiCommonStyles.iDelete(), toolBar, new SelectionListener<ButtonEvent>() {
@@ -454,10 +435,6 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 				serviceController.removeChangeListener(changeListener);
 			}
 		});
-	
-
-		
-		
 		 
 		grid.addListener(Events.RowClick, new Listener<GridEvent<PortalConfigurationInstanceSelModelData>>() {
 			public void handleEvent(GridEvent<PortalConfigurationInstanceSelModelData> ge) {
@@ -480,9 +457,9 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 		ttiInheritConfiguration.disable();
 	} else if(configuration==EstadoHerencia.PROPIO) {
 		ttiEditConfiguration.setEnabled(true);
-		ttiEditFatherConfiguration.setEnabled(true);
-		ttiInheritConfiguration.setEnabled(true);
-		ttiOverrideConfiguration.setEnabled(true);
+		ttiEditFatherConfiguration.disable();
+		ttiInheritConfiguration.disable();
+		ttiOverrideConfiguration.disable();
 	} else if(configuration==EstadoHerencia.HEREDADO) {
 		ttiEditConfiguration.disable();
 		ttiEditFatherConfiguration.setEnabled(true);;

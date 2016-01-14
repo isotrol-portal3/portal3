@@ -39,8 +39,17 @@ public final class PortalConfigurationSelDTO extends AbstractDescribedWithId {
 	public enum EstadoHerencia {
 	   PROPIO,
 	   HEREDADO,
-	   SOBREESCRITO
-	   
+	   SOBREESCRITO;
+		
+		public String toString() {
+			if (this.equals(EstadoHerencia.PROPIO)) {
+				return "Propio".toString();
+			} else if (this.equals(EstadoHerencia.HEREDADO)) {
+				return "Heredado".toString();
+			} else {
+				return "Sobreescrito".toString();
+			}
+		}
 	}
 
 	private EstadoHerencia inherited;

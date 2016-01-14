@@ -623,22 +623,46 @@ public class PortalsController extends ChangeEventSupport implements IPortalsSer
 	}
 
 	@Override
-	public void savePortalConfiguration(String id, String bean, List<ConfigurationItemDTO> confsDto,
-			AsyncCallback<ConfigurationTemplateDTO> callback) {
-		service.savePortalConfiguration(id, bean, confsDto, callback);		
+	public void savePortalConfiguration(String id, String bean, final boolean inherited, List<ConfigurationItemDTO> confsDto,
+			final AsyncCallback<ConfigurationTemplateDTO> callback) {
+		
+		AsyncCallback<ConfigurationTemplateDTO> realCallback = new AsyncCallback<ConfigurationTemplateDTO>() {
+			public void onFailure(Throwable arg0) {
+				callback.onFailure(arg0);
+			}
+
+			public void onSuccess(ConfigurationTemplateDTO arg0) {
+				if (!inherited) {
+					int type = PmsChangeEvent.UPDATE;
+					PmsChangeEvent event = new PmsChangeEvent(type, arg0);
+					PortalsController.this.notify(event);
+				}
+				callback.onSuccess(arg0);
+			}
+		};
+		
+		service.savePortalConfiguration(id, bean, inherited, confsDto, realCallback);		
 	}
 
-	/*@Override
-	public void clearConfiguration(String id, String bean, AsyncCallback<PortalConfigurationSelDTO> callback) {
-		// TODO Auto-generated method stub
-		
-	}*/
-	
 	@Override
-	public void clearConfiguration(String id, String bean,AsyncCallback<ConfigurationTemplateDTO> callback) {
-		service.clearConfiguration(id, bean,callback);	
+	public void clearConfiguration(String id, String bean, final AsyncCallback<ConfigurationTemplateDTO> callback) {
+		AsyncCallback<ConfigurationTemplateDTO> realCallback = new AsyncCallback<ConfigurationTemplateDTO>() {
+			public void onFailure(Throwable arg0) {
+				callback.onFailure(arg0);
+			}
+
+			public void onSuccess(ConfigurationTemplateDTO arg0) {
+				int type = PmsChangeEvent.UPDATE;
+				
+				PmsChangeEvent event = new PmsChangeEvent(type, arg0);
+				PortalsController.this.notify(event);
+				callback.onSuccess(arg0);
+			}
+		};
 		
+		service.clearConfiguration(id, bean, realCallback);	
 	}
+	
 }
 
 

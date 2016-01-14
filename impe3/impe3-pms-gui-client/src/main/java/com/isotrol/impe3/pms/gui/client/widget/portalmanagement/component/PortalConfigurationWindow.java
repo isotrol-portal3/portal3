@@ -145,7 +145,7 @@ public class PortalConfigurationWindow extends TypicalWindow implements IDetailP
 			}
 		};
 		
-		portalService.savePortalConfiguration(id, bean, confsDto, callback);
+		portalService.savePortalConfiguration(id, bean, inherited, confsDto, callback);
 	}
 
 	@Override
