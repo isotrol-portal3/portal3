@@ -1030,4 +1030,14 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 		
 		return getPortalConfiguration(portalId, beanName);
 	}
+	
+	/**
+	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getAvailableProperties(java.lang.String)
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
+	public ConfigurationTemplateDTO getInheritedPortalConfiguration(String portalId, String beanName) throws PMSException {
+		
+		return loadContextGlobal().toPortal(portalId).getPortalConfiguration(beanName);
+	}
 }

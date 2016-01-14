@@ -19,7 +19,6 @@
 
 package com.isotrol.impe3.pms.core.support;
 
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Date;

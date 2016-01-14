@@ -40,7 +40,6 @@ public final class PortalConfigurationSelDTO extends AbstractDescribedWithId {
 	   PROPIO,
 	   HEREDADO,
 	   SOBREESCRITO
-	   
 	}
 
 	private EstadoHerencia inherited;

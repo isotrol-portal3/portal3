@@ -28,7 +28,6 @@ import com.isotrol.impe3.pms.api.PropertyDTO;
 import com.isotrol.impe3.pms.api.config.ConfigurationItemDTO;
 import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 
-
 /**
  * Portals service.
  * @author Andres Rodriguez.
