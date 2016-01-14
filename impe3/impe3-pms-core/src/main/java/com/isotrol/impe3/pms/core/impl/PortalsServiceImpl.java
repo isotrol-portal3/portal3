@@ -979,8 +979,15 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 	 */
 	@Transactional(rollbackFor = Throwable.class)
 	@Authorized(global = GlobalAuthority.PORTAL_SET, portal=PortalAuthority.SET)
-	public ConfigurationTemplateDTO savePortalConfiguration(String portalId, String beanName,
-		List<ConfigurationItemDTO> config) throws PMSException {
+	public ConfigurationTemplateDTO savePortalConfiguration(String portalId, String beanName, 
+		boolean inherited, List<ConfigurationItemDTO> config) throws PMSException {
+		// Actualiza la configuracion del portal padre
+		if (inherited && loadContextGlobal().toPortal(portalId) != null 
+			&& loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId)) != null) {
+			
+			portalId = loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId)).toString();
+		}
+		
 		final ContextPortal context = loadContextGlobal().toPortal(portalId);
 		overrideConfiguration(context, beanName, config);
 		return getPortalConfiguration(portalId, beanName);
@@ -1026,8 +1033,9 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 		
 		if (portalDfn.getPortalConfiguration() != null && portalDfn.getPortalConfiguration().get(beanName) != null) {
 			portalConfigurationManager.delete(portalDfn.getPortalConfiguration().get(beanName).getPortalConfiguration());
+			portalDfn.getPortalConfiguration().remove(beanName);
 		}
-		sync();
+		
 		return getPortalConfiguration(portalId, beanName);
 	}
 	
@@ -1037,8 +1045,18 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 	@Transactional(rollbackFor = Throwable.class)
 	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
 	public ConfigurationTemplateDTO getInheritedPortalConfiguration(String portalId, String beanName) throws PMSException {
-		UUID parentUuid = loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId));
+		UUID parentUuid = null;
 		
-		return loadContextGlobal().toPortal(portalId).getPortalConfiguration(beanName);
+		// Comprueba si existe el portal padre
+		if (loadContextGlobal().toPortal(portalId) != null 
+			&& loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId)) != null) {
+		
+			parentUuid = loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId));
+		}
+		String parentId = portalId;
+		if (parentUuid != null) {
+			parentId = parentUuid.toString();
+		}
+		return loadContextGlobal().toPortal(parentId).getPortalConfiguration(beanName);
 	}
 }

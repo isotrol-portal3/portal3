@@ -171,6 +171,7 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 	/**
 	 * Constructor.
 	 * @param dfn Definition.
+	 * @param portalDfn 
 	 */
 	ModuleObject(WithModuleDfn dfn) {
 		super(dfn.getInstanceId());
@@ -181,6 +182,29 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 		this.portalConfiguration = PortalConfigurationObject.of(this.module.getPortalConfiguration(), dfn);
 		this.missingConfiguration = this.module.isConfigurationDependencyRequired() && this.configuration == null;
 		this.deps = DEPS_LOADER.get(dfn, this.module);
+	}
+	
+	/**
+	 * Constructor.
+	 * @param dfn Definition.
+	 * @param portalDfn 
+	 */
+	ModuleObject(WithModuleDfn dfn, PortalDfn portalDfn) {
+		super(dfn.getInstanceId());
+		this.module = dfn.getModuleDefinition();
+		this.name = dfn.getName();
+		this.description = dfn.getDescription();
+		this.configuration = ConfigurationObject.of(this.module.getConfiguration(), dfn.getConfiguration());
+		PortalConfigurationDefinition<?> pcd = this.module.getPortalConfiguration();
+		PortalConfigurationValue pcv = portalDfn.getActivePortalConfigurationValue(pcd.getType().getName());
+		if (pcv != null) {
+			this.portalConfiguration = PortalConfigurationObject.of(pcd, pcv.getPortalConfiguration());
+		} else {
+			this.portalConfiguration = null;
+		}
+		this.missingConfiguration = this.module.isConfigurationDependencyRequired() && this.configuration == null;
+		this.deps = DEPS_LOADER.get(dfn, this.module);
+		portalDfn.getActivePortalConfigurationValue(this.module.getPortalConfiguration().getType().getName());
 	}
 
 	/**

@@ -724,6 +724,9 @@ public class PortalDfn extends AbstractRoutableDfn<PortalDfn, PortalEntity, Port
 	 * @return the portalConfiguration
 	 */
 	public Map<String, PortalConfigurationValue> getPortalConfiguration() {
+		if (portalConfiguration == null) {
+			portalConfiguration = Maps.newHashMap();
+		}
 		return portalConfiguration;
 	}
 

@@ -277,9 +277,11 @@ public final class Mappers {
 			ComponentsObject objects, PortalObject portal) {
 		
 		final List<PortalConfigurationSelDTO> list;
+		final Map<String, PortalConfigurationSelDTO> listMap = Maps.newHashMap();
 		
 		if (components == null || components.isEmpty()) {
 			list = Lists.newArrayListWithCapacity(0);
+			
 		} else {
 			list = Lists.newArrayListWithCapacity(components.size());
 		
@@ -287,15 +289,19 @@ public final class Mappers {
 				PortalConfigurationDefinition<?> pcd = obj.getModule().getPortalConfiguration();
 				String beanName = pcd.getType().getName();
 				
-				list.add(new PortalConfigurationSelDTO(beanName, 
-						(String) pcd.getName().get(), 
-						(String) pcd.getDescription().get(), 
-						portal.getStringId(), !obj.isPortalConfigurationError(), 
-							(objects.isOwned(obj.getId()) ? EstadoHerencia.PROPIO : 
-								(portal.hasPortalConfiguration(beanName) ? EstadoHerencia.SOBREESCRITO : EstadoHerencia.HEREDADO))));
+				PortalConfigurationSelDTO pcsDto = new PortalConfigurationSelDTO(beanName, 
+					(String) pcd.getName().get(), 
+					(String) pcd.getDescription().get(), 
+					portal.getStringId(), !obj.isPortalConfigurationError(), 
+						(objects.isOwned(obj.getId()) ? EstadoHerencia.PROPIO : 
+							(portal.hasPortalConfiguration(beanName) ? EstadoHerencia.SOBREESCRITO : EstadoHerencia.HEREDADO)));
+				
+				listMap.put(beanName, pcsDto);
+				
+				list.add(pcsDto);
 			}
 		}
-		return list;
+		return Lists.newArrayList(listMap.values());
 	}
 	
 	/**

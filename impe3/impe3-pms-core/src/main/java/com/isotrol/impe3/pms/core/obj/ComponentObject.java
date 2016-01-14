@@ -55,16 +55,16 @@ public class ComponentObject extends ModuleObject {
 	}
 
 	/** Populates a domain object from a definition. */
-	public static ComponentObject of(ComponentDfn dfn) {
-		return new ComponentObject(dfn);
+	public static ComponentObject of(ComponentDfn dfn, PortalDfn portalDfn) {
+		return new ComponentObject(dfn, portalDfn);
 	}
 
 	/**
 	 * Constructor.
 	 * @param dfn Definition.
 	 */
-	private ComponentObject(ComponentDfn dfn) {
-		super(dfn);
+	private ComponentObject(ComponentDfn dfn, PortalDfn portalDfn) {
+		super(dfn, portalDfn);
 	}
 
 	/**

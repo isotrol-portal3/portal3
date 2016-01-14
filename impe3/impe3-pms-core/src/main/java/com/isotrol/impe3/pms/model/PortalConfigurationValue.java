@@ -26,6 +26,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.google.common.base.Objects;
+import com.isotrol.impe3.pms.api.PMSException;
+import com.isotrol.impe3.pms.core.ConfigurationManager;
 
 
 /**
@@ -88,5 +90,13 @@ public class PortalConfigurationValue implements Cloneable {
 			return portalConfiguration == v.portalConfiguration;
 		}
 		return false;
+	}
+
+	public PortalConfigurationValue clone(ConfigurationManager cm) throws PMSException {
+		if (portalConfiguration == null) {
+			return null;
+		}
+		ConfigurationEntity c = (portalConfiguration != null) ? cm.duplicate(portalConfiguration) : null;
+		return new PortalConfigurationValue(c);
 	}
 }
