@@ -1038,7 +1038,10 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
 	public ConfigurationTemplateDTO getInheritedPortalConfiguration(String portalId, String beanName) throws PMSException {
 		UUID parentUuid = loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId));
-		
-		return loadContextGlobal().toPortal(portalId).getPortalConfiguration(beanName);
+		String parentId = portalId;
+		if (parentUuid != null) {
+			parentId = parentUuid.toString();
+		}
+		return loadContextGlobal().toPortal(parentId).getPortalConfiguration(beanName);
 	}
 }
