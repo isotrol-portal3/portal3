@@ -634,10 +634,10 @@ public class PortalsController extends ChangeEventSupport implements IPortalsSer
 		
 	}*/
 	
-	/*@Override
-	public void clearConfiguration(String id, String bean,AsyncCallback<PortalConfigurationSelDTO> callback) {
-		//service.clearConfiguration(id, bean,callback);	
-*/		
+	@Override
+	public void clearConfiguration(String id, String bean,AsyncCallback<ConfigurationTemplateDTO> callback) {
+		service.clearConfiguration(id, bean,callback);	
+		
 	}
 
 

@@ -512,7 +512,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			}
 		};
 		
-		//componentsService.clearConfiguration(portalNameDto.getId(), dto.getComponent().getId(), callback);
+		portalService.clearConfiguration(portalNameDto.getId(),portalNameDto.getName(), callback);
 	}
 	
 	private void tryGetConfiguration(final String id, final String bean) {
