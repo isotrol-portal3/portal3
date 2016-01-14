@@ -733,6 +733,24 @@ public class PortalDfn extends AbstractRoutableDfn<PortalDfn, PortalEntity, Port
 	public void setPortalConfiguration(Map<String, PortalConfigurationValue> portalConfiguration) {
 		this.portalConfiguration = portalConfiguration;
 	}
+
+	/**
+	 * Return active portal configuration value.
+	 * @param name Bean name.
+	 * @return PortalConfigurationValue
+	 */
+	public PortalConfigurationValue getActivePortalConfigurationValue(String name) {
+		PortalConfigurationValue pcv = null;
+		
+		pcv = this.getPortalConfiguration().get(name);
+		
+		// Buscamos en el portal padre una configuracion valida
+		if (pcv == null && this.getParentId() != null) {
+			pcv = this.getParent().getCurrent().getActivePortalConfigurationValue(name);
+		}
+		
+		return pcv;
+	}
 	
 	
 }

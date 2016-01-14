@@ -55,6 +55,7 @@ import com.isotrol.impe3.api.FileLoader;
 import com.isotrol.impe3.core.ImpeIAModel;
 import com.isotrol.impe3.core.Loggers;
 import com.isotrol.impe3.core.config.ConfigurationDefinition;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.modules.Dependency;
 import com.isotrol.impe3.core.modules.ModuleDefinition;
 import com.isotrol.impe3.core.modules.ModuleException;
@@ -75,6 +76,8 @@ import com.isotrol.impe3.pms.core.ModuleRegistry;
 import com.isotrol.impe3.pms.core.support.AbstractValueLoader;
 import com.isotrol.impe3.pms.model.DependencySetEntity;
 import com.isotrol.impe3.pms.model.OverridenComponentValue;
+import com.isotrol.impe3.pms.model.PortalConfigurationValue;
+import com.isotrol.impe3.pms.model.PortalDfn;
 import com.isotrol.impe3.pms.model.WithDependencies;
 import com.isotrol.impe3.pms.model.WithIdVersion;
 import com.isotrol.impe3.pms.model.WithModuleDfn;
@@ -184,8 +187,9 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 	 * Overriding constructor.
 	 * @param m Module to override.
 	 * @param o Overriding information.
+	 * @param dfn 
 	 */
-	ModuleObject(ModuleObject m, OverridenComponentValue o) {
+	ModuleObject(ModuleObject m, OverridenComponentValue o, PortalDfn dfn) {
 		super(m.getId());
 		this.module = m.getModule();
 		this.name = m.getName();
@@ -198,9 +202,13 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 			this.configuration = m.configuration;
 			this.missingConfiguration = m.missingConfiguration;
 		}
-		
-		// TODO: EDIAZ		
-		this.portalConfiguration = PortalConfigurationObject.of(this.module.getPortalConfiguration(), null);
+		PortalConfigurationDefinition<?> pcd = this.module.getPortalConfiguration();
+		PortalConfigurationValue pcv = dfn.getActivePortalConfigurationValue(pcd.getType().getName());
+		if (pcv != null) {
+			this.portalConfiguration = PortalConfigurationObject.of(pcd, pcv.getPortalConfiguration());
+		} else {
+			this.portalConfiguration = null;
+		}
 		
 		// Dependencies
 		if (o != null && o.getDependencySet() != null) {
@@ -263,6 +271,10 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 		return isError() || !deps.extra.isEmpty() || (configuration != null && configuration.isWarning());
 	}
 
+	public boolean isPortalConfigurationError() {
+		return portalConfiguration == null || portalConfiguration.isError();
+	}
+	
 	public Correctness getCorrectness() {
 		if (isError()) {
 			return Correctness.ERROR;
@@ -313,6 +325,18 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 			}
 			dto.setConfiguration(ct);
 		}
+		
+		final PortalConfigurationDefinition<?> pcd = module.getPortalConfiguration();
+		if (pcd != null) {
+			final ConfigurationTemplateDTO ct;
+			if (portalConfiguration != null) {
+				ct = portalConfiguration.toTemplateDTO(ctx);
+			} else {
+				ct = PortalConfigurationObject.template(pcd, ctx);
+			}
+			dto.setPortalConfiguration(ct);
+		}
+		
 		return dto;
 	}
 
@@ -360,6 +384,12 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 			if (configuration != null) {
 				ms.put(md.getConfigurationBeanName(), configuration.get(model));
 			}
+			
+			// 4 - Portal Configuration
+			if (portalConfiguration != null) {
+				ms.put(md.getPortalConfigurationBeanName(), portalConfiguration.get(model));
+			}
+			
 			return ms;
 		} catch (RuntimeException e) {
 			Loggers.pms().error("--> Error starting module Id [{}]...", getId());
@@ -379,7 +409,7 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 	/**
 	 * @return the portalConfiguration
 	 */
-	PortalConfigurationObject getPortalConfiguration() {
+	public PortalConfigurationObject getPortalConfiguration() {
 		return portalConfiguration;
 	}
 

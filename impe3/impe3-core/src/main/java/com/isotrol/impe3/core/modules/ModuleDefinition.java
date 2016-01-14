@@ -430,9 +430,9 @@ public abstract class ModuleDefinition<T extends Module> extends Definition<T> {
 					suppliedDeps.put(getConfigurationBeanName(), configuration.builder().get());
 				}
 				// Add portal configuration
-				if (portalConfigurationDependency != null) {
-					suppliedDeps.put(getPortalConfigurationBeanName(), portalConfiguration.builder().get());
-				}
+//				if (portalConfigurationDependency != null) {
+//					suppliedDeps.put(getPortalConfigurationBeanName(), portalConfiguration.builder().get());
+//				}
 				
 				final Set<String> required = Maps.filterValues(dependencies, Dependency.IS_REQUIRED).keySet();
 				final Set<String> missing = Sets.difference(required, suppliedDeps.keySet());

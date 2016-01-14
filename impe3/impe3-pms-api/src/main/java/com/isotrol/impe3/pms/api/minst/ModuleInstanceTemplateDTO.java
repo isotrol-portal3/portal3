@@ -37,6 +37,9 @@ public class ModuleInstanceTemplateDTO extends ModuleInstanceSelDTO {
 	private List<DependencyTemplateDTO> dependencies;
 	/** Configuration. */
 	private ConfigurationTemplateDTO configuration;
+	
+	/** Portal Configuration. */
+	private ConfigurationTemplateDTO portalConfiguration;
 
 	/** Default constructor. */
 	public ModuleInstanceTemplateDTO() {
@@ -72,6 +75,22 @@ public class ModuleInstanceTemplateDTO extends ModuleInstanceSelDTO {
 	 */
 	public void setConfiguration(ConfigurationTemplateDTO configuration) {
 		this.configuration = configuration;
+	}
+
+	/**
+	 * Returns the portal configuration.
+	 * @return The portal configuration.
+	 */
+	public ConfigurationTemplateDTO getPortalConfiguration() {
+		return portalConfiguration;
+	}
+	
+	/**
+	 * Sets the portal configuration.
+	 * @param configuration The portal configuration.
+	 */
+	public void setPortalConfiguration(ConfigurationTemplateDTO portalConfiguration) {
+		this.portalConfiguration = portalConfiguration;
 	}
 
 	/**

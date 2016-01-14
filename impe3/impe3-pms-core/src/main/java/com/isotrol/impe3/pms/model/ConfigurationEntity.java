@@ -24,6 +24,7 @@ import java.util.Map;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.MapKeyColumn;
@@ -40,7 +41,7 @@ import com.google.common.collect.Maps;
 @Table(name = "CONFIGURATION")
 public class ConfigurationEntity extends VersionedEntity {
 	/** Configuration values. */
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@JoinTable(name = "CONFIGURATION_VALUE", joinColumns = @JoinColumn(name = "CNFG_ID", nullable = false))
 	@MapKeyColumn(name = "NAME", length = Lengths.NAME)
 	private Map<String, ConfigurationValue> values;
