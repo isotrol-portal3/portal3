@@ -346,10 +346,11 @@ public interface PortalsService {
 	 * Save portal configuration.
 	 * @param portalId Portal id.
 	 * @param beanName Bean name.
+	 * @param inherited inherited configuration.
 	 * @param config Config to save.
 	 */
 	public ConfigurationTemplateDTO savePortalConfiguration(String portalId, String beanName,
-		List<ConfigurationItemDTO> config) throws PMSException;
+		boolean inherited, List<ConfigurationItemDTO> config) throws PMSException;
 	
 	/**
 	 * Clear portal configuration.
