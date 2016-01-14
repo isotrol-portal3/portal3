@@ -1027,7 +1027,7 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 		if (portalDfn.getPortalConfiguration() != null && portalDfn.getPortalConfiguration().get(beanName) != null) {
 			portalConfigurationManager.delete(portalDfn.getPortalConfiguration().get(beanName).getPortalConfiguration());
 		}
-		
+		sync();
 		return getPortalConfiguration(portalId, beanName);
 	}
 	

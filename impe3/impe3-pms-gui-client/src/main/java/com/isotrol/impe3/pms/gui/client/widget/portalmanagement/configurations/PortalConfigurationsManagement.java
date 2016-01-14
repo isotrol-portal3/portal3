@@ -44,7 +44,7 @@ import com.isotrol.impe3.gui.common.util.Util;
 import com.isotrol.impe3.pms.api.component.InheritedComponentInstanceSelDTO;
 import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
-import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO.Herencia;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO.EstadoHerencia;
 import com.isotrol.impe3.pms.api.portal.PortalNameDTO;
 //mport com.isotrol.impe3.pms.api.portalConfig.PortalConfigurationInstanceSelDTO;
 
@@ -363,7 +363,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 							public void handleEvent(MessageBoxEvent be) {
 								Button clicked = be.getButtonClicked();
 								if (clicked != null && clicked.getItemId().equals(Dialog.YES)) {
-									tryClearConfiguration(selected.getDTO());
+									tryClearConfiguration(selected.getDTO().getBeanName());
 									
 								}
 							}
@@ -470,7 +470,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 	}
 
 	private void enableDisableButtons(PortalConfigurationInstanceSelModelData model) {
-		Herencia configuration = model.getDTO().getInherited();
+		EstadoHerencia configuration = model.getDTO().getInherited();
 	
 
 	if (configuration == null) {
@@ -478,17 +478,17 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 		ttiEditConfiguration.disable();;
 		ttiEditFatherConfiguration.disable();
 		ttiInheritConfiguration.disable();
-	} else if(configuration==Herencia.PROPIO) {
+	} else if(configuration==EstadoHerencia.PROPIO) {
 		ttiEditConfiguration.setEnabled(true);
 		ttiEditFatherConfiguration.setEnabled(true);
 		ttiInheritConfiguration.setEnabled(true);
 		ttiOverrideConfiguration.setEnabled(true);
-	} else if(configuration==Herencia.HEREDADO) {
+	} else if(configuration==EstadoHerencia.HEREDADO) {
 		ttiEditConfiguration.disable();
 		ttiEditFatherConfiguration.setEnabled(true);;
 		ttiInheritConfiguration.disable();
 		ttiOverrideConfiguration.setEnabled(true);
-	}else if(configuration==Herencia.SOBREESCRITO){
+	}else if(configuration==EstadoHerencia.SOBREESCRITO){
 		ttiEditConfiguration.setEnabled(true);
 		ttiEditFatherConfiguration.disable();;
 		ttiInheritConfiguration.setEnabled(true);
@@ -497,11 +497,11 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 	}
 	}
 	
-	private void tryClearConfiguration(PortalConfigurationSelDTO dto) {
+	private void tryClearConfiguration(String bean) {
 		mask(pmsMessages.mskClearOverrideConfiguration());
-		AsyncCallback<PortalConfigurationSelDTO> callback = new AsyncCallback<PortalConfigurationSelDTO>() {
+		AsyncCallback<ConfigurationTemplateDTO> callback = new AsyncCallback<ConfigurationTemplateDTO>() {
 
-			public void onSuccess(PortalConfigurationSelDTO result) {
+			public void onSuccess(ConfigurationTemplateDTO result) {
 				unmask();
 				util.info(pmsMessages.msgSuccessClearConfiguration());
 			}
@@ -512,7 +512,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			}
 		};
 		
-		//componentsService.clearConfiguration(portalNameDto.getId(), dto.getComponent().getId(), callback);
+		portalService.clearConfiguration(portalNameDto.getId(),bean, callback);
 	}
 	
 	private void tryGetConfiguration(final String id, final String bean) {
@@ -525,18 +525,33 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			}
 
 			public void onSuccess(ConfigurationTemplateDTO arg0) {
-				showConfiguration(arg0,bean);
+				showConfiguration(arg0,bean,false);
 				unmask();
 			}
 		};
 		portalService.getPortalConfiguration(portalNameDto.getId(),bean, callback);
 	}
 	
+	private void tryGetInheritedConfiguration(final String id, final String bean) {
+		mask(pmsMessages.mskComponent());
+
+		AsyncCallback<ConfigurationTemplateDTO> callback = new AsyncCallback<ConfigurationTemplateDTO>() {
+			public void onFailure(Throwable arg0) {
+				unmask();
+				errorProcessor.processError(arg0, errorMessageResolver, pmsMessages.msgErrorRetrieveComponent());
+			}
+
+			public void onSuccess(ConfigurationTemplateDTO arg0) {
+				showConfiguration(arg0,bean,true);
+				unmask();
+			}
+		};
+		portalService.getPortalConfiguration(portalNameDto.getId(),bean, callback);
+	}
 	
-	
-	private void showConfiguration(ConfigurationTemplateDTO configurationTemplate, String bean) {
+	private void showConfiguration(ConfigurationTemplateDTO configurationTemplate, String bean,boolean inherited) {
 		PortalConfigurationWindow configurationDetailPanel = PmsFactory.getInstance().getPortalConfigurationWindow();
-		configurationDetailPanel.init(configurationTemplate, portalNameDto.getId(), bean);
+		configurationDetailPanel.init(configurationTemplate, portalNameDto.getId(), bean,inherited);
 		configurationDetailPanel.show();
 	}
 	

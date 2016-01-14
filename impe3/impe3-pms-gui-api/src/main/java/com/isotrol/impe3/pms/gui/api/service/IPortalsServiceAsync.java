@@ -351,5 +351,5 @@ public interface IPortalsServiceAsync {
 
 	void savePortalConfiguration(String id, String bean, List<ConfigurationItemDTO> confsDto, AsyncCallback<ConfigurationTemplateDTO> callback);
 	
-	//void clearConfiguration(String id, String bean,AsyncCallback<PortalConfigurationSelDTO> callback);
+	void clearConfiguration(String id, String bean,AsyncCallback<ConfigurationTemplateDTO> callback);
 }

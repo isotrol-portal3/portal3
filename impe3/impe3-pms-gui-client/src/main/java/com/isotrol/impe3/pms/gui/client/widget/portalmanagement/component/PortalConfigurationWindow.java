@@ -37,6 +37,7 @@ public class PortalConfigurationWindow extends TypicalWindow implements IDetailP
 	private String bean;
 	private String id;
 	private SelectionListener<ButtonEvent> acceptListener = null;
+	private boolean inherited;
 	/**
 	 * Generic messages service.<br/>
 	 */
@@ -63,10 +64,11 @@ public class PortalConfigurationWindow extends TypicalWindow implements IDetailP
 	private Buttons buttonsSupport = null;
 
 
-	public void init(ConfigurationTemplateDTO configurationTemplate, String id, String bean) {
+	public void init(ConfigurationTemplateDTO configurationTemplate, String id, String bean,boolean inherited) {
 		this.id = id;
 		this.bean=bean;
 		this.configurationTemplate = configurationTemplate;
+		this.inherited=inherited;
 
 		initListeners();
 		initThis();
