@@ -61,6 +61,7 @@ import com.isotrol.impe3.pms.gui.client.ioc.PmsFactory;
 import com.isotrol.impe3.pms.gui.client.util.PmsChangeEvent;
 import com.isotrol.impe3.pms.gui.client.util.PmsContentPanel;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.ComponentsImportWindow;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.InheritPortalConfigurationWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.InheritedComponentsExportWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.OverrideConfigurationWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.PortalConfigurationWindow;
@@ -519,7 +520,7 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 			}
 
 			public void onSuccess(ConfigurationTemplateDTO arg0) {
-				showConfiguration(arg0,bean,true);
+				showInheritedConfiguration(arg0,bean,true);
 				unmask();
 			}
 		};
@@ -528,6 +529,11 @@ public class PortalConfigurationsManagement extends PmsContentPanel  {
 	
 	private void showConfiguration(ConfigurationTemplateDTO configurationTemplate, String bean,boolean inherited) {
 		PortalConfigurationWindow configurationDetailPanel = PmsFactory.getInstance().getPortalConfigurationWindow();
+		configurationDetailPanel.init(configurationTemplate, portalNameDto.getId(), bean,inherited);
+		configurationDetailPanel.show();
+	}
+	private void showInheritedConfiguration(ConfigurationTemplateDTO configurationTemplate, String bean,boolean inherited) {
+		InheritPortalConfigurationWindow configurationDetailPanel = PmsFactory.getInstance().getInheritPortalConfigurationWindow();
 		configurationDetailPanel.init(configurationTemplate, portalNameDto.getId(), bean,inherited);
 		configurationDetailPanel.show();
 	}
