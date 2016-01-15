@@ -302,7 +302,7 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 	public Correctness getCorrectness() {
 		if (isError()) {
 			return Correctness.ERROR;
-		} else if (isWarning()) {
+		} else if (isWarning() || isPortalConfigurationError()) {
 			return Correctness.WARN;
 		}
 		return Correctness.OK;
