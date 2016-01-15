@@ -287,18 +287,21 @@ public final class Mappers {
 		
 			for (ComponentObject obj : components.values()) {
 				PortalConfigurationDefinition<?> pcd = obj.getModule().getPortalConfiguration();
-				String beanName = pcd.getType().getName();
 				
-				PortalConfigurationSelDTO pcsDto = new PortalConfigurationSelDTO(beanName, 
-					(String) pcd.getName().get(), 
-					(String) pcd.getDescription().get(), 
-					portal.getStringId(), !obj.isPortalConfigurationError(), 
-						(objects.isOwned(obj.getId()) ? EstadoHerencia.PROPIO : 
-							(portal.hasPortalConfiguration(beanName) ? EstadoHerencia.SOBREESCRITO : EstadoHerencia.HEREDADO)));
-				
-				listMap.put(beanName, pcsDto);
-				
-				list.add(pcsDto);
+				if (pcd != null) {
+					String beanName = pcd.getType().getName();
+					
+					PortalConfigurationSelDTO pcsDto = new PortalConfigurationSelDTO(beanName, 
+						(String) pcd.getName().get(), 
+						(String) pcd.getDescription().get(), 
+						portal.getStringId(), !obj.isPortalConfigurationError(), 
+							(objects.isOwned(obj.getId()) ? EstadoHerencia.PROPIO : 
+								(portal.hasPortalConfiguration(beanName) ? EstadoHerencia.SOBREESCRITO : EstadoHerencia.HEREDADO)));
+					
+					listMap.put(beanName, pcsDto);
+					
+					list.add(pcsDto);
+				}
 			}
 		}
 		return Lists.newArrayList(listMap.values());
@@ -317,8 +320,10 @@ public final class Mappers {
 		for (ComponentObject obj : components.values()) {
 			ModuleDefinition def = obj.getModule();
 			
-			String beanName = def.getPortalConfiguration().getType().getName();
-			list.put(beanName, obj.toTemplateDTO(ctx).getPortalConfiguration());
+			if (def.getPortalConfiguration() != null) {
+				String beanName = def.getPortalConfiguration().getType().getName();
+				list.put(beanName, obj.toTemplateDTO(ctx).getPortalConfiguration());
+			}
 		}
 		return list;
 	}
@@ -334,7 +339,9 @@ public final class Mappers {
 		
 		for (ComponentObject obj : components.values()) {
 			ModuleDefinition def = obj.getModule();
-			list.put(def.getPortalConfiguration().getType().getName(), def.getPortalConfiguration());
+			if (def.getPortalConfiguration() != null) {
+				list.put(def.getPortalConfiguration().getType().getName(), def.getPortalConfiguration());
+			}
 		}
 		return list;
 	}

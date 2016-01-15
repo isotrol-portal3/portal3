@@ -196,7 +196,10 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 		this.description = dfn.getDescription();
 		this.configuration = ConfigurationObject.of(this.module.getConfiguration(), dfn.getConfiguration());
 		PortalConfigurationDefinition<?> pcd = this.module.getPortalConfiguration();
-		PortalConfigurationValue pcv = portalDfn.getActivePortalConfigurationValue(pcd.getType().getName());
+		PortalConfigurationValue pcv = null;
+		if (pcd !=  null) {
+			pcv = portalDfn.getActivePortalConfigurationValue(pcd.getType().getName());
+		}
 		if (pcv != null) {
 			this.portalConfiguration = PortalConfigurationObject.of(pcd, pcv.getPortalConfiguration());
 		} else {
@@ -204,7 +207,6 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 		}
 		this.missingConfiguration = this.module.isConfigurationDependencyRequired() && this.configuration == null;
 		this.deps = DEPS_LOADER.get(dfn, this.module);
-		portalDfn.getActivePortalConfigurationValue(this.module.getPortalConfiguration().getType().getName());
 	}
 
 	/**
@@ -227,7 +229,10 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 			this.missingConfiguration = m.missingConfiguration;
 		}
 		PortalConfigurationDefinition<?> pcd = this.module.getPortalConfiguration();
-		PortalConfigurationValue pcv = dfn.getActivePortalConfigurationValue(pcd.getType().getName());
+		PortalConfigurationValue pcv = null;
+		if (pcd != null) {
+			pcv = dfn.getActivePortalConfigurationValue(pcd.getType().getName());
+		}
 		if (pcv != null) {
 			this.portalConfiguration = PortalConfigurationObject.of(pcd, pcv.getPortalConfiguration());
 		} else {
