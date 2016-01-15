@@ -119,7 +119,7 @@ public class PortalConfigurationWindow extends TypicalWindow implements IDetailP
 						}
 					}
 				};
-				MessageBox.confirm(messages.headerConfirmWindow(), pmsMessages.msgConfirmOverrideConfiguration(),
+				MessageBox.confirm(messages.headerConfirmWindow(), pmsMessages.msgConfirmOverridePortalConfiguration(),
 					lConfirm).setModal(true);
 			}
 		};
