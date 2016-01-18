@@ -2,7 +2,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.0.6</version>
+		<version>3.1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>impe3-palette-oc7</artifactId>
@@ -15,22 +15,22 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-palette</artifactId>
-			<version>3.0.6</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-nr-api</artifactId>
-			<version>3.0.6</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-idx-opencms-api</artifactId>
-			<version>3.0.6</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-test</artifactId>
-			<version>3.0.6</version>
+			<version>3.1.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
