@@ -181,7 +181,7 @@ public class ContentTypesPanel extends ADataBoundContentPanel<PortalIATemplateDT
 		setWidth(Constants.HUNDRED_PERCENT);
 		setLayout(new FitLayout());
 		
-		setHeading(pmsMessages.headerContentTypeManagement());
+		setHeadingText(pmsMessages.headerContentTypeManagement());
 		setHeaderVisible(true);
 		
 		List<ColumnConfig> configs = new LinkedList<ColumnConfig>();
@@ -192,13 +192,13 @@ public class ContentTypesPanel extends ADataBoundContentPanel<PortalIATemplateDT
 
 		ColumnConfig column = new ColumnConfig();
 		column.setId(ContentTypeSelModelData.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMNNAMEWIDTH);
 		configs.add(column);
 		
 		column = new ColumnConfig();
 		column.setId(ContentTypeSelModelData.PROPERTY_DESCRIPTION);
-		column.setHeader(pmsMessages.columnHeaderDescription());
+		column.setHeaderText(pmsMessages.columnHeaderDescription());
 		column.setWidth(COLUMNDESCRIPTIONWIDTH);
 		configs.add(column);
 

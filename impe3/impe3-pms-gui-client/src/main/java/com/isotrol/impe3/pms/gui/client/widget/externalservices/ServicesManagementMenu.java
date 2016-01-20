@@ -85,7 +85,7 @@ public class ServicesManagementMenu extends AManagementMenu {
 		setIconStyle(getPmsStyles().menuIconServicesManagement());
 		setBodyBorder(false);
 
-		setHeading(getPmsMessages().menuItem1Services());
+		setHeadingText(getPmsMessages().menuItem1Services());
 		getHeader().addStyleName(getGuiCommonStyles().noSideBorders());
 	}
 

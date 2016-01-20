@@ -37,8 +37,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
-import net.sf.derquinsej.i18n.Locales;
-
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableBiMap;
@@ -88,9 +86,12 @@ import com.isotrol.impe3.pms.core.support.Mappers;
 import com.isotrol.impe3.pms.core.support.MoreLocales;
 import com.isotrol.impe3.pms.model.DeviceEntity;
 import com.isotrol.impe3.pms.model.PortalCacheValue;
+import com.isotrol.impe3.pms.model.PortalConfigurationValue;
 import com.isotrol.impe3.pms.model.PortalDeviceValue;
 import com.isotrol.impe3.pms.model.PortalDfn;
 import com.isotrol.impe3.pms.model.SetFilterValue;
+
+import net.sf.derquinsej.i18n.Locales;
 
 
 /**
@@ -132,6 +133,7 @@ public final class PortalObject extends AbstractRoutableObject {
 
 	private static final BasesLoader BASES_LOADER = new BasesLoader();
 	private static final PropertiesLoader PROPERTIES_LOADER = new PropertiesLoader();
+	private static final PortalConfigurationLoader PORTAL_CONFIGURATION_LOADER = new PortalConfigurationLoader();
 	private static final SetFiltersLoader SETFILTERS_LOADER = new SetFiltersLoader();
 	private static final LocalesLoader LOCALES_LOADER = new LocalesLoader();
 	private static final DevicesLoader DEVICES_LOADER = new DevicesLoader();
@@ -164,6 +166,10 @@ public final class PortalObject extends AbstractRoutableObject {
 	private final Supplier<ImmutableMap<String, String>> bases;
 	/** Portal properties. */
 	private final Supplier<ImmutableMap<String, String>> properties;
+	
+	/** Portal configuration. */
+	private final Supplier<ImmutableMap<String, PortalConfigurationValue>> portalConfiguration;
+	
 	/** Include uncategorized. */
 	private final PortalInheritableFlag uncategorized;
 	/** Only due nodes. */
@@ -211,6 +217,9 @@ public final class PortalObject extends AbstractRoutableObject {
 		this.nodeRepository = Provider.of(dfn.getNrConnector(), dfn.getNrBean());
 		this.bases = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, BASES_LOADER);
 		this.properties = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, PROPERTIES_LOADER);
+//		((PortalConfigurationValue)tx.getTxSupplier(PortalDfn.class, dfn.getParent().getCurrentId(), null, PORTAL_CONFIGURATION_LOADER).get().values().toArray()[0]).getPortalConfiguration().getValues().values()
+		this.portalConfiguration = tx.getTxSupplier(PortalDfn.class, dfn.getId(), null, PORTAL_CONFIGURATION_LOADER);
+		
 		this.uncategorized = PortalInheritableFlag.fromBoolean(dfn.getUncategorized());
 		this.due = PortalInheritableFlag.fromBoolean(dfn.getDue());
 		this.defaultLocale = MoreLocales.fromString(dfn.getDefaultLocale(), MoreLocales.FALLBACK);
@@ -270,7 +279,18 @@ public final class PortalObject extends AbstractRoutableObject {
 	ImmutableMap<String, String> getProperties() {
 		return properties.get();
 	}
+	
+	/**
+	 * @return the portalConfiguration
+	 */
+	public ImmutableMap<String, PortalConfigurationValue> getPortalConfiguration() {
+		return portalConfiguration.get();
+	}
 
+	public boolean hasPortalConfiguration(String beanName) {
+		return (portalConfiguration != null && getPortalConfiguration() != null && getPortalConfiguration().containsKey(beanName));
+	}
+	
 	public ImmutableMap<String, SetFilterValue> getSetFilters() {
 		return setFilters.get();
 	}
@@ -654,6 +674,19 @@ public final class PortalObject extends AbstractRoutableObject {
 		@Override
 		protected ImmutableMap<String, String> load(PortalDfn dfn) {
 			return ImmutableMap.copyOf(dfn.getProperties());
+		}
+	}
+	
+	/** Portal configurations loader. */
+	private static final class PortalConfigurationLoader extends
+		AbstractSimpleValueLoader<PortalDfn, ImmutableMap<String, PortalConfigurationValue>> {
+		PortalConfigurationLoader() {
+			super("Portal Properties");
+		}
+
+		@Override
+		protected ImmutableMap<String, PortalConfigurationValue> load(PortalDfn dfn) {
+			return ImmutableMap.copyOf(dfn.getPortalConfiguration());
 		}
 	}
 

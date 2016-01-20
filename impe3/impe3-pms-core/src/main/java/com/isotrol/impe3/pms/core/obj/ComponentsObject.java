@@ -65,14 +65,25 @@ import com.isotrol.impe3.pms.model.PortalDfn;
  * @author Andres Rodriguez
  */
 public final class ComponentsObject extends ModulesObject<ComponentObject> {
-	private static final Function<ComponentDfn, ComponentObject> DFN2OBJ = new Function<ComponentDfn, ComponentObject>() {
+	private static final WithInitFunction<ComponentDfn, ComponentObject> DFN2OBJ = new WithInitFunction<ComponentDfn, ComponentObject>() {
 		public ComponentObject apply(ComponentDfn from) {
-			return ComponentObject.of(from);
+			return ComponentObject.of(from, portalDfn);
+		}
+		
+		private PortalDfn portalDfn = null;
+
+		@Override
+		public Function<ComponentDfn, ComponentObject> init(Object object) {
+			if (PortalDfn.class.isAssignableFrom(object.getClass())) {
+				this.portalDfn = (PortalDfn) object;
+			}
+			return this;
 		}
 	};
 
 	/** Portal Id. */
 	private final UUID portalId;
+	public  final PortalDfn portalDfn;
 	/** All components map. */
 	private final ImmutableMap<UUID, ComponentObject> all;
 	/** Owned components map. */
@@ -99,7 +110,9 @@ public final class ComponentsObject extends ModulesObject<ComponentObject> {
 	 */
 	private ComponentsObject(PortalDfn dfn, ComponentsObject parent) {
 		this.portalId = dfn.getEntity().getId();
-		this.owned = IdentifiableMaps.immutableOf(transform(dfn.getComponents(), DFN2OBJ));
+		this.portalDfn = dfn;
+		
+		this.owned = IdentifiableMaps.immutableOf(transform(dfn.getComponents(), DFN2OBJ.init(dfn)));
 		if (parent == null || parent.isEmpty()) {
 			this.all = owned;
 			this.inherited = ImmutableMap.of();
@@ -111,7 +124,10 @@ public final class ComponentsObject extends ModulesObject<ComponentObject> {
 			ImmutableMap.Builder<UUID, Inherited> ib = ImmutableMap.builder();
 			for (Entry<UUID, ComponentObject> e : parent.entrySet()) {
 				final UUID id = e.getKey();
-				ib.put(id, e.getValue().override(map.get(id)));
+				
+				Inherited inh = e.getValue().override(map.get(id), dfn);
+				//inh.getPortalConfiguration()
+				ib.put(id, inh);
 			}
 			this.inherited = ib.build();
 			Map<UUID, ComponentObject> ab = Maps.newHashMap();

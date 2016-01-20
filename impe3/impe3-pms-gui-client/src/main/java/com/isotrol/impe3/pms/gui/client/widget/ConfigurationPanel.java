@@ -454,7 +454,7 @@ public class ConfigurationPanel extends TabItem implements IDetailPanel, IDataBo
 		Button bSubmit = new Button(pmsMessages.labelUpload(), new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				lUploadStatus.setText(pmsMessages.labelUpoading());
+				lUploadStatus.setValue(pmsMessages.labelUpoading());
 				formPanel.submit();
 			}
 		});
@@ -506,7 +506,7 @@ public class ConfigurationPanel extends TabItem implements IDetailPanel, IDataBo
 					fileJson = (JSONObject) JSONParser.parseStrict(be.getResultHtml()).isObject();
 				} catch (JSONException jsone) {
 					// TODO review this. Should always receive a JSON object.
-					lUploadStatus.setText(pmsMessages.msgErrorUpload());
+					lUploadStatus.setValue(pmsMessages.msgErrorUpload());
 				}
 				UploadedFileDTO fileDto = null;
 				if (fileJson != null) {
@@ -533,7 +533,7 @@ public class ConfigurationPanel extends TabItem implements IDetailPanel, IDataBo
 					statusLabelText = pmsMessages.msgErrorUpload();
 					bDownload.disable();
 				}
-				lUploadStatus.setText(statusLabelText);
+				lUploadStatus.setValue(statusLabelText);
 			}
 		});
 
@@ -748,7 +748,7 @@ public class ConfigurationPanel extends TabItem implements IDetailPanel, IDataBo
 	private void showCategorySelector(final ConfigurationTemplateItemDTO item) {
 
 		wCategories = new Window();
-		wCategories.setHeading("Categorías");
+		wCategories.setHeadingText("Categorías");
 		wCategories.setScrollMode(Scroll.AUTO);
 		wCategories.setSize(500, 550);
 		wCategories.setClosable(true);

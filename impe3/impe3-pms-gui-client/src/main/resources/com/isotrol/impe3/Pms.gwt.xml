@@ -33,7 +33,7 @@
 		In order to compile for only one version, choose (GXT 1.2): 
 		ie6,ie8,gecko,gecko1_8,safari,opera 
 	-->
-	<!--<set-property name="user.agent" value="gecko1_8" />-->
+<!-- 	<set-property name="user.agent" value="gecko1_8" /> -->
 <!--	<set-property name="user.agent" value="ie6" />-->
 
 	<!-- Locale -->

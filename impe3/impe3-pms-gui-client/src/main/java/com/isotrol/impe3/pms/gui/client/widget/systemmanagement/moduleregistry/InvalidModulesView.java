@@ -95,7 +95,7 @@ public class InvalidModulesView extends AModuleDTOView<InvalidModuleModelData, I
 		InvalidModuleDTO dto = model.getDTO();
 		ContentPanel detail = new ContentPanel();
 		detail.setFrame(true);
-		detail.setHeading(dto.getName());
+		detail.setHeadingText(dto.getName());
 
 		String template = TEMPLATE_TEMPLATE
 			.replaceAll(PATTERN_ERROR, dto.getError())

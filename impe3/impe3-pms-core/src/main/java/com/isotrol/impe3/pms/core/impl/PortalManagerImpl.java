@@ -28,8 +28,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
-import net.sf.derquinsej.collect.Hierarchy;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -47,11 +45,14 @@ import com.isotrol.impe3.pms.model.ComponentEntity;
 import com.isotrol.impe3.pms.model.DeviceEntity;
 import com.isotrol.impe3.pms.model.NameValue;
 import com.isotrol.impe3.pms.model.OverridenComponentValue;
+import com.isotrol.impe3.pms.model.PortalConfigurationValue;
 import com.isotrol.impe3.pms.model.PortalDeviceValue;
 import com.isotrol.impe3.pms.model.PortalDfn;
 import com.isotrol.impe3.pms.model.PortalEdition;
 import com.isotrol.impe3.pms.model.PortalEntity;
 import com.isotrol.impe3.pms.model.UserEntity;
+
+import net.sf.derquinsej.collect.Hierarchy;
 
 
 /**
@@ -197,6 +198,13 @@ public final class PortalManagerImpl extends AbstractPortalService<PortalEntity,
 		for (ComponentDfn componentDfn : current.getComponents()) {
 			dfn.getComponents().add(componentManager.duplicate(componentDfn));
 		}
+		
+		// Portal configuration
+		final Map<String, PortalConfigurationValue> portalConfigMap = dfn.getPortalConfiguration();
+		for (Entry<String, PortalConfigurationValue> entry : current.getPortalConfiguration().entrySet()) {
+			portalConfigMap.put(entry.getKey(), entry.getValue().clone(configurationManager));
+		}
+		
 		dfn.getPages().addAll(Collections2.transform(current.getPages(), pageManager.getDuplicator()));
 		dfn.setDefaultLocale(current.getDefaultLocale());
 		dfn.getL7DNames().putAll(dfn.getL7DNames());

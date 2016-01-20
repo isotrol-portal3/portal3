@@ -200,7 +200,7 @@ public class LoginPanel extends TypicalWindow implements IDetailPanel {
 		setWidth(WIDTH);
 		setAutoHeight(true);
 		String heading = pmsMessages.headerLoginPanel();
-		setHeading(heading);
+		setHeadingText(heading);
 		setDraggable(false);
 		setPlain(true);
 		setShim(false);
@@ -278,11 +278,11 @@ public class LoginPanel extends TypicalWindow implements IDetailPanel {
 			 */
 			public void onSubmit(SubmitEvent event) {
 				if (tfUsername.getValue() == null || tfUsername.getValue().equals("")) {
-					tfErrorMessage.setText(pmsMessages.msgErrorUserRequired());
+					tfErrorMessage.setValue(pmsMessages.msgErrorUserRequired());
 					tfErrorMessage.show();
 					event.cancel();
 				} else if (tfPassword.getValue() == null || tfPassword.getValue().equals("")) {
-					tfErrorMessage.setText(pmsMessages.msgErrorPasswordRequired());
+					tfErrorMessage.setValue(pmsMessages.msgErrorPasswordRequired());
 					tfErrorMessage.show();
 					event.cancel();
 				} else {
@@ -350,7 +350,7 @@ public class LoginPanel extends TypicalWindow implements IDetailPanel {
 	 * @param error
 	 */
 	private void onAuthenticationFailure(Throwable error) {
-		tfErrorMessage.setText(sessionsError.getErrorLoginMessage(error, pmsMessages.msgErrorAuthentication()));
+		tfErrorMessage.setValue(sessionsError.getErrorLoginMessage(error, pmsMessages.msgErrorAuthentication()));
 		tfErrorMessage.show();
 	}
 

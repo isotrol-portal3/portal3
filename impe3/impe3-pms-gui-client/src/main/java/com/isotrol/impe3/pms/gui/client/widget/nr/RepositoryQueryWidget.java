@@ -210,7 +210,7 @@ public class RepositoryQueryWidget extends ARepositoryWidget {
 		setLayout(new BorderLayout());
 		setBorders(false);
 		setBodyBorder(false);
-		setHeading(getNrMessages().menuItem2RepositoryQuery());
+		setHeadingText(getNrMessages().menuItem2RepositoryQuery());
 		
 		Header header = getHeader();
 		header.addStyleName(styles.noSideBorders());
@@ -228,7 +228,7 @@ public class RepositoryQueryWidget extends ARepositoryWidget {
 		cpQuery.setBodyBorder(false);
 		cpQuery.setLayout(formSupport.getStandardLayout(true));
 		cpQuery.setButtonAlign(HorizontalAlignment.LEFT);
-		cpQuery.setHeading(getNrMessages().headerQueryParams());
+		cpQuery.setHeadingText(getNrMessages().headerQueryParams());
 		cpQuery.setBodyStyle("padding:10px");
 		
 		Header header = cpQuery.getHeader();
@@ -299,7 +299,7 @@ public class RepositoryQueryWidget extends ARepositoryWidget {
 		cpResults = new ContentPanel(new FitLayout());
 		cpResults.setBorders(true);
 		cpResults.setBodyBorder(false);
-		cpResults.setHeading(getNrMessages().headerResults());
+		cpResults.setHeadingText(getNrMessages().headerResults());
 		
 		Header header = cpResults.getHeader();
 		header.addStyleName(styles.noSideBorders());

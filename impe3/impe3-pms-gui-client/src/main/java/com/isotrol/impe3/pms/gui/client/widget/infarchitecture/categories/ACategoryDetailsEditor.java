@@ -214,7 +214,7 @@ public abstract class ACategoryDetailsEditor extends TypicalWindow implements ID
 		setAutoHeight(true);
 		setModal(true);
 		setHeaderVisible(true);
-		setHeading(getHeadingText());
+		setHeadingText(getHeadingText());
 		setClosable(false);
 		setScrollMode(Scroll.NONE);
 

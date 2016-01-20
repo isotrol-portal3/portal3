@@ -205,7 +205,7 @@ public class ContentTypesImportWindow extends TypicalWindow implements IDetailPa
 		setModal(true);
 		setWidth(525);
 		setAutoHeight(true);
-		setHeading(pmsMessages.headerContentTypesImport());
+		setHeadingText(pmsMessages.headerContentTypesImport());
 		setClosable(false);
 		setShadow(false);
 	}
@@ -251,7 +251,7 @@ public class ContentTypesImportWindow extends TypicalWindow implements IDetailPa
 		Button bSubmit = new Button(pmsMessages.labelUpload(), new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				lUploadStatus.setText(pmsMessages.labelUpoading());
+				lUploadStatus.setValue(pmsMessages.labelUpoading());
 				formPanel.submit();
 			}
 		});
@@ -267,7 +267,7 @@ public class ContentTypesImportWindow extends TypicalWindow implements IDetailPa
 					fileJson = (JSONObject) JSONParser.parseStrict(be.getResultHtml()).isObject();
 				} catch (JSONException jsone) {
 					// TODO review this. Should always receive a JSON object.
-					lUploadStatus.setText(pmsMessages.msgErrorUpload());
+					lUploadStatus.setValue(pmsMessages.msgErrorUpload());
 				}
 				UploadedFileDTO fileDto = null;
 				if (fileJson != null) {
@@ -292,7 +292,7 @@ public class ContentTypesImportWindow extends TypicalWindow implements IDetailPa
 				} else { // error
 					statusLabelText = pmsMessages.msgErrorUpload();
 				}
-				lUploadStatus.setText(statusLabelText);
+				lUploadStatus.setValue(statusLabelText);
 			}
 		});
 

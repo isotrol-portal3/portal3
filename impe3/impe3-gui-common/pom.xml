@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.0.5</version>
+		<version>3.1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>impe3-gui-common</artifactId>
@@ -18,8 +18,22 @@
 			<artifactId>gwt-user</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.google.gwt.inject</groupId>
+			<groupId>com.google.gwt</groupId>
 			<artifactId>gin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.guice</groupId>
+			<artifactId>guice</artifactId>
+		</dependency>
+		<!-- guice assistedinject -->
+		<dependency>
+			<groupId>com.google.code.guice</groupId>
+			<artifactId>guice-assistedinject</artifactId>
+		</dependency>
+		<!-- javax.inject -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
 		</dependency>
 	</dependencies>
 

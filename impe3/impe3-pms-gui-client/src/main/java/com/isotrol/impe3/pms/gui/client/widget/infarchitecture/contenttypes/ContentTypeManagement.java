@@ -261,7 +261,7 @@ public class ContentTypeManagement extends PmsContentPanel {
 
 		config = new ColumnConfig();
 		config.setId(ContentTypeSelModelData.PROPERTY_STATE);
-		config.setHeader(pmsMessages.columnHeaderState());
+		config.setHeaderText(pmsMessages.columnHeaderState());
 		config.setWidth(COLUMN_STATE_WIDTH);
 		config.setSortable(false);
 		config.setRenderer(stateCellRenderer);
@@ -270,7 +270,7 @@ public class ContentTypeManagement extends PmsContentPanel {
 		config = new ColumnConfig();
 		config.setId(ContentTypeSelModelData.PROPERTY_NAME);
 		config.setWidth(COLUMN_NAME_WIDTH);
-		config.setHeader(pmsMessages.columnHeaderName());
+		config.setHeaderText(pmsMessages.columnHeaderName());
 		/*config.setRenderer(new GridCellRenderer<ContentTypeSelModelData>() {
 
 			public Object render(ContentTypeSelModelData model, String property, ColumnData config, int rowIndex,
@@ -283,7 +283,7 @@ public class ContentTypeManagement extends PmsContentPanel {
 		config = new ColumnConfig();
 		config.setId(ContentTypeSelModelData.PROPERTY_DESCRIPTION);
 		config.setWidth(COLUMN_DESCRIPTION_WIDTH);
-		config.setHeader(pmsMessages.columnHeaderDescription());
+		config.setHeaderText(pmsMessages.columnHeaderDescription());
 		configs.add(config);
 
 		ColumnModel cm = new ColumnModel(configs);

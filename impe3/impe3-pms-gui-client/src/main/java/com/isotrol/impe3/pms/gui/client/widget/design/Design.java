@@ -293,7 +293,7 @@ public final class Design extends Window {
 		setLayout(new FitLayout());
 		setLayoutOnChange(true);
 		RootPanel.get().addStyleName(DESIGN_BODY_CSS);
-		setHeading(pmsMessages.titleDesignWindow(page.getName()));
+		setHeadingText(pmsMessages.titleDesignWindow(page.getName()));
 		setMaximizable(true);
 		setModal(true);
 		setSize(600, 500);

@@ -309,14 +309,14 @@ public class PortalsManagement extends PmsContentPanel {
 		config.setId(PortalSelModelData.PROPERTY_ID);
 		config.setWidth(30);
 		config.setRenderer(urlsRenderer);
-		config.setHeader("Urls");
+		config.setHeaderText("Urls");
 		configs.add(config);
 
 		// state icon
 		config = new ColumnConfig();
 		config.setRenderer(stateCellRenderer);
 		config.setId(ModuleInstanceSelModelData.PROPERTY_STATE);
-		config.setHeader(pmsMessages.columnHeaderState());
+		config.setHeaderText(pmsMessages.columnHeaderState());
 		config.setWidth(50);
 		configs.add(config);
 
@@ -324,13 +324,13 @@ public class PortalsManagement extends PmsContentPanel {
 		config.setId(PortalSelModelData.PROPERTY_NAME);
 		config.setWidth(COLUMN_NAME_WIDTH);
 		config.setRenderer(new HtmlEncodeTreeGridCellRenderer());
-		config.setHeader(pmsMessages.columnHeaderName());
+		config.setHeaderText(pmsMessages.columnHeaderName());
 		configs.add(config);
 
 		config = new ColumnConfig();
 		config.setId(PortalSelModelData.PROPERTY_DESCRIPTION);
 		config.setWidth(COLUMN_DESCRIPTION_WIDTH);
-		config.setHeader(pmsMessages.columnHeaderDescription());
+		config.setHeaderText(pmsMessages.columnHeaderDescription());
 		config.setRenderer(new HtmlEncodeGridCellRenderer());
 		configs.add(config);
 
@@ -634,7 +634,7 @@ public class PortalsManagement extends PmsContentPanel {
 		private void addPanel() {
 			ContentPanel panel = new ContentPanel();
 			panel.setFrame(true);
-			panel.setHeading(portalModel.getDTO().getName());
+			panel.setHeadingText(portalModel.getDTO().getName());
 			panel.getHeader().addTool(new ToolButton("x-tool-close", new SelectionListener<IconButtonEvent>() {
 				@Override
 				public void componentSelected(IconButtonEvent ce) {

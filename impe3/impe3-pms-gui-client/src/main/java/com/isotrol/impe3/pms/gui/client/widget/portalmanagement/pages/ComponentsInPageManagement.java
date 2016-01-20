@@ -208,7 +208,7 @@ public class ComponentsInPageManagement extends LayoutContainer implements IDeta
 	private void addDependenciesTree() {
 
 		depsPanel = new ContentPanel();
-		depsPanel.setHeading(pmsMessages.headerComponentsDependencesPanel());
+		depsPanel.setHeadingText(pmsMessages.headerComponentsDependencesPanel());
 		depsPanel.setBodyStyleName("components-tree-panel-body");
 		depsPanel.setScrollMode(Scroll.AUTO);
 

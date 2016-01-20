@@ -25,7 +25,8 @@ import java.util.List;
 import com.isotrol.impe3.pms.api.EntityNotFoundException;
 import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.PropertyDTO;
-
+import com.isotrol.impe3.pms.api.config.ConfigurationItemDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 
 /**
  * Portals service.
@@ -325,4 +326,38 @@ public interface PortalsService {
 	 * @param cache The portal cache configuration DTO.
 	 */
 	void setPortalCache(PortalCacheDTO cache) throws PMSException;
+	
+	/**
+	 * Returns the portal configurations. The inherited properties are mixed in.
+	 * @param portalId Portal Id.
+	 * @return The portal configurations.
+	 */
+	List<PortalConfigurationSelDTO> getPortalConfigurations(String portalId) throws PMSException;
+	
+	/**
+	 * Returns the portal configuration.
+	 * @param portalId Portal Id.
+	 * @param beanName Bean Name.
+	 * @return The portal configurations.
+	 */
+	ConfigurationTemplateDTO getPortalConfiguration(String portalId, String beanName) throws PMSException;
+	
+	/**
+	 * Save portal configuration.
+	 * @param portalId Portal id.
+	 * @param beanName Bean name.
+	 * @param inherited inherited configuration.
+	 * @param config Config to save.
+	 */
+	public ConfigurationTemplateDTO savePortalConfiguration(String portalId, String beanName,
+		boolean inherited, List<ConfigurationItemDTO> config) throws PMSException;
+	
+	/**
+	 * Clear portal configuration.
+	 * @param portalId Portal id.
+	 * @param beanName Bean name.
+	 * @return ConfigurationTemplateDTO.
+	 * @throws PMSException.
+	 */
+	public ConfigurationTemplateDTO clearConfiguration(String portalId, String beanName) throws PMSException;
 }

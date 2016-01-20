@@ -269,13 +269,13 @@ public abstract class AOwnComponentManagement extends PmsContentPanel {
 
 		column = new ColumnConfig();
 		column.setId(Constants.PROPERTY_NAME);
-		column.setHeader(pmsMessages.columnHeaderName());
+		column.setHeaderText(pmsMessages.columnHeaderName());
 		column.setWidth(COLUMN_NAME_WIDTH);
 		configs.add(column);
 
 		column = new ColumnConfig();
 		column.setId(ModuleInstanceSelModelData.PROPERTY_MODULE);
-		column.setHeader(pmsMessages.columnHeaderModule());
+		column.setHeaderText(pmsMessages.columnHeaderModule());
 		column.setWidth(COLUMN_MODULE_WIDTH);
 		configs.add(column);
 		addSpecificColumns(configs);
@@ -609,7 +609,7 @@ public abstract class AOwnComponentManagement extends PmsContentPanel {
 	private void addComponentsSelector() {
 		wComponentsSelector = new Window();
 
-		wComponentsSelector.setHeading(pmsMessages.headerComponentSelector());
+		wComponentsSelector.setHeadingText(pmsMessages.headerComponentSelector());
 		wComponentsSelector.setModal(true);
 		wComponentsSelector.setResizable(false);
 		wComponentsSelector.setWidth(Constants.SIXTY_FIVE_PERCENT);
@@ -622,12 +622,12 @@ public abstract class AOwnComponentManagement extends PmsContentPanel {
 		// the grid column model:
 		ColumnConfig cName = new ColumnConfig();
 		cName.setId(AbstractModuleModelData.PROPERTY_NAME);
-		cName.setHeader(pmsMessages.columnHeaderName());
+		cName.setHeaderText(pmsMessages.columnHeaderName());
 		cName.setWidth(350);
 
 		ColumnConfig cDesc = new ColumnConfig();
 		cDesc.setId(AbstractModuleModelData.PROPERTY_DESCRIPTION);
-		cDesc.setHeader(pmsMessages.columnHeaderDescription());
+		cDesc.setHeaderText(pmsMessages.columnHeaderDescription());
 		cDesc.setRenderer(new GridCellRenderer<ComponentModuleModelData>() {
 			public Object render(ComponentModuleModelData model, String property, ColumnData config, int rowIndex,
 				int colIndex, ListStore<ComponentModuleModelData> store, Grid<ComponentModuleModelData> grid) {

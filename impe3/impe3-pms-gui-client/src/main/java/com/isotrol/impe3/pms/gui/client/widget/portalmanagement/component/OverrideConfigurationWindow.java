@@ -113,7 +113,7 @@ public class OverrideConfigurationWindow extends TypicalWindow implements IDetai
 	private void initThis() {
 		setWidth(PmsConstants.DETAIL_WINDOW_WIDTH);
 		setScrollMode(Scroll.AUTO);
-		setHeading(pmsMessages.configurationWidgetTitle());
+		setHeadingText(pmsMessages.configurationWidgetTitle());
 	}
 
 	/**

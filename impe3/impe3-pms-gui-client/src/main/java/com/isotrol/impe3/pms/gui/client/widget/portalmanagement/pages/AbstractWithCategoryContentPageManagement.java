@@ -248,7 +248,7 @@ public abstract class AbstractWithCategoryContentPageManagement extends ContentP
 		wDetail = new Window();
 		wDetail.setModal(true);
 		wDetail.setScrollMode(Scroll.AUTO);
-		wDetail.setHeading(messages.headerDetailPanel());
+		wDetail.setHeadingText(messages.headerDetailPanel());
 		// wDetail.setClosable(false);
 		wDetail.setMaximizable(true);
 
@@ -527,7 +527,7 @@ public abstract class AbstractWithCategoryContentPageManagement extends ContentP
 		config = new ColumnConfig();
 		config.setId(CategoryPageModelData.PROPERTY_TO_DISPLAY);
 		config.setWidth(200);
-		config.setHeader(pmsMessages.columnHeaderName());
+		config.setHeaderText(pmsMessages.columnHeaderName());
 		config.setRenderer(new TreePageCellRenderer());
 		columns.add(config);
 		

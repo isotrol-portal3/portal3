@@ -116,6 +116,17 @@ public final class Constants {
 	 * Universal definition for the <b>uri</b> property.<br/>
 	 */
 	public static final String PROPERTY_URI = "uri";
+	
+	public static final String PROPERTY_VALIDITY ="validity";
+	
+	
+	public static final String PROPERTY_HERENCY ="herency";
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * Universal definition for the <b>routable</b> property.<br/>

@@ -19,7 +19,6 @@
 
 package com.isotrol.impe3.pms.core.support;
 
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Date;
@@ -27,8 +26,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import net.sf.derquinsej.i18n.Locales;
+import java.util.UUID;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -36,6 +34,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.isotrol.impe3.api.Identifiables;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
+import com.isotrol.impe3.core.modules.ModuleDefinition;
 import com.isotrol.impe3.core.support.Named;
 import com.isotrol.impe3.pbuf.BaseProtos.DependencyPB;
 import com.isotrol.impe3.pbuf.BaseProtos.LocalizedNamePB;
@@ -44,15 +44,24 @@ import com.isotrol.impe3.pms.api.Described;
 import com.isotrol.impe3.pms.api.NameDTO;
 import com.isotrol.impe3.pms.api.PropertyDTO;
 import com.isotrol.impe3.pms.api.WithLocalizedNameDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.config.UploadedFileDTO;
 import com.isotrol.impe3.pms.api.minst.DependencyDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO.EstadoHerencia;
 import com.isotrol.impe3.pms.api.user.DoneDTO;
 import com.isotrol.impe3.pms.api.user.UserSelDTO;
+import com.isotrol.impe3.pms.core.obj.ComponentObject;
+import com.isotrol.impe3.pms.core.obj.ComponentsObject;
+import com.isotrol.impe3.pms.core.obj.ContextGlobal;
+import com.isotrol.impe3.pms.core.obj.PortalObject;
 import com.isotrol.impe3.pms.model.Done;
 import com.isotrol.impe3.pms.model.FileEntity;
 import com.isotrol.impe3.pms.model.NameValue;
 import com.isotrol.impe3.pms.model.UserEntity;
 import com.isotrol.impe3.pms.model.WithLocalizedName;
+
+import net.sf.derquinsej.i18n.Locales;
 
 
 /**
@@ -196,7 +205,6 @@ public final class Mappers {
 		return list;
 	}
 	
-
 	/**
 	 * Copy a default and localized names from the model to a dto.
 	 * @param value Value
@@ -260,4 +268,81 @@ public final class Mappers {
 		return Lists.newArrayList(Iterables.transform(from, function));
 	}
 
+	/**
+	 * Portal configurations map to list of DTOs.
+	 * @param components List of ComponentObject.
+	 * @return List of PortalConfigurationSelDTO
+	 */
+	public static List<PortalConfigurationSelDTO> pconfig2seldto(Map<UUID, ComponentObject> components, 
+			ComponentsObject objects, PortalObject portal) {
+		
+		final List<PortalConfigurationSelDTO> list;
+		final Map<String, PortalConfigurationSelDTO> listMap = Maps.newHashMap();
+		
+		if (components == null || components.isEmpty()) {
+			list = Lists.newArrayListWithCapacity(0);
+			
+		} else {
+			list = Lists.newArrayListWithCapacity(components.size());
+		
+			for (ComponentObject obj : components.values()) {
+				PortalConfigurationDefinition<?> pcd = obj.getModule().getPortalConfiguration();
+				
+				if (pcd != null) {
+					String beanName = pcd.getType().getName();
+					
+					PortalConfigurationSelDTO pcsDto = new PortalConfigurationSelDTO(beanName, 
+						(String) pcd.getName().get(), 
+						(String) pcd.getDescription().get(), 
+						portal.getStringId(), !obj.isPortalConfigurationError(), 
+							(objects.isOwned(obj.getId()) ? EstadoHerencia.PROPIO : 
+								(portal.hasPortalConfiguration(beanName) ? EstadoHerencia.SOBREESCRITO : EstadoHerencia.HEREDADO)));
+					
+					listMap.put(beanName, pcsDto);
+					
+					list.add(pcsDto);
+				}
+			}
+		}
+		return Lists.newArrayList(listMap.values());
+	}
+	
+	/**
+	 * Portal configurations map to list of DTOs.
+	 * @param components List of ComponentObject.
+	 * @return List of PortalConfigurationSelDTO
+	 */
+	public static Map<String, ConfigurationTemplateDTO> pconfig2temp(Map<UUID, ComponentObject> components, ComponentsObject objects, 
+			PortalObject portal, ContextGlobal ctx) {
+		
+		final Map<String, ConfigurationTemplateDTO> list = Maps.newHashMap();
+		
+		for (ComponentObject obj : components.values()) {
+			ModuleDefinition def = obj.getModule();
+			
+			if (def.getPortalConfiguration() != null) {
+				String beanName = def.getPortalConfiguration().getType().getName();
+				list.put(beanName, obj.toTemplateDTO(ctx).getPortalConfiguration());
+			}
+		}
+		return list;
+	}
+	
+	/**
+	 * Portal configurations map to list of DTOs.
+	 * @param components List of ComponentObject.
+	 * @return List of PortalConfigurationSelDTO
+	 */
+	public static Map<String, PortalConfigurationDefinition<?>> pconfig2def(Map<UUID, ComponentObject> components, PortalObject portal) {
+		
+		final Map<String, PortalConfigurationDefinition<?>> list = Maps.newHashMap();;
+		
+		for (ComponentObject obj : components.values()) {
+			ModuleDefinition def = obj.getModule();
+			if (def.getPortalConfiguration() != null) {
+				list.put(def.getPortalConfiguration().getType().getName(), def.getPortalConfiguration());
+			}
+		}
+		return list;
+	}
 }

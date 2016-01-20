@@ -169,7 +169,7 @@ public class AllConnectorsManagement extends AConnectorsManagement {
 	private void createConnectorModuleSelector() {
 
 		modulesWindow = new Window();
-		modulesWindow.setHeading(getPmsMessages().headerConnectorSelector());
+		modulesWindow.setHeadingText(getPmsMessages().headerConnectorSelector());
 		modulesWindow.setModal(true);
 		modulesWindow.setResizable(false);
 		modulesWindow.setWidth(Constants.SIXTY_FIVE_PERCENT);
@@ -202,7 +202,7 @@ public class AllConnectorsManagement extends AConnectorsManagement {
 		
 		ColumnConfig cName = new ColumnConfig();
 		cName.setId(ConnectorModuleModelData.PROPERTY_NAME);
-		cName.setHeader(getPmsMessages().columnHeaderName());
+		cName.setHeaderText(getPmsMessages().columnHeaderName());
 		cName.setWidth(350);
 
 		ColumnModel columnModel = new ColumnModel(Arrays.asList(new ColumnConfig[] {expander, cId, cName}));
@@ -279,7 +279,7 @@ public class AllConnectorsManagement extends AConnectorsManagement {
 		ColumnConfig column = new ColumnConfig();
 		column.setRenderer(correctnessRenderer);
 		column.setId(ModuleInstanceSelModelData.PROPERTY_CORRECTNESS);
-		column.setHeader(getPmsMessages().columnHeaderValid());
+		column.setHeaderText(getPmsMessages().columnHeaderValid());
 		column.setWidth(COLUMN_CORRECTNESS_WIDTH);
 		configs.add(3, column);
 	}

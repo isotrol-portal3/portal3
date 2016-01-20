@@ -166,7 +166,7 @@ public class LeftMenu extends ALeftPanel {
 	 */
 	private void addLogPanel(LayoutContainer pMenu) {
 		ContentPanel logMenu = new ContentPanel();
-		logMenu.setHeading("Log");
+		logMenu.setHeadingText("Log");
 		logMenu.setAutoHeight(true);
 		logMenu.setBodyBorder(false);
 		logMenu.getHeader().addStyleName(getStyles().menuLevel1());

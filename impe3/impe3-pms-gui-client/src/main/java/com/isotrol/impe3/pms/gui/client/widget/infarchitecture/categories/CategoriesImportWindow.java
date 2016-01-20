@@ -196,7 +196,7 @@ public class CategoriesImportWindow extends TypicalWindow implements IDetailPane
 		setAutoHeight(true);
 		setModal(true);
 		setHeaderVisible(true);
-		setHeading(pmsMessages.headerCategoriesExport());
+		setHeadingText(pmsMessages.headerCategoriesExport());
 		setClosable(false);
 		setScrollMode(Scroll.NONE);
 
@@ -288,7 +288,7 @@ public class CategoriesImportWindow extends TypicalWindow implements IDetailPane
 		Button bSubmit = new Button(pmsMessages.labelUpload(), new SelectionListener<ButtonEvent>() {
 			@Override
 			public void componentSelected(ButtonEvent ce) {
-				lUploadStatus.setText(pmsMessages.labelUpoading());
+				lUploadStatus.setValue(pmsMessages.labelUpoading());
 				formPanel.submit();
 			}
 		});
@@ -304,7 +304,7 @@ public class CategoriesImportWindow extends TypicalWindow implements IDetailPane
 					fileJson = (JSONObject) JSONParser.parseStrict(be.getResultHtml()).isObject();
 				} catch (JSONException jsone) {
 					// TODO review this. Should always receive a JSON object.
-					lUploadStatus.setText(pmsMessages.msgErrorUpload());
+					lUploadStatus.setValue(pmsMessages.msgErrorUpload());
 				}
 				UploadedFileDTO fileDto = null;
 				if (fileJson != null) {
@@ -329,7 +329,7 @@ public class CategoriesImportWindow extends TypicalWindow implements IDetailPane
 				} else { // error
 					statusLabelText = pmsMessages.msgErrorUpload();
 				}
-				lUploadStatus.setText(statusLabelText);
+				lUploadStatus.setValue(statusLabelText);
 			}
 		});
 

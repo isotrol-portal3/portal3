@@ -235,33 +235,33 @@ public class EditionManagement extends ContentPanel {
 		ColumnConfig ccCurrent = new ColumnConfig();
 		ccCurrent.setId(EditionModelData.PROPERTY_CURRENT);
 		ccCurrent.setWidth(COLUMN_CURRENT_WIDTH);
-		ccCurrent.setHeader(pmsMessages.columnHeaderCurrent());
+		ccCurrent.setHeaderText(pmsMessages.columnHeaderCurrent());
 		ccCurrent.setRenderer(booleanCellRenderer);
 		configs.add(ccCurrent);
 
 		ColumnConfig ccPublishedBy = new ColumnConfig();
 		ccPublishedBy.setId(EditionModelData.PROPERTY_PUBLISHED_BY);
 		ccPublishedBy.setWidth(250);
-		ccPublishedBy.setHeader(pmsMessages.columnHeaderPublishedBy());
+		ccPublishedBy.setHeaderText(pmsMessages.columnHeaderPublishedBy());
 		configs.add(ccPublishedBy);
 
 		ColumnConfig ccPublished = new ColumnConfig();
 		ccPublished.setId(EditionModelData.PROPERTY_PUBLISHED);
 		ccPublished.setWidth(150);
-		ccPublished.setHeader(pmsMessages.columnHeaderPublishedDate());
+		ccPublished.setHeaderText(pmsMessages.columnHeaderPublishedDate());
 		ccPublished.setRenderer(dateCellRenderer);
 		configs.add(ccPublished);
 
 		ColumnConfig ccCreatedBy = new ColumnConfig();
 		ccCreatedBy.setId(EditionModelData.PROPERTY_CREATED_BY);
 		ccCreatedBy.setWidth(250);
-		ccCreatedBy.setHeader(pmsMessages.columnHeaderCreationBy());
+		ccCreatedBy.setHeaderText(pmsMessages.columnHeaderCreationBy());
 		configs.add(ccCreatedBy);
 
 		ColumnConfig ccCreated = new ColumnConfig();
 		ccCreated.setId(EditionModelData.PROPERTY_CREATED);
 		ccCreated.setWidth(COLUMN_CREATED_WIDTH);
-		ccCreated.setHeader(pmsMessages.columnHeaderCreationDate());
+		ccCreated.setHeaderText(pmsMessages.columnHeaderCreationDate());
 		ccCreated.setRenderer(dateCellRenderer);
 		configs.add(ccCreated);
 

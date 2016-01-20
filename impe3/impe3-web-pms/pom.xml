@@ -2,7 +2,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.0.5</version>
+		<version>3.1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>impe3-web-pms</artifactId>
@@ -11,12 +11,12 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-pms-gui-server</artifactId>
-			<version>3.0.5</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-web-online</artifactId>
-			<version>3.0.5</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.gwt-widget</groupId>

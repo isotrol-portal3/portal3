@@ -229,7 +229,7 @@ public abstract class APropertiesManagementPopup<M extends ModelData> extends Ty
 	 */
 	private void initThis() {
 		setSize(600, 400);
-		setHeading(getHeaderText());
+		setHeadingText(getHeaderText());
 		setClosable(false);
 
 		// own and inherited tabs

@@ -173,7 +173,7 @@ public abstract class AValidModuleView<M extends AbstractValidModuleModelData<D>
 	private void addColumnInstantiable(List<ColumnConfig> configs) {
 		ColumnConfig config = new ColumnConfig();
 		config.setId(AbstractModuleModelData.PROPERTY_INSTANTIABLE);
-		config.setHeader(getPmsMessages().columnHeaderInstantiable());
+		config.setHeaderText(getPmsMessages().columnHeaderInstantiable());
 		config.setWidth(Constants.COLUMN_ICON_WIDTH);
 		config.setRenderer(getInstantiableCellRenderer());
 		configs.add(config);

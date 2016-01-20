@@ -71,12 +71,15 @@ import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.Compon
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.ComponentsExportWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.ComponentsImportWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.ErrorOwnComponentManagement;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.InheritPortalConfigurationWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.InheritedComponentManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.InheritedComponentsExportWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.OverrideConfigurationWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.OverrideDependencesWindow;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.PortalConfigurationWindow;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.ValidOwnComponentManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component.WarningOwnComponentManagement;
+import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.configurations.PortalConfigurationsManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.device.PortalDeviceEditionPanel;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.device.PortalDevicesManagement;
 import com.isotrol.impe3.pms.gui.client.widget.portalmanagement.names.PortalNameCreationPanel;
@@ -623,6 +626,9 @@ public interface IPmsFactory extends Ginjector {
 	 */
 	AvailableBasesWidget getAvailableBasesWidget();
 	
+	
+	PortalConfigurationsManagement getPortalConfigurationsManagement();
+	
 	/**
 	 * @return the widget with the available portal properties
 	 */
@@ -777,4 +783,12 @@ public interface IPmsFactory extends Ginjector {
 	 * @return the window to change the user password
 	 */
 	ChangeUserPwdWindow getChangeUserPwdWindow();
+	
+	/**
+	 * 
+	 * @return @return the window to charge the portal configuration
+	 */
+	PortalConfigurationWindow getPortalConfigurationWindow();
+	
+	InheritPortalConfigurationWindow getInheritPortalConfigurationWindow();
 }

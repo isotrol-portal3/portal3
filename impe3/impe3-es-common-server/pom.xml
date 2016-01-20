@@ -2,7 +2,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.0.5</version>
+		<version>3.1.0</version>
 	</parent>
 	<name>Port@l :: Support Modules :: ES Common Server</name>
 	<modelVersion>4.0.0</modelVersion>
@@ -11,7 +11,7 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-hib</artifactId>
-			<version>3.0.5</version>
+			<version>3.1.0</version>
 		</dependency>
 	</dependencies>
 </project>

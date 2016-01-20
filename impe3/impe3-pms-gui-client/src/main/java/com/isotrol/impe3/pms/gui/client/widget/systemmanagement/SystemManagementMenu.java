@@ -141,7 +141,7 @@ public class SystemManagementMenu extends AManagementMenu {
 		setIconStyle(getPmsStyles().menuIconSystemManagement());
 		setBodyBorder(false);
 
-		setHeading(getPmsMessages().menuItem1SystemManagement());
+		setHeadingText(getPmsMessages().menuItem1SystemManagement());
 		getHeader().addStyleName(getGuiCommonStyles().noSideBorders());
 	}
 

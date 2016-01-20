@@ -159,7 +159,7 @@ public class ComponentInPageNameEditor extends TypicalWindow implements IDetailP
 		setLayout(new FitLayout());
 		setClosable(false);
 		setWidth(FormSupport.RECOMMENDED_WIDTH);
-		setHeading(pmsMessages.headerRenamePanel());
+		setHeadingText(pmsMessages.headerRenamePanel());
 		setAutoHeight(true);
 	}
 

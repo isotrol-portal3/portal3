@@ -80,7 +80,7 @@ public class HelpMenu extends AManagementMenu {
 		setIconStyle(getPmsStyles().menuIconHelp());
 		setBodyBorder(false);
 
-		setHeading(getPmsMessages().menuItem1Help());
+		setHeadingText(getPmsMessages().menuItem1Help());
 		getHeader().addStyleName(getGuiCommonStyles().noSideBorders());
 	}
 

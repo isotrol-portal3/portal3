@@ -60,6 +60,7 @@ import com.isotrol.impe3.api.LocaleRouter;
 import com.isotrol.impe3.api.PageResolver;
 import com.isotrol.impe3.api.PathSegments;
 import com.isotrol.impe3.core.EngineModel;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.engine.DefaultOfflineEngine;
 import com.isotrol.impe3.core.engine.RequestContexts;
 import com.isotrol.impe3.nr.api.FilterType;
@@ -75,6 +76,8 @@ import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.PortalAuthority;
 import com.isotrol.impe3.pms.api.PropertyDTO;
 import com.isotrol.impe3.pms.api.category.CategorySelDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationItemDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.minst.ProvidedDTO;
 import com.isotrol.impe3.pms.api.portal.BaseDTO;
 import com.isotrol.impe3.pms.api.portal.BasesDTO;
@@ -83,6 +86,7 @@ import com.isotrol.impe3.pms.api.portal.DiPDTO;
 import com.isotrol.impe3.pms.api.portal.IllegalPortalParentException;
 import com.isotrol.impe3.pms.api.portal.PortalCacheDTO;
 import com.isotrol.impe3.pms.api.portal.PortalCategoryMode;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesTemplateDTO;
@@ -99,6 +103,7 @@ import com.isotrol.impe3.pms.api.type.ContentTypeSelDTO;
 import com.isotrol.impe3.pms.core.DeviceManager;
 import com.isotrol.impe3.pms.core.ExportJobManager;
 import com.isotrol.impe3.pms.core.FileManager;
+import com.isotrol.impe3.pms.core.PortalConfigurationManager;
 import com.isotrol.impe3.pms.core.PortalManager;
 import com.isotrol.impe3.pms.core.engine.EngineModelLoader;
 import com.isotrol.impe3.pms.core.obj.ConnectorObject;
@@ -114,11 +119,13 @@ import com.isotrol.impe3.pms.core.support.InUseProviders;
 import com.isotrol.impe3.pms.core.support.Mappers;
 import com.isotrol.impe3.pms.core.support.MoreLocales;
 import com.isotrol.impe3.pms.core.support.NotFoundProviders;
+import com.isotrol.impe3.pms.model.ConfigurationEntity;
 import com.isotrol.impe3.pms.model.ConnectorEntity;
 import com.isotrol.impe3.pms.model.ContentTypeEntity;
 import com.isotrol.impe3.pms.model.DeviceEntity;
 import com.isotrol.impe3.pms.model.ExportJobType;
 import com.isotrol.impe3.pms.model.PortalCacheValue;
+import com.isotrol.impe3.pms.model.PortalConfigurationValue;
 import com.isotrol.impe3.pms.model.PortalDeviceValue;
 import com.isotrol.impe3.pms.model.PortalDfn;
 import com.isotrol.impe3.pms.model.PortalEdition;
@@ -146,7 +153,10 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 	/** File manager. */
 	@Autowired
 	private FileManager fileManager;
-
+	/** Configuration manager */
+	@Autowired
+	private PortalConfigurationManager portalConfigurationManager;
+	
 	/** Default constructor. */
 	public PortalsServiceImpl() {
 	}
@@ -154,6 +164,20 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 	@Autowired
 	public void setPortalManager(PortalManager portalManager) {
 		this.portalManager = portalManager;
+	}
+
+	/**
+	 * @return the configurationManager
+	 */
+	public PortalConfigurationManager getPortalConfigurationManager() {
+		return portalConfigurationManager;
+	}
+
+	/**
+	 * @param configurationManager the configurationManager to set
+	 */
+	public void setPortalConfigurationManager(PortalConfigurationManager portalConfigurationManager) {
+		this.portalConfigurationManager = portalConfigurationManager;
 	}
 
 	private PortalDfn getUpdateDfn(ContextPortal ctx) throws PMSException {
@@ -928,4 +952,111 @@ public final class PortalsServiceImpl extends AbstractPortalService<PortalEntity
 		}
 	}
 
+	
+	/**
+	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getAvailableProperties(java.lang.String)
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
+	public List<PortalConfigurationSelDTO> getPortalConfigurations(String portalId) throws PMSException {
+		return loadContextGlobal().toPortal(portalId).getPortalConfigurations();
+	}
+	
+	/**
+	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getAvailableProperties(java.lang.String)
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
+	public ConfigurationTemplateDTO getPortalConfiguration(String portalId, String beanName) throws PMSException {
+		return loadContextGlobal().toPortal(portalId).getPortalConfiguration(beanName);
+	}
+	
+	/**
+	 * Save portal configuration.
+	 * @param portalId Portal id.
+	 * @param beanName Bean name.
+	 * @param config Config to save.
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_SET, portal=PortalAuthority.SET)
+	public ConfigurationTemplateDTO savePortalConfiguration(String portalId, String beanName, 
+		boolean inherited, List<ConfigurationItemDTO> config) throws PMSException {
+		// Actualiza la configuracion del portal padre
+		if (inherited && loadContextGlobal().toPortal(portalId) != null 
+			&& loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId)) != null) {
+			
+			portalId = loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId)).toString();
+		}
+		
+		final ContextPortal context = loadContextGlobal().toPortal(portalId);
+		overrideConfiguration(context, beanName, config);
+		return getPortalConfiguration(portalId, beanName);
+	}
+
+	private void overrideConfiguration(ContextPortal context, String beanName, List<ConfigurationItemDTO> config)
+		throws PMSException {
+		final PortalConfigurationDefinition<?> cdef = context.getPortalConfigurationsDef().get(beanName);
+//		NotFoundProviders.COMPONENT.checkNotNull(c.overridesConfiguration(), beanName);
+		// Update it
+		final PortalEntity entity = loadPortal(context.getPortalId());
+		final PortalDfn portalDfn = portalManager.touchOffline(entity);
+		portalManager.touchComponents(context.getPortals(), entity);
+		PortalConfigurationValue pcv = portalDfn.getPortalConfiguration().get(beanName);
+		if (pcv == null) {
+			pcv = new PortalConfigurationValue();
+			portalDfn.getPortalConfiguration().put(beanName, pcv);
+		}
+		ConfigurationEntity ce = pcv.getPortalConfiguration();
+		if (ce == null) {
+			ce = portalConfigurationManager.create(cdef, config);
+		} else {
+			ce = portalConfigurationManager.update(cdef, ce, config);
+		}
+		pcv.setPortalConfiguration(ce);
+	}
+	
+	/**
+	 * Clear portal configuration.
+	 * @param portalId Portal id.
+	 * @param beanName Bean name.
+	 * @return ConfigurationTemplateDTO.
+	 * @throws PMSException.
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_SET, portal=PortalAuthority.SET)
+	public ConfigurationTemplateDTO clearConfiguration(String portalId, String beanName) throws PMSException {
+		final ContextPortal context = loadContextGlobal().toPortal(portalId);
+		
+		final PortalEntity entity = loadPortal(context.getPortalId());
+		final PortalDfn portalDfn = portalManager.touchOffline(entity);
+		portalManager.touchComponents(context.getPortals(), entity);
+		
+		if (portalDfn.getPortalConfiguration() != null && portalDfn.getPortalConfiguration().get(beanName) != null) {
+			portalConfigurationManager.delete(portalDfn.getPortalConfiguration().get(beanName).getPortalConfiguration());
+			portalDfn.getPortalConfiguration().remove(beanName);
+		}
+		
+		return getPortalConfiguration(portalId, beanName);
+	}
+	
+	/**
+	 * @see com.isotrol.impe3.pms.api.portal.PortalsService#getAvailableProperties(java.lang.String)
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	@Authorized(global = GlobalAuthority.PORTAL_GET, portal = PortalAuthority.GET)
+	public ConfigurationTemplateDTO getInheritedPortalConfiguration(String portalId, String beanName) throws PMSException {
+		UUID parentUuid = null;
+		
+		// Comprueba si existe el portal padre
+		if (loadContextGlobal().toPortal(portalId) != null 
+			&& loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId)) != null) {
+		
+			parentUuid = loadContextGlobal().toPortal(portalId).getParentPortalId(UUID.fromString(portalId));
+		}
+		String parentId = portalId;
+		if (parentUuid != null) {
+			parentId = parentUuid.toString();
+		}
+		return loadContextGlobal().toPortal(parentId).getPortalConfiguration(beanName);
+	}
 }

@@ -293,7 +293,7 @@ public class CommentsManagement extends ContentPanel implements IInitializableWi
 	 * Inits this component propeties.<br/>
 	 */
 	private void initThis() {
-		setHeading(commentsMessages.phComments());
+		setHeadingText(commentsMessages.phComments());
 		setLayout(new BorderLayout());
 		setBorders(false);
 		setBodyBorder(false);
@@ -320,7 +320,7 @@ public class CommentsManagement extends ContentPanel implements IInitializableWi
 		cpTop = new ContentPanel(formSupport.getStandardLayout(true));
 		cpTop.setBorders(true);
 		cpTop.setBodyBorder(false);
-		cpTop.setHeading(commentsMessages.phCommentsFilter());
+		cpTop.setHeadingText(commentsMessages.phCommentsFilter());
 		cpTop.setBodyStyle("padding:10px");
 
 		Header header = cpTop.getHeader();

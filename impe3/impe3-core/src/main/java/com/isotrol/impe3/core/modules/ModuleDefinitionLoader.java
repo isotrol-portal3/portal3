@@ -46,6 +46,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.isotrol.impe3.api.Configuration;
+import com.isotrol.impe3.api.PortalConfiguration;
 import com.isotrol.impe3.api.URIGenerator;
 import com.isotrol.impe3.api.component.Component;
 import com.isotrol.impe3.api.modules.Module;
@@ -55,6 +56,7 @@ import com.isotrol.impe3.core.component.ComponentDefinition;
 import com.isotrol.impe3.core.component.ComponentException;
 import com.isotrol.impe3.core.config.ConfigurationDefinition;
 import com.isotrol.impe3.core.config.ConfigurationException;
+import com.isotrol.impe3.core.config.PortalConfigurationDefinition;
 import com.isotrol.impe3.core.support.TypeRelated;
 
 
@@ -86,6 +88,8 @@ final class ModuleDefinitionLoader<T extends Module> extends TypeRelated<T> {
 	private ModuleType moduleType = null;
 	private ConfigurationDefinition<?> configuration = null;
 	private Dependency configurationDependency = null;
+	private PortalConfigurationDefinition<?> portalConfiguration = null;
+	private Dependency portalConfigurationDependency = null;
 	private Map<String, Dependency> dependencies;
 	private Set<String> actions;
 
@@ -135,6 +139,20 @@ final class ModuleDefinitionLoader<T extends Module> extends TypeRelated<T> {
 	Dependency getConfigurationDependency() {
 		return configurationDependency;
 	}
+	
+	/**
+	 * @return the portalConfiguration
+	 */
+	public PortalConfigurationDefinition<?> getPortalConfiguration() {
+		return portalConfiguration;
+	}
+
+	/**
+	 * @return the portalConfigurationDependency
+	 */
+	public Dependency getPortalConfigurationDependency() {
+		return portalConfigurationDependency;
+	}
 
 	Set<String> getActions() {
 		return actions;
@@ -160,6 +178,22 @@ final class ModuleDefinitionLoader<T extends Module> extends TypeRelated<T> {
 			}
 			try {
 				configuration = ConfigurationDefinition.of(klass.asSubclass(Configuration.class));
+			} catch (ConfigurationException e) {
+				throw new ModuleConfigurationException(getType(), e);
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean loadPortalConfiguration(Class<?> klass) throws ModuleException {
+		if (PortalConfiguration.class.isAssignableFrom(klass)) {
+			// is a configuration
+			if (portalConfiguration != null) {
+				throw new DuplicateModuleConfigurationException(getType());
+			}
+			try {
+				portalConfiguration = PortalConfigurationDefinition.of(klass.asSubclass(PortalConfiguration.class));
 			} catch (ConfigurationException e) {
 				throw new ModuleConfigurationException(getType(), e);
 			}
@@ -358,6 +392,8 @@ final class ModuleDefinitionLoader<T extends Module> extends TypeRelated<T> {
 				final Class<?> klass = types[0];
 				final boolean required = !registry.containsBean(bean);
 				final boolean config = loadConfiguration(klass);
+				final boolean portalConfig = loadPortalConfiguration(klass);
+				
 				if (!config) {
 					if (!Modules.isInternalDependency(klass) && !klass.isInterface()) {
 						throw new NonInterfaceDependsException(getType(), bean, klass);
@@ -382,6 +418,9 @@ final class ModuleDefinitionLoader<T extends Module> extends TypeRelated<T> {
 				dependencies.put(bean, d);
 				if (config) {
 					configurationDependency = d;
+				}
+				if (portalConfig) {
+					portalConfigurationDependency = d;
 				}
 			}
 		}

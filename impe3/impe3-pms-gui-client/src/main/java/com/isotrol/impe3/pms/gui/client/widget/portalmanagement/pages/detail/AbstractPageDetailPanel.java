@@ -232,7 +232,7 @@ public abstract class AbstractPageDetailPanel extends TypicalWindow implements I
 		// setHeight(Constants.EIGHTY_FIVE_PERCENT);
 		setClosable(false);
 		setMaximizable(true);
-		setHeading(guiCommonMessages.headerDetailPanel());
+		setHeadingText(guiCommonMessages.headerDetailPanel());
 
 		topContainer = new LayoutContainer(formSupport.getStandardLayout(false));
 		topContainer.setAutoHeight(true);

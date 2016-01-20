@@ -196,7 +196,7 @@ public abstract class ACollectionDetailsEditor extends TypicalWindow implements 
 		setAutoHeight(true);
 		setModal(true);
 		setHeaderVisible(true);
-		setHeading(getHeadingText());
+		setHeadingText(getHeadingText());
 		setClosable(false);
 		setScrollMode(Scroll.NONE);
 

@@ -267,7 +267,7 @@ public abstract class AModuleDetailPanel extends TypicalWindow implements IDetai
 	 */
 	private void initThis() {
 		setWidth(PmsConstants.DETAIL_WINDOW_WIDTH);
-		setHeading(moduleInstanceTemplateDto.getName());
+		setHeadingText(moduleInstanceTemplateDto.getName());
 		setClosable(false);
 		setLayout(new FitLayout());
 		setBodyBorder(false);
@@ -335,7 +335,7 @@ public abstract class AModuleDetailPanel extends TypicalWindow implements IDetai
 		// module info fieldset:
 		FieldSet fsModuleInfo = new FieldSet();
 		fsModuleInfo.setCollapsible(false);
-		fsModuleInfo.setHeading(pmsMessages.headerModuleInfo());
+		fsModuleInfo.setHeadingHtml(pmsMessages.headerModuleInfo());
 
 		FormLayout fl = formSupport.getStandardLayout();
 		fsModuleInfo.setLayout(fl);

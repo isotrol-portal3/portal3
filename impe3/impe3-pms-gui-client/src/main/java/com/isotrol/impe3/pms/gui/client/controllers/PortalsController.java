@@ -28,9 +28,12 @@ import com.extjs.gxt.ui.client.data.ChangeEventSource;
 import com.extjs.gxt.ui.client.data.ChangeEventSupport;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.isotrol.impe3.pms.api.PropertyDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationItemDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
 import com.isotrol.impe3.pms.api.portal.BaseDTO;
 import com.isotrol.impe3.pms.api.portal.BasesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalCacheDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesDTO;
 import com.isotrol.impe3.pms.api.portal.PortalDevicesTemplateDTO;
@@ -346,6 +349,11 @@ public class PortalsController extends ChangeEventSupport implements IPortalsSer
 		service.getAvailableProperties(portalId, callback);
 	}
 
+	@Override
+	public void getPortalConfigurations(String portalId, AsyncCallback<List<PortalConfigurationSelDTO>> callback) {
+		service.getPortalConfigurations(portalId, callback);
+	}
+	
 	/**
 	 * (non-Javadoc)
 	 * @see com.isotrol.impe3.pms.gui.api.service.IPortalsServiceAsync#clearSetFilters(java.lang.String,
@@ -608,4 +616,53 @@ public class PortalsController extends ChangeEventSupport implements IPortalsSer
 	public void setPortalCache(PortalCacheDTO cache, AsyncCallback<Void> callback) {
 		service.setPortalCache(cache, callback);
 	}
+
+	@Override
+	public void getPortalConfiguration(String portalId, String beanName, AsyncCallback<ConfigurationTemplateDTO> callback) {
+		service.getPortalConfiguration(portalId, beanName, callback);
+	}
+
+	@Override
+	public void savePortalConfiguration(String id, String bean, final boolean inherited, List<ConfigurationItemDTO> confsDto,
+			final AsyncCallback<ConfigurationTemplateDTO> callback) {
+		
+		AsyncCallback<ConfigurationTemplateDTO> realCallback = new AsyncCallback<ConfigurationTemplateDTO>() {
+			public void onFailure(Throwable arg0) {
+				callback.onFailure(arg0);
+			}
+
+			public void onSuccess(ConfigurationTemplateDTO arg0) {
+				if (!inherited) {
+					int type = PmsChangeEvent.UPDATE;
+					PmsChangeEvent event = new PmsChangeEvent(type, arg0);
+					PortalsController.this.notify(event);
+				}
+				callback.onSuccess(arg0);
+			}
+		};
+		
+		service.savePortalConfiguration(id, bean, inherited, confsDto, realCallback);		
+	}
+
+	@Override
+	public void clearConfiguration(String id, String bean, final AsyncCallback<ConfigurationTemplateDTO> callback) {
+		AsyncCallback<ConfigurationTemplateDTO> realCallback = new AsyncCallback<ConfigurationTemplateDTO>() {
+			public void onFailure(Throwable arg0) {
+				callback.onFailure(arg0);
+			}
+
+			public void onSuccess(ConfigurationTemplateDTO arg0) {
+				int type = PmsChangeEvent.UPDATE;
+				
+				PmsChangeEvent event = new PmsChangeEvent(type, arg0);
+				PortalsController.this.notify(event);
+				callback.onSuccess(arg0);
+			}
+		};
+		
+		service.clearConfiguration(id, bean, realCallback);	
+	}
+	
 }
+
+
