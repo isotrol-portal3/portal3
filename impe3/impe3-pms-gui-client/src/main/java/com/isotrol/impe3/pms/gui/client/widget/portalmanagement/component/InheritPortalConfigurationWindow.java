@@ -1,37 +1,54 @@
+/**
+ * This file is part of Port@l
+ * Port@l 3.0 - Portal Engine and Management System
+ * Copyright (C) 2010  Isotrol, SA.  http://www.isotrol.com
+ *
+ * Port@l is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Port@l is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Port@l.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.isotrol.impe3.pms.gui.client.widget.portalmanagement.component;
-
-
 	
 
-	import java.util.LinkedList;
-	import java.util.List;
+import java.util.LinkedList;
+import java.util.List;
 
-	import com.extjs.gxt.ui.client.Style.Scroll;
-	import com.extjs.gxt.ui.client.event.ButtonEvent;
-	import com.extjs.gxt.ui.client.event.Listener;
-	import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-	import com.extjs.gxt.ui.client.event.SelectionListener;
-	import com.extjs.gxt.ui.client.widget.Component;
-	import com.extjs.gxt.ui.client.widget.Dialog;
-	import com.extjs.gxt.ui.client.widget.MessageBox;
-	import com.extjs.gxt.ui.client.widget.button.Button;
-	import com.google.gwt.user.client.rpc.AsyncCallback;
-	import com.google.inject.Inject;
-	import com.isotrol.impe3.gui.common.util.Buttons;
-	import com.isotrol.impe3.gui.common.util.Util;
-	import com.isotrol.impe3.gui.common.util.component.IDetailPanel;
-	import com.isotrol.impe3.gui.common.widget.TypicalWindow;
-	import com.isotrol.impe3.pms.api.component.InheritedComponentInstanceSelDTO;
-	import com.isotrol.impe3.pms.api.config.ConfigurationItemDTO;
-	import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
-	import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
-	import com.isotrol.impe3.pms.gui.api.service.IComponentsServiceAsync;
-	import com.isotrol.impe3.pms.gui.api.service.IPortalsServiceAsync;
-	import com.isotrol.impe3.pms.gui.client.util.PmsConstants;
-	import com.isotrol.impe3.pms.gui.client.util.PmsListeningStrategy;
-	import com.isotrol.impe3.pms.gui.client.widget.ConfigurationPanel;
-	import com.isotrol.impe3.gui.common.i18n.GuiCommonMessages;
-	import com.isotrol.impe3.pms.gui.client.i18n.PmsMessages;
+import com.extjs.gxt.ui.client.Style.Scroll;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.widget.Component;
+import com.extjs.gxt.ui.client.widget.Dialog;
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
+import com.isotrol.impe3.gui.common.util.Buttons;
+import com.isotrol.impe3.gui.common.util.Util;
+import com.isotrol.impe3.gui.common.util.component.IDetailPanel;
+import com.isotrol.impe3.gui.common.widget.TypicalWindow;
+import com.isotrol.impe3.pms.api.component.InheritedComponentInstanceSelDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationItemDTO;
+import com.isotrol.impe3.pms.api.config.ConfigurationTemplateDTO;
+import com.isotrol.impe3.pms.api.portal.PortalConfigurationSelDTO;
+import com.isotrol.impe3.pms.gui.api.service.IComponentsServiceAsync;
+import com.isotrol.impe3.pms.gui.api.service.IPortalsServiceAsync;
+import com.isotrol.impe3.pms.gui.client.util.PmsConstants;
+import com.isotrol.impe3.pms.gui.client.util.PmsListeningStrategy;
+import com.isotrol.impe3.pms.gui.client.widget.ConfigurationPanel;
+import com.isotrol.impe3.gui.common.i18n.GuiCommonMessages;
+import com.isotrol.impe3.pms.gui.client.i18n.PmsMessages;
 
 	public class InheritPortalConfigurationWindow extends TypicalWindow implements IDetailPanel {
 		
