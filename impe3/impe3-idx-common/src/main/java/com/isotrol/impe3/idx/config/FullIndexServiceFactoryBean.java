@@ -21,6 +21,9 @@ package com.isotrol.impe3.idx.config;
 
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
+import org.apache.lucene.analysis.Analyzer;
+
 import net.sf.lucis.core.Delays;
 import net.sf.lucis.core.FullIndexer;
 import net.sf.lucis.core.IndexerService;
@@ -28,8 +31,6 @@ import net.sf.lucis.core.ReindexingStore;
 import net.sf.lucis.core.ReindexingWriter;
 import net.sf.lucis.core.impl.DefaultReindexingWriter;
 import net.sf.lucis.core.impl.ReindexingIndexerService;
-
-import org.apache.lucene.analysis.Analyzer;
 
 
 /**
@@ -63,6 +64,8 @@ public final class FullIndexServiceFactoryBean extends AbstractIndexServiceFacto
 			}
 			s.start();
 			service = s;
+			// Register the index service
+			IndexServiceRegister.getInstance().getRegisters().put(s.getName(), s);
 		}
 	}
 	
