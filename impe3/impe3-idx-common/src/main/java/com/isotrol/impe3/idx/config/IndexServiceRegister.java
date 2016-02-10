@@ -20,11 +20,18 @@
 package com.isotrol.impe3.idx.config;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
 
+import net.sf.lucis.core.Indexer;
+import net.sf.lucis.core.Store;
+import net.sf.lucis.core.Writer;
 import net.sf.lucis.core.impl.AbstractIndexService;
+import net.sf.lucis.core.impl.DefaultWriter;
 
 
 /**
@@ -36,7 +43,9 @@ public final class IndexServiceRegister {
 	private static IndexServiceRegister instance = new IndexServiceRegister();
 	
 	/** Service map. */
-	private Map<String, AbstractIndexService> indexers = Maps.newHashMap();
+	private Map<String, List<Object>> indexers = Maps.newHashMap();
+	
+	
 	
 	private IndexServiceRegister() { 
 	}
@@ -53,9 +62,71 @@ public final class IndexServiceRegister {
 	 * get the register indexers.
 	 * @return
 	 */
-	public Map<String, AbstractIndexService> getRegisters() {
+	public Map<String, List<Object>> getRegisters() {
 		return indexers;
 	}
+	
+	public void setIndexers(String nameIdx, AbstractIndexService service, Store<?> store,IndexServiceDfn definition) {
+		List<Object> properties = new ArrayList<Object>();
+		properties.add(service);
+		//properties.add(writer);
+		properties.add(store);
+		properties.add(definition);
+		
+		indexers.put(nameIdx, properties);
+		
+	}
+	
+	public AbstractIndexService getIndexService(String key) {
+		AbstractIndexService ais = null;
+		
+		for(Object obj : indexers.get(key)) {
+			if(obj instanceof AbstractIndexService) {
+				ais= (AbstractIndexService) obj;
+			}
+		}
+		return ais;
+	}
+	
+	public IndexServiceDfn getDefinition(String key) {
+		IndexServiceDfn dw=null;
+		
+		for(Object obj:indexers.get(key)){
+			if(obj instanceof IndexServiceDfn){
+				dw= (IndexServiceDfn)obj;
+			}
+		}
+		return dw;
+		
+		
+	}
+	
+	public Store<?> getStore(String key) {
+		Store<?> store=null;
+		
+		for(Object obj:indexers.get(key)){
+			if(obj instanceof Store){
+				store= (Store<?>)obj;
+			}
+		}
+		return store;
+		
+		
+	}
+	
+	public Indexer<?, ?> getIndexer(String key) {
+		Indexer<?, ?> indexer=null;
+		
+		for(Object obj:indexers.get(key)){
+			if(obj instanceof Indexer){
+				indexer= (Indexer<?,?>)obj;
+			}
+		}
+		return indexer;
+		
+		
+	}
+	
 }
 
 

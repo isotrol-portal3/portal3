@@ -50,6 +50,7 @@ import com.isotrol.impe3.pms.gui.client.ioc.IPmsFactory;
 import com.isotrol.impe3.pms.gui.client.ioc.PmsFactory;
 import com.isotrol.impe3.pms.gui.client.util.EventCallback;
 import com.isotrol.impe3.pms.gui.client.widget.externalservices.CommentsExternalServiceManagement;
+import com.isotrol.impe3.pms.gui.client.widget.externalservices.IndexersManagement;
 import com.isotrol.impe3.pms.gui.client.widget.externalservices.NodesRepositoryManagement;
 import com.isotrol.impe3.pms.gui.client.widget.externalservices.PortalUsersManagement;
 import com.isotrol.impe3.pms.gui.client.widget.infarchitecture.categories.CategoryManagement;
@@ -108,7 +109,7 @@ public class PmsTabItemManager extends TabPanel implements ICenterWidget {
 
 	private static final List<String> SERVICES_MANAGEMENT_WIDGETS = Arrays.asList(new String[] {
 		PortalUsersManagement.class.toString(), NodesRepositoryManagement.class.toString(),
-		CommentsExternalServiceManagement.class.toString()});
+		CommentsExternalServiceManagement.class.toString(), IndexersManagement.class.toString()});
 
 	private static final List<String> MODULES_REGISTRY_WIDGETS = Arrays.asList(new String[] {
 		ComponentsPackagesView.class.toString(), ConnectorsView.class.toString(), InvalidModulesView.class.toString(),
@@ -468,6 +469,11 @@ public class PmsTabItemManager extends TabPanel implements ICenterWidget {
 			widget = usersManagement;
 		} else if (widgetClass.equals(NodesRepositoryManagement.class.toString())) {
 			NodesRepositoryManagement nrManagement = injector.getNodesRepositoryManagement();
+			nrManagement.init();
+			widget = nrManagement;
+			
+		} else if (widgetClass.equals(IndexersManagement.class.toString())) {
+			IndexersManagement nrManagement = injector.getIndexersManagement();
 			nrManagement.init();
 			widget = nrManagement;
 		} else if (widgetClass.equals(CommentsExternalServiceManagement.class.toString())) {

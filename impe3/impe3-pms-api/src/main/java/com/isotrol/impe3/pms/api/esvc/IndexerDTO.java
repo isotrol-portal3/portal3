@@ -19,52 +19,60 @@
 
 package com.isotrol.impe3.pms.api.esvc;
 
-import com.isotrol.impe3.pms.api.AbstractWithId;
+import com.isotrol.impe3.pms.api.AbstractDescribedWithId;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-import com.isotrol.impe3.pms.api.Described;
 
-import net.sf.lucis.core.IndexStatus;
-
-public class IndexerDTO extends AbstractWithId implements Described {
+public final class IndexerDTO extends AbstractDescribedWithId {//implements IsSerializable{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4870680008470132789L;
+	private static final long serialVersionUID = -6898975278968413984L;
 	
+	private String state;
+	private String type;
+	private String node;
+
+	public IndexerDTO() {		
+	}
+
+	public IndexerDTO(String id, String name, String description, String state, String type, String node) {
+		super();
+		this.setId(id);
+		this.setName(name);
+		this.setDescription(description);
+		this.state = state;
+		this.type = type;
+		this.node = node;
+	}
 
 	public enum Estado {
 		INICIADO,
 		PARADO,
 		REINDEXANDO;
 	
-	
-	
-	public String toString() {
-		if (this.equals(Estado.INICIADO)) {
-			return "Iniciado".toString();
-		} else if (this.equals(Estado.PARADO)) {
-			return "Parado".toString();
-		} else if (this.equals(Estado.REINDEXANDO)) {
-			return "Reindexando".toString();
-		}else{
-			return "";
+		public String toString() {
+			if (this.equals(Estado.INICIADO)) {
+				return "Iniciado".toString();
+			} else if (this.equals(Estado.PARADO)) {
+				return "Parado".toString();
+			} else if (this.equals(Estado.REINDEXANDO)) {
+				return "Reindexando".toString();
+			}else{
+				return "";
+			}
 		}
 	}
-	}
 
 	
-	private String name;
-	private String description;
-	private Estado state;
-	private String type;
-	private String node;
 
-	public Estado getState() {
+
+	public String getState() {
 		return state;
 	}
 
-	public void setState(Estado state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 
@@ -83,31 +91,4 @@ public class IndexerDTO extends AbstractWithId implements Described {
 	public void setNode(String node) {
 		this.node = node;
 	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return name;
-	}
-
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		this.name=name;
-		
-	}
-
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return description;
-	}
-
-	@Override
-	public void setDescription(String description) {
-		// TODO Auto-generated method stub
-		this.description=description;
-		
-	}
-
 }
