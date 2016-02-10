@@ -22,6 +22,9 @@ package com.isotrol.impe3.idx.config;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.lucene.analysis.Analyzer;
 
 import net.sf.lucis.core.Delays;
@@ -44,12 +47,19 @@ public final class IndexServiceFactoryBean extends AbstractIndexServiceFactoryBe
 	/** Service. */
 	private volatile DefaultIndexerService<?, ?> service = null;
 
+	private IndexServiceDfn definition = null;
+	
 	IndexServiceFactoryBean(Analyzer analyzer, Store<?> store, Indexer<?, ?> indexer) {
 		super(analyzer);
 		this.store = checkNotNull(store, "The store must be provided");
-		this.indexer = checkNotNull(indexer, "The indexer must be provided");
+		this.indexer = checkNotNull(indexer, "The indexer must be provided");		
 	}
 
+	IndexServiceFactoryBean(Analyzer analyzer, Store<?> store, Indexer<?, ?> indexer, IndexServiceDfn definition) {
+		this(analyzer, store, indexer);
+		this.definition = definition;
+	}
+	
 	public synchronized void afterPropertiesSet() throws Exception {
 		if (service == null) {
 			final DefaultWriter writer = new DefaultWriter(getSupplier());
@@ -62,11 +72,43 @@ public final class IndexServiceFactoryBean extends AbstractIndexServiceFactoryBe
 			if (d != null) {
 				s.setDelays(d);
 			}
+		
 			s.start();
 			service = s;
-			// Register the index service
-			IndexServiceRegister.getInstance().getRegisters().put(s.getName(), s);
+			
+			if (this.definition == null) {
+				// Inicializa la definicion del servicio con valores por defecto
+				String nameIdx=this.getName();
+				String descIdx="indexador "+nameIdx;
+				String modeIdx;
+				if(nameIdx.contains("off")){
+					modeIdx="Offline";
+				}else{
+					modeIdx="Online";
+				}
+				
+				this.definition = new IndexServiceDfn(nameIdx, modeIdx, descIdx);
+			}
+			
+			// Register the index service		
+			IndexServiceRegister.getInstance().setIndexers(s.getName(), s, store, definition);
 		}
+	}
+
+	public DefaultIndexerService<?, ?> getService() {
+		return service;
+	}
+
+	public void setService(DefaultIndexerService<?, ?> service) {
+		this.service = service;
+	}
+
+	public Store<?> getStore() {
+		return store;
+	}
+
+	public Indexer<?, ?> getIndexer() {
+		return indexer;
 	}
 
 	public IndexerService getObject() throws Exception {

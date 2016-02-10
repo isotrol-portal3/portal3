@@ -70,6 +70,10 @@
 		<property name="service" ref="nodeRepositoryExternalService" />
 	</bean>
 	
+	<bean id="indexersServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
+		<property name="service" ref="indexersService" />
+	</bean>
+	
 	<bean id="devicesServiceExporter" class="org.gwtwidgets.server.spring.GWTRPCServiceExporter">
 		<property name="service" ref="devicesService" />
 	</bean>
@@ -100,6 +104,7 @@
 				<entry key="/pmsrpc/ExternalServicesService" value-ref="externalServicesServiceExporter" />
 				<entry key="/pmsrpc/PortalUsersExternalService" value-ref="portalUsersExternalServiceExporter" />
 				<entry key="/pmsrpc/NodeRepositoryExternalService" value-ref="nodeRepositoryExternalServiceExporter" />
+				<entry key="/pmsrpc/IndexersService" value-ref="indexersServiceExporter" />
 				<entry key="/pmsrpc/DevicesService" value-ref="devicesServiceExporter" />
 				<entry key="/pmsrpc/CommentsExternalService" value-ref="commentsExternalServiceExporter" />
 			</map>

@@ -46,6 +46,7 @@ import com.isotrol.impe3.pms.gui.api.service.IContentTypesServiceAsync;
 import com.isotrol.impe3.pms.gui.api.service.IDevicesServiceAsync;
 import com.isotrol.impe3.pms.gui.api.service.IEditionsServiceAsync;
 import com.isotrol.impe3.pms.gui.api.service.IExternalServicesServiceAsync;
+import com.isotrol.impe3.pms.gui.api.service.IIndexerServiceAsync;
 import com.isotrol.impe3.pms.gui.api.service.IModuleRegistryServiceAsync;
 import com.isotrol.impe3.pms.gui.api.service.IPagesServiceAsync;
 import com.isotrol.impe3.pms.gui.api.service.IPortalsServiceAsync;
@@ -81,6 +82,7 @@ import com.isotrol.impe3.pms.gui.client.ioc.sp.ContentTypesServiceProvider;
 import com.isotrol.impe3.pms.gui.client.ioc.sp.DevicesServiceProvider;
 import com.isotrol.impe3.pms.gui.client.ioc.sp.EditionsServiceProvider;
 import com.isotrol.impe3.pms.gui.client.ioc.sp.ExternalServicesServiceProvider;
+import com.isotrol.impe3.pms.gui.client.ioc.sp.IndexerServiceProvider;
 import com.isotrol.impe3.pms.gui.client.ioc.sp.ModulesRegistryServiceProvider;
 import com.isotrol.impe3.pms.gui.client.ioc.sp.NodeRepositoryExternalServiceProvider;
 import com.isotrol.impe3.pms.gui.client.ioc.sp.PagesServiceProvider;
@@ -261,6 +263,7 @@ public class PmsGinModule extends AbstractGinModule {
 		bind(ISessionsServiceAsync.class).toProvider(SessionsServiceProvider.class).in(Singleton.class);
 		bind(ISourceMappingsServiceAsync.class).toProvider(SourceMappingsServiceProvider.class).in(Singleton.class);
 		bind(IExternalServicesServiceAsync.class).toProvider(ExternalServicesServiceProvider.class).in(Singleton.class);
+		bind(IIndexerServiceAsync.class).toProvider(IndexerServiceProvider.class).in(Singleton.class);
 		bind(IUsersServiceAsync.class).toProvider(UsersServiceProvider.class).in(Singleton.class);
 		bind(INodeRepositoryExternalServiceAsync.class).toProvider(NodeRepositoryExternalServiceProvider.class).in(
 			Singleton.class);

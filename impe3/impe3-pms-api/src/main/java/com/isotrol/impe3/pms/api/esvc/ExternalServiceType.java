@@ -30,5 +30,7 @@ public enum ExternalServiceType {
 	/** Node repository service. */
 	NODE_REPOSITORY,
 	/** Comments. */
-	COMMENTS
+	COMMENTS,
+	/** Indexer nodes */
+	INDEXER_REPOSITORY
 }

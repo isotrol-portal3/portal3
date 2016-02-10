@@ -166,6 +166,10 @@
 		<module>impe3-idx-opencms7</module>
 		<module>impe3-palette-oc7</module>
 		<module>impe3-idx-opencms5</module>
+		<module>impe3-idx-rest-server</module>
+		<module>impe3-idx-rest-client</module>
+		
+		
 	</modules>
 
 	<profiles>

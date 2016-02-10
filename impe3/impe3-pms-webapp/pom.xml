@@ -30,6 +30,12 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.isotrol.impe3.indexers</groupId>
+			<artifactId>impe3-idx-rest-client</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.0.4</version>
