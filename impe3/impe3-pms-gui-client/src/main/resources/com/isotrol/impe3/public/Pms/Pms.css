@@ -87,6 +87,10 @@ body {
 	background: url('img/menu-icons/nr.gif') no-repeat;
 }
 
+.menu-icon-ir {
+	background: url('img/indexers.png') no-repeat;
+}
+
 .menu-icon-comments {
 	background: url('img/menu-icons/comment.gif') no-repeat;
 }
@@ -227,6 +231,21 @@ table.x-btn {
 
 .icon-manage-portal-users {
 	background: transparent url('img/account_settings.gif') no-repeat scroll left !important;
+}
+
+.icon-reindex {
+	background: transparent url('img/reindexer.png') no-repeat scroll left !important;
+}
+
+.icon-force-reindex {
+	background: transparent url('img/forceIndexer.png') no-repeat scroll left !important;
+}
+
+.icon-check-well{
+	background: transparent url('img/startIndexing.png') no-repeat scroll left !important;
+}
+.icon-check-not-well{
+	background: transparent url('img/correctness-icons/ko.gif') no-repeat scroll left !important;	
 }
 
 .icon-manage-nodes-repository {

@@ -66,6 +66,9 @@ public final class PmsUtil {
 	 * Visibility of Nodes Repository menu
 	 */
 	private boolean nodeRepositoryVisible = true;
+	
+	
+	private boolean IndexersServiceVisible=true;
 
 	/**
 	 * Visibility of Portal Users Service menu
@@ -253,6 +256,10 @@ public final class PmsUtil {
 	 */
 	public boolean isNodeRepositoryVisible() {
 		return nodeRepositoryVisible;
+	}
+	
+	public boolean isIndexersServiceVisible(){
+		return IndexersServiceVisible;
 	}
 
 	/**

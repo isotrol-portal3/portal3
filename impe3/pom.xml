@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>impe3-maven</artifactId>
 		<groupId>com.isotrol.impe3.maven</groupId>
-		<version>3.1.0</version>
+		<version>3.1.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.isotrol.impe3</groupId>
@@ -11,7 +11,7 @@
 	<packaging>pom</packaging>
 	<name>Port@l 3.0 :: Main project</name>
 	<description>Isotrol Port@l 3.0 Portal Management Platform</description>
-	<version>3.1.0</version>
+	<version>3.1.1-SNAPSHOT</version>
 
 	<scm>
 		<connection>scm:git:https://code.google.com/p/isotrol-portal.p3/</connection>
@@ -166,6 +166,10 @@
 		<module>impe3-idx-opencms7</module>
 		<module>impe3-palette-oc7</module>
 		<module>impe3-idx-opencms5</module>
+		<module>impe3-idx-rest-server</module>
+		<module>impe3-idx-rest-client</module>
+		
+		
 	</modules>
 
 	<profiles>

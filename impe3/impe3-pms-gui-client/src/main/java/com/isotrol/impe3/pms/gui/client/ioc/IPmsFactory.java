@@ -39,6 +39,7 @@ import com.isotrol.impe3.pms.gui.client.widget.design.FrameComponent;
 import com.isotrol.impe3.pms.gui.client.widget.design.NorthPanel;
 import com.isotrol.impe3.pms.gui.client.widget.design.PalettesPanel;
 import com.isotrol.impe3.pms.gui.client.widget.externalservices.CommentsExternalServiceManagement;
+import com.isotrol.impe3.pms.gui.client.widget.externalservices.IndexersManagement;
 import com.isotrol.impe3.pms.gui.client.widget.externalservices.NodesRepositoryManagement;
 import com.isotrol.impe3.pms.gui.client.widget.externalservices.PortalUsersManagement;
 import com.isotrol.impe3.pms.gui.client.widget.infarchitecture.LocalesMappingWindow;
@@ -791,4 +792,6 @@ public interface IPmsFactory extends Ginjector {
 	PortalConfigurationWindow getPortalConfigurationWindow();
 	
 	InheritPortalConfigurationWindow getInheritPortalConfigurationWindow();
+	
+	IndexersManagement getIndexersManagement();
 }

@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.1.0</version>
+		<version>3.1.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>impe3-pms-webapp-deps</artifactId>
 	<packaging>pom</packaging>
@@ -12,17 +12,22 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-web-pms</artifactId>
-			<version>3.1.0</version>
+			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-pms-gui-client</artifactId>
-			<version>3.1.0</version>
+			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-palette</artifactId>
-			<version>3.1.0</version>
+			<version>3.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3.indexers</groupId>
+			<artifactId>impe3-idx-rest-client</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -41,6 +41,7 @@ import com.isotrol.impe3.pms.api.PMSException;
 import com.isotrol.impe3.pms.api.esvc.ExternalServiceDTO;
 import com.isotrol.impe3.pms.api.esvc.ExternalServiceType;
 import com.isotrol.impe3.pms.api.esvc.ExternalServicesService;
+import com.isotrol.impe3.pms.api.esvc.IndexersService;
 import com.isotrol.impe3.pms.core.obj.ConnectorObject;
 import com.isotrol.impe3.pms.core.obj.ContextGlobal;
 import com.isotrol.impe3.pms.core.obj.Provider;
@@ -68,6 +69,9 @@ public final class ExternalServicesServiceImpl extends AbstractContextService im
 		m.put(ExternalServiceType.USERS, PortalUsersService.class);
 		m.put(ExternalServiceType.NODE_REPOSITORY, NodeRepository.class);
 		m.put(ExternalServiceType.COMMENTS, CommentsService.class);
+		m.put(ExternalServiceType.INDEXER_REPOSITORY,IndexersService.class);
+		// TODO ZINEB --> Poner la interfaz del nuevo servicio... EL DEL CONECTOR
+		//m.put(ExternalServiceType.INDEXER_REPOSITORY, restinde.class); (RESTINDEXERSERVICE.CLASS,TAMBIEN PONER LA DEPENDENCIA DEL PROYECTO DEL OTRO(CONECTOR CREADO))
 		TYPES = Collections.unmodifiableMap(m);
 	}
 

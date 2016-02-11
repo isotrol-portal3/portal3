@@ -21,15 +21,18 @@ package com.isotrol.impe3.idx.config;
 
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
+import org.apache.lucene.analysis.Analyzer;
+
 import net.sf.lucis.core.Delays;
 import net.sf.lucis.core.FullIndexer;
+import net.sf.lucis.core.Indexer;
 import net.sf.lucis.core.IndexerService;
 import net.sf.lucis.core.ReindexingStore;
 import net.sf.lucis.core.ReindexingWriter;
+import net.sf.lucis.core.Store;
 import net.sf.lucis.core.impl.DefaultReindexingWriter;
 import net.sf.lucis.core.impl.ReindexingIndexerService;
-
-import org.apache.lucene.analysis.Analyzer;
 
 
 /**
@@ -43,11 +46,18 @@ public final class FullIndexServiceFactoryBean extends AbstractIndexServiceFacto
 	private final FullIndexer<?> indexer;
 	/** Service. */
 	private volatile ReindexingIndexerService<?> service = null;
+	
+	private IndexServiceDfn definition = null;
 
 	FullIndexServiceFactoryBean(Analyzer analyzer, ReindexingStore store, FullIndexer<?> indexer) {
 		super(analyzer);
 		this.store = checkNotNull(store, "The store must be provided");
 		this.indexer = checkNotNull(indexer, "The indexer must be provided");
+	}
+	
+	FullIndexServiceFactoryBean(Analyzer analyzer,  ReindexingStore store, FullIndexer<?> indexer, IndexServiceDfn definition) {
+		this(analyzer, store, indexer);
+		this.definition = definition;
 	}
 
 	public synchronized void afterPropertiesSet() throws Exception {
@@ -63,6 +73,22 @@ public final class FullIndexServiceFactoryBean extends AbstractIndexServiceFacto
 			}
 			s.start();
 			service = s;
+			if (this.definition == null) {
+				// Inicializa la definicion del servicio con valores por defecto
+				String nameIdx=this.getName();
+				String descIdx="indexador "+nameIdx;
+				String modeIdx;
+				if(nameIdx.contains("off")){
+					modeIdx="Offline";
+				}else{
+					modeIdx="Online";
+				}
+				
+				this.definition = new IndexServiceDfn(nameIdx, modeIdx, descIdx);
+			}
+			
+			// Register the index service		
+			IndexServiceRegister.getInstance().setIndexers(s.getName(), s, null, definition);
 		}
 	}
 	

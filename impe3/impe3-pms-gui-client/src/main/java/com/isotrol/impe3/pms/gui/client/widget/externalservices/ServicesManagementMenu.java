@@ -53,6 +53,9 @@ public class ServicesManagementMenu extends AManagementMenu {
 	 * "Nodes Repository" item ID.<br/>
 	 */
 	private static final String ID_MI_NODES_REPOSITORY_SERVICES = "mi2_nodes_repository";
+	
+	
+	private static final String ID_MI_INDEXADORES_SERVICE = "mi2_servicio_indexadores";
 
 	/**
 	 * "Nodes Repository" item ID.<br/>
@@ -125,6 +128,11 @@ public class ServicesManagementMenu extends AManagementMenu {
 				.menuIconNodesRepository(), ID_MI_NODES_REPOSITORY_SERVICES);
 			adminMenuList.getStore().add(itemNr);
 		}
+		//indexers management
+		if (getPmsUtil().isIndexersServiceVisible()) {
+			MenuItemModelData itemNr = new MenuItemModelData(pmsMessages.menuItem2Indexers(), getPmsStyles().menuIconIndexersRepository(), ID_MI_INDEXADORES_SERVICE);
+			adminMenuList.getStore().add(itemNr);
+		}
 
 		// comments service
 		if (getPmsUtil().isCommentsServiceVisible()) {
@@ -150,12 +158,16 @@ public class ServicesManagementMenu extends AManagementMenu {
 		} else if (type.equals(ID_MI_NODES_REPOSITORY_SERVICES)) {
 			clazz = NodesRepositoryManagement.class.toString();
 			title = pmsMessages.menuItem2NodesRepository();
+		}else if (type.equals(ID_MI_INDEXADORES_SERVICE)){
+			clazz = IndexersManagement.class.toString();
+			title = pmsMessages.menuItem2Indexers();
+		
 		} else if (type.equals(ID_MI_COMMENT_SERVICES)) {
 			clazz = CommentsExternalServiceManagement.class.toString();
 			title = pmsMessages.menuItem2Comments();
-		}
+		} 
 		getTabItemManager().closeAllAndAddWidget(clazz, data, title);
-	}
+}
 
 	@Override
 	public ListView<MenuItemModelData> getMenuListView() {

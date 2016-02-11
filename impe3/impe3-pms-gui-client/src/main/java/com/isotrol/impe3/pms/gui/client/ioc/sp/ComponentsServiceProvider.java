@@ -22,6 +22,7 @@
  */
 package com.isotrol.impe3.pms.gui.client.ioc.sp;
 
+import com.extjs.gxt.ui.client.widget.MessageBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.isotrol.impe3.pms.gui.api.service.IComponentsService;
@@ -48,7 +49,7 @@ public class ComponentsServiceProvider extends
 		ServiceDefTarget comEndpoint = (ServiceDefTarget) serviceProxy;
 		comEndpoint.setServiceEntryPoint(getRpcBaseUrl()
 				+ getSettings().componentsServiceUrlMapping());
-
+		
 		ComponentsController serviceController = new ComponentsController(
 				serviceProxy);
 
