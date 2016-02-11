@@ -37,6 +37,10 @@ import com.isotrol.impe3.pms.api.esvc.IndexersDTO;
 import net.sf.lucis.core.Store;
 import net.sf.lucis.core.impl.AbstractIndexService;
 
+/**
+ * Indexer sevices manager.
+ * @author Zineb Ghamiri
+ */
 @Component
 public class IndexersManager {
 	
@@ -45,7 +49,7 @@ public class IndexersManager {
 	}
 
 	/**
-	 * 
+	 * Obtain list of indexers services.
 	 * @return
 	 */
 	public IndexersDTO getIndexers(){
@@ -61,6 +65,12 @@ public class IndexersManager {
 		
 		return listaIndexadores;
 	}
+	
+	/**
+	 * Stop the indexer with id equal 'name'.
+	 * @param name
+	 * @return
+	 */
 	public IndexerDTO stop(String name){
 		AbstractIndexService indexador= IndexServiceRegister.getInstance().getIndexService(name);
 		indexador.stop();
@@ -70,6 +80,11 @@ public class IndexersManager {
 		
 	}
 	
+	/**
+	 * Start the indexer with id equal 'name'.
+	 * @param name
+	 * @return
+	 */
 	public IndexerDTO start(String name){
 		AbstractIndexService indexador= IndexServiceRegister.getInstance().getIndexService(name);
 		indexador.start();
@@ -79,6 +94,11 @@ public class IndexersManager {
 		
 	}
 	
+	/**
+	 * Restart the indexation task.
+	 * @param name
+	 * @return
+	 */
 	public IndexerDTO reindex(String name){
 		AbstractIndexService indexador= IndexServiceRegister.getInstance().getIndexService(name);
 		indexador.stop();
@@ -89,29 +109,35 @@ public class IndexersManager {
 		
 	}
 	
+	/**
+	 * Launch a full indexation.
+	 * @param name
+	 * @param copia
+	 * @return
+	 */
 	public IndexerDTO reindexAll(String name, boolean copia) {
 		AbstractIndexService indexador= IndexServiceRegister.getInstance().getIndexService(name);
 		
 		indexador.stop();
-		
-		
 		try {
-			
 			Store<?> store = IndexServiceRegister.getInstance().getStore(name);
-			String[] fileNames = store.getDirectory().listAll();
-			if(copia){
-				if(IndexServiceRegister.getInstance().getStore(name).getDirectory() instanceof FSDirectory){
-					File backup = new File(((FSDirectory) store.getDirectory()).getDirectory().getAbsolutePath().concat("-backup"));
-					Directory to = FSDirectory.open(backup);
-					for (String file : fileNames) {
-						
-						store.getDirectory().copy(to, file, file);
-						store.getDirectory().deleteFile(file);
+			
+			if (store != null && store.getDirectory() != null) {
+				String[] fileNames = store.getDirectory().listAll();
+				if (copia) {
+					if(IndexServiceRegister.getInstance().getStore(name).getDirectory() instanceof FSDirectory){
+						File backup = new File(((FSDirectory) store.getDirectory()).getDirectory().getAbsolutePath().concat("-backup"));
+						Directory to = FSDirectory.open(backup);
+						for (String file : fileNames) {
+							
+							store.getDirectory().copy(to, file, file);
+							store.getDirectory().deleteFile(file);
+						}
 					}
-				}
-			}else{			
-				for (String fileName : fileNames) {
-					store.getDirectory().deleteFile(fileName);
+				} else {			
+					for (String fileName : fileNames) {
+						store.getDirectory().deleteFile(fileName);
+					}
 				}
 			}
 		} catch (IOException e) {
@@ -123,6 +149,11 @@ public class IndexersManager {
 		
 	}
 	
+	/**
+	 * Build indexer service dto.
+	 * @param name
+	 * @return
+	 */
 	public IndexerDTO getDTO(String name){
 		
 		AbstractIndexService indexador=IndexServiceRegister.getInstance().getIndexService(name);
