@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.1.0</version>
+		<version>3.1.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.isotrol.impe3.extensions</groupId>
 	<artifactId>impe3-pms-ldap</artifactId>
-	<version>3.1.0</version>
+	<version>3.1.1-SNAPSHOT</version>
 	<name>Port@l 3.0 :: PMS :: Extensions :: LDAP</name>
 
 
@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-pms-ext-api</artifactId>
-			<version>3.1.0</version>
+			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
