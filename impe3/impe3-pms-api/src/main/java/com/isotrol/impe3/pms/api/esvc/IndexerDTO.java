@@ -20,7 +20,6 @@
 package com.isotrol.impe3.pms.api.esvc;
 
 import com.isotrol.impe3.pms.api.AbstractDescribedWithId;
-import com.google.gwt.user.client.rpc.IsSerializable;
 
 
 public final class IndexerDTO extends AbstractDescribedWithId {//implements IsSerializable{
