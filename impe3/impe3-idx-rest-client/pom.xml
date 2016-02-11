@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>impe3</artifactId>
+		<groupId>com.isotrol.impe3</groupId>
+		<version>3.1.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.isotrol.impe3.indexers</groupId>
+	<artifactId>impe3-idx-rest-client</artifactId>
+	<name>IMPE3 :: Idx :: Rest :: Client</name>
+	<dependencies>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-api</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-pms-api</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-test</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3.tickets</groupId>
+			<artifactId>impe3-tickets-jersey</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+		</dependency>
+		<dependency>
+		<groupId>com.isotrol.impe3.indexers</groupId>
+		<artifactId>impe3-idx-rest-server</artifactId>
+		<version>3.1.1-SNAPSHOT</version> 		
+	</dependency>
+	</dependencies>
+</project>
