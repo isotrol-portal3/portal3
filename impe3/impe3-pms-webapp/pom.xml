@@ -1,0 +1,215 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>impe3</artifactId>
+		<groupId>com.isotrol.impe3</groupId>
+		<version>3.1.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>impe3-pms-webapp</artifactId>
+	<packaging>war</packaging>
+	<name>IMPE3 :: PMS :: Webapp</name>
+	<url>http://www.isotrol.com</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-web-pms</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-pms-gui-client</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-palette</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-idx-rest-client</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.0.4</version>
+		</dependency>
+	</dependencies>
+	<inceptionYear>2009</inceptionYear>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+		<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<!-- This execution must be defined 
+							 only if using Hosted Mode + Tomcat (GWT 1.5.3) -->
+						<id>copy-spring-resources</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>process-resources</phase>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<!-- MAVEN-WEBTOOLKIT's WEB-INF dir -->
+							<resources>
+								<resource>
+									<directory>src/main/webapp/WEB-INF</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+<!--						directory to copy the .xml resources into:	-->						
+							<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<directory>${basedir}/src/main/webresources</directory>
+						</resource>
+						<resource>
+							<filtering>false</filtering>
+							<directory>${basedir}/src/main/resources</directory>
+						</resource>
+					</webResources>
+					<warSourceExcludes>${project.build.directory}/${project.artifactId}/.gwt-tmp/**</warSourceExcludes>
+				</configuration>
+			</plugin>
+			<!--  configure the GWT-Maven plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<configuration>
+					<!-- Select the place where GWT application is built. 
+						In inplace mode, the warSourceDirectory is used to match the same use case 
+						of the war plugin. Default value is: false. -->
+					<inplace>false</inplace>
+					<!-- Always compile. -->
+					<force>true</force>
+					<!-- Location of the hosted-mode web application structure. 
+						 Default value is: ${basedir}/war -->
+					<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+					<!--
+						Create readable Javascript code. Comment this line for compact
+						Javascript output (or use value OBF) Available values:
+						OBF[USCATED], PRETTY, DETAILED Recommended value for production:
+						OBF.
+					-->
+					<style>PRETTY</style>
+					<!--
+						-Xss => 4MB stack size avoids a stack overflow exception during compile 
+						-Dgwt.jjs.permutationWorkerFactory => avoids an annoying
+							compile error when trying to use a socket-base worker factory.
+					-->
+					<extraJvmArgs>-Xmx512m -Xss4096k -Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
+					<gwtVersion>${gwtVersion}</gwtVersion>
+					<modules>
+						<module>${gwtModuleName}</module>
+					</modules>
+					<runTarget>${gwtModuleName}/Pms.html</runTarget>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--
+				(this is a replacement for the old "automatic" mode - useful if you
+				don't have GWT installed already, or you just want a maven way to
+				handle gwt deps)
+			-->
+		</plugins>
+	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>gwt-maven-plugins</id>
+			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/
+			</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>gwt-maven</id>
+			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/</url>
+		</repository>
+	</repositories>
+
+	<profiles>
+		
+		<!-- Debug profiles: 
+		 if using "debug", the GWT Debug Panel will be included -->
+		<profile>
+			<!-- includes in PMS the GWT debug panel, and a log panel. -->
+			<id>debug</id>
+			
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			
+			<build>
+				<plugins>
+					<!--  configure the GWT-Maven plugin -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>gwt-maven-plugin</artifactId>
+						<configuration>
+							<!-- Select the place where GWT application is built. 
+								In inplace mode, the warSourceDirectory is used to match the same use case 
+								of the war plugin. Default value is: false. -->
+							<inplace>false</inplace>
+							<!-- Always compile. -->
+							<force>true</force>
+							<!-- Location of the hosted-mode web application structure. 
+								 Default value is: ${basedir}/war -->
+							<hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+							<!-- 4MB stack size avoids a stack overflow exception during compile -->
+							<extraJvmArgs>-Xmx512m -Xss4096k -Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
+							<gwtVersion>${gwtVersion}</gwtVersion>
+							<modules>
+								<module>${gwtModuleName}</module>
+								<module>com.isotrol.impe3.PmsDebugPanel</module>
+							</modules>
+							<runTarget>${gwtModuleName}/Pms.html</runTarget>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>compile</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile> 
+	</profiles>
+
+	<properties>
+		<gwtModuleName>com.isotrol.impe3.Pms</gwtModuleName>
+	</properties>
+
+</project>
