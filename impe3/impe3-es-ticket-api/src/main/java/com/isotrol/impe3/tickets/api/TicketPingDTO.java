@@ -22,6 +22,7 @@ import java.io.Serializable;
 
 public class TicketPingDTO implements Serializable {
 
+	
 	/**
 	 * 
 	 */
