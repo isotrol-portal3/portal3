@@ -300,8 +300,9 @@ public abstract class ModuleObject extends AbstractIdentifiable implements WithC
 		return isError() || !deps.extra.isEmpty() || (configuration != null && configuration.isWarning());
 	}
 
+	
 	public boolean isPortalConfigurationError() {
-		return portalConfiguration == null || portalConfiguration.isError();
+		return portalConfiguration != null && portalConfiguration.isError();
 	}
 	
 	public Correctness getCorrectness() {

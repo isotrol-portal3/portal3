@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="impe3-idx-rest-war">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module archiveName="impe3-idx-rest-server-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-idx-rest-server/impe3-idx-rest-server">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-idx-common-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-idx-common/impe3-idx-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-mapping-api-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-mapping-api/impe3-mapping-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-nr-core-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-nr-core/impe3-nr-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-nr-api-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-nr-api/impe3-nr-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-pms-api-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-pms-api/impe3-pms-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-users-api-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-users-api/impe3-users-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-pms-ext-api-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-pms-ext-api/impe3-pms-ext-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-api-base-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-api-base/impe3-api-base">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-es-common-server-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-es-common-server/impe3-es-common-server">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-hib-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-hib/impe3-hib">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-dto-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-dto/impe3-dto">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-es-web20-api-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-es-web20-api/impe3-es-web20-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-content-api-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-content-api/impe3-content-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-lucene-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-lucene/impe3-lucene">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-tickets-jersey-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-tickets-jersey/impe3-tickets-jersey">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="impe3-es-ticket-api-3.1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/impe3-es-ticket-api/impe3-es-ticket-api">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/impe3-idx-rest-war/target/classes"/>
+        <property name="context-root" value="impe3-idx-rest-war"/>
+    </wb-module>
+</project-modules>

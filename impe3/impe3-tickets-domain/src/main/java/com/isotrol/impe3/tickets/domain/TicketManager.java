@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.UUID;
 
 
+
 /**
  * Interface for the ticket manager.
  * @author Andres Rodriguez
@@ -47,4 +48,11 @@ public interface TicketManager {
 	 * @throws IllegalArgumentException if the subject is not found.
 	 */
 	Ticket consume(String subject, UUID id);
+	
+	/**
+	 * Return subject id.
+	 * @param subject Ticket subject.
+	 * @return subject id.
+	 */
+	 boolean hasSubject(String subject);
 }

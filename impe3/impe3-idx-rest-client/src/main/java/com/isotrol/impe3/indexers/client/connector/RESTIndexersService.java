@@ -20,8 +20,6 @@
 package com.isotrol.impe3.indexers.client.connector;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.util.StringUtils;
 
 import com.isotrol.impe3.dto.ServiceException;
@@ -37,7 +35,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 
 	/**
-	 * Jersey client-based tickets service implementation.
+	 * Jersey client-based indexer service implementation.
 	 * @author Zineb GHAMIRI
 	 */
 	public class RESTIndexersService  implements IndexersService{
