@@ -16,21 +16,35 @@
  * You should have received a copy of the GNU General Public License
  * along with Port@l.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.isotrol.impe3.tickets.api;
 
-package com.isotrol.impe3.pms.api.esvc;
+import java.io.Serializable;
+
+public class TicketPingDTO implements Serializable {
+
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private String asunto;
+	
+	
+	public TicketPingDTO(String asunto){
+		this.setAsunto(asunto);
+	}
 
 
-/**
- * Enumeration of the external services manageable from the PMS.
- * @author Andres Rodriguez
- */
-public enum ExternalServiceType {
-	/** Users service. */
-	USERS,
-	/** Node repository service. */
-	NODE_REPOSITORY,
-	/** Comments. */
-	COMMENTS,
-	/** Indexer nodes */
-	INDEXER_REPOSITORY
+	public String getAsunto() {
+		return asunto;
+	}
+
+
+	public void setAsunto(String asunto) {
+		this.asunto = asunto;
+	}
+	
+	
+
 }

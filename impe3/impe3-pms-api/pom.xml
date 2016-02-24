@@ -14,6 +14,11 @@
 			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+      		<groupId>com.google.gwt</groupId>
+      		<artifactId>gwt-user</artifactId>
+      		<scope>provided</scope>
+   	    </dependency>
+		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-es-web20-api</artifactId>
 			<version>3.1.1-SNAPSHOT</version>
@@ -23,6 +28,11 @@
 			<artifactId>impe3-pms-ext-api</artifactId>
 			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.isotrol.impe3</groupId>
+			<artifactId>impe3-idx-common</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+		</dependency>	
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-api-base</artifactId>

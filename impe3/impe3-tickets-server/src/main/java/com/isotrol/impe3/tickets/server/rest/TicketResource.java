@@ -35,10 +35,10 @@ import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.google.common.collect.ImmutableMap;
 import com.isotrol.impe3.tickets.api.CreatedTicketDTO;
 import com.isotrol.impe3.tickets.api.NewTicketDTO;
+import com.isotrol.impe3.tickets.api.TicketPingDTO;
 import com.isotrol.impe3.tickets.domain.Ticket;
 import com.isotrol.impe3.tickets.domain.TicketConstraints;
 import com.isotrol.impe3.tickets.domain.TicketManager;
@@ -106,4 +106,21 @@ public class TicketResource {
 			return error(1);
 		}
 	}
+	
+	@GET
+	@Path("ping")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response ping(@PathParam("subject") String subject) {
+			boolean t = ticketManager.hasSubject(subject);
+			if (!t) {
+				return error(1);
+			}else{
+				return Response.ok(new TicketPingDTO(subject)).build();
+			}
+		
+	}
 }
+			
+		
+

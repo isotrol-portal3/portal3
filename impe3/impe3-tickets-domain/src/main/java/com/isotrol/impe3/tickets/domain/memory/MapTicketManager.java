@@ -92,4 +92,10 @@ public final class MapTicketManager implements TicketManager {
 		}
 
 	}
+
+	public boolean hasSubject(String subject) {
+		checkNotNull(subject);
+		final Subject subjectId = subjects.getUnchecked(subject);
+		return (subjectId != null);
+	}
 }

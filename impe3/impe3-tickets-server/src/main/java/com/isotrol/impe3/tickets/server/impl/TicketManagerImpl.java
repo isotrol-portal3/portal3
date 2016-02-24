@@ -92,5 +92,15 @@ public final class TicketManagerImpl extends AbstractService<DAO> implements Tic
 		}
 		return t.consume();
 	}
+	
+	/**
+	 * @see com.isotrol.impe3.tickets.domain.TicketManager#hasSubject(java.lang.String)
+	 */
+	@Transactional(rollbackFor = Throwable.class)
+	public boolean hasSubject(String subject) {
+		checkNotNull(subject);
+		final UUID subjectId = subjectManager.getSubject(subject);
+		return (subjectId != null);
+	}
 
 }
