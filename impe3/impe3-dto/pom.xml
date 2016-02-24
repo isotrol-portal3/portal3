@@ -2,7 +2,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.1.1-SNAPSHOT</version>
+		<version>3.1.1</version>
 	</parent>
 	<name>Port@l 3.0 :: External APIs :: DTO</name>
 	<modelVersion>4.0.0</modelVersion>

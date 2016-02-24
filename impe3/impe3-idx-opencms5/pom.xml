@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.1.1-SNAPSHOT</version>
+		<version>3.1.1</version>
 	</parent>
 	<artifactId>impe3-idx-opencms5</artifactId>
 	<name>IMPE3 :: OpenCms :: IDX :: OpenCms5</name>
@@ -11,27 +11,27 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-nr-core</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
+			<version>3.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-nr-api</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
+			<version>3.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-idx-common</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
+			<version>3.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-idx-opencms-common</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
+			<version>3.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-idx-opencms-api</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
+			<version>3.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.lucis</groupId>

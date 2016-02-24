@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>impe3</artifactId>
 		<groupId>com.isotrol.impe3</groupId>
-		<version>3.1.1-SNAPSHOT</version>
+		<version>3.1.1</version>
 	</parent>
 	<groupId>com.isotrol.impe3.tickets</groupId>
 	<artifactId>impe3-tickets-jersey</artifactId>
@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>com.isotrol.impe3</groupId>
 			<artifactId>impe3-es-ticket-api</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
+			<version>3.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
