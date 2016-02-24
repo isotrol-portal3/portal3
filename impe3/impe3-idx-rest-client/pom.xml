@@ -6,7 +6,7 @@
 		<groupId>com.isotrol.impe3</groupId>
 		<version>3.1.1</version>
 	</parent>
-	<groupId>com.isotrol.impe3.indexers</groupId>
+	<groupId>com.isotrol.impe3</groupId>
 	<artifactId>impe3-idx-rest-client</artifactId>
 	<name>IMPE3 :: Idx :: Rest :: Client</name>
 	<dependencies>
