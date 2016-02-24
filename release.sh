@@ -28,7 +28,7 @@ mvn -DnewVersion=$NVER versions:set || error_exit "Unable to set version to $NVE
 # Verify build
 mvn -Psonatype-oss-release clean verify || error_exit "Verify build failed" 5
 # Commit
-git commit -a -m "Version $NVER" || error_exit "Unable to commit" 6
+git commit -a -m -u "Version $NVER" || error_exit "Unable to commit" 6
 # Install and deploy
 mvn -Psonatype-oss-release install deploy || error_exit "Unable to install and deploy version $NVER" 7
 # Push
