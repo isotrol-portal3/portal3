@@ -36,7 +36,7 @@
 			<artifactId>jersey-client</artifactId>
 		</dependency>
 		<dependency>
-		<groupId>com.isotrol.impe3.indexers</groupId>
+		<groupId>com.isotrol.impe3</groupId>
 		<artifactId>impe3-idx-rest-server</artifactId>
 		<version>3.1.1</version> 		
 	</dependency>
