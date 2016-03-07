@@ -34,6 +34,6 @@ mvn -Psonatype-oss-release install deploy || error_exit "Unable to install and d
 # Push
 git push origin master || error_exit "Unable push version $NVER" 8
 # Tag and push
-git tag -a $TAGBASE-$NVER -m "Version $NVER" || error_exit "Unable to tag version $NVER" 9
+#git tag -a $TAGBASE-$NVER -m "Version $NVER" || error_exit "Unable to tag version $NVER" 9
 git push --tags || error_exit "Unable push tag version $NVER" 10
 
